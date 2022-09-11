@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: memlayout.h 소스 파일</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">My Project
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 다음에 의해 생성됨 :  Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'검색');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','검색');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">memlayout.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="../../d8/da9/memlayout_8h.html">이 파일의 문서화 페이지로 가기</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Memory layout</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="../../d8/da9/memlayout_8h.html#afa15977c771e531ebd3f3a5c2563ce16">    3</a></span>&#160;<span class="preprocessor">#define EXTMEM  0x100000            // Start of extended memory</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno"><a class="line" href="../../d8/da9/memlayout_8h.html#ad3c557a115f7d82d9ef849846779531c">    4</a></span>&#160;<span class="preprocessor">#define PHYSTOP 0xE000000           // Top physical memory</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="../../d8/da9/memlayout_8h.html#a643ab4c8a98a6f7bfde12c8f52f6aafa">    5</a></span>&#160;<span class="preprocessor">#define DEVSPACE 0xFE000000         // Other devices are at high addresses</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// Key addresses for address space layout (see kmap in vm.c for layout)</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="../../d8/da9/memlayout_8h.html#a20cbfc19992a40ab9ccf4aa8ab8283d0">    8</a></span>&#160;<span class="preprocessor">#define KERNBASE 0x80000000         // First kernel virtual address</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="../../d8/da9/memlayout_8h.html#aca91837d3500b42e38e6427ca4db4946">    9</a></span>&#160;<span class="preprocessor">#define KERNLINK (KERNBASE+EXTMEM)  // Address where kernel is linked</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="../../d8/da9/memlayout_8h.html#a5021188bc7da1304f27e913aee183407">   11</a></span>&#160;<span class="preprocessor">#define V2P(a) (((uint) (a)) - KERNBASE)</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="../../d8/da9/memlayout_8h.html#aefd5e8b62c49bba2cf20309c7dd174e2">   12</a></span>&#160;<span class="preprocessor">#define P2V(a) ((void *)(((char *) (a)) + KERNBASE))</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="../../d8/da9/memlayout_8h.html#a07c445cd5425fc1d69188d1e6d511e4b">   14</a></span>&#160;<span class="preprocessor">#define V2P_WO(x) ((x) - KERNBASE)    // same as V2P, but without casts</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="../../d8/da9/memlayout_8h.html#a6835c6206bedd9fccc1a29205c233309">   15</a></span>&#160;<span class="preprocessor">#define P2V_WO(x) ((x) + KERNBASE)    // same as P2V, but without casts</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+다음에 의해 생성됨 :  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.17
+</small></address>
+</body>
+</html>

@@ -1,0 +1,724 @@
+\hypertarget{mkfs_8c}{}\doxysection{mkfs.\+c 파일 참조}
+\label{mkfs_8c}\index{mkfs.c@{mkfs.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}fs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stat.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}param.\+h\char`\"{}}\newline
+mkfs.\+c에 대한 include 의존 그래프
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d9/ddf/mkfs_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{매크로}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{mkfs_8c_a149da0702b060478da4d59ffe807adac}{stat}}~xv6\+\_\+stat
+\item 
+\#define \mbox{\hyperlink{mkfs_8c_abce67139ad0bc979ef080a694e60fb36}{static\+\_\+assert}}(a,  b)~do \{ switch (0) case 0\+: case (a)\+: ; \} while (0)
+\item 
+\#define \mbox{\hyperlink{mkfs_8c_ad285a4c453432da6be26e87a581ee35c}{N\+I\+N\+O\+D\+ES}}~200
+\item 
+\#define \mbox{\hyperlink{mkfs_8c_ac6afabdc09a49a433ee19d8a9486056d}{min}}(a,  b)~((a) $<$ (b) ? (a) \+: (b))
+\end{DoxyCompactItemize}
+\doxysubsection*{함수}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{mkfs_8c_a327cdfc7a74165d8922ec6c8ba256906}{balloc}} (int)
+\item 
+void \mbox{\hyperlink{mkfs_8c_ac62d827d836d1807e4d6f365f32348bb}{wsect}} (\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}, void $\ast$)
+\item 
+void \mbox{\hyperlink{mkfs_8c_a2540c48cea7dc865909cfb3f8450a887}{winode}} (\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}, struct \mbox{\hyperlink{structdinode}{dinode}} $\ast$)
+\item 
+void \mbox{\hyperlink{mkfs_8c_a3b6cb1258a963010211a8e5ddf99defe}{rinode}} (\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} inum, struct \mbox{\hyperlink{structdinode}{dinode}} $\ast$ip)
+\item 
+void \mbox{\hyperlink{mkfs_8c_a22ea835ad23cd716a962f30e4882ee80}{rsect}} (\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} sec, void $\ast$\mbox{\hyperlink{structbuf}{buf}})
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{mkfs_8c_a341af7faeda3d6fcb57a5a9fe3a0104a}{ialloc}} (\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} type)
+\item 
+void \mbox{\hyperlink{mkfs_8c_a268b61616f575ff072f5bb34c83e02e9}{iappend}} (\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} inum, void $\ast$p, int n)
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{mkfs_8c_ac6dbbb3aaeee7114cf795be284be08ce}{xshort}} (\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} x)
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}{xint}} (\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} x)
+\item 
+int \mbox{\hyperlink{mkfs_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$\mbox{\hyperlink{init_8c_abd1a2cf54950f450187ef24c1cdcac0c}{argv}}\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\doxysubsection*{변수}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{mkfs_8c_ab3610080ec9ad31beae2488dffd98026}{nbitmap}} = \mbox{\hyperlink{param_8h_a486f47992f736854db2444b01afd9991}{F\+S\+S\+I\+ZE}}/(\mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{B\+S\+I\+ZE}}$\ast$8) + 1
+\item 
+int \mbox{\hyperlink{mkfs_8c_a86bf1487f875e3a82dbb4f7c0cde878c}{ninodeblocks}} = \mbox{\hyperlink{mkfs_8c_ad285a4c453432da6be26e87a581ee35c}{N\+I\+N\+O\+D\+ES}} / \mbox{\hyperlink{fs_8h_aadb6c866a6d0a173f5f0a6ed9c7e0228}{I\+PB}} + 1
+\item 
+int \mbox{\hyperlink{mkfs_8c_aa86ff3fab07bd3139fcd159de0ffce90}{nlog}} = \mbox{\hyperlink{param_8h_acc7694167c7840a913939a1b90808b4c}{L\+O\+G\+S\+I\+ZE}}
+\item 
+int \mbox{\hyperlink{mkfs_8c_a6bb66ce69ae378551f55d86c515ae02c}{nmeta}}
+\item 
+int \mbox{\hyperlink{mkfs_8c_a076c8e8b7f7acccc46cd356bd8776b26}{nblocks}}
+\item 
+int \mbox{\hyperlink{mkfs_8c_a44f12de41bc5a5ada9e5fff19c18201c}{fsfd}}
+\item 
+struct \mbox{\hyperlink{structsuperblock}{superblock}} \mbox{\hyperlink{mkfs_8c_a0248d0bac625de5a1415f2f8c91f3343}{sb}}
+\item 
+char \mbox{\hyperlink{mkfs_8c_aef2d52736d40de37197333ecdeb14a60}{zeroes}} \mbox{[}\mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{B\+S\+I\+ZE}}\mbox{]}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{mkfs_8c_acee9059b25c8d81ef2b9cfedded17d48}{freeinode}} = 1
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{mkfs_8c_a8d3a0b59d5f6e59c8b7c0bbdab41ab15}{freeblock}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{매크로 문서화}
+\mbox{\Hypertarget{mkfs_8c_ac6afabdc09a49a433ee19d8a9486056d}\label{mkfs_8c_ac6afabdc09a49a433ee19d8a9486056d}} 
+\index{mkfs.c@{mkfs.c}!min@{min}}
+\index{min@{min}!mkfs.c@{mkfs.c}}
+\doxysubsubsection{\texorpdfstring{min}{min}}
+{\footnotesize\ttfamily \#define min(\begin{DoxyParamCaption}\item[{}]{a,  }\item[{}]{b }\end{DoxyParamCaption})~((a) $<$ (b) ? (a) \+: (b))}
+
+
+
+mkfs.\+c 파일의 253 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mkfs_8c_ad285a4c453432da6be26e87a581ee35c}\label{mkfs_8c_ad285a4c453432da6be26e87a581ee35c}} 
+\index{mkfs.c@{mkfs.c}!NINODES@{NINODES}}
+\index{NINODES@{NINODES}!mkfs.c@{mkfs.c}}
+\doxysubsubsection{\texorpdfstring{NINODES}{NINODES}}
+{\footnotesize\ttfamily \#define N\+I\+N\+O\+D\+ES~200}
+
+
+
+mkfs.\+c 파일의 18 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mkfs_8c_a149da0702b060478da4d59ffe807adac}\label{mkfs_8c_a149da0702b060478da4d59ffe807adac}} 
+\index{mkfs.c@{mkfs.c}!stat@{stat}}
+\index{stat@{stat}!mkfs.c@{mkfs.c}}
+\doxysubsubsection{\texorpdfstring{stat}{stat}}
+{\footnotesize\ttfamily \#define \mbox{\hyperlink{structstat}{stat}}~xv6\+\_\+stat}
+
+
+
+mkfs.\+c 파일의 8 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mkfs_8c_abce67139ad0bc979ef080a694e60fb36}\label{mkfs_8c_abce67139ad0bc979ef080a694e60fb36}} 
+\index{mkfs.c@{mkfs.c}!static\_assert@{static\_assert}}
+\index{static\_assert@{static\_assert}!mkfs.c@{mkfs.c}}
+\doxysubsubsection{\texorpdfstring{static\_assert}{static\_assert}}
+{\footnotesize\ttfamily \#define static\+\_\+assert(\begin{DoxyParamCaption}\item[{}]{a,  }\item[{}]{b }\end{DoxyParamCaption})~do \{ switch (0) case 0\+: case (a)\+: ; \} while (0)}
+
+
+
+mkfs.\+c 파일의 15 번째 라인에서 정의되었습니다.
+
+
+
+\doxysubsection{함수 문서화}
+\mbox{\Hypertarget{mkfs_8c_a327cdfc7a74165d8922ec6c8ba256906}\label{mkfs_8c_a327cdfc7a74165d8922ec6c8ba256906}} 
+\index{mkfs.c@{mkfs.c}!balloc@{balloc}}
+\index{balloc@{balloc}!mkfs.c@{mkfs.c}}
+\doxysubsubsection{\texorpdfstring{balloc()}{balloc()}}
+{\footnotesize\ttfamily void balloc (\begin{DoxyParamCaption}\item[{int}]{used }\end{DoxyParamCaption})}
+
+
+
+mkfs.\+c 파일의 238 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{239 \{}
+\DoxyCodeLine{240   \mbox{\hyperlink{types_8h_a65f85814a8290f9797005d3b28e7e5fc}{uchar}} \mbox{\hyperlink{structbuf}{buf}}[\mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}}];}
+\DoxyCodeLine{241   \textcolor{keywordtype}{int} i;}
+\DoxyCodeLine{242 }
+\DoxyCodeLine{243   \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(\textcolor{stringliteral}{"balloc: first \%d blocks have been allocated\(\backslash\)n"}, used);}
+\DoxyCodeLine{244   assert(used < \mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}}*8);}
+\DoxyCodeLine{245   \mbox{\hyperlink{fs_8c_ac93f607f4a954323f4c9ea485ca88538}{bzero}}(\mbox{\hyperlink{structbuf}{buf}}, \mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}});}
+\DoxyCodeLine{246   \textcolor{keywordflow}{for}(i = 0; i < used; i++)\{}
+\DoxyCodeLine{247     \mbox{\hyperlink{structbuf}{buf}}[i/8] = \mbox{\hyperlink{structbuf}{buf}}[i/8] | (0x1 << (i\%8));}
+\DoxyCodeLine{248   \}}
+\DoxyCodeLine{249   \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(\textcolor{stringliteral}{"balloc: write bitmap block at sector \%d\(\backslash\)n"}, \mbox{\hyperlink{mkfs_8c_a0248d0bac625de5a1415f2f8c91f3343}{sb}}.\mbox{\hyperlink{structsuperblock_a3c815dda5be6bda609389e76434171cc}{bmapstart}});}
+\DoxyCodeLine{250   \mbox{\hyperlink{mkfs_8c_ac62d827d836d1807e4d6f365f32348bb}{wsect}}(\mbox{\hyperlink{mkfs_8c_a0248d0bac625de5a1415f2f8c91f3343}{sb}}.\mbox{\hyperlink{structsuperblock_a3c815dda5be6bda609389e76434171cc}{bmapstart}}, \mbox{\hyperlink{structbuf}{buf}});}
+\DoxyCodeLine{251 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d7/d1f/mkfs_8c_a327cdfc7a74165d8922ec6c8ba256906_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=203pt]{d7/d1f/mkfs_8c_a327cdfc7a74165d8922ec6c8ba256906_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mkfs_8c_a341af7faeda3d6fcb57a5a9fe3a0104a}\label{mkfs_8c_a341af7faeda3d6fcb57a5a9fe3a0104a}} 
+\index{mkfs.c@{mkfs.c}!ialloc@{ialloc}}
+\index{ialloc@{ialloc}!mkfs.c@{mkfs.c}}
+\doxysubsubsection{\texorpdfstring{ialloc()}{ialloc()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} ialloc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}}}]{type }\end{DoxyParamCaption})}
+
+
+
+mkfs.\+c 파일의 224 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{225 \{}
+\DoxyCodeLine{226   \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} inum = \mbox{\hyperlink{mkfs_8c_acee9059b25c8d81ef2b9cfedded17d48}{freeinode}}++;}
+\DoxyCodeLine{227   \textcolor{keyword}{struct }\mbox{\hyperlink{structdinode}{dinode}} din;}
+\DoxyCodeLine{228 }
+\DoxyCodeLine{229   \mbox{\hyperlink{fs_8c_ac93f607f4a954323f4c9ea485ca88538}{bzero}}(\&din, \textcolor{keyword}{sizeof}(din));}
+\DoxyCodeLine{230   din.type = \mbox{\hyperlink{mkfs_8c_ac6dbbb3aaeee7114cf795be284be08ce}{xshort}}(\mbox{\hyperlink{structdinode_abf6b2a8476a803284f1c927fb3b82259}{type}});}
+\DoxyCodeLine{231   din.nlink = \mbox{\hyperlink{mkfs_8c_ac6dbbb3aaeee7114cf795be284be08ce}{xshort}}(1);}
+\DoxyCodeLine{232   din.size = \mbox{\hyperlink{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}{xint}}(0);}
+\DoxyCodeLine{233   \mbox{\hyperlink{mkfs_8c_a2540c48cea7dc865909cfb3f8450a887}{winode}}(inum, \&din);}
+\DoxyCodeLine{234   \textcolor{keywordflow}{return} inum;}
+\DoxyCodeLine{235 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d7/d1f/mkfs_8c_a341af7faeda3d6fcb57a5a9fe3a0104a_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{d7/d1f/mkfs_8c_a341af7faeda3d6fcb57a5a9fe3a0104a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mkfs_8c_a268b61616f575ff072f5bb34c83e02e9}\label{mkfs_8c_a268b61616f575ff072f5bb34c83e02e9}} 
+\index{mkfs.c@{mkfs.c}!iappend@{iappend}}
+\index{iappend@{iappend}!mkfs.c@{mkfs.c}}
+\doxysubsubsection{\texorpdfstring{iappend()}{iappend()}}
+{\footnotesize\ttfamily void iappend (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}}]{inum,  }\item[{void $\ast$}]{p,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+
+
+mkfs.\+c 파일의 256 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{257 \{}
+\DoxyCodeLine{258   \textcolor{keywordtype}{char} *p = (\textcolor{keywordtype}{char}*)xp;}
+\DoxyCodeLine{259   \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} fbn, off, n1;}
+\DoxyCodeLine{260   \textcolor{keyword}{struct }\mbox{\hyperlink{structdinode}{dinode}} din;}
+\DoxyCodeLine{261   \textcolor{keywordtype}{char} \mbox{\hyperlink{structbuf}{buf}}[\mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}}];}
+\DoxyCodeLine{262   \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} indirect[\mbox{\hyperlink{fs_8h_a6d24f098ea2928d61ff80b123d761715}{NINDIRECT}}];}
+\DoxyCodeLine{263   \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} x;}
+\DoxyCodeLine{264 }
+\DoxyCodeLine{265   \mbox{\hyperlink{mkfs_8c_a3b6cb1258a963010211a8e5ddf99defe}{rinode}}(inum, \&din);}
+\DoxyCodeLine{266   off = \mbox{\hyperlink{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}{xint}}(din.size);}
+\DoxyCodeLine{267   \textcolor{comment}{// printf("append inum \%d at off \%d sz \%d\(\backslash\)n", inum, off, n);}}
+\DoxyCodeLine{268   \textcolor{keywordflow}{while}(n > 0)\{}
+\DoxyCodeLine{269     fbn = off / \mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}};}
+\DoxyCodeLine{270     assert(fbn < \mbox{\hyperlink{fs_8h_a714b2485a6dd312e37226e1f833728a9}{MAXFILE}});}
+\DoxyCodeLine{271     \textcolor{keywordflow}{if}(fbn < \mbox{\hyperlink{fs_8h_acd38e9532d4b3623f844b93c012a8e06}{NDIRECT}})\{}
+\DoxyCodeLine{272       \textcolor{keywordflow}{if}(\mbox{\hyperlink{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}{xint}}(din.addrs[fbn]) == 0)\{}
+\DoxyCodeLine{273         din.addrs[fbn] = \mbox{\hyperlink{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}{xint}}(\mbox{\hyperlink{mkfs_8c_a8d3a0b59d5f6e59c8b7c0bbdab41ab15}{freeblock}}++);}
+\DoxyCodeLine{274       \}}
+\DoxyCodeLine{275       x = \mbox{\hyperlink{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}{xint}}(din.addrs[fbn]);}
+\DoxyCodeLine{276     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{277       \textcolor{keywordflow}{if}(\mbox{\hyperlink{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}{xint}}(din.addrs[\mbox{\hyperlink{fs_8h_acd38e9532d4b3623f844b93c012a8e06}{NDIRECT}}]) == 0)\{}
+\DoxyCodeLine{278         din.addrs[\mbox{\hyperlink{fs_8h_acd38e9532d4b3623f844b93c012a8e06}{NDIRECT}}] = \mbox{\hyperlink{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}{xint}}(\mbox{\hyperlink{mkfs_8c_a8d3a0b59d5f6e59c8b7c0bbdab41ab15}{freeblock}}++);}
+\DoxyCodeLine{279       \}}
+\DoxyCodeLine{280       \mbox{\hyperlink{mkfs_8c_a22ea835ad23cd716a962f30e4882ee80}{rsect}}(\mbox{\hyperlink{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}{xint}}(din.addrs[\mbox{\hyperlink{fs_8h_acd38e9532d4b3623f844b93c012a8e06}{NDIRECT}}]), (\textcolor{keywordtype}{char}*)indirect);}
+\DoxyCodeLine{281       \textcolor{keywordflow}{if}(indirect[fbn -\/ \mbox{\hyperlink{fs_8h_acd38e9532d4b3623f844b93c012a8e06}{NDIRECT}}] == 0)\{}
+\DoxyCodeLine{282         indirect[fbn -\/ \mbox{\hyperlink{fs_8h_acd38e9532d4b3623f844b93c012a8e06}{NDIRECT}}] = \mbox{\hyperlink{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}{xint}}(\mbox{\hyperlink{mkfs_8c_a8d3a0b59d5f6e59c8b7c0bbdab41ab15}{freeblock}}++);}
+\DoxyCodeLine{283         \mbox{\hyperlink{mkfs_8c_ac62d827d836d1807e4d6f365f32348bb}{wsect}}(\mbox{\hyperlink{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}{xint}}(din.addrs[\mbox{\hyperlink{fs_8h_acd38e9532d4b3623f844b93c012a8e06}{NDIRECT}}]), (\textcolor{keywordtype}{char}*)indirect);}
+\DoxyCodeLine{284       \}}
+\DoxyCodeLine{285       x = \mbox{\hyperlink{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}{xint}}(indirect[fbn-\/\mbox{\hyperlink{fs_8h_acd38e9532d4b3623f844b93c012a8e06}{NDIRECT}}]);}
+\DoxyCodeLine{286     \}}
+\DoxyCodeLine{287     n1 = \mbox{\hyperlink{mkfs_8c_ac6afabdc09a49a433ee19d8a9486056d}{min}}(n, (fbn + 1) * \mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}} -\/ off);}
+\DoxyCodeLine{288     \mbox{\hyperlink{mkfs_8c_a22ea835ad23cd716a962f30e4882ee80}{rsect}}(x, \mbox{\hyperlink{structbuf}{buf}});}
+\DoxyCodeLine{289     bcopy(p, \mbox{\hyperlink{structbuf}{buf}} + off -\/ (fbn * \mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}}), n1);}
+\DoxyCodeLine{290     \mbox{\hyperlink{mkfs_8c_ac62d827d836d1807e4d6f365f32348bb}{wsect}}(x, \mbox{\hyperlink{structbuf}{buf}});}
+\DoxyCodeLine{291     n -\/= n1;}
+\DoxyCodeLine{292     off += n1;}
+\DoxyCodeLine{293     p += n1;}
+\DoxyCodeLine{294   \}}
+\DoxyCodeLine{295   din.size = \mbox{\hyperlink{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}{xint}}(off);}
+\DoxyCodeLine{296   \mbox{\hyperlink{mkfs_8c_a2540c48cea7dc865909cfb3f8450a887}{winode}}(inum, \&din);}
+\DoxyCodeLine{297 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d7/d1f/mkfs_8c_a268b61616f575ff072f5bb34c83e02e9_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=213pt]{d7/d1f/mkfs_8c_a268b61616f575ff072f5bb34c83e02e9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mkfs_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{mkfs_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{mkfs.c@{mkfs.c}!main@{main}}
+\index{main@{main}!mkfs.c@{mkfs.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+mkfs.\+c 파일의 68 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{69 \{}
+\DoxyCodeLine{70   \textcolor{keywordtype}{int} i, cc, fd;}
+\DoxyCodeLine{71   \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} rootino, inum, off;}
+\DoxyCodeLine{72   \textcolor{keyword}{struct }\mbox{\hyperlink{structdirent}{dirent}} de;}
+\DoxyCodeLine{73   \textcolor{keywordtype}{char} \mbox{\hyperlink{structbuf}{buf}}[\mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}}];}
+\DoxyCodeLine{74   \textcolor{keyword}{struct }\mbox{\hyperlink{structdinode}{dinode}} din;}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77   \mbox{\hyperlink{mkfs_8c_abce67139ad0bc979ef080a694e60fb36}{static\_assert}}(\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}) == 4, \textcolor{stringliteral}{"Integers must be 4 bytes!"});}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79   \textcolor{keywordflow}{if}(argc < 2)\{}
+\DoxyCodeLine{80     fprintf(stderr, \textcolor{stringliteral}{"Usage: mkfs fs.img files...\(\backslash\)n"});}
+\DoxyCodeLine{81     \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}(1);}
+\DoxyCodeLine{82   \}}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84   assert((\mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}} \% \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} \mbox{\hyperlink{structdinode}{dinode}})) == 0);}
+\DoxyCodeLine{85   assert((\mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}} \% \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} \mbox{\hyperlink{structdirent}{dirent}})) == 0);}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87   \mbox{\hyperlink{mkfs_8c_a44f12de41bc5a5ada9e5fff19c18201c}{fsfd}} = \mbox{\hyperlink{user_8h_a2c4414339f388561554c2deab11a1a07}{open}}(\mbox{\hyperlink{init_8c_abd1a2cf54950f450187ef24c1cdcac0c}{argv}}[1], \mbox{\hyperlink{fcntl_8h_abb0586253488ee61072b73557eeb873b}{O\_RDWR}}|O\_CREAT|O\_TRUNC, 0666);}
+\DoxyCodeLine{88   \textcolor{keywordflow}{if}(\mbox{\hyperlink{mkfs_8c_a44f12de41bc5a5ada9e5fff19c18201c}{fsfd}} < 0)\{}
+\DoxyCodeLine{89     perror(\mbox{\hyperlink{init_8c_abd1a2cf54950f450187ef24c1cdcac0c}{argv}}[1]);}
+\DoxyCodeLine{90     \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}(1);}
+\DoxyCodeLine{91   \}}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93   \textcolor{comment}{// 1 fs block = 1 disk sector}}
+\DoxyCodeLine{94   \mbox{\hyperlink{mkfs_8c_a6bb66ce69ae378551f55d86c515ae02c}{nmeta}} = 2 + \mbox{\hyperlink{mkfs_8c_aa86ff3fab07bd3139fcd159de0ffce90}{nlog}} + \mbox{\hyperlink{mkfs_8c_a86bf1487f875e3a82dbb4f7c0cde878c}{ninodeblocks}} + \mbox{\hyperlink{mkfs_8c_ab3610080ec9ad31beae2488dffd98026}{nbitmap}};}
+\DoxyCodeLine{95   \mbox{\hyperlink{mkfs_8c_a076c8e8b7f7acccc46cd356bd8776b26}{nblocks}} = \mbox{\hyperlink{param_8h_a486f47992f736854db2444b01afd9991}{FSSIZE}} -\/ \mbox{\hyperlink{mkfs_8c_a6bb66ce69ae378551f55d86c515ae02c}{nmeta}};}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97   \mbox{\hyperlink{mkfs_8c_a0248d0bac625de5a1415f2f8c91f3343}{sb}}.\mbox{\hyperlink{structsuperblock_a7c6e4d6da139ecee74eb7816d5d44fa6}{size}} = \mbox{\hyperlink{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}{xint}}(\mbox{\hyperlink{param_8h_a486f47992f736854db2444b01afd9991}{FSSIZE}});}
+\DoxyCodeLine{98   \mbox{\hyperlink{mkfs_8c_a0248d0bac625de5a1415f2f8c91f3343}{sb}}.\mbox{\hyperlink{structsuperblock_a2a27a7cfb54689f0e1dcd1788d049218}{nblocks}} = \mbox{\hyperlink{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}{xint}}(\mbox{\hyperlink{mkfs_8c_a076c8e8b7f7acccc46cd356bd8776b26}{nblocks}});}
+\DoxyCodeLine{99   \mbox{\hyperlink{mkfs_8c_a0248d0bac625de5a1415f2f8c91f3343}{sb}}.\mbox{\hyperlink{structsuperblock_a355d2a1ebdc51f80820c23e69363cf42}{ninodes}} = \mbox{\hyperlink{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}{xint}}(\mbox{\hyperlink{mkfs_8c_ad285a4c453432da6be26e87a581ee35c}{NINODES}});}
+\DoxyCodeLine{100   \mbox{\hyperlink{mkfs_8c_a0248d0bac625de5a1415f2f8c91f3343}{sb}}.\mbox{\hyperlink{structsuperblock_aea92ae872785fd4fb39b903d9157aac5}{nlog}} = \mbox{\hyperlink{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}{xint}}(\mbox{\hyperlink{mkfs_8c_aa86ff3fab07bd3139fcd159de0ffce90}{nlog}});}
+\DoxyCodeLine{101   \mbox{\hyperlink{mkfs_8c_a0248d0bac625de5a1415f2f8c91f3343}{sb}}.\mbox{\hyperlink{structsuperblock_a460268b28aced19797e8d7b84aa60ebf}{logstart}} = \mbox{\hyperlink{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}{xint}}(2);}
+\DoxyCodeLine{102   \mbox{\hyperlink{mkfs_8c_a0248d0bac625de5a1415f2f8c91f3343}{sb}}.\mbox{\hyperlink{structsuperblock_adde361528f3905445974301b424611c1}{inodestart}} = \mbox{\hyperlink{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}{xint}}(2+\mbox{\hyperlink{mkfs_8c_aa86ff3fab07bd3139fcd159de0ffce90}{nlog}});}
+\DoxyCodeLine{103   \mbox{\hyperlink{mkfs_8c_a0248d0bac625de5a1415f2f8c91f3343}{sb}}.\mbox{\hyperlink{structsuperblock_a3c815dda5be6bda609389e76434171cc}{bmapstart}} = \mbox{\hyperlink{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}{xint}}(2+\mbox{\hyperlink{mkfs_8c_aa86ff3fab07bd3139fcd159de0ffce90}{nlog}}+\mbox{\hyperlink{mkfs_8c_a86bf1487f875e3a82dbb4f7c0cde878c}{ninodeblocks}});}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105   \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(\textcolor{stringliteral}{"nmeta \%d (boot, super, log blocks \%u inode blocks \%u, bitmap blocks \%u) blocks \%d total \%d\(\backslash\)n"},}
+\DoxyCodeLine{106          \mbox{\hyperlink{mkfs_8c_a6bb66ce69ae378551f55d86c515ae02c}{nmeta}}, \mbox{\hyperlink{mkfs_8c_aa86ff3fab07bd3139fcd159de0ffce90}{nlog}}, \mbox{\hyperlink{mkfs_8c_a86bf1487f875e3a82dbb4f7c0cde878c}{ninodeblocks}}, \mbox{\hyperlink{mkfs_8c_ab3610080ec9ad31beae2488dffd98026}{nbitmap}}, \mbox{\hyperlink{mkfs_8c_a076c8e8b7f7acccc46cd356bd8776b26}{nblocks}}, \mbox{\hyperlink{param_8h_a486f47992f736854db2444b01afd9991}{FSSIZE}});}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108   \mbox{\hyperlink{mkfs_8c_a8d3a0b59d5f6e59c8b7c0bbdab41ab15}{freeblock}} = \mbox{\hyperlink{mkfs_8c_a6bb66ce69ae378551f55d86c515ae02c}{nmeta}};     \textcolor{comment}{// the first free block that we can allocate}}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110   \textcolor{keywordflow}{for}(i = 0; i < \mbox{\hyperlink{param_8h_a486f47992f736854db2444b01afd9991}{FSSIZE}}; i++)}
+\DoxyCodeLine{111     \mbox{\hyperlink{mkfs_8c_ac62d827d836d1807e4d6f365f32348bb}{wsect}}(i, \mbox{\hyperlink{mkfs_8c_aef2d52736d40de37197333ecdeb14a60}{zeroes}});}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113   \mbox{\hyperlink{defs_8h_a9d55c9f035076ed1a90b6452770d0b62}{memset}}(\mbox{\hyperlink{structbuf}{buf}}, 0, \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structbuf}{buf}}));}
+\DoxyCodeLine{114   \mbox{\hyperlink{defs_8h_aa9c8577c0e9d233f85892ec2d9bfe212}{memmove}}(\mbox{\hyperlink{structbuf}{buf}}, \&\mbox{\hyperlink{mkfs_8c_a0248d0bac625de5a1415f2f8c91f3343}{sb}}, \textcolor{keyword}{sizeof}(\mbox{\hyperlink{mkfs_8c_a0248d0bac625de5a1415f2f8c91f3343}{sb}}));}
+\DoxyCodeLine{115   \mbox{\hyperlink{mkfs_8c_ac62d827d836d1807e4d6f365f32348bb}{wsect}}(1, \mbox{\hyperlink{structbuf}{buf}});}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117   rootino = \mbox{\hyperlink{mkfs_8c_a341af7faeda3d6fcb57a5a9fe3a0104a}{ialloc}}(\mbox{\hyperlink{stat_8h_a91136bcd71a9f499304f5d7e7e9d6376}{T\_DIR}});}
+\DoxyCodeLine{118   assert(rootino == \mbox{\hyperlink{fs_8h_a22c8ea96d09283ed6496347806cc72a0}{ROOTINO}});}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120   \mbox{\hyperlink{fs_8c_ac93f607f4a954323f4c9ea485ca88538}{bzero}}(\&de, \textcolor{keyword}{sizeof}(de));}
+\DoxyCodeLine{121   de.inum = \mbox{\hyperlink{mkfs_8c_ac6dbbb3aaeee7114cf795be284be08ce}{xshort}}(rootino);}
+\DoxyCodeLine{122   \mbox{\hyperlink{ulib_8c_a366e60542fdfbf5b1004701768088b71}{strcpy}}(de.name, \textcolor{stringliteral}{"."});}
+\DoxyCodeLine{123   \mbox{\hyperlink{mkfs_8c_a268b61616f575ff072f5bb34c83e02e9}{iappend}}(rootino, \&de, \textcolor{keyword}{sizeof}(de));}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125   \mbox{\hyperlink{fs_8c_ac93f607f4a954323f4c9ea485ca88538}{bzero}}(\&de, \textcolor{keyword}{sizeof}(de));}
+\DoxyCodeLine{126   de.inum = \mbox{\hyperlink{mkfs_8c_ac6dbbb3aaeee7114cf795be284be08ce}{xshort}}(rootino);}
+\DoxyCodeLine{127   \mbox{\hyperlink{ulib_8c_a366e60542fdfbf5b1004701768088b71}{strcpy}}(de.name, \textcolor{stringliteral}{".."});}
+\DoxyCodeLine{128   \mbox{\hyperlink{mkfs_8c_a268b61616f575ff072f5bb34c83e02e9}{iappend}}(rootino, \&de, \textcolor{keyword}{sizeof}(de));}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130   \textcolor{keywordflow}{for}(i = 2; i < argc; i++)\{}
+\DoxyCodeLine{131     assert(index(\mbox{\hyperlink{init_8c_abd1a2cf54950f450187ef24c1cdcac0c}{argv}}[i], \textcolor{charliteral}{'/'}) == 0);}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133     \textcolor{keywordflow}{if}((fd = \mbox{\hyperlink{user_8h_a2c4414339f388561554c2deab11a1a07}{open}}(\mbox{\hyperlink{init_8c_abd1a2cf54950f450187ef24c1cdcac0c}{argv}}[i], 0)) < 0)\{}
+\DoxyCodeLine{134       perror(\mbox{\hyperlink{init_8c_abd1a2cf54950f450187ef24c1cdcac0c}{argv}}[i]);}
+\DoxyCodeLine{135       \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}(1);}
+\DoxyCodeLine{136     \}}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138     \textcolor{comment}{// Skip leading \_ in name when writing to file system.}}
+\DoxyCodeLine{139     \textcolor{comment}{// The binaries are named \_rm, \_cat, etc. to keep the}}
+\DoxyCodeLine{140     \textcolor{comment}{// build operating system from trying to execute them}}
+\DoxyCodeLine{141     \textcolor{comment}{// in place of system binaries like rm and cat.}}
+\DoxyCodeLine{142     \textcolor{keywordflow}{if}(\mbox{\hyperlink{init_8c_abd1a2cf54950f450187ef24c1cdcac0c}{argv}}[i][0] == \textcolor{charliteral}{'\_'})}
+\DoxyCodeLine{143       ++\mbox{\hyperlink{init_8c_abd1a2cf54950f450187ef24c1cdcac0c}{argv}}[i];}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145     inum = \mbox{\hyperlink{mkfs_8c_a341af7faeda3d6fcb57a5a9fe3a0104a}{ialloc}}(\mbox{\hyperlink{stat_8h_a0a8afbed81f5fb3930e9d153fbd51737}{T\_FILE}});}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147     \mbox{\hyperlink{fs_8c_ac93f607f4a954323f4c9ea485ca88538}{bzero}}(\&de, \textcolor{keyword}{sizeof}(de));}
+\DoxyCodeLine{148     de.inum = \mbox{\hyperlink{mkfs_8c_ac6dbbb3aaeee7114cf795be284be08ce}{xshort}}(inum);}
+\DoxyCodeLine{149     \mbox{\hyperlink{defs_8h_afcc0bb831ec06288e3a951e09e8d5b7d}{strncpy}}(de.name, \mbox{\hyperlink{init_8c_abd1a2cf54950f450187ef24c1cdcac0c}{argv}}[i], \mbox{\hyperlink{fs_8h_a48246fb9e5cb7f6a71ebc9ebc2f06562}{DIRSIZ}});}
+\DoxyCodeLine{150     \mbox{\hyperlink{mkfs_8c_a268b61616f575ff072f5bb34c83e02e9}{iappend}}(rootino, \&de, \textcolor{keyword}{sizeof}(de));}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152     \textcolor{keywordflow}{while}((cc = \mbox{\hyperlink{user_8h_a2d73522d6354b8a141ecfaa9585a0c77}{read}}(fd, \mbox{\hyperlink{structbuf}{buf}}, \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structbuf}{buf}}))) > 0)}
+\DoxyCodeLine{153       \mbox{\hyperlink{mkfs_8c_a268b61616f575ff072f5bb34c83e02e9}{iappend}}(inum, \mbox{\hyperlink{structbuf}{buf}}, cc);}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155     \mbox{\hyperlink{user_8h_ae152484c890a24e4d9b4980e7b965be0}{close}}(fd);}
+\DoxyCodeLine{156   \}}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158   \textcolor{comment}{// fix size of root inode dir}}
+\DoxyCodeLine{159   \mbox{\hyperlink{mkfs_8c_a3b6cb1258a963010211a8e5ddf99defe}{rinode}}(rootino, \&din);}
+\DoxyCodeLine{160   off = \mbox{\hyperlink{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}{xint}}(din.size);}
+\DoxyCodeLine{161   off = ((off/\mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}}) + 1) * \mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}};}
+\DoxyCodeLine{162   din.size = \mbox{\hyperlink{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}{xint}}(off);}
+\DoxyCodeLine{163   \mbox{\hyperlink{mkfs_8c_a2540c48cea7dc865909cfb3f8450a887}{winode}}(rootino, \&din);}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{165   \mbox{\hyperlink{mkfs_8c_a327cdfc7a74165d8922ec6c8ba256906}{balloc}}(\mbox{\hyperlink{mkfs_8c_a8d3a0b59d5f6e59c8b7c0bbdab41ab15}{freeblock}});}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167   \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}(0);}
+\DoxyCodeLine{168 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d7/d1f/mkfs_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mkfs_8c_a3b6cb1258a963010211a8e5ddf99defe}\label{mkfs_8c_a3b6cb1258a963010211a8e5ddf99defe}} 
+\index{mkfs.c@{mkfs.c}!rinode@{rinode}}
+\index{rinode@{rinode}!mkfs.c@{mkfs.c}}
+\doxysubsubsection{\texorpdfstring{rinode()}{rinode()}}
+{\footnotesize\ttfamily void rinode (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}}]{inum,  }\item[{struct \mbox{\hyperlink{structdinode}{dinode}} $\ast$}]{ip }\end{DoxyParamCaption})}
+
+
+
+mkfs.\+c 파일의 198 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{199 \{}
+\DoxyCodeLine{200   \textcolor{keywordtype}{char} \mbox{\hyperlink{structbuf}{buf}}[\mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}}];}
+\DoxyCodeLine{201   \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} bn;}
+\DoxyCodeLine{202   \textcolor{keyword}{struct }\mbox{\hyperlink{structdinode}{dinode}} *dip;}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204   bn = \mbox{\hyperlink{fs_8h_ac9a5b990015f0f86e5d4c6b21d38ffa0}{IBLOCK}}(inum, \mbox{\hyperlink{mkfs_8c_a0248d0bac625de5a1415f2f8c91f3343}{sb}});}
+\DoxyCodeLine{205   \mbox{\hyperlink{mkfs_8c_a22ea835ad23cd716a962f30e4882ee80}{rsect}}(bn, \mbox{\hyperlink{structbuf}{buf}});}
+\DoxyCodeLine{206   dip = ((\textcolor{keyword}{struct }\mbox{\hyperlink{structdinode}{dinode}}*)\mbox{\hyperlink{structbuf}{buf}}) + (inum \% \mbox{\hyperlink{fs_8h_aadb6c866a6d0a173f5f0a6ed9c7e0228}{IPB}});}
+\DoxyCodeLine{207   *ip = *dip;}
+\DoxyCodeLine{208 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{d7/d1f/mkfs_8c_a3b6cb1258a963010211a8e5ddf99defe_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=296pt]{d7/d1f/mkfs_8c_a3b6cb1258a963010211a8e5ddf99defe_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mkfs_8c_a22ea835ad23cd716a962f30e4882ee80}\label{mkfs_8c_a22ea835ad23cd716a962f30e4882ee80}} 
+\index{mkfs.c@{mkfs.c}!rsect@{rsect}}
+\index{rsect@{rsect}!mkfs.c@{mkfs.c}}
+\doxysubsubsection{\texorpdfstring{rsect()}{rsect()}}
+{\footnotesize\ttfamily void rsect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}}]{sec,  }\item[{void $\ast$}]{buf }\end{DoxyParamCaption})}
+
+
+
+mkfs.\+c 파일의 211 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{212 \{}
+\DoxyCodeLine{213   \textcolor{keywordflow}{if}(lseek(\mbox{\hyperlink{mkfs_8c_a44f12de41bc5a5ada9e5fff19c18201c}{fsfd}}, sec * \mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}}, 0) != sec * \mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}})\{}
+\DoxyCodeLine{214     perror(\textcolor{stringliteral}{"lseek"});}
+\DoxyCodeLine{215     \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}(1);}
+\DoxyCodeLine{216   \}}
+\DoxyCodeLine{217   \textcolor{keywordflow}{if}(\mbox{\hyperlink{user_8h_a2d73522d6354b8a141ecfaa9585a0c77}{read}}(\mbox{\hyperlink{mkfs_8c_a44f12de41bc5a5ada9e5fff19c18201c}{fsfd}}, \mbox{\hyperlink{structbuf}{buf}}, \mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}}) != \mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}})\{}
+\DoxyCodeLine{218     perror(\textcolor{stringliteral}{"read"});}
+\DoxyCodeLine{219     \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}(1);}
+\DoxyCodeLine{220   \}}
+\DoxyCodeLine{221 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=195pt]{d7/d1f/mkfs_8c_a22ea835ad23cd716a962f30e4882ee80_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d7/d1f/mkfs_8c_a22ea835ad23cd716a962f30e4882ee80_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mkfs_8c_a2540c48cea7dc865909cfb3f8450a887}\label{mkfs_8c_a2540c48cea7dc865909cfb3f8450a887}} 
+\index{mkfs.c@{mkfs.c}!winode@{winode}}
+\index{winode@{winode}!mkfs.c@{mkfs.c}}
+\doxysubsubsection{\texorpdfstring{winode()}{winode()}}
+{\footnotesize\ttfamily void winode (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}}]{inum,  }\item[{struct \mbox{\hyperlink{structdinode}{dinode}} $\ast$}]{ip }\end{DoxyParamCaption})}
+
+
+
+mkfs.\+c 파일의 184 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{185 \{}
+\DoxyCodeLine{186   \textcolor{keywordtype}{char} \mbox{\hyperlink{structbuf}{buf}}[\mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}}];}
+\DoxyCodeLine{187   \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} bn;}
+\DoxyCodeLine{188   \textcolor{keyword}{struct }\mbox{\hyperlink{structdinode}{dinode}} *dip;}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{190   bn = \mbox{\hyperlink{fs_8h_ac9a5b990015f0f86e5d4c6b21d38ffa0}{IBLOCK}}(inum, \mbox{\hyperlink{mkfs_8c_a0248d0bac625de5a1415f2f8c91f3343}{sb}});}
+\DoxyCodeLine{191   \mbox{\hyperlink{mkfs_8c_a22ea835ad23cd716a962f30e4882ee80}{rsect}}(bn, \mbox{\hyperlink{structbuf}{buf}});}
+\DoxyCodeLine{192   dip = ((\textcolor{keyword}{struct }\mbox{\hyperlink{structdinode}{dinode}}*)\mbox{\hyperlink{structbuf}{buf}}) + (inum \% \mbox{\hyperlink{fs_8h_aadb6c866a6d0a173f5f0a6ed9c7e0228}{IPB}});}
+\DoxyCodeLine{193   *dip = *ip;}
+\DoxyCodeLine{194   \mbox{\hyperlink{mkfs_8c_ac62d827d836d1807e4d6f365f32348bb}{wsect}}(bn, \mbox{\hyperlink{structbuf}{buf}});}
+\DoxyCodeLine{195 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=290pt]{d7/d1f/mkfs_8c_a2540c48cea7dc865909cfb3f8450a887_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=301pt]{d7/d1f/mkfs_8c_a2540c48cea7dc865909cfb3f8450a887_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mkfs_8c_ac62d827d836d1807e4d6f365f32348bb}\label{mkfs_8c_ac62d827d836d1807e4d6f365f32348bb}} 
+\index{mkfs.c@{mkfs.c}!wsect@{wsect}}
+\index{wsect@{wsect}!mkfs.c@{mkfs.c}}
+\doxysubsubsection{\texorpdfstring{wsect()}{wsect()}}
+{\footnotesize\ttfamily void wsect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}}]{sec,  }\item[{void $\ast$}]{buf }\end{DoxyParamCaption})}
+
+
+
+mkfs.\+c 파일의 171 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{172 \{}
+\DoxyCodeLine{173   \textcolor{keywordflow}{if}(lseek(\mbox{\hyperlink{mkfs_8c_a44f12de41bc5a5ada9e5fff19c18201c}{fsfd}}, sec * \mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}}, 0) != sec * \mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}})\{}
+\DoxyCodeLine{174     perror(\textcolor{stringliteral}{"lseek"});}
+\DoxyCodeLine{175     \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}(1);}
+\DoxyCodeLine{176   \}}
+\DoxyCodeLine{177   \textcolor{keywordflow}{if}(\mbox{\hyperlink{user_8h_ae57e95d717eb7386cd8b935a0c136abe}{write}}(\mbox{\hyperlink{mkfs_8c_a44f12de41bc5a5ada9e5fff19c18201c}{fsfd}}, \mbox{\hyperlink{structbuf}{buf}}, \mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}}) != \mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}})\{}
+\DoxyCodeLine{178     perror(\textcolor{stringliteral}{"write"});}
+\DoxyCodeLine{179     \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}(1);}
+\DoxyCodeLine{180   \}}
+\DoxyCodeLine{181 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{d7/d1f/mkfs_8c_ac62d827d836d1807e4d6f365f32348bb_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d7/d1f/mkfs_8c_ac62d827d836d1807e4d6f365f32348bb_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}\label{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}} 
+\index{mkfs.c@{mkfs.c}!xint@{xint}}
+\index{xint@{xint}!mkfs.c@{mkfs.c}}
+\doxysubsubsection{\texorpdfstring{xint()}{xint()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} xint (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}}]{x }\end{DoxyParamCaption})}
+
+
+
+mkfs.\+c 파일의 56 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{57 \{}
+\DoxyCodeLine{58   \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} y;}
+\DoxyCodeLine{59   \mbox{\hyperlink{types_8h_a65f85814a8290f9797005d3b28e7e5fc}{uchar}} *a = (\mbox{\hyperlink{types_8h_a65f85814a8290f9797005d3b28e7e5fc}{uchar}}*)\&y;}
+\DoxyCodeLine{60   a[0] = x;}
+\DoxyCodeLine{61   a[1] = x >> 8;}
+\DoxyCodeLine{62   a[2] = x >> 16;}
+\DoxyCodeLine{63   a[3] = x >> 24;}
+\DoxyCodeLine{64   \textcolor{keywordflow}{return} y;}
+\DoxyCodeLine{65 \}}
+
+\end{DoxyCode}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=284pt]{d7/d1f/mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mkfs_8c_ac6dbbb3aaeee7114cf795be284be08ce}\label{mkfs_8c_ac6dbbb3aaeee7114cf795be284be08ce}} 
+\index{mkfs.c@{mkfs.c}!xshort@{xshort}}
+\index{xshort@{xshort}!mkfs.c@{mkfs.c}}
+\doxysubsubsection{\texorpdfstring{xshort()}{xshort()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} xshort (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}}}]{x }\end{DoxyParamCaption})}
+
+
+
+mkfs.\+c 파일의 46 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{47 \{}
+\DoxyCodeLine{48   \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} y;}
+\DoxyCodeLine{49   \mbox{\hyperlink{types_8h_a65f85814a8290f9797005d3b28e7e5fc}{uchar}} *a = (\mbox{\hyperlink{types_8h_a65f85814a8290f9797005d3b28e7e5fc}{uchar}}*)\&y;}
+\DoxyCodeLine{50   a[0] = x;}
+\DoxyCodeLine{51   a[1] = x >> 8;}
+\DoxyCodeLine{52   \textcolor{keywordflow}{return} y;}
+\DoxyCodeLine{53 \}}
+
+\end{DoxyCode}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=283pt]{d7/d1f/mkfs_8c_ac6dbbb3aaeee7114cf795be284be08ce_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{변수 문서화}
+\mbox{\Hypertarget{mkfs_8c_a8d3a0b59d5f6e59c8b7c0bbdab41ab15}\label{mkfs_8c_a8d3a0b59d5f6e59c8b7c0bbdab41ab15}} 
+\index{mkfs.c@{mkfs.c}!freeblock@{freeblock}}
+\index{freeblock@{freeblock}!mkfs.c@{mkfs.c}}
+\doxysubsubsection{\texorpdfstring{freeblock}{freeblock}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} freeblock}
+
+
+
+mkfs.\+c 파일의 33 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mkfs_8c_acee9059b25c8d81ef2b9cfedded17d48}\label{mkfs_8c_acee9059b25c8d81ef2b9cfedded17d48}} 
+\index{mkfs.c@{mkfs.c}!freeinode@{freeinode}}
+\index{freeinode@{freeinode}!mkfs.c@{mkfs.c}}
+\doxysubsubsection{\texorpdfstring{freeinode}{freeinode}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} freeinode = 1}
+
+
+
+mkfs.\+c 파일의 32 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mkfs_8c_a44f12de41bc5a5ada9e5fff19c18201c}\label{mkfs_8c_a44f12de41bc5a5ada9e5fff19c18201c}} 
+\index{mkfs.c@{mkfs.c}!fsfd@{fsfd}}
+\index{fsfd@{fsfd}!mkfs.c@{mkfs.c}}
+\doxysubsubsection{\texorpdfstring{fsfd}{fsfd}}
+{\footnotesize\ttfamily int fsfd}
+
+
+
+mkfs.\+c 파일의 29 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mkfs_8c_ab3610080ec9ad31beae2488dffd98026}\label{mkfs_8c_ab3610080ec9ad31beae2488dffd98026}} 
+\index{mkfs.c@{mkfs.c}!nbitmap@{nbitmap}}
+\index{nbitmap@{nbitmap}!mkfs.c@{mkfs.c}}
+\doxysubsubsection{\texorpdfstring{nbitmap}{nbitmap}}
+{\footnotesize\ttfamily int nbitmap = \mbox{\hyperlink{param_8h_a486f47992f736854db2444b01afd9991}{F\+S\+S\+I\+ZE}}/(\mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{B\+S\+I\+ZE}}$\ast$8) + 1}
+
+
+
+mkfs.\+c 파일의 23 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mkfs_8c_a076c8e8b7f7acccc46cd356bd8776b26}\label{mkfs_8c_a076c8e8b7f7acccc46cd356bd8776b26}} 
+\index{mkfs.c@{mkfs.c}!nblocks@{nblocks}}
+\index{nblocks@{nblocks}!mkfs.c@{mkfs.c}}
+\doxysubsubsection{\texorpdfstring{nblocks}{nblocks}}
+{\footnotesize\ttfamily int nblocks}
+
+
+
+mkfs.\+c 파일의 27 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mkfs_8c_a86bf1487f875e3a82dbb4f7c0cde878c}\label{mkfs_8c_a86bf1487f875e3a82dbb4f7c0cde878c}} 
+\index{mkfs.c@{mkfs.c}!ninodeblocks@{ninodeblocks}}
+\index{ninodeblocks@{ninodeblocks}!mkfs.c@{mkfs.c}}
+\doxysubsubsection{\texorpdfstring{ninodeblocks}{ninodeblocks}}
+{\footnotesize\ttfamily int ninodeblocks = \mbox{\hyperlink{mkfs_8c_ad285a4c453432da6be26e87a581ee35c}{N\+I\+N\+O\+D\+ES}} / \mbox{\hyperlink{fs_8h_aadb6c866a6d0a173f5f0a6ed9c7e0228}{I\+PB}} + 1}
+
+
+
+mkfs.\+c 파일의 24 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mkfs_8c_aa86ff3fab07bd3139fcd159de0ffce90}\label{mkfs_8c_aa86ff3fab07bd3139fcd159de0ffce90}} 
+\index{mkfs.c@{mkfs.c}!nlog@{nlog}}
+\index{nlog@{nlog}!mkfs.c@{mkfs.c}}
+\doxysubsubsection{\texorpdfstring{nlog}{nlog}}
+{\footnotesize\ttfamily int nlog = \mbox{\hyperlink{param_8h_acc7694167c7840a913939a1b90808b4c}{L\+O\+G\+S\+I\+ZE}}}
+
+
+
+mkfs.\+c 파일의 25 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mkfs_8c_a6bb66ce69ae378551f55d86c515ae02c}\label{mkfs_8c_a6bb66ce69ae378551f55d86c515ae02c}} 
+\index{mkfs.c@{mkfs.c}!nmeta@{nmeta}}
+\index{nmeta@{nmeta}!mkfs.c@{mkfs.c}}
+\doxysubsubsection{\texorpdfstring{nmeta}{nmeta}}
+{\footnotesize\ttfamily int nmeta}
+
+
+
+mkfs.\+c 파일의 26 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mkfs_8c_a0248d0bac625de5a1415f2f8c91f3343}\label{mkfs_8c_a0248d0bac625de5a1415f2f8c91f3343}} 
+\index{mkfs.c@{mkfs.c}!sb@{sb}}
+\index{sb@{sb}!mkfs.c@{mkfs.c}}
+\doxysubsubsection{\texorpdfstring{sb}{sb}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structsuperblock}{superblock}} sb}
+
+
+
+mkfs.\+c 파일의 30 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mkfs_8c_aef2d52736d40de37197333ecdeb14a60}\label{mkfs_8c_aef2d52736d40de37197333ecdeb14a60}} 
+\index{mkfs.c@{mkfs.c}!zeroes@{zeroes}}
+\index{zeroes@{zeroes}!mkfs.c@{mkfs.c}}
+\doxysubsubsection{\texorpdfstring{zeroes}{zeroes}}
+{\footnotesize\ttfamily char zeroes\mbox{[}\mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{B\+S\+I\+ZE}}\mbox{]}}
+
+
+
+mkfs.\+c 파일의 31 번째 라인에서 정의되었습니다.
+

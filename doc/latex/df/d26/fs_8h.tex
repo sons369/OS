@@ -1,0 +1,145 @@
+\hypertarget{fs_8h}{}\doxysection{fs.\+h 파일 참조}
+\label{fs_8h}\index{fs.h@{fs.h}}
+이 그래프는 이 파일을 직/간접적으로 include 하는 파일들을 보여줍니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d9/d98/fs_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{데이터 구조}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structsuperblock}{superblock}}
+\item 
+struct \mbox{\hyperlink{structdinode}{dinode}}
+\item 
+struct \mbox{\hyperlink{structdirent}{dirent}}
+\end{DoxyCompactItemize}
+\doxysubsection*{매크로}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{fs_8h_a22c8ea96d09283ed6496347806cc72a0}{R\+O\+O\+T\+I\+NO}}~1
+\item 
+\#define \mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{B\+S\+I\+ZE}}~512
+\item 
+\#define \mbox{\hyperlink{fs_8h_acd38e9532d4b3623f844b93c012a8e06}{N\+D\+I\+R\+E\+CT}}~12
+\item 
+\#define \mbox{\hyperlink{fs_8h_a6d24f098ea2928d61ff80b123d761715}{N\+I\+N\+D\+I\+R\+E\+CT}}~(\mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{B\+S\+I\+ZE}} / sizeof(\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}))
+\item 
+\#define \mbox{\hyperlink{fs_8h_a714b2485a6dd312e37226e1f833728a9}{M\+A\+X\+F\+I\+LE}}~(\mbox{\hyperlink{fs_8h_acd38e9532d4b3623f844b93c012a8e06}{N\+D\+I\+R\+E\+CT}} + \mbox{\hyperlink{fs_8h_a6d24f098ea2928d61ff80b123d761715}{N\+I\+N\+D\+I\+R\+E\+CT}})
+\item 
+\#define \mbox{\hyperlink{fs_8h_aadb6c866a6d0a173f5f0a6ed9c7e0228}{I\+PB}}~(\mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{B\+S\+I\+ZE}} / sizeof(struct \mbox{\hyperlink{structdinode}{dinode}}))
+\item 
+\#define \mbox{\hyperlink{fs_8h_ac9a5b990015f0f86e5d4c6b21d38ffa0}{I\+B\+L\+O\+CK}}(i,  \mbox{\hyperlink{mkfs_8c_a0248d0bac625de5a1415f2f8c91f3343}{sb}})~((i) / \mbox{\hyperlink{fs_8h_aadb6c866a6d0a173f5f0a6ed9c7e0228}{I\+PB}} + sb.\+inodestart)
+\item 
+\#define \mbox{\hyperlink{fs_8h_a3c88fd21abb83ef11461ce750c466828}{B\+PB}}~(\mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{B\+S\+I\+ZE}}$\ast$8)
+\item 
+\#define \mbox{\hyperlink{fs_8h_a080eb729016328ec6da85bfe125fc04c}{B\+B\+L\+O\+CK}}(b,  \mbox{\hyperlink{mkfs_8c_a0248d0bac625de5a1415f2f8c91f3343}{sb}})~(b/\mbox{\hyperlink{fs_8h_a3c88fd21abb83ef11461ce750c466828}{B\+PB}} + sb.\+bmapstart)
+\item 
+\#define \mbox{\hyperlink{fs_8h_a48246fb9e5cb7f6a71ebc9ebc2f06562}{D\+I\+R\+S\+IZ}}~14
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{매크로 문서화}
+\mbox{\Hypertarget{fs_8h_a080eb729016328ec6da85bfe125fc04c}\label{fs_8h_a080eb729016328ec6da85bfe125fc04c}} 
+\index{fs.h@{fs.h}!BBLOCK@{BBLOCK}}
+\index{BBLOCK@{BBLOCK}!fs.h@{fs.h}}
+\doxysubsubsection{\texorpdfstring{BBLOCK}{BBLOCK}}
+{\footnotesize\ttfamily \#define B\+B\+L\+O\+CK(\begin{DoxyParamCaption}\item[{}]{b,  }\item[{}]{\mbox{\hyperlink{mkfs_8c_a0248d0bac625de5a1415f2f8c91f3343}{sb}} }\end{DoxyParamCaption})~(b/\mbox{\hyperlink{fs_8h_a3c88fd21abb83ef11461ce750c466828}{B\+PB}} + sb.\+bmapstart)}
+
+
+
+fs.\+h 파일의 48 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{fs_8h_a3c88fd21abb83ef11461ce750c466828}\label{fs_8h_a3c88fd21abb83ef11461ce750c466828}} 
+\index{fs.h@{fs.h}!BPB@{BPB}}
+\index{BPB@{BPB}!fs.h@{fs.h}}
+\doxysubsubsection{\texorpdfstring{BPB}{BPB}}
+{\footnotesize\ttfamily \#define B\+PB~(\mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{B\+S\+I\+ZE}}$\ast$8)}
+
+
+
+fs.\+h 파일의 45 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{fs_8h_a403cf3149c084cea115b85c90721039a}\label{fs_8h_a403cf3149c084cea115b85c90721039a}} 
+\index{fs.h@{fs.h}!BSIZE@{BSIZE}}
+\index{BSIZE@{BSIZE}!fs.h@{fs.h}}
+\doxysubsubsection{\texorpdfstring{BSIZE}{BSIZE}}
+{\footnotesize\ttfamily \#define B\+S\+I\+ZE~512}
+
+
+
+fs.\+h 파일의 6 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{fs_8h_a48246fb9e5cb7f6a71ebc9ebc2f06562}\label{fs_8h_a48246fb9e5cb7f6a71ebc9ebc2f06562}} 
+\index{fs.h@{fs.h}!DIRSIZ@{DIRSIZ}}
+\index{DIRSIZ@{DIRSIZ}!fs.h@{fs.h}}
+\doxysubsubsection{\texorpdfstring{DIRSIZ}{DIRSIZ}}
+{\footnotesize\ttfamily \#define D\+I\+R\+S\+IZ~14}
+
+
+
+fs.\+h 파일의 51 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{fs_8h_ac9a5b990015f0f86e5d4c6b21d38ffa0}\label{fs_8h_ac9a5b990015f0f86e5d4c6b21d38ffa0}} 
+\index{fs.h@{fs.h}!IBLOCK@{IBLOCK}}
+\index{IBLOCK@{IBLOCK}!fs.h@{fs.h}}
+\doxysubsubsection{\texorpdfstring{IBLOCK}{IBLOCK}}
+{\footnotesize\ttfamily \#define I\+B\+L\+O\+CK(\begin{DoxyParamCaption}\item[{}]{i,  }\item[{}]{\mbox{\hyperlink{mkfs_8c_a0248d0bac625de5a1415f2f8c91f3343}{sb}} }\end{DoxyParamCaption})~((i) / \mbox{\hyperlink{fs_8h_aadb6c866a6d0a173f5f0a6ed9c7e0228}{I\+PB}} + sb.\+inodestart)}
+
+
+
+fs.\+h 파일의 42 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{fs_8h_aadb6c866a6d0a173f5f0a6ed9c7e0228}\label{fs_8h_aadb6c866a6d0a173f5f0a6ed9c7e0228}} 
+\index{fs.h@{fs.h}!IPB@{IPB}}
+\index{IPB@{IPB}!fs.h@{fs.h}}
+\doxysubsubsection{\texorpdfstring{IPB}{IPB}}
+{\footnotesize\ttfamily \#define I\+PB~(\mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{B\+S\+I\+ZE}} / sizeof(struct \mbox{\hyperlink{structdinode}{dinode}}))}
+
+
+
+fs.\+h 파일의 39 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{fs_8h_a714b2485a6dd312e37226e1f833728a9}\label{fs_8h_a714b2485a6dd312e37226e1f833728a9}} 
+\index{fs.h@{fs.h}!MAXFILE@{MAXFILE}}
+\index{MAXFILE@{MAXFILE}!fs.h@{fs.h}}
+\doxysubsubsection{\texorpdfstring{MAXFILE}{MAXFILE}}
+{\footnotesize\ttfamily \#define M\+A\+X\+F\+I\+LE~(\mbox{\hyperlink{fs_8h_acd38e9532d4b3623f844b93c012a8e06}{N\+D\+I\+R\+E\+CT}} + \mbox{\hyperlink{fs_8h_a6d24f098ea2928d61ff80b123d761715}{N\+I\+N\+D\+I\+R\+E\+CT}})}
+
+
+
+fs.\+h 파일의 26 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{fs_8h_acd38e9532d4b3623f844b93c012a8e06}\label{fs_8h_acd38e9532d4b3623f844b93c012a8e06}} 
+\index{fs.h@{fs.h}!NDIRECT@{NDIRECT}}
+\index{NDIRECT@{NDIRECT}!fs.h@{fs.h}}
+\doxysubsubsection{\texorpdfstring{NDIRECT}{NDIRECT}}
+{\footnotesize\ttfamily \#define N\+D\+I\+R\+E\+CT~12}
+
+
+
+fs.\+h 파일의 24 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{fs_8h_a6d24f098ea2928d61ff80b123d761715}\label{fs_8h_a6d24f098ea2928d61ff80b123d761715}} 
+\index{fs.h@{fs.h}!NINDIRECT@{NINDIRECT}}
+\index{NINDIRECT@{NINDIRECT}!fs.h@{fs.h}}
+\doxysubsubsection{\texorpdfstring{NINDIRECT}{NINDIRECT}}
+{\footnotesize\ttfamily \#define N\+I\+N\+D\+I\+R\+E\+CT~(\mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{B\+S\+I\+ZE}} / sizeof(\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}))}
+
+
+
+fs.\+h 파일의 25 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{fs_8h_a22c8ea96d09283ed6496347806cc72a0}\label{fs_8h_a22c8ea96d09283ed6496347806cc72a0}} 
+\index{fs.h@{fs.h}!ROOTINO@{ROOTINO}}
+\index{ROOTINO@{ROOTINO}!fs.h@{fs.h}}
+\doxysubsubsection{\texorpdfstring{ROOTINO}{ROOTINO}}
+{\footnotesize\ttfamily \#define R\+O\+O\+T\+I\+NO~1}
+
+
+
+fs.\+h 파일의 5 번째 라인에서 정의되었습니다.
+

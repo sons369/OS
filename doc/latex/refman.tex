@@ -1,0 +1,356 @@
+\let\mypdfximage\pdfximage\def\pdfximage{\immediate\mypdfximage}\documentclass[twoside]{book}
+
+%% moved from doxygen.sty due to workaround for LaTex 2019 version and unmaintained tabu package
+\usepackage{ifthen}
+\ifx\requestedLaTeXdate\undefined
+\usepackage{array}
+\else
+\usepackage{array}[=2016-10-06]
+\fi
+%%
+% Packages required by doxygen
+\usepackage{fixltx2e}
+\usepackage{calc}
+\usepackage{doxygen}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage{makeidx}
+\usepackage{multicol}
+\usepackage{multirow}
+\PassOptionsToPackage{warn}{textcomp}
+\usepackage{textcomp}
+\usepackage[nointegrals]{wasysym}
+\usepackage[table]{xcolor}
+\usepackage{ifpdf,ifxetex}
+
+% NLS support packages
+\usepackage{kotex}
+
+% Font selection
+\usepackage[T1]{fontenc}
+\usepackage[scaled=.90]{helvet}
+\usepackage{courier}
+\usepackage{amssymb}
+\usepackage{sectsty}
+\renewcommand{\familydefault}{\sfdefault}
+\allsectionsfont{%
+  \fontseries{bc}\selectfont%
+  \color{darkgray}%
+}
+\renewcommand{\DoxyLabelFont}{%
+  \fontseries{bc}\selectfont%
+  \color{darkgray}%
+}
+\newcommand{\+}{\discretionary{\mbox{\scriptsize$\hookleftarrow$}}{}{}}
+
+% Arguments of doxygenemoji:
+% 1) ':<text>:' form of the emoji, already "LaTeX"-escaped
+% 2) file with the name of the emoji without the .png extension
+% in case image exist use this otherwise use the ':<text>:' form
+\newcommand{\doxygenemoji}[2]{%
+  \IfFileExists{./#2.png}{\raisebox{-0.1em}{\includegraphics[height=0.9em]{./#2.png}}}{#1}%
+}
+% Page & text layout
+\usepackage{geometry}
+\geometry{%
+  a4paper,%
+  top=2.5cm,%
+  bottom=2.5cm,%
+  left=2.5cm,%
+  right=2.5cm%
+}
+\tolerance=750
+\hfuzz=15pt
+\hbadness=750
+\setlength{\emergencystretch}{15pt}
+\setlength{\parindent}{0cm}
+\newcommand{\doxynormalparskip}{\setlength{\parskip}{3ex plus 2ex minus 2ex}}
+\newcommand{\doxytocparskip}{\setlength{\parskip}{1ex plus 0ex minus 0ex}}
+\doxynormalparskip
+\makeatletter
+\renewcommand{\paragraph}{%
+  \@startsection{paragraph}{4}{0ex}{-1.0ex}{1.0ex}{%
+    \normalfont\normalsize\bfseries\SS@parafont%
+  }%
+}
+\renewcommand{\subparagraph}{%
+  \@startsection{subparagraph}{5}{0ex}{-1.0ex}{1.0ex}{%
+    \normalfont\normalsize\bfseries\SS@subparafont%
+  }%
+}
+\makeatother
+
+\makeatletter
+\newcommand\hrulefilll{\leavevmode\leaders\hrule\hskip 0pt plus 1filll\kern\z@}
+\makeatother
+
+% Headers & footers
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\fancyhead[LE]{\fancyplain{}{\bfseries\thepage}}
+\fancyhead[CE]{\fancyplain{}{}}
+\fancyhead[RE]{\fancyplain{}{\bfseries\leftmark}}
+\fancyhead[LO]{\fancyplain{}{\bfseries\rightmark}}
+\fancyhead[CO]{\fancyplain{}{}}
+\fancyhead[RO]{\fancyplain{}{\bfseries\thepage}}
+\fancyfoot[LE]{\fancyplain{}{}}
+\fancyfoot[CE]{\fancyplain{}{}}
+\fancyfoot[RE]{\fancyplain{}{\bfseries\scriptsize 다음에 의해 생성됨 \+:  Doxygen }}
+\fancyfoot[LO]{\fancyplain{}{\bfseries\scriptsize 다음에 의해 생성됨 \+:  Doxygen }}
+\fancyfoot[CO]{\fancyplain{}{}}
+\fancyfoot[RO]{\fancyplain{}{}}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\chaptermark}[1]{%
+  \markboth{#1}{}%
+}
+\renewcommand{\sectionmark}[1]{%
+  \markright{\thesection\ #1}%
+}
+
+% Indices & bibliography
+\usepackage{natbib}
+\usepackage[titles]{tocloft}
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{5}
+\makeindex
+
+\usepackage{newunicodechar}
+  \newunicodechar{⁻}{${}^{-}$}% Superscript minus
+  \newunicodechar{²}{${}^{2}$}% Superscript two
+  \newunicodechar{³}{${}^{3}$}% Superscript three
+
+% Hyperlinks (required, but should be loaded last)
+\ifpdf
+  \usepackage[pdftex,pagebackref=true]{hyperref}
+\else
+  \ifxetex
+    \usepackage[pagebackref=true]{hyperref}
+  \else
+    \usepackage[ps2pdf,pagebackref=true]{hyperref}
+  \fi
+\fi
+
+\hypersetup{%
+  colorlinks=true,%
+  linkcolor=blue,%
+  citecolor=blue,%
+  unicode%
+}
+
+% Custom commands
+\newcommand{\clearemptydoublepage}{%
+  \newpage{\pagestyle{empty}\cleardoublepage}%
+}
+
+\usepackage{caption}
+\captionsetup{labelsep=space,justification=centering,font={bf},singlelinecheck=off,skip=4pt,position=top}
+
+\usepackage{etoc}
+\etocsettocstyle{\doxytocparskip}{\doxynormalparskip}
+\renewcommand{\numberline}[1]{#1~}
+%===== C O N T E N T S =====
+
+\begin{document}
+
+% Titlepage & ToC
+\hypersetup{pageanchor=false,
+             bookmarksnumbered=true,
+             pdfencoding=unicode
+            }
+\pagenumbering{alph}
+\begin{titlepage}
+\vspace*{7cm}
+\begin{center}%
+{\Large My Project \\[1ex]\large 1.\+0 }\\
+\vspace*{1cm}
+{\large 다음에 의해 생성됨 \+:  Doxygen 1.8.17}\\
+\end{center}
+\end{titlepage}
+\clearemptydoublepage
+\pagenumbering{roman}
+\tableofcontents
+\clearemptydoublepage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true}
+
+%--- Begin generated contents ---
+\chapter{데이터 구조 색인}
+\input{annotated}
+\chapter{파일 색인}
+\input{files}
+\chapter{데이터 구조 문서화}
+\input{da/d1f/structbackcmd}
+\input{d9/dd0/structbuf}
+\input{d5/db7/structcmd}
+\input{d7/dfe/structcontext}
+\input{db/d62/structcpu}
+\input{de/d6a/structdevsw}
+\input{db/dfa/structdinode}
+\input{d5/de2/structdirent}
+\input{d7/da8/structelfhdr}
+\input{dd/db7/structexeccmd}
+\input{d7/d3a/structfile}
+\input{d8/dd3/structgatedesc}
+\input{d3/d5d/unionheader}
+\input{d0/df8/structinode}
+\input{d3/d9b/structioapic}
+\input{dc/dd9/structkmap}
+\input{d8/d63/structlistcmd}
+\input{d0/d4a/structlog}
+\input{d4/d6c/structlogheader}
+\input{d8/d11/structmp}
+\input{d8/d01/structmpconf}
+\input{d6/d9b/structmpioapic}
+\input{d4/d22/structmpproc}
+\input{d8/d53/structpipe}
+\input{d6/d94/structpipecmd}
+\input{de/d48/structproc}
+\input{de/d4f/structproghdr}
+\input{d8/dac/structredircmd}
+\input{d3/de7/structrtcdate}
+\input{d0/d60/structrun}
+\input{d8/d3e/structsegdesc}
+\input{d9/dd0/structsleeplock}
+\input{d1/d08/structspinlock}
+\input{da/de7/structstat}
+\input{df/d3d/structsuperblock}
+\input{dc/dd1/structtaskstate}
+\input{df/d05/structtrapframe}
+\chapter{파일 문서화}
+\input{de/d21/asm_8h}
+\input{dc/de6/bio_8c}
+\input{d1/d7e/bio_8d}
+\input{d7/d42/bootasm_8d}
+\input{d5/dfc/bootmain_8c}
+\input{d4/d15/bootmain_8d}
+\input{d6/d6d/buf_8h}
+\input{d1/d8f/cat_8c}
+\input{d4/d9b/cat_8d}
+\input{d0/d56/console_8c}
+\input{d7/d52/console_8d}
+\input{db/d96/date_8h}
+\input{d5/d64/defs_8h}
+\input{da/daf/echo_8c}
+\input{d1/d6a/echo_8d}
+\input{d1/d9e/elf_8h}
+\input{dc/db8/entryother_8d}
+\input{df/dc9/exec_8c}
+\input{d2/db4/exec_8d}
+\input{d7/d9f/fcntl_8h}
+\input{d6/d13/file_8c}
+\input{d8/d01/file_8d}
+\input{d2/d4d/file_8h}
+\input{d5/de1/forktest_8c}
+\input{d4/d34/forktest_8d}
+\input{d2/d5a/fs_8c}
+\input{d8/d50/fs_8d}
+\input{df/d26/fs_8h}
+\input{d5/dcb/grep_8c}
+\input{df/d5e/grep_8d}
+\input{db/d00/hcat_8c}
+\input{d0/dbf/hcat_8d}
+\input{da/d80/helloworld_8c}
+\input{d7/ddb/helloworld_8d}
+\input{d9/d2f/ide_8c}
+\input{d5/dca/ide_8d}
+\input{d8/d60/init_8c}
+\input{d6/d70/init_8d}
+\input{dd/d5b/initcode_8d}
+\input{dd/d61/ioapic_8c}
+\input{d2/d0d/ioapic_8d}
+\input{d4/def/kalloc_8c}
+\input{d0/dd0/kalloc_8d}
+\input{dc/da9/kbd_8c}
+\input{dd/d26/kbd_8d}
+\input{d7/df4/kbd_8h}
+\input{d2/d1d/kill_8c}
+\input{dd/dd6/kill_8d}
+\input{dc/df6/lapic_8c}
+\input{dd/d9c/lapic_8d}
+\input{db/df0/list_8txt}
+\input{d0/d37/ln_8c}
+\input{db/d02/ln_8d}
+\input{d7/df8/log_8c}
+\input{df/dda/log_8d}
+\input{de/d77/ls_8c}
+\input{dd/d40/ls_8d}
+\input{d0/d29/main_8c}
+\input{d9/d60/main_8d}
+\input{da/d9b/memide_8c}
+\input{d8/da9/memlayout_8h}
+\input{de/d41/memsizetest_8c}
+\input{db/dd1/memsizetest_8d}
+\input{db/d1f/mkdir_8c}
+\input{d5/dba/mkdir_8d}
+\input{d7/d1f/mkfs_8c}
+\input{d2/df1/mmu_8h}
+\input{dd/d06/mp_8c}
+\input{df/d9e/mp_8d}
+\input{dc/d0c/mp_8h}
+\input{d5/d33/param_8h}
+\input{d5/da8/picirq_8c}
+\input{dc/dee/picirq_8d}
+\input{d1/d47/pipe_8c}
+\input{db/dfc/pipe_8d}
+\input{d1/d3d/printf_8c}
+\input{d4/d8e/printf_8d}
+\input{d3/dda/proc_8c}
+\input{d5/d52/proc_8d}
+\input{df/d03/proc_8h}
+\input{dc/d14/rm_8c}
+\input{d0/d38/rm_8d}
+\input{dd/da3/sh_8c}
+\input{df/dfc/sh_8d}
+\input{d8/dd1/sleeplock_8c}
+\input{da/d80/sleeplock_8d}
+\input{d0/d74/sleeplock_8h}
+\input{d3/d2d/spinlock_8c}
+\input{d1/da0/spinlock_8d}
+\input{df/d63/spinlock_8h}
+\input{dc/ded/ssu__login_8c}
+\input{d5/d01/ssu__login_8d}
+\input{d6/d95/ssu__trace_8c}
+\input{da/df2/ssu__trace_8d}
+\input{d2/d1b/stat_8h}
+\input{d4/dbf/stressfs_8c}
+\input{de/d84/stressfs_8d}
+\input{d1/db0/string_8c}
+\input{d7/d5e/string_8d}
+\input{db/dd8/syscall_8c}
+\input{d5/d44/syscall_8d}
+\input{de/ddf/syscall_8h}
+\input{d1/d14/sysfile_8c}
+\input{de/d3f/sysfile_8d}
+\input{dd/d35/sysproc_8c}
+\input{d0/dd3/sysproc_8d}
+\input{dc/d6f/trap_8c}
+\input{de/d05/trap_8d}
+\input{d5/d98/traps_8h}
+\input{d9/d49/types_8h}
+\input{d1/d87/uart_8c}
+\input{d3/de3/uart_8d}
+\input{db/d8a/ulib_8c}
+\input{d8/d0c/ulib_8d}
+\input{df/d5d/umalloc_8c}
+\input{de/dd3/umalloc_8d}
+\input{d8/ddb/user_8h}
+\input{de/dc0/usertests_8c}
+\input{d7/d62/usertests_8d}
+\input{de/de9/vm_8c}
+\input{d2/dea/vm_8d}
+\input{d3/d7a/wc_8c}
+\input{d6/ddf/wc_8d}
+\input{d5/d39/x86_8h}
+\input{dd/da4/zombie_8c}
+\input{df/d56/zombie_8d}
+%--- End generated contents ---
+
+% Index
+\backmatter
+\newpage
+\phantomsection
+\clearemptydoublepage
+\addcontentsline{toc}{chapter}{\indexname}
+\printindex
+
+\end{document}

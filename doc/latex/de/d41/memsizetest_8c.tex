@@ -1,0 +1,78 @@
+\hypertarget{memsizetest_8c}{}\doxysection{memsizetest.\+c 파일 참조}
+\label{memsizetest_8c}\index{memsizetest.c@{memsizetest.c}}
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stat.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}user.\+h\char`\"{}}\newline
+memsizetest.\+c에 대한 include 의존 그래프
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=260pt]{d7/d0d/memsizetest_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{매크로}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{memsizetest_8c_a70ed59adcb4159ac551058053e649640}{S\+I\+ZE}}~2048
+\end{DoxyCompactItemize}
+\doxysubsection*{함수}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{memsizetest_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{매크로 문서화}
+\mbox{\Hypertarget{memsizetest_8c_a70ed59adcb4159ac551058053e649640}\label{memsizetest_8c_a70ed59adcb4159ac551058053e649640}} 
+\index{memsizetest.c@{memsizetest.c}!SIZE@{SIZE}}
+\index{SIZE@{SIZE}!memsizetest.c@{memsizetest.c}}
+\doxysubsubsection{\texorpdfstring{SIZE}{SIZE}}
+{\footnotesize\ttfamily \#define S\+I\+ZE~2048}
+
+
+
+memsizetest.\+c 파일의 5 번째 라인에서 정의되었습니다.
+
+
+
+\doxysubsection{함수 문서화}
+\mbox{\Hypertarget{memsizetest_8c_a840291bc02cba5474a4cb46a9b9566fe}\label{memsizetest_8c_a840291bc02cba5474a4cb46a9b9566fe}} 
+\index{memsizetest.c@{memsizetest.c}!main@{main}}
+\index{main@{main}!memsizetest.c@{memsizetest.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+memsizetest.\+c 파일의 7 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{8 \{}
+\DoxyCodeLine{9     \textcolor{keywordtype}{int} msize = \mbox{\hyperlink{user_8h_af2742a38fe1ce2c321b9b948f40b87fc}{memsize}}();}
+\DoxyCodeLine{10     \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(1, \textcolor{stringliteral}{"The process is using \%dB\(\backslash\)n"}, msize);}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12     \textcolor{keywordtype}{char} *tmp = (\textcolor{keywordtype}{char} *)\mbox{\hyperlink{umalloc_8c_a94267ee40e0547410676894ab3f23c15}{malloc}}(\mbox{\hyperlink{memsizetest_8c_a70ed59adcb4159ac551058053e649640}{SIZE}} * \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char}));}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14     \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(1, \textcolor{stringliteral}{"Allocating more memory\(\backslash\)n"});}
+\DoxyCodeLine{15     msize = \mbox{\hyperlink{user_8h_af2742a38fe1ce2c321b9b948f40b87fc}{memsize}}();}
+\DoxyCodeLine{16     \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(1, \textcolor{stringliteral}{"The process is using \%dB\(\backslash\)n"}, msize);}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18     \mbox{\hyperlink{umalloc_8c_adebb229f063e66907017098087cbe791}{free}}(tmp);}
+\DoxyCodeLine{19     \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(1, \textcolor{stringliteral}{"Freeing memory\(\backslash\)n"});}
+\DoxyCodeLine{20     msize = \mbox{\hyperlink{user_8h_af2742a38fe1ce2c321b9b948f40b87fc}{memsize}}();}
+\DoxyCodeLine{21     \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(1, \textcolor{stringliteral}{"The process is using \%dB\(\backslash\)n"}, msize);}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23     \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}();}
+\DoxyCodeLine{24 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{de/d41/memsizetest_8c_a840291bc02cba5474a4cb46a9b9566fe_cgraph}
+\end{center}
+\end{figure}

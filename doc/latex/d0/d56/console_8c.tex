@@ -1,0 +1,703 @@
+\hypertarget{console_8c}{}\doxysection{console.\+c 파일 참조}
+\label{console_8c}\index{console.c@{console.c}}
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}defs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}param.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}traps.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}spinlock.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sleeplock.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}fs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}file.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}memlayout.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mmu.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}proc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}x86.\+h\char`\"{}}\newline
+console.\+c에 대한 include 의존 그래프
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{df/d7f/console_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{매크로}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{console_8c_a629568514359445d2fbda71d70eeb1ce}{B\+A\+C\+K\+S\+P\+A\+CE}}~0x100
+\item 
+\#define \mbox{\hyperlink{console_8c_a2e3959df0a0c54f50f20d4776b14487f}{C\+R\+T\+P\+O\+RT}}~0x3d4
+\item 
+\#define \mbox{\hyperlink{console_8c_a5d85434f2a29f6c3048aeac34d0ce41d}{I\+N\+P\+U\+T\+\_\+\+B\+UF}}~128
+\item 
+\#define \mbox{\hyperlink{console_8c_ac54ae397901fe700628cafadea3c5208}{C}}(x)~((x)-\/\textquotesingle{}@\textquotesingle{})
+\end{DoxyCompactItemize}
+\doxysubsection*{함수}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{console_8c_a0504dbe97899f754f22dbe2b1e6b6102}{consputc}} (int)
+\item 
+static void \mbox{\hyperlink{console_8c_aafb705f6d5b125c41825313da0d41252}{printint}} (int xx, int \mbox{\hyperlink{umalloc_8c_a877e065dfc67f9bd937b962b8b968638}{base}}, int sign)
+\item 
+void \mbox{\hyperlink{console_8c_a90f0742d846503e4ed1804f1df421ec6}{cprintf}} (char $\ast$fmt,...)
+\item 
+void \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}} (char $\ast$s)
+\item 
+static void \mbox{\hyperlink{console_8c_a9e775e33e5b346aba0be84dbeddcb312}{cgaputc}} (int c)
+\item 
+void \mbox{\hyperlink{console_8c_aad3d6ca39f23bb6d2686d2967e415193}{consoleintr}} (int($\ast$getc)(void))
+\item 
+int \mbox{\hyperlink{console_8c_a28ac85a90987662e306ca8efbfe16074}{consoleread}} (struct \mbox{\hyperlink{structinode}{inode}} $\ast$ip, char $\ast$dst, int n)
+\item 
+int \mbox{\hyperlink{console_8c_a6af7eb39268127d389792cec37785666}{consolewrite}} (struct \mbox{\hyperlink{structinode}{inode}} $\ast$ip, char $\ast$\mbox{\hyperlink{structbuf}{buf}}, int n)
+\item 
+void \mbox{\hyperlink{console_8c_ab508ff0f4db26fe35cd25fa648f9ee75}{consoleinit}} (void)
+\end{DoxyCompactItemize}
+\doxysubsection*{변수}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{console_8c_af96084c4b67ff0c90052951ebf852bb9}{panicked}} = 0
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>struct \mbox{\hyperlink{structspinlock}{spinlock}} \mbox{\hyperlink{console_8c_ab28e82cd5dda7d960095706a3ea20572}{lock}}\\
+\>int \mbox{\hyperlink{console_8c_ae51110da3bc13ef49e32d1e2cda5d55c}{locking}}\\
+\} \mbox{\hyperlink{console_8c_a799a95b1ef986c63508f73813078ca23}{cons}}\\
+
+\end{tabbing}\item 
+static \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} $\ast$ \mbox{\hyperlink{console_8c_a4af835b1e23478618e644db708284c75}{crt}} = (\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}}$\ast$)\mbox{\hyperlink{memlayout_8h_aefd5e8b62c49bba2cf20309c7dd174e2}{P2V}}(0xb8000)
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>char \mbox{\hyperlink{console_8c_aa427837782b05b05204809dfba33c8f5}{buf}} \mbox{[}\mbox{\hyperlink{console_8c_a5d85434f2a29f6c3048aeac34d0ce41d}{INPUT\_BUF}}\mbox{]}\\
+\>\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{console_8c_af10fa12dd785c91e29528fbdc50cf9af}{r}}\\
+\>\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{console_8c_afdeff54db9a334718662b709641fdfe1}{w}}\\
+\>\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{console_8c_ab56fa7c992b725d84916b987c3d532ea}{e}}\\
+\} \mbox{\hyperlink{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}{input}}\\
+
+\end{tabbing}\end{DoxyCompactItemize}
+
+
+\doxysubsection{매크로 문서화}
+\mbox{\Hypertarget{console_8c_a629568514359445d2fbda71d70eeb1ce}\label{console_8c_a629568514359445d2fbda71d70eeb1ce}} 
+\index{console.c@{console.c}!BACKSPACE@{BACKSPACE}}
+\index{BACKSPACE@{BACKSPACE}!console.c@{console.c}}
+\doxysubsubsection{\texorpdfstring{BACKSPACE}{BACKSPACE}}
+{\footnotesize\ttfamily \#define B\+A\+C\+K\+S\+P\+A\+CE~0x100}
+
+
+
+console.\+c 파일의 127 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{console_8c_ac54ae397901fe700628cafadea3c5208}\label{console_8c_ac54ae397901fe700628cafadea3c5208}} 
+\index{console.c@{console.c}!C@{C}}
+\index{C@{C}!console.c@{console.c}}
+\doxysubsubsection{\texorpdfstring{C}{C}}
+{\footnotesize\ttfamily \#define C(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~((x)-\/\textquotesingle{}@\textquotesingle{})}
+
+
+
+console.\+c 파일의 189 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{console_8c_a2e3959df0a0c54f50f20d4776b14487f}\label{console_8c_a2e3959df0a0c54f50f20d4776b14487f}} 
+\index{console.c@{console.c}!CRTPORT@{CRTPORT}}
+\index{CRTPORT@{CRTPORT}!console.c@{console.c}}
+\doxysubsubsection{\texorpdfstring{CRTPORT}{CRTPORT}}
+{\footnotesize\ttfamily \#define C\+R\+T\+P\+O\+RT~0x3d4}
+
+
+
+console.\+c 파일의 128 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{console_8c_a5d85434f2a29f6c3048aeac34d0ce41d}\label{console_8c_a5d85434f2a29f6c3048aeac34d0ce41d}} 
+\index{console.c@{console.c}!INPUT\_BUF@{INPUT\_BUF}}
+\index{INPUT\_BUF@{INPUT\_BUF}!console.c@{console.c}}
+\doxysubsubsection{\texorpdfstring{INPUT\_BUF}{INPUT\_BUF}}
+{\footnotesize\ttfamily \#define I\+N\+P\+U\+T\+\_\+\+B\+UF~128}
+
+
+
+console.\+c 파일의 181 번째 라인에서 정의되었습니다.
+
+
+
+\doxysubsection{함수 문서화}
+\mbox{\Hypertarget{console_8c_a9e775e33e5b346aba0be84dbeddcb312}\label{console_8c_a9e775e33e5b346aba0be84dbeddcb312}} 
+\index{console.c@{console.c}!cgaputc@{cgaputc}}
+\index{cgaputc@{cgaputc}!console.c@{console.c}}
+\doxysubsubsection{\texorpdfstring{cgaputc()}{cgaputc()}}
+{\footnotesize\ttfamily static void cgaputc (\begin{DoxyParamCaption}\item[{int}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+console.\+c 파일의 132 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{133 \{}
+\DoxyCodeLine{134   \textcolor{keywordtype}{int} pos;}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136   \textcolor{comment}{// Cursor position: col + 80*row.}}
+\DoxyCodeLine{137   \mbox{\hyperlink{x86_8h_ae83f752beecce9c8f6f8711ff936377f}{outb}}(\mbox{\hyperlink{console_8c_a2e3959df0a0c54f50f20d4776b14487f}{CRTPORT}}, 14);}
+\DoxyCodeLine{138   pos = \mbox{\hyperlink{x86_8h_a2866d9720d8f4b0e23530f79171dfba9}{inb}}(\mbox{\hyperlink{console_8c_a2e3959df0a0c54f50f20d4776b14487f}{CRTPORT}}+1) << 8;}
+\DoxyCodeLine{139   \mbox{\hyperlink{x86_8h_ae83f752beecce9c8f6f8711ff936377f}{outb}}(\mbox{\hyperlink{console_8c_a2e3959df0a0c54f50f20d4776b14487f}{CRTPORT}}, 15);}
+\DoxyCodeLine{140   pos |= \mbox{\hyperlink{x86_8h_a2866d9720d8f4b0e23530f79171dfba9}{inb}}(\mbox{\hyperlink{console_8c_a2e3959df0a0c54f50f20d4776b14487f}{CRTPORT}}+1);}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142   \textcolor{keywordflow}{if}(c == \textcolor{charliteral}{'\(\backslash\)n'})}
+\DoxyCodeLine{143     pos += 80 -\/ pos\%80;}
+\DoxyCodeLine{144   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(c == \mbox{\hyperlink{console_8c_a629568514359445d2fbda71d70eeb1ce}{BACKSPACE}})\{}
+\DoxyCodeLine{145     \textcolor{keywordflow}{if}(pos > 0) -\/-\/pos;}
+\DoxyCodeLine{146   \} \textcolor{keywordflow}{else}}
+\DoxyCodeLine{147     \mbox{\hyperlink{console_8c_a4af835b1e23478618e644db708284c75}{crt}}[pos++] = (c\&0xff) | 0x0700;  \textcolor{comment}{// black on white}}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149   \textcolor{keywordflow}{if}(pos < 0 || pos > 25*80)}
+\DoxyCodeLine{150     \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"pos under/overflow"});}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152   \textcolor{keywordflow}{if}((pos/80) >= 24)\{  \textcolor{comment}{// Scroll up.}}
+\DoxyCodeLine{153     \mbox{\hyperlink{defs_8h_aa9c8577c0e9d233f85892ec2d9bfe212}{memmove}}(\mbox{\hyperlink{console_8c_a4af835b1e23478618e644db708284c75}{crt}}, \mbox{\hyperlink{console_8c_a4af835b1e23478618e644db708284c75}{crt}}+80, \textcolor{keyword}{sizeof}(\mbox{\hyperlink{console_8c_a4af835b1e23478618e644db708284c75}{crt}}[0])*23*80);}
+\DoxyCodeLine{154     pos -\/= 80;}
+\DoxyCodeLine{155     \mbox{\hyperlink{defs_8h_a9d55c9f035076ed1a90b6452770d0b62}{memset}}(\mbox{\hyperlink{console_8c_a4af835b1e23478618e644db708284c75}{crt}}+pos, 0, \textcolor{keyword}{sizeof}(\mbox{\hyperlink{console_8c_a4af835b1e23478618e644db708284c75}{crt}}[0])*(24*80 -\/ pos));}
+\DoxyCodeLine{156   \}}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158   \mbox{\hyperlink{x86_8h_ae83f752beecce9c8f6f8711ff936377f}{outb}}(\mbox{\hyperlink{console_8c_a2e3959df0a0c54f50f20d4776b14487f}{CRTPORT}}, 14);}
+\DoxyCodeLine{159   \mbox{\hyperlink{x86_8h_ae83f752beecce9c8f6f8711ff936377f}{outb}}(\mbox{\hyperlink{console_8c_a2e3959df0a0c54f50f20d4776b14487f}{CRTPORT}}+1, pos>>8);}
+\DoxyCodeLine{160   \mbox{\hyperlink{x86_8h_ae83f752beecce9c8f6f8711ff936377f}{outb}}(\mbox{\hyperlink{console_8c_a2e3959df0a0c54f50f20d4776b14487f}{CRTPORT}}, 15);}
+\DoxyCodeLine{161   \mbox{\hyperlink{x86_8h_ae83f752beecce9c8f6f8711ff936377f}{outb}}(\mbox{\hyperlink{console_8c_a2e3959df0a0c54f50f20d4776b14487f}{CRTPORT}}+1, pos);}
+\DoxyCodeLine{162   \mbox{\hyperlink{console_8c_a4af835b1e23478618e644db708284c75}{crt}}[pos] = \textcolor{charliteral}{' '} | 0x0700;}
+\DoxyCodeLine{163 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=241pt]{d0/d56/console_8c_a9e775e33e5b346aba0be84dbeddcb312_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d56/console_8c_a9e775e33e5b346aba0be84dbeddcb312_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{console_8c_ab508ff0f4db26fe35cd25fa648f9ee75}\label{console_8c_ab508ff0f4db26fe35cd25fa648f9ee75}} 
+\index{console.c@{console.c}!consoleinit@{consoleinit}}
+\index{consoleinit@{consoleinit}!console.c@{console.c}}
+\doxysubsubsection{\texorpdfstring{consoleinit()}{consoleinit()}}
+{\footnotesize\ttfamily void consoleinit (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+console.\+c 파일의 289 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{290 \{}
+\DoxyCodeLine{291   \mbox{\hyperlink{defs_8h_ab56d728e6966819a0260c358d3ac3419}{initlock}}(\&\mbox{\hyperlink{console_8c_a799a95b1ef986c63508f73813078ca23}{cons}}.lock, \textcolor{stringliteral}{"console"});}
+\DoxyCodeLine{292 }
+\DoxyCodeLine{293   \mbox{\hyperlink{structdevsw}{devsw}}[\mbox{\hyperlink{file_8h_a6c17169f464fb1a2995dbe06faa47a5f}{CONSOLE}}].\mbox{\hyperlink{structdevsw_a87fd7af6c9a6fb8663fc206be7a233d4}{write}} = \mbox{\hyperlink{console_8c_a6af7eb39268127d389792cec37785666}{consolewrite}};}
+\DoxyCodeLine{294   \mbox{\hyperlink{structdevsw}{devsw}}[\mbox{\hyperlink{file_8h_a6c17169f464fb1a2995dbe06faa47a5f}{CONSOLE}}].\mbox{\hyperlink{structdevsw_a4efbe00d0031a1c9005ef2186947ea37}{read}} = \mbox{\hyperlink{console_8c_a28ac85a90987662e306ca8efbfe16074}{consoleread}};}
+\DoxyCodeLine{295   \mbox{\hyperlink{console_8c_a799a95b1ef986c63508f73813078ca23}{cons}}.locking = 1;}
+\DoxyCodeLine{296 }
+\DoxyCodeLine{297   \mbox{\hyperlink{defs_8h_a63da75c0c2f0b051f2c790aea2116b63}{ioapicenable}}(\mbox{\hyperlink{traps_8h_a0b7569cda71298859ffb6ea55c03a36a}{IRQ\_KBD}}, 0);}
+\DoxyCodeLine{298 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d56/console_8c_ab508ff0f4db26fe35cd25fa648f9ee75_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{console_8c_aad3d6ca39f23bb6d2686d2967e415193}\label{console_8c_aad3d6ca39f23bb6d2686d2967e415193}} 
+\index{console.c@{console.c}!consoleintr@{consoleintr}}
+\index{consoleintr@{consoleintr}!console.c@{console.c}}
+\doxysubsubsection{\texorpdfstring{consoleintr()}{consoleintr()}}
+{\footnotesize\ttfamily void consoleintr (\begin{DoxyParamCaption}\item[{int($\ast$)(void)}]{getc }\end{DoxyParamCaption})}
+
+
+
+console.\+c 파일의 192 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{193 \{}
+\DoxyCodeLine{194   \textcolor{keywordtype}{int} c, doprocdump = 0;}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{196   \mbox{\hyperlink{defs_8h_afe4ef8638f1ecb962a6e67fb086ee3b8}{acquire}}(\&\mbox{\hyperlink{console_8c_a799a95b1ef986c63508f73813078ca23}{cons}}.lock);}
+\DoxyCodeLine{197   \textcolor{keywordflow}{while}((c = getc()) >= 0)\{}
+\DoxyCodeLine{198     \textcolor{keywordflow}{switch}(c)\{}
+\DoxyCodeLine{199     \textcolor{keywordflow}{case} \mbox{\hyperlink{console_8c_ac54ae397901fe700628cafadea3c5208}{C}}(\textcolor{charliteral}{'P'}):  \textcolor{comment}{// Process listing.}}
+\DoxyCodeLine{200       \textcolor{comment}{// procdump() locks cons.lock indirectly; invoke later}}
+\DoxyCodeLine{201       doprocdump = 1;}
+\DoxyCodeLine{202       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{203     \textcolor{keywordflow}{case} \mbox{\hyperlink{console_8c_ac54ae397901fe700628cafadea3c5208}{C}}(\textcolor{charliteral}{'U'}):  \textcolor{comment}{// Kill line.}}
+\DoxyCodeLine{204       while(\mbox{\hyperlink{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}{input}}.\mbox{\hyperlink{console_8c_ab56fa7c992b725d84916b987c3d532ea}{e}} != \mbox{\hyperlink{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}{input}}.\mbox{\hyperlink{console_8c_afdeff54db9a334718662b709641fdfe1}{w}} \&\&}
+\DoxyCodeLine{205             \mbox{\hyperlink{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}{input}}.\mbox{\hyperlink{structbuf}{buf}}[(\mbox{\hyperlink{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}{input}}.\mbox{\hyperlink{console_8c_ab56fa7c992b725d84916b987c3d532ea}{e}}-\/1) \% \mbox{\hyperlink{console_8c_a5d85434f2a29f6c3048aeac34d0ce41d}{INPUT\_BUF}}] != \textcolor{stringliteral}{'\(\backslash\)n'})\{}
+\DoxyCodeLine{206         \mbox{\hyperlink{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}{input}}.e-\/-\/;}
+\DoxyCodeLine{207         \mbox{\hyperlink{console_8c_a0504dbe97899f754f22dbe2b1e6b6102}{consputc}}(\mbox{\hyperlink{console_8c_a629568514359445d2fbda71d70eeb1ce}{BACKSPACE}});}
+\DoxyCodeLine{208       \}}
+\DoxyCodeLine{209       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{210     \textcolor{keywordflow}{case} \mbox{\hyperlink{console_8c_ac54ae397901fe700628cafadea3c5208}{C}}(\textcolor{charliteral}{'H'}): case \textcolor{stringliteral}{'\(\backslash\)x7f'}:  \textcolor{comment}{// Backspace}}
+\DoxyCodeLine{211       if(\mbox{\hyperlink{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}{input}}.\mbox{\hyperlink{console_8c_ab56fa7c992b725d84916b987c3d532ea}{e}} != \mbox{\hyperlink{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}{input}}.\mbox{\hyperlink{console_8c_afdeff54db9a334718662b709641fdfe1}{w}})\{}
+\DoxyCodeLine{212         \mbox{\hyperlink{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}{input}}.e-\/-\/;}
+\DoxyCodeLine{213         \mbox{\hyperlink{console_8c_a0504dbe97899f754f22dbe2b1e6b6102}{consputc}}(\mbox{\hyperlink{console_8c_a629568514359445d2fbda71d70eeb1ce}{BACKSPACE}});}
+\DoxyCodeLine{214       \}}
+\DoxyCodeLine{215       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{216     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{217       \textcolor{keywordflow}{if}(c != 0 \&\& \mbox{\hyperlink{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}{input}}.e-\/\mbox{\hyperlink{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}{input}}.r < \mbox{\hyperlink{console_8c_a5d85434f2a29f6c3048aeac34d0ce41d}{INPUT\_BUF}})\{}
+\DoxyCodeLine{218         c = (c == \textcolor{charliteral}{'\(\backslash\)r'}) ? \textcolor{charliteral}{'\(\backslash\)n'} : c;}
+\DoxyCodeLine{219         \mbox{\hyperlink{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}{input}}.buf[\mbox{\hyperlink{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}{input}}.e++ \% \mbox{\hyperlink{console_8c_a5d85434f2a29f6c3048aeac34d0ce41d}{INPUT\_BUF}}] = c;}
+\DoxyCodeLine{220         \mbox{\hyperlink{console_8c_a0504dbe97899f754f22dbe2b1e6b6102}{consputc}}(c);}
+\DoxyCodeLine{221         \textcolor{keywordflow}{if}(c == \textcolor{charliteral}{'\(\backslash\)n'} || c == \mbox{\hyperlink{console_8c_ac54ae397901fe700628cafadea3c5208}{C}}(\textcolor{charliteral}{'D'}) || \mbox{\hyperlink{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}{input}}.e == \mbox{\hyperlink{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}{input}}.r+\mbox{\hyperlink{console_8c_a5d85434f2a29f6c3048aeac34d0ce41d}{INPUT\_BUF}})\{}
+\DoxyCodeLine{222           \mbox{\hyperlink{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}{input}}.w = \mbox{\hyperlink{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}{input}}.e;}
+\DoxyCodeLine{223           \mbox{\hyperlink{defs_8h_a245b56417239f499389b2e806bd99254}{wakeup}}(\&\mbox{\hyperlink{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}{input}}.r);}
+\DoxyCodeLine{224         \}}
+\DoxyCodeLine{225       \}}
+\DoxyCodeLine{226       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{227     \}}
+\DoxyCodeLine{228   \}}
+\DoxyCodeLine{229   \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{console_8c_a799a95b1ef986c63508f73813078ca23}{cons}}.lock);}
+\DoxyCodeLine{230   \textcolor{keywordflow}{if}(doprocdump) \{}
+\DoxyCodeLine{231     \mbox{\hyperlink{defs_8h_a7f185044294ebb57521c73f723990164}{procdump}}();  \textcolor{comment}{// now call procdump() wo. cons.lock held}}
+\DoxyCodeLine{232   \}}
+\DoxyCodeLine{233 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d56/console_8c_aad3d6ca39f23bb6d2686d2967e415193_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=312pt]{d0/d56/console_8c_aad3d6ca39f23bb6d2686d2967e415193_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{console_8c_a28ac85a90987662e306ca8efbfe16074}\label{console_8c_a28ac85a90987662e306ca8efbfe16074}} 
+\index{console.c@{console.c}!consoleread@{consoleread}}
+\index{consoleread@{consoleread}!console.c@{console.c}}
+\doxysubsubsection{\texorpdfstring{consoleread()}{consoleread()}}
+{\footnotesize\ttfamily int consoleread (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structinode}{inode}} $\ast$}]{ip,  }\item[{char $\ast$}]{dst,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+
+
+console.\+c 파일의 236 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{237 \{}
+\DoxyCodeLine{238   \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} target;}
+\DoxyCodeLine{239   \textcolor{keywordtype}{int} c;}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{241   \mbox{\hyperlink{defs_8h_af301c10ad8ced77a5dfb2de3a64c666c}{iunlock}}(ip);}
+\DoxyCodeLine{242   target = n;}
+\DoxyCodeLine{243   \mbox{\hyperlink{defs_8h_afe4ef8638f1ecb962a6e67fb086ee3b8}{acquire}}(\&\mbox{\hyperlink{console_8c_a799a95b1ef986c63508f73813078ca23}{cons}}.lock);}
+\DoxyCodeLine{244   \textcolor{keywordflow}{while}(n > 0)\{}
+\DoxyCodeLine{245     \textcolor{keywordflow}{while}(\mbox{\hyperlink{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}{input}}.r == \mbox{\hyperlink{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}{input}}.w)\{}
+\DoxyCodeLine{246       \textcolor{keywordflow}{if}(\mbox{\hyperlink{defs_8h_addb64b689e3c266aaa67cc0126bba441}{myproc}}()-\/>killed)\{}
+\DoxyCodeLine{247         \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{console_8c_a799a95b1ef986c63508f73813078ca23}{cons}}.lock);}
+\DoxyCodeLine{248         \mbox{\hyperlink{defs_8h_a29a4d743d41fe659f74b0a57fdc25012}{ilock}}(ip);}
+\DoxyCodeLine{249         \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{250       \}}
+\DoxyCodeLine{251       \mbox{\hyperlink{defs_8h_aca4a88f06b3ebbcc04330f7ae06c8507}{sleep}}(\&\mbox{\hyperlink{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}{input}}.r, \&\mbox{\hyperlink{console_8c_a799a95b1ef986c63508f73813078ca23}{cons}}.lock);}
+\DoxyCodeLine{252     \}}
+\DoxyCodeLine{253     c = \mbox{\hyperlink{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}{input}}.buf[\mbox{\hyperlink{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}{input}}.r++ \% \mbox{\hyperlink{console_8c_a5d85434f2a29f6c3048aeac34d0ce41d}{INPUT\_BUF}}];}
+\DoxyCodeLine{254     \textcolor{keywordflow}{if}(c == \mbox{\hyperlink{console_8c_ac54ae397901fe700628cafadea3c5208}{C}}(\textcolor{charliteral}{'D'}))\{  \textcolor{comment}{// EOF}}
+\DoxyCodeLine{255       \textcolor{keywordflow}{if}(n < target)\{}
+\DoxyCodeLine{256         \textcolor{comment}{// Save \string^D for next time, to make sure}}
+\DoxyCodeLine{257         \textcolor{comment}{// caller gets a 0-\/byte result.}}
+\DoxyCodeLine{258         \mbox{\hyperlink{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}{input}}.r-\/-\/;}
+\DoxyCodeLine{259       \}}
+\DoxyCodeLine{260       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{261     \}}
+\DoxyCodeLine{262     *dst++ = c;}
+\DoxyCodeLine{263     -\/-\/n;}
+\DoxyCodeLine{264     \textcolor{keywordflow}{if}(c == \textcolor{charliteral}{'\(\backslash\)n'})}
+\DoxyCodeLine{265       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{266   \}}
+\DoxyCodeLine{267   \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{console_8c_a799a95b1ef986c63508f73813078ca23}{cons}}.lock);}
+\DoxyCodeLine{268   \mbox{\hyperlink{defs_8h_a29a4d743d41fe659f74b0a57fdc25012}{ilock}}(ip);}
+\DoxyCodeLine{269 }
+\DoxyCodeLine{270   \textcolor{keywordflow}{return} target -\/ n;}
+\DoxyCodeLine{271 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d56/console_8c_a28ac85a90987662e306ca8efbfe16074_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=262pt]{d0/d56/console_8c_a28ac85a90987662e306ca8efbfe16074_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{console_8c_a6af7eb39268127d389792cec37785666}\label{console_8c_a6af7eb39268127d389792cec37785666}} 
+\index{console.c@{console.c}!consolewrite@{consolewrite}}
+\index{consolewrite@{consolewrite}!console.c@{console.c}}
+\doxysubsubsection{\texorpdfstring{consolewrite()}{consolewrite()}}
+{\footnotesize\ttfamily int consolewrite (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structinode}{inode}} $\ast$}]{ip,  }\item[{char $\ast$}]{buf,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+
+
+console.\+c 파일의 274 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{275 \{}
+\DoxyCodeLine{276   \textcolor{keywordtype}{int} i;}
+\DoxyCodeLine{277 }
+\DoxyCodeLine{278   \mbox{\hyperlink{defs_8h_af301c10ad8ced77a5dfb2de3a64c666c}{iunlock}}(ip);}
+\DoxyCodeLine{279   \mbox{\hyperlink{defs_8h_afe4ef8638f1ecb962a6e67fb086ee3b8}{acquire}}(\&\mbox{\hyperlink{console_8c_a799a95b1ef986c63508f73813078ca23}{cons}}.lock);}
+\DoxyCodeLine{280   \textcolor{keywordflow}{for}(i = 0; i < n; i++)}
+\DoxyCodeLine{281     \mbox{\hyperlink{console_8c_a0504dbe97899f754f22dbe2b1e6b6102}{consputc}}(\mbox{\hyperlink{structbuf}{buf}}[i] \& 0xff);}
+\DoxyCodeLine{282   \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{console_8c_a799a95b1ef986c63508f73813078ca23}{cons}}.lock);}
+\DoxyCodeLine{283   \mbox{\hyperlink{defs_8h_a29a4d743d41fe659f74b0a57fdc25012}{ilock}}(ip);}
+\DoxyCodeLine{284 }
+\DoxyCodeLine{285   \textcolor{keywordflow}{return} n;}
+\DoxyCodeLine{286 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d56/console_8c_a6af7eb39268127d389792cec37785666_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=265pt]{d0/d56/console_8c_a6af7eb39268127d389792cec37785666_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{console_8c_a0504dbe97899f754f22dbe2b1e6b6102}\label{console_8c_a0504dbe97899f754f22dbe2b1e6b6102}} 
+\index{console.c@{console.c}!consputc@{consputc}}
+\index{consputc@{consputc}!console.c@{console.c}}
+\doxysubsubsection{\texorpdfstring{consputc()}{consputc()}}
+{\footnotesize\ttfamily void consputc (\begin{DoxyParamCaption}\item[{int}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+console.\+c 파일의 166 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{167 \{}
+\DoxyCodeLine{168   \textcolor{keywordflow}{if}(\mbox{\hyperlink{console_8c_af96084c4b67ff0c90052951ebf852bb9}{panicked}})\{}
+\DoxyCodeLine{169     \mbox{\hyperlink{x86_8h_a89d04efedb6dc6e8d87c6a5b453529e1}{cli}}();}
+\DoxyCodeLine{170     \textcolor{keywordflow}{for}(;;)}
+\DoxyCodeLine{171       ;}
+\DoxyCodeLine{172   \}}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174   \textcolor{keywordflow}{if}(c == \mbox{\hyperlink{console_8c_a629568514359445d2fbda71d70eeb1ce}{BACKSPACE}})\{}
+\DoxyCodeLine{175     \mbox{\hyperlink{defs_8h_a571626618a1f05ff6854802e936845d6}{uartputc}}(\textcolor{charliteral}{'\(\backslash\)b'}); \mbox{\hyperlink{defs_8h_a571626618a1f05ff6854802e936845d6}{uartputc}}(\textcolor{charliteral}{' '}); \mbox{\hyperlink{defs_8h_a571626618a1f05ff6854802e936845d6}{uartputc}}(\textcolor{charliteral}{'\(\backslash\)b'});}
+\DoxyCodeLine{176   \} \textcolor{keywordflow}{else}}
+\DoxyCodeLine{177     \mbox{\hyperlink{defs_8h_a571626618a1f05ff6854802e936845d6}{uartputc}}(c);}
+\DoxyCodeLine{178   \mbox{\hyperlink{console_8c_a9e775e33e5b346aba0be84dbeddcb312}{cgaputc}}(c);}
+\DoxyCodeLine{179 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{d0/d56/console_8c_a0504dbe97899f754f22dbe2b1e6b6102_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{d0/d56/console_8c_a0504dbe97899f754f22dbe2b1e6b6102_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{console_8c_a90f0742d846503e4ed1804f1df421ec6}\label{console_8c_a90f0742d846503e4ed1804f1df421ec6}} 
+\index{console.c@{console.c}!cprintf@{cprintf}}
+\index{cprintf@{cprintf}!console.c@{console.c}}
+\doxysubsubsection{\texorpdfstring{cprintf()}{cprintf()}}
+{\footnotesize\ttfamily void cprintf (\begin{DoxyParamCaption}\item[{char $\ast$}]{fmt,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+
+
+console.\+c 파일의 55 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{56 \{}
+\DoxyCodeLine{57   \textcolor{keywordtype}{int} i, c, \mbox{\hyperlink{console_8c_ae51110da3bc13ef49e32d1e2cda5d55c}{locking}};}
+\DoxyCodeLine{58   \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} *argp;}
+\DoxyCodeLine{59   \textcolor{keywordtype}{char} *s;}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61   \mbox{\hyperlink{console_8c_ae51110da3bc13ef49e32d1e2cda5d55c}{locking}} = \mbox{\hyperlink{console_8c_a799a95b1ef986c63508f73813078ca23}{cons}}.locking;}
+\DoxyCodeLine{62   \textcolor{keywordflow}{if}(\mbox{\hyperlink{console_8c_ae51110da3bc13ef49e32d1e2cda5d55c}{locking}})}
+\DoxyCodeLine{63     \mbox{\hyperlink{defs_8h_afe4ef8638f1ecb962a6e67fb086ee3b8}{acquire}}(\&\mbox{\hyperlink{console_8c_a799a95b1ef986c63508f73813078ca23}{cons}}.lock);}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65   \textcolor{keywordflow}{if} (fmt == 0)}
+\DoxyCodeLine{66     \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"null fmt"});}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68   argp = (\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}*)(\textcolor{keywordtype}{void}*)(\&fmt + 1);}
+\DoxyCodeLine{69   \textcolor{keywordflow}{for}(i = 0; (c = fmt[i] \& 0xff) != 0; i++)\{}
+\DoxyCodeLine{70     \textcolor{keywordflow}{if}(c != \textcolor{charliteral}{'\%'})\{}
+\DoxyCodeLine{71       \mbox{\hyperlink{console_8c_a0504dbe97899f754f22dbe2b1e6b6102}{consputc}}(c);}
+\DoxyCodeLine{72       \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{73     \}}
+\DoxyCodeLine{74     c = fmt[++i] \& 0xff;}
+\DoxyCodeLine{75     \textcolor{keywordflow}{if}(c == 0)}
+\DoxyCodeLine{76       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{77     \textcolor{keywordflow}{switch}(c)\{}
+\DoxyCodeLine{78     \textcolor{keywordflow}{case} \textcolor{charliteral}{'d'}:}
+\DoxyCodeLine{79       \mbox{\hyperlink{console_8c_aafb705f6d5b125c41825313da0d41252}{printint}}(*argp++, 10, 1);}
+\DoxyCodeLine{80       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{81     \textcolor{keywordflow}{case} \textcolor{charliteral}{'x'}:}
+\DoxyCodeLine{82     \textcolor{keywordflow}{case} \textcolor{charliteral}{'p'}:}
+\DoxyCodeLine{83       \mbox{\hyperlink{console_8c_aafb705f6d5b125c41825313da0d41252}{printint}}(*argp++, 16, 0);}
+\DoxyCodeLine{84       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{85     \textcolor{keywordflow}{case} \textcolor{charliteral}{'s'}:}
+\DoxyCodeLine{86       \textcolor{keywordflow}{if}((s = (\textcolor{keywordtype}{char}*)*argp++) == 0)}
+\DoxyCodeLine{87         s = \textcolor{stringliteral}{"(null)"};}
+\DoxyCodeLine{88       \textcolor{keywordflow}{for}(; *s; s++)}
+\DoxyCodeLine{89         \mbox{\hyperlink{console_8c_a0504dbe97899f754f22dbe2b1e6b6102}{consputc}}(*s);}
+\DoxyCodeLine{90       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{91     \textcolor{keywordflow}{case} \textcolor{charliteral}{'\%'}:}
+\DoxyCodeLine{92       \mbox{\hyperlink{console_8c_a0504dbe97899f754f22dbe2b1e6b6102}{consputc}}(\textcolor{charliteral}{'\%'});}
+\DoxyCodeLine{93       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{94     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{95       \textcolor{comment}{// Print unknown \% sequence to draw attention.}}
+\DoxyCodeLine{96       \mbox{\hyperlink{console_8c_a0504dbe97899f754f22dbe2b1e6b6102}{consputc}}(\textcolor{charliteral}{'\%'});}
+\DoxyCodeLine{97       \mbox{\hyperlink{console_8c_a0504dbe97899f754f22dbe2b1e6b6102}{consputc}}(c);}
+\DoxyCodeLine{98       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{99     \}}
+\DoxyCodeLine{100   \}}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102   \textcolor{keywordflow}{if}(\mbox{\hyperlink{console_8c_ae51110da3bc13ef49e32d1e2cda5d55c}{locking}})}
+\DoxyCodeLine{103     \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{console_8c_a799a95b1ef986c63508f73813078ca23}{cons}}.lock);}
+\DoxyCodeLine{104 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d56/console_8c_a90f0742d846503e4ed1804f1df421ec6_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{d0/d56/console_8c_a90f0742d846503e4ed1804f1df421ec6_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{console_8c_a95c0aca5d6d7487933984f08b189917a}\label{console_8c_a95c0aca5d6d7487933984f08b189917a}} 
+\index{console.c@{console.c}!panic@{panic}}
+\index{panic@{panic}!console.c@{console.c}}
+\doxysubsubsection{\texorpdfstring{panic()}{panic()}}
+{\footnotesize\ttfamily void panic (\begin{DoxyParamCaption}\item[{char $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+console.\+c 파일의 107 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{108 \{}
+\DoxyCodeLine{109   \textcolor{keywordtype}{int} i;}
+\DoxyCodeLine{110   \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} pcs[10];}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112   \mbox{\hyperlink{x86_8h_a89d04efedb6dc6e8d87c6a5b453529e1}{cli}}();}
+\DoxyCodeLine{113   \mbox{\hyperlink{console_8c_a799a95b1ef986c63508f73813078ca23}{cons}}.locking = 0;}
+\DoxyCodeLine{114   \textcolor{comment}{// use lapiccpunum so that we can call panic from mycpu()}}
+\DoxyCodeLine{115   \mbox{\hyperlink{console_8c_a90f0742d846503e4ed1804f1df421ec6}{cprintf}}(\textcolor{stringliteral}{"lapicid \%d: panic: "}, \mbox{\hyperlink{defs_8h_a627f7996b64f99d885244a5102c85164}{lapicid}}());}
+\DoxyCodeLine{116   \mbox{\hyperlink{console_8c_a90f0742d846503e4ed1804f1df421ec6}{cprintf}}(s);}
+\DoxyCodeLine{117   \mbox{\hyperlink{console_8c_a90f0742d846503e4ed1804f1df421ec6}{cprintf}}(\textcolor{stringliteral}{"\(\backslash\)n"});}
+\DoxyCodeLine{118   \mbox{\hyperlink{defs_8h_a4105de9e2969515d6c6c795c4386f69f}{getcallerpcs}}(\&s, pcs);}
+\DoxyCodeLine{119   \textcolor{keywordflow}{for}(i=0; i<10; i++)}
+\DoxyCodeLine{120     \mbox{\hyperlink{console_8c_a90f0742d846503e4ed1804f1df421ec6}{cprintf}}(\textcolor{stringliteral}{" \%p"}, pcs[i]);}
+\DoxyCodeLine{121   \mbox{\hyperlink{console_8c_af96084c4b67ff0c90052951ebf852bb9}{panicked}} = 1; \textcolor{comment}{// freeze other CPU}}
+\DoxyCodeLine{122   \textcolor{keywordflow}{for}(;;)}
+\DoxyCodeLine{123     ;}
+\DoxyCodeLine{124 \}}
+
+\end{DoxyCode}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{d0/d56/console_8c_a95c0aca5d6d7487933984f08b189917a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{console_8c_aafb705f6d5b125c41825313da0d41252}\label{console_8c_aafb705f6d5b125c41825313da0d41252}} 
+\index{console.c@{console.c}!printint@{printint}}
+\index{printint@{printint}!console.c@{console.c}}
+\doxysubsubsection{\texorpdfstring{printint()}{printint()}}
+{\footnotesize\ttfamily static void printint (\begin{DoxyParamCaption}\item[{int}]{xx,  }\item[{int}]{base,  }\item[{int}]{sign }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+console.\+c 파일의 28 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{29 \{}
+\DoxyCodeLine{30   \textcolor{keyword}{static} \textcolor{keywordtype}{char} digits[] = \textcolor{stringliteral}{"0123456789abcdef"};}
+\DoxyCodeLine{31   \textcolor{keywordtype}{char} \mbox{\hyperlink{structbuf}{buf}}[16];}
+\DoxyCodeLine{32   \textcolor{keywordtype}{int} i;}
+\DoxyCodeLine{33   \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} x;}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35   \textcolor{keywordflow}{if}(sign \&\& (sign = xx < 0))}
+\DoxyCodeLine{36     x = -\/xx;}
+\DoxyCodeLine{37   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{38     x = xx;}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40   i = 0;}
+\DoxyCodeLine{41   \textcolor{keywordflow}{do}\{}
+\DoxyCodeLine{42     \mbox{\hyperlink{structbuf}{buf}}[i++] = digits[x \% \mbox{\hyperlink{umalloc_8c_a877e065dfc67f9bd937b962b8b968638}{base}}];}
+\DoxyCodeLine{43   \}\textcolor{keywordflow}{while}((x /= \mbox{\hyperlink{umalloc_8c_a877e065dfc67f9bd937b962b8b968638}{base}}) != 0);}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45   \textcolor{keywordflow}{if}(sign)}
+\DoxyCodeLine{46     \mbox{\hyperlink{structbuf}{buf}}[i++] = \textcolor{charliteral}{'-\/'};}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48   \textcolor{keywordflow}{while}(-\/-\/i >= 0)}
+\DoxyCodeLine{49     \mbox{\hyperlink{console_8c_a0504dbe97899f754f22dbe2b1e6b6102}{consputc}}(\mbox{\hyperlink{structbuf}{buf}}[i]);}
+\DoxyCodeLine{50 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d56/console_8c_aafb705f6d5b125c41825313da0d41252_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{d0/d56/console_8c_aafb705f6d5b125c41825313da0d41252_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{변수 문서화}
+\mbox{\Hypertarget{console_8c_aa427837782b05b05204809dfba33c8f5}\label{console_8c_aa427837782b05b05204809dfba33c8f5}} 
+\index{console.c@{console.c}!buf@{buf}}
+\index{buf@{buf}!console.c@{console.c}}
+\doxysubsubsection{\texorpdfstring{buf}{buf}}
+{\footnotesize\ttfamily char \mbox{\hyperlink{structbuf}{buf}}\mbox{[}\mbox{\hyperlink{console_8c_a5d85434f2a29f6c3048aeac34d0ce41d}{I\+N\+P\+U\+T\+\_\+\+B\+UF}}\mbox{]}}
+
+
+
+console.\+c 파일의 183 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{console_8c_a799a95b1ef986c63508f73813078ca23}\label{console_8c_a799a95b1ef986c63508f73813078ca23}} 
+\index{console.c@{console.c}!cons@{cons}}
+\index{cons@{cons}!console.c@{console.c}}
+\doxysubsubsection{\texorpdfstring{cons}{cons}}
+{\footnotesize\ttfamily struct \{ ... \}  cons\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{console_8c_a4af835b1e23478618e644db708284c75}\label{console_8c_a4af835b1e23478618e644db708284c75}} 
+\index{console.c@{console.c}!crt@{crt}}
+\index{crt@{crt}!console.c@{console.c}}
+\doxysubsubsection{\texorpdfstring{crt}{crt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}}$\ast$ crt = (\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}}$\ast$)\mbox{\hyperlink{memlayout_8h_aefd5e8b62c49bba2cf20309c7dd174e2}{P2V}}(0xb8000)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+console.\+c 파일의 129 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{console_8c_ab56fa7c992b725d84916b987c3d532ea}\label{console_8c_ab56fa7c992b725d84916b987c3d532ea}} 
+\index{console.c@{console.c}!e@{e}}
+\index{e@{e}!console.c@{console.c}}
+\doxysubsubsection{\texorpdfstring{e}{e}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} e}
+
+
+
+console.\+c 파일의 186 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}\label{console_8c_ad4135e5cfd2abbf73cba6fe6cdf2e949}} 
+\index{console.c@{console.c}!input@{input}}
+\index{input@{input}!console.c@{console.c}}
+\doxysubsubsection{\texorpdfstring{input}{input}}
+{\footnotesize\ttfamily struct \{ ... \}  input}
+
+\mbox{\Hypertarget{console_8c_ab28e82cd5dda7d960095706a3ea20572}\label{console_8c_ab28e82cd5dda7d960095706a3ea20572}} 
+\index{console.c@{console.c}!lock@{lock}}
+\index{lock@{lock}!console.c@{console.c}}
+\doxysubsubsection{\texorpdfstring{lock}{lock}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structspinlock}{spinlock}} lock}
+
+
+
+console.\+c 파일의 23 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{console_8c_ae51110da3bc13ef49e32d1e2cda5d55c}\label{console_8c_ae51110da3bc13ef49e32d1e2cda5d55c}} 
+\index{console.c@{console.c}!locking@{locking}}
+\index{locking@{locking}!console.c@{console.c}}
+\doxysubsubsection{\texorpdfstring{locking}{locking}}
+{\footnotesize\ttfamily int locking}
+
+
+
+console.\+c 파일의 24 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{console_8c_af96084c4b67ff0c90052951ebf852bb9}\label{console_8c_af96084c4b67ff0c90052951ebf852bb9}} 
+\index{console.c@{console.c}!panicked@{panicked}}
+\index{panicked@{panicked}!console.c@{console.c}}
+\doxysubsubsection{\texorpdfstring{panicked}{panicked}}
+{\footnotesize\ttfamily int panicked = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+console.\+c 파일의 20 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{console_8c_af10fa12dd785c91e29528fbdc50cf9af}\label{console_8c_af10fa12dd785c91e29528fbdc50cf9af}} 
+\index{console.c@{console.c}!r@{r}}
+\index{r@{r}!console.c@{console.c}}
+\doxysubsubsection{\texorpdfstring{r}{r}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} r}
+
+
+
+console.\+c 파일의 184 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{console_8c_afdeff54db9a334718662b709641fdfe1}\label{console_8c_afdeff54db9a334718662b709641fdfe1}} 
+\index{console.c@{console.c}!w@{w}}
+\index{w@{w}!console.c@{console.c}}
+\doxysubsubsection{\texorpdfstring{w}{w}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} w}
+
+
+
+console.\+c 파일의 185 번째 라인에서 정의되었습니다.
+

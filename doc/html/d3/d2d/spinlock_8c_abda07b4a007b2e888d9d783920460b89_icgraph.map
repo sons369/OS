@@ -1,0 +1,19 @@
+<map id="initlock" name="initlock">
+<area shape="rect" id="node1" title=" " alt="" coords="648,237,719,264"/>
+<area shape="rect" id="node2" href="$d5/d64/defs_8h.html#a53cca0ddc98c5f1de37124eca2575a59" title=" " alt="" coords="382,85,433,112"/>
+<area shape="rect" id="node3" href="$d5/d64/defs_8h.html#ab508ff0f4db26fe35cd25fa648f9ee75" title=" " alt="" coords="501,34,594,61"/>
+<area shape="rect" id="node4" href="$d6/d13/file_8c.html#a66bb5a4b304ea0f851dd999fc8195fa4" title=" " alt="" coords="516,85,579,112"/>
+<area shape="rect" id="node5" href="$d9/d2f/ide_8c.html#aefb190a6104cb58c0bc1f8fec88d1307" title=" " alt="" coords="516,136,579,162"/>
+<area shape="rect" id="node6" href="$d2/d5a/fs_8c.html#a301761a27cf266e0bad483272fb31a3c" title=" " alt="" coords="384,237,431,264"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#ad5e79aaefb91f41b9ef6aeae7ecf4708" title=" " alt="" coords="376,288,439,314"/>
+<area shape="rect" id="node12" href="$d8/dd1/sleeplock_8c.html#aaa5746f0a7ae0071b2916be5fdedf4ab" title=" " alt="" coords="495,186,600,213"/>
+<area shape="rect" id="node13" href="$d4/def/kalloc_8c.html#a596c07f040e83fd8ea1857f36ffab4fb" title=" " alt="" coords="518,338,577,365"/>
+<area shape="rect" id="node14" href="$d3/dda/proc_8c.html#a9d293f913985937ee7a266fe5ddbfc77" title=" " alt="" coords="522,389,573,416"/>
+<area shape="rect" id="node15" href="$d1/d47/pipe_8c.html#a9d6f0c526148e6002b6776619c7563e6" title=" " alt="" coords="507,440,588,466"/>
+<area shape="rect" id="node17" href="$dc/d6f/trap_8c.html#a9e7167b8e20e217c4af4e757f612ba6a" title=" " alt="" coords="519,490,575,517"/>
+<area shape="rect" id="node7" href="$d3/dda/proc_8c.html#a11c5d62d28e8121e75235d361158156e" title=" " alt="" coords="253,262,320,289"/>
+<area shape="rect" id="node8" href="$d3/dda/proc_8c.html#ab2adf77e35eddf8a6a5371372caddedc" title=" " alt="" coords="124,262,205,289"/>
+<area shape="rect" id="node9" href="$d8/ddb/user_8h.html#acd2e1ded4bb6fce4500438bf928330f4" title=" " alt="" coords="17,237,65,264"/>
+<area shape="rect" id="node10" href="$d3/dda/proc_8c.html#a81c8a6a0cae413bc81aa223f7f7b7205" title=" " alt="" coords="5,288,76,314"/>
+<area shape="rect" id="node16" href="$d1/d14/sysfile_8c.html#a9a70db941def46ec25939e6c2d30e399" title=" " alt="" coords="368,440,447,466"/>
+</map>

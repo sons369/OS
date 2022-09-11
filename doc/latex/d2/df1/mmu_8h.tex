@@ -1,0 +1,518 @@
+\hypertarget{mmu_8h}{}\doxysection{mmu.\+h 파일 참조}
+\label{mmu_8h}\index{mmu.h@{mmu.h}}
+이 그래프는 이 파일을 직/간접적으로 include 하는 파일들을 보여줍니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/d98/mmu_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{데이터 구조}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structsegdesc}{segdesc}}
+\item 
+struct \mbox{\hyperlink{structtaskstate}{taskstate}}
+\item 
+struct \mbox{\hyperlink{structgatedesc}{gatedesc}}
+\end{DoxyCompactItemize}
+\doxysubsection*{매크로}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{mmu_8h_ab481068357bb42797aafe91864a2d085}{F\+L\+\_\+\+IF}}~0x00000200
+\item 
+\#define \mbox{\hyperlink{mmu_8h_aa899fa0a2a7dd414343fb2fada767622}{C\+R0\+\_\+\+PE}}~0x00000001
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a2897f244bf55b3cf87c13869db57f6c8}{C\+R0\+\_\+\+WP}}~0x00010000
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a4f3b70ba40d96e55cae6026acc12cfed}{C\+R0\+\_\+\+PG}}~0x80000000
+\item 
+\#define \mbox{\hyperlink{mmu_8h_acdc818c9179c6112b2d065bd9d91a420}{C\+R4\+\_\+\+P\+SE}}~0x00000010
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a0d4e0c4c738af60d6092941469642429}{S\+E\+G\+\_\+\+K\+C\+O\+DE}}~1
+\item 
+\#define \mbox{\hyperlink{mmu_8h_ad523d10217ef0ff5e75b7831f251d2b1}{S\+E\+G\+\_\+\+K\+D\+A\+TA}}~2
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a85b694d969eb01e547197c21db219f4b}{S\+E\+G\+\_\+\+U\+C\+O\+DE}}~3
+\item 
+\#define \mbox{\hyperlink{mmu_8h_aba0495696b4c656fda31704782648461}{S\+E\+G\+\_\+\+U\+D\+A\+TA}}~4
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a51332450caa8201ecc42fce428288e6f}{S\+E\+G\+\_\+\+T\+SS}}~5
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a2fca412c6ed6584438e96f43ccce030a}{N\+S\+E\+GS}}~6
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a1594ac4688d9f212e835fd38ff63e83f}{S\+EG}}(type,  \mbox{\hyperlink{umalloc_8c_a877e065dfc67f9bd937b962b8b968638}{base}},  lim,  dpl)
+\item 
+\#define \mbox{\hyperlink{mmu_8h_abe69a1dd6290e2be017d58309495adb7}{S\+E\+G16}}(type,  \mbox{\hyperlink{umalloc_8c_a877e065dfc67f9bd937b962b8b968638}{base}},  lim,  dpl)
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a060d4d4e32af81cab881fe77e58d7b78}{D\+P\+L\+\_\+\+U\+S\+ER}}~0x3
+\item 
+\#define \mbox{\hyperlink{mmu_8h_af30c683a434e0712fd83781307239cb9}{S\+T\+A\+\_\+X}}~0x8
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a9321b5b232838b8b230c6b681be9a882}{S\+T\+A\+\_\+W}}~0x2
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a6545a48f34a3fae1b04cf265f13bc8f3}{S\+T\+A\+\_\+R}}~0x2
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a1b27d53cef04c198f3b048345d28016c}{S\+T\+S\+\_\+\+T32A}}~0x9
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a14b54d1a503921b0c10993cdc6ff197b}{S\+T\+S\+\_\+\+I\+G32}}~0xE
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a734d7f1a24c70d7b410cf3a7cbe00093}{S\+T\+S\+\_\+\+T\+G32}}~0xF
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a110662636733266a8820e15fd32995b7}{P\+DX}}(va)~(((\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})(va) $>$$>$ \mbox{\hyperlink{mmu_8h_a6d2227e0acbc6e206494b5e50f0c5297}{P\+D\+X\+S\+H\+I\+FT}}) \& 0x3\+FF)
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a6430b46123b475c465d6af22a51336fb}{P\+TX}}(va)~(((\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})(va) $>$$>$ \mbox{\hyperlink{mmu_8h_a4424facfb4be6b056c05ec638d6347de}{P\+T\+X\+S\+H\+I\+FT}}) \& 0x3\+FF)
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a2e162e8ad6bc81877dd299db9fc87664}{P\+G\+A\+D\+DR}}(d,  t,  o)~((\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})((d) $<$$<$ \mbox{\hyperlink{mmu_8h_a6d2227e0acbc6e206494b5e50f0c5297}{P\+D\+X\+S\+H\+I\+FT}} $\vert$ (t) $<$$<$ \mbox{\hyperlink{mmu_8h_a4424facfb4be6b056c05ec638d6347de}{P\+T\+X\+S\+H\+I\+FT}} $\vert$ (o)))
+\item 
+\#define \mbox{\hyperlink{mmu_8h_af60ee3ecbf249497d0378c97201edfe8}{N\+P\+D\+E\+N\+T\+R\+I\+ES}}~1024
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a6318b16289e829d7f9719134ba08704f}{N\+P\+T\+E\+N\+T\+R\+I\+ES}}~1024
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a5f96cb6ae6670e023c407cc2f77e1704}{P\+G\+S\+I\+ZE}}~4096
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a4424facfb4be6b056c05ec638d6347de}{P\+T\+X\+S\+H\+I\+FT}}~12
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a6d2227e0acbc6e206494b5e50f0c5297}{P\+D\+X\+S\+H\+I\+FT}}~22
+\item 
+\#define \mbox{\hyperlink{mmu_8h_affa8cdfbd1c15dafc9f3af3a7b641f80}{P\+G\+R\+O\+U\+N\+D\+UP}}(sz)~(((sz)+\mbox{\hyperlink{mmu_8h_a5f96cb6ae6670e023c407cc2f77e1704}{P\+G\+S\+I\+ZE}}-\/1) \& $\sim$(\mbox{\hyperlink{mmu_8h_a5f96cb6ae6670e023c407cc2f77e1704}{P\+G\+S\+I\+ZE}}-\/1))
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a687e91750055553dd2788386c6a512fb}{P\+G\+R\+O\+U\+N\+D\+D\+O\+WN}}(a)~(((a)) \& $\sim$(\mbox{\hyperlink{mmu_8h_a5f96cb6ae6670e023c407cc2f77e1704}{P\+G\+S\+I\+ZE}}-\/1))
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a89bd860de64c44cd8ebaca8dc311b5ac}{P\+T\+E\+\_\+P}}~0x001
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a058fcbcc3e1eab2c09c68b3e5221c545}{P\+T\+E\+\_\+W}}~0x002
+\item 
+\#define \mbox{\hyperlink{mmu_8h_adced9836a1dc98d72849361e6ab03cda}{P\+T\+E\+\_\+U}}~0x004
+\item 
+\#define \mbox{\hyperlink{mmu_8h_ab499d5acd1363559590a7cfdcfadab46}{P\+T\+E\+\_\+\+PS}}~0x080
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a74b24f9b091875a5313370892e3f37a5}{P\+T\+E\+\_\+\+A\+D\+DR}}(pte)~((\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})(pte) \& $\sim$0x\+F\+FF)
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a8842a288646d28dda80a0544002f6941}{P\+T\+E\+\_\+\+F\+L\+A\+GS}}(pte)~((\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})(pte) \&  0x\+F\+FF)
+\item 
+\#define \mbox{\hyperlink{mmu_8h_a23e7ddf0a414b66cf9badd182edf1eca}{S\+E\+T\+G\+A\+TE}}(gate,  istrap,  sel,  off,  d)
+\end{DoxyCompactItemize}
+\doxysubsection*{타입정의}
+\begin{DoxyCompactItemize}
+\item 
+typedef \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{mmu_8h_ab23e75f764f8314a83eaff23508c2ae5}{pte\+\_\+t}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{매크로 문서화}
+\mbox{\Hypertarget{mmu_8h_aa899fa0a2a7dd414343fb2fada767622}\label{mmu_8h_aa899fa0a2a7dd414343fb2fada767622}} 
+\index{mmu.h@{mmu.h}!CR0\_PE@{CR0\_PE}}
+\index{CR0\_PE@{CR0\_PE}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{CR0\_PE}{CR0\_PE}}
+{\footnotesize\ttfamily \#define C\+R0\+\_\+\+PE~0x00000001}
+
+
+
+mmu.\+h 파일의 8 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a4f3b70ba40d96e55cae6026acc12cfed}\label{mmu_8h_a4f3b70ba40d96e55cae6026acc12cfed}} 
+\index{mmu.h@{mmu.h}!CR0\_PG@{CR0\_PG}}
+\index{CR0\_PG@{CR0\_PG}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{CR0\_PG}{CR0\_PG}}
+{\footnotesize\ttfamily \#define C\+R0\+\_\+\+PG~0x80000000}
+
+
+
+mmu.\+h 파일의 10 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a2897f244bf55b3cf87c13869db57f6c8}\label{mmu_8h_a2897f244bf55b3cf87c13869db57f6c8}} 
+\index{mmu.h@{mmu.h}!CR0\_WP@{CR0\_WP}}
+\index{CR0\_WP@{CR0\_WP}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{CR0\_WP}{CR0\_WP}}
+{\footnotesize\ttfamily \#define C\+R0\+\_\+\+WP~0x00010000}
+
+
+
+mmu.\+h 파일의 9 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_acdc818c9179c6112b2d065bd9d91a420}\label{mmu_8h_acdc818c9179c6112b2d065bd9d91a420}} 
+\index{mmu.h@{mmu.h}!CR4\_PSE@{CR4\_PSE}}
+\index{CR4\_PSE@{CR4\_PSE}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{CR4\_PSE}{CR4\_PSE}}
+{\footnotesize\ttfamily \#define C\+R4\+\_\+\+P\+SE~0x00000010}
+
+
+
+mmu.\+h 파일의 12 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a060d4d4e32af81cab881fe77e58d7b78}\label{mmu_8h_a060d4d4e32af81cab881fe77e58d7b78}} 
+\index{mmu.h@{mmu.h}!DPL\_USER@{DPL\_USER}}
+\index{DPL\_USER@{DPL\_USER}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{DPL\_USER}{DPL\_USER}}
+{\footnotesize\ttfamily \#define D\+P\+L\+\_\+\+U\+S\+ER~0x3}
+
+
+
+mmu.\+h 파일의 53 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_ab481068357bb42797aafe91864a2d085}\label{mmu_8h_ab481068357bb42797aafe91864a2d085}} 
+\index{mmu.h@{mmu.h}!FL\_IF@{FL\_IF}}
+\index{FL\_IF@{FL\_IF}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{FL\_IF}{FL\_IF}}
+{\footnotesize\ttfamily \#define F\+L\+\_\+\+IF~0x00000200}
+
+
+
+mmu.\+h 파일의 5 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_af60ee3ecbf249497d0378c97201edfe8}\label{mmu_8h_af60ee3ecbf249497d0378c97201edfe8}} 
+\index{mmu.h@{mmu.h}!NPDENTRIES@{NPDENTRIES}}
+\index{NPDENTRIES@{NPDENTRIES}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{NPDENTRIES}{NPDENTRIES}}
+{\footnotesize\ttfamily \#define N\+P\+D\+E\+N\+T\+R\+I\+ES~1024}
+
+
+
+mmu.\+h 파일의 83 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a6318b16289e829d7f9719134ba08704f}\label{mmu_8h_a6318b16289e829d7f9719134ba08704f}} 
+\index{mmu.h@{mmu.h}!NPTENTRIES@{NPTENTRIES}}
+\index{NPTENTRIES@{NPTENTRIES}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{NPTENTRIES}{NPTENTRIES}}
+{\footnotesize\ttfamily \#define N\+P\+T\+E\+N\+T\+R\+I\+ES~1024}
+
+
+
+mmu.\+h 파일의 84 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a2fca412c6ed6584438e96f43ccce030a}\label{mmu_8h_a2fca412c6ed6584438e96f43ccce030a}} 
+\index{mmu.h@{mmu.h}!NSEGS@{NSEGS}}
+\index{NSEGS@{NSEGS}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{NSEGS}{NSEGS}}
+{\footnotesize\ttfamily \#define N\+S\+E\+GS~6}
+
+
+
+mmu.\+h 파일의 22 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a110662636733266a8820e15fd32995b7}\label{mmu_8h_a110662636733266a8820e15fd32995b7}} 
+\index{mmu.h@{mmu.h}!PDX@{PDX}}
+\index{PDX@{PDX}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{PDX}{PDX}}
+{\footnotesize\ttfamily \#define P\+DX(\begin{DoxyParamCaption}\item[{}]{va }\end{DoxyParamCaption})~(((\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})(va) $>$$>$ \mbox{\hyperlink{mmu_8h_a6d2227e0acbc6e206494b5e50f0c5297}{P\+D\+X\+S\+H\+I\+FT}}) \& 0x3\+FF)}
+
+
+
+mmu.\+h 파일의 74 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a6d2227e0acbc6e206494b5e50f0c5297}\label{mmu_8h_a6d2227e0acbc6e206494b5e50f0c5297}} 
+\index{mmu.h@{mmu.h}!PDXSHIFT@{PDXSHIFT}}
+\index{PDXSHIFT@{PDXSHIFT}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{PDXSHIFT}{PDXSHIFT}}
+{\footnotesize\ttfamily \#define P\+D\+X\+S\+H\+I\+FT~22}
+
+
+
+mmu.\+h 파일의 88 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a2e162e8ad6bc81877dd299db9fc87664}\label{mmu_8h_a2e162e8ad6bc81877dd299db9fc87664}} 
+\index{mmu.h@{mmu.h}!PGADDR@{PGADDR}}
+\index{PGADDR@{PGADDR}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{PGADDR}{PGADDR}}
+{\footnotesize\ttfamily \#define P\+G\+A\+D\+DR(\begin{DoxyParamCaption}\item[{}]{d,  }\item[{}]{t,  }\item[{}]{o }\end{DoxyParamCaption})~((\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})((d) $<$$<$ \mbox{\hyperlink{mmu_8h_a6d2227e0acbc6e206494b5e50f0c5297}{P\+D\+X\+S\+H\+I\+FT}} $\vert$ (t) $<$$<$ \mbox{\hyperlink{mmu_8h_a4424facfb4be6b056c05ec638d6347de}{P\+T\+X\+S\+H\+I\+FT}} $\vert$ (o)))}
+
+
+
+mmu.\+h 파일의 80 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a687e91750055553dd2788386c6a512fb}\label{mmu_8h_a687e91750055553dd2788386c6a512fb}} 
+\index{mmu.h@{mmu.h}!PGROUNDDOWN@{PGROUNDDOWN}}
+\index{PGROUNDDOWN@{PGROUNDDOWN}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{PGROUNDDOWN}{PGROUNDDOWN}}
+{\footnotesize\ttfamily \#define P\+G\+R\+O\+U\+N\+D\+D\+O\+WN(\begin{DoxyParamCaption}\item[{}]{a }\end{DoxyParamCaption})~(((a)) \& $\sim$(\mbox{\hyperlink{mmu_8h_a5f96cb6ae6670e023c407cc2f77e1704}{P\+G\+S\+I\+ZE}}-\/1))}
+
+
+
+mmu.\+h 파일의 91 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_affa8cdfbd1c15dafc9f3af3a7b641f80}\label{mmu_8h_affa8cdfbd1c15dafc9f3af3a7b641f80}} 
+\index{mmu.h@{mmu.h}!PGROUNDUP@{PGROUNDUP}}
+\index{PGROUNDUP@{PGROUNDUP}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{PGROUNDUP}{PGROUNDUP}}
+{\footnotesize\ttfamily \#define P\+G\+R\+O\+U\+N\+D\+UP(\begin{DoxyParamCaption}\item[{}]{sz }\end{DoxyParamCaption})~(((sz)+\mbox{\hyperlink{mmu_8h_a5f96cb6ae6670e023c407cc2f77e1704}{P\+G\+S\+I\+ZE}}-\/1) \& $\sim$(\mbox{\hyperlink{mmu_8h_a5f96cb6ae6670e023c407cc2f77e1704}{P\+G\+S\+I\+ZE}}-\/1))}
+
+
+
+mmu.\+h 파일의 90 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a5f96cb6ae6670e023c407cc2f77e1704}\label{mmu_8h_a5f96cb6ae6670e023c407cc2f77e1704}} 
+\index{mmu.h@{mmu.h}!PGSIZE@{PGSIZE}}
+\index{PGSIZE@{PGSIZE}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{PGSIZE}{PGSIZE}}
+{\footnotesize\ttfamily \#define P\+G\+S\+I\+ZE~4096}
+
+
+
+mmu.\+h 파일의 85 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a74b24f9b091875a5313370892e3f37a5}\label{mmu_8h_a74b24f9b091875a5313370892e3f37a5}} 
+\index{mmu.h@{mmu.h}!PTE\_ADDR@{PTE\_ADDR}}
+\index{PTE\_ADDR@{PTE\_ADDR}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{PTE\_ADDR}{PTE\_ADDR}}
+{\footnotesize\ttfamily \#define P\+T\+E\+\_\+\+A\+D\+DR(\begin{DoxyParamCaption}\item[{}]{pte }\end{DoxyParamCaption})~((\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})(pte) \& $\sim$0x\+F\+FF)}
+
+
+
+mmu.\+h 파일의 100 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a8842a288646d28dda80a0544002f6941}\label{mmu_8h_a8842a288646d28dda80a0544002f6941}} 
+\index{mmu.h@{mmu.h}!PTE\_FLAGS@{PTE\_FLAGS}}
+\index{PTE\_FLAGS@{PTE\_FLAGS}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{PTE\_FLAGS}{PTE\_FLAGS}}
+{\footnotesize\ttfamily \#define P\+T\+E\+\_\+\+F\+L\+A\+GS(\begin{DoxyParamCaption}\item[{}]{pte }\end{DoxyParamCaption})~((\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})(pte) \&  0x\+F\+FF)}
+
+
+
+mmu.\+h 파일의 101 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a89bd860de64c44cd8ebaca8dc311b5ac}\label{mmu_8h_a89bd860de64c44cd8ebaca8dc311b5ac}} 
+\index{mmu.h@{mmu.h}!PTE\_P@{PTE\_P}}
+\index{PTE\_P@{PTE\_P}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{PTE\_P}{PTE\_P}}
+{\footnotesize\ttfamily \#define P\+T\+E\+\_\+P~0x001}
+
+
+
+mmu.\+h 파일의 94 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_ab499d5acd1363559590a7cfdcfadab46}\label{mmu_8h_ab499d5acd1363559590a7cfdcfadab46}} 
+\index{mmu.h@{mmu.h}!PTE\_PS@{PTE\_PS}}
+\index{PTE\_PS@{PTE\_PS}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{PTE\_PS}{PTE\_PS}}
+{\footnotesize\ttfamily \#define P\+T\+E\+\_\+\+PS~0x080}
+
+
+
+mmu.\+h 파일의 97 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_adced9836a1dc98d72849361e6ab03cda}\label{mmu_8h_adced9836a1dc98d72849361e6ab03cda}} 
+\index{mmu.h@{mmu.h}!PTE\_U@{PTE\_U}}
+\index{PTE\_U@{PTE\_U}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{PTE\_U}{PTE\_U}}
+{\footnotesize\ttfamily \#define P\+T\+E\+\_\+U~0x004}
+
+
+
+mmu.\+h 파일의 96 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a058fcbcc3e1eab2c09c68b3e5221c545}\label{mmu_8h_a058fcbcc3e1eab2c09c68b3e5221c545}} 
+\index{mmu.h@{mmu.h}!PTE\_W@{PTE\_W}}
+\index{PTE\_W@{PTE\_W}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{PTE\_W}{PTE\_W}}
+{\footnotesize\ttfamily \#define P\+T\+E\+\_\+W~0x002}
+
+
+
+mmu.\+h 파일의 95 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a6430b46123b475c465d6af22a51336fb}\label{mmu_8h_a6430b46123b475c465d6af22a51336fb}} 
+\index{mmu.h@{mmu.h}!PTX@{PTX}}
+\index{PTX@{PTX}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{PTX}{PTX}}
+{\footnotesize\ttfamily \#define P\+TX(\begin{DoxyParamCaption}\item[{}]{va }\end{DoxyParamCaption})~(((\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})(va) $>$$>$ \mbox{\hyperlink{mmu_8h_a4424facfb4be6b056c05ec638d6347de}{P\+T\+X\+S\+H\+I\+FT}}) \& 0x3\+FF)}
+
+
+
+mmu.\+h 파일의 77 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a4424facfb4be6b056c05ec638d6347de}\label{mmu_8h_a4424facfb4be6b056c05ec638d6347de}} 
+\index{mmu.h@{mmu.h}!PTXSHIFT@{PTXSHIFT}}
+\index{PTXSHIFT@{PTXSHIFT}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{PTXSHIFT}{PTXSHIFT}}
+{\footnotesize\ttfamily \#define P\+T\+X\+S\+H\+I\+FT~12}
+
+
+
+mmu.\+h 파일의 87 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a1594ac4688d9f212e835fd38ff63e83f}\label{mmu_8h_a1594ac4688d9f212e835fd38ff63e83f}} 
+\index{mmu.h@{mmu.h}!SEG@{SEG}}
+\index{SEG@{SEG}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{SEG}{SEG}}
+{\footnotesize\ttfamily \#define S\+EG(\begin{DoxyParamCaption}\item[{}]{type,  }\item[{}]{\mbox{\hyperlink{umalloc_8c_a877e065dfc67f9bd937b962b8b968638}{base}},  }\item[{}]{lim,  }\item[{}]{dpl }\end{DoxyParamCaption})}
+
+{\bfseries 값\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\textcolor{keyword}{struct }\mbox{\hyperlink{structsegdesc}{segdesc}})    \(\backslash\)}
+\DoxyCodeLine{\{ ((lim) >> 12) \& 0xffff, (\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})(\mbox{\hyperlink{umalloc_8c_a877e065dfc67f9bd937b962b8b968638}{base}}) \& 0xffff,      \(\backslash\)}
+\DoxyCodeLine{  ((\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})(\mbox{\hyperlink{umalloc_8c_a877e065dfc67f9bd937b962b8b968638}{base}}) >> 16) \& 0xff, \mbox{\hyperlink{structsegdesc_acb54ea5ee6d09cfcc8b4dd3e96e4ce5b}{type}}, 1, \mbox{\hyperlink{structsegdesc_ab22349cefd6990e4a9a1d93e42ee0c03}{dpl}}, 1,       \(\backslash\)}
+\DoxyCodeLine{  (\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})(lim) >> 28, 0, 0, 1, 1, (\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})(\mbox{\hyperlink{umalloc_8c_a877e065dfc67f9bd937b962b8b968638}{base}}) >> 24 \}}
+
+\end{DoxyCode}
+
+
+mmu.\+h 파일의 43 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_abe69a1dd6290e2be017d58309495adb7}\label{mmu_8h_abe69a1dd6290e2be017d58309495adb7}} 
+\index{mmu.h@{mmu.h}!SEG16@{SEG16}}
+\index{SEG16@{SEG16}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{SEG16}{SEG16}}
+{\footnotesize\ttfamily \#define S\+E\+G16(\begin{DoxyParamCaption}\item[{}]{type,  }\item[{}]{\mbox{\hyperlink{umalloc_8c_a877e065dfc67f9bd937b962b8b968638}{base}},  }\item[{}]{lim,  }\item[{}]{dpl }\end{DoxyParamCaption})}
+
+{\bfseries 값\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\textcolor{keyword}{struct }\mbox{\hyperlink{structsegdesc}{segdesc}})  \(\backslash\)}
+\DoxyCodeLine{\{ (lim) \& 0xffff, (\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})(\mbox{\hyperlink{umalloc_8c_a877e065dfc67f9bd937b962b8b968638}{base}}) \& 0xffff,              \(\backslash\)}
+\DoxyCodeLine{  ((\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})(\mbox{\hyperlink{umalloc_8c_a877e065dfc67f9bd937b962b8b968638}{base}}) >> 16) \& 0xff, \mbox{\hyperlink{structsegdesc_acb54ea5ee6d09cfcc8b4dd3e96e4ce5b}{type}}, 1, \mbox{\hyperlink{structsegdesc_ab22349cefd6990e4a9a1d93e42ee0c03}{dpl}}, 1,       \(\backslash\)}
+\DoxyCodeLine{  (\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})(lim) >> 16, 0, 0, 1, 0, (\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})(\mbox{\hyperlink{umalloc_8c_a877e065dfc67f9bd937b962b8b968638}{base}}) >> 24 \}}
+
+\end{DoxyCode}
+
+
+mmu.\+h 파일의 47 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a0d4e0c4c738af60d6092941469642429}\label{mmu_8h_a0d4e0c4c738af60d6092941469642429}} 
+\index{mmu.h@{mmu.h}!SEG\_KCODE@{SEG\_KCODE}}
+\index{SEG\_KCODE@{SEG\_KCODE}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{SEG\_KCODE}{SEG\_KCODE}}
+{\footnotesize\ttfamily \#define S\+E\+G\+\_\+\+K\+C\+O\+DE~1}
+
+
+
+mmu.\+h 파일의 15 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_ad523d10217ef0ff5e75b7831f251d2b1}\label{mmu_8h_ad523d10217ef0ff5e75b7831f251d2b1}} 
+\index{mmu.h@{mmu.h}!SEG\_KDATA@{SEG\_KDATA}}
+\index{SEG\_KDATA@{SEG\_KDATA}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{SEG\_KDATA}{SEG\_KDATA}}
+{\footnotesize\ttfamily \#define S\+E\+G\+\_\+\+K\+D\+A\+TA~2}
+
+
+
+mmu.\+h 파일의 16 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a51332450caa8201ecc42fce428288e6f}\label{mmu_8h_a51332450caa8201ecc42fce428288e6f}} 
+\index{mmu.h@{mmu.h}!SEG\_TSS@{SEG\_TSS}}
+\index{SEG\_TSS@{SEG\_TSS}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{SEG\_TSS}{SEG\_TSS}}
+{\footnotesize\ttfamily \#define S\+E\+G\+\_\+\+T\+SS~5}
+
+
+
+mmu.\+h 파일의 19 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a85b694d969eb01e547197c21db219f4b}\label{mmu_8h_a85b694d969eb01e547197c21db219f4b}} 
+\index{mmu.h@{mmu.h}!SEG\_UCODE@{SEG\_UCODE}}
+\index{SEG\_UCODE@{SEG\_UCODE}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{SEG\_UCODE}{SEG\_UCODE}}
+{\footnotesize\ttfamily \#define S\+E\+G\+\_\+\+U\+C\+O\+DE~3}
+
+
+
+mmu.\+h 파일의 17 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_aba0495696b4c656fda31704782648461}\label{mmu_8h_aba0495696b4c656fda31704782648461}} 
+\index{mmu.h@{mmu.h}!SEG\_UDATA@{SEG\_UDATA}}
+\index{SEG\_UDATA@{SEG\_UDATA}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{SEG\_UDATA}{SEG\_UDATA}}
+{\footnotesize\ttfamily \#define S\+E\+G\+\_\+\+U\+D\+A\+TA~4}
+
+
+
+mmu.\+h 파일의 18 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a23e7ddf0a414b66cf9badd182edf1eca}\label{mmu_8h_a23e7ddf0a414b66cf9badd182edf1eca}} 
+\index{mmu.h@{mmu.h}!SETGATE@{SETGATE}}
+\index{SETGATE@{SETGATE}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{SETGATE}{SETGATE}}
+{\footnotesize\ttfamily \#define S\+E\+T\+G\+A\+TE(\begin{DoxyParamCaption}\item[{}]{gate,  }\item[{}]{istrap,  }\item[{}]{sel,  }\item[{}]{off,  }\item[{}]{d }\end{DoxyParamCaption})}
+
+{\bfseries 값\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{                                                         \(\backslash\)}
+\DoxyCodeLine{  (gate).off\_15\_0 = (\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})(off) \& 0xffff;                \(\backslash\)}
+\DoxyCodeLine{  (gate).cs = (sel);                                      \(\backslash\)}
+\DoxyCodeLine{  (gate).args = 0;                                        \(\backslash\)}
+\DoxyCodeLine{  (gate).rsv1 = 0;                                        \(\backslash\)}
+\DoxyCodeLine{  (gate).type = (istrap) ? \mbox{\hyperlink{mmu_8h_a734d7f1a24c70d7b410cf3a7cbe00093}{STS\_TG32}} : \mbox{\hyperlink{mmu_8h_a14b54d1a503921b0c10993cdc6ff197b}{STS\_IG32}};           \(\backslash\)}
+\DoxyCodeLine{  (gate).s = 0;                                           \(\backslash\)}
+\DoxyCodeLine{  (gate).dpl = (d);                                       \(\backslash\)}
+\DoxyCodeLine{  (gate).p = 1;                                           \(\backslash\)}
+\DoxyCodeLine{  (gate).off\_31\_16 = (\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})(off) >> 16;                  \(\backslash\)}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+mmu.\+h 파일의 168 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a6545a48f34a3fae1b04cf265f13bc8f3}\label{mmu_8h_a6545a48f34a3fae1b04cf265f13bc8f3}} 
+\index{mmu.h@{mmu.h}!STA\_R@{STA\_R}}
+\index{STA\_R@{STA\_R}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{STA\_R}{STA\_R}}
+{\footnotesize\ttfamily \#define S\+T\+A\+\_\+R~0x2}
+
+
+
+mmu.\+h 파일의 58 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a9321b5b232838b8b230c6b681be9a882}\label{mmu_8h_a9321b5b232838b8b230c6b681be9a882}} 
+\index{mmu.h@{mmu.h}!STA\_W@{STA\_W}}
+\index{STA\_W@{STA\_W}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{STA\_W}{STA\_W}}
+{\footnotesize\ttfamily \#define S\+T\+A\+\_\+W~0x2}
+
+
+
+mmu.\+h 파일의 57 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_af30c683a434e0712fd83781307239cb9}\label{mmu_8h_af30c683a434e0712fd83781307239cb9}} 
+\index{mmu.h@{mmu.h}!STA\_X@{STA\_X}}
+\index{STA\_X@{STA\_X}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{STA\_X}{STA\_X}}
+{\footnotesize\ttfamily \#define S\+T\+A\+\_\+X~0x8}
+
+
+
+mmu.\+h 파일의 56 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a14b54d1a503921b0c10993cdc6ff197b}\label{mmu_8h_a14b54d1a503921b0c10993cdc6ff197b}} 
+\index{mmu.h@{mmu.h}!STS\_IG32@{STS\_IG32}}
+\index{STS\_IG32@{STS\_IG32}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{STS\_IG32}{STS\_IG32}}
+{\footnotesize\ttfamily \#define S\+T\+S\+\_\+\+I\+G32~0xE}
+
+
+
+mmu.\+h 파일의 62 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a1b27d53cef04c198f3b048345d28016c}\label{mmu_8h_a1b27d53cef04c198f3b048345d28016c}} 
+\index{mmu.h@{mmu.h}!STS\_T32A@{STS\_T32A}}
+\index{STS\_T32A@{STS\_T32A}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{STS\_T32A}{STS\_T32A}}
+{\footnotesize\ttfamily \#define S\+T\+S\+\_\+\+T32A~0x9}
+
+
+
+mmu.\+h 파일의 61 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{mmu_8h_a734d7f1a24c70d7b410cf3a7cbe00093}\label{mmu_8h_a734d7f1a24c70d7b410cf3a7cbe00093}} 
+\index{mmu.h@{mmu.h}!STS\_TG32@{STS\_TG32}}
+\index{STS\_TG32@{STS\_TG32}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{STS\_TG32}{STS\_TG32}}
+{\footnotesize\ttfamily \#define S\+T\+S\+\_\+\+T\+G32~0xF}
+
+
+
+mmu.\+h 파일의 63 번째 라인에서 정의되었습니다.
+
+
+
+\doxysubsection{타입정의 문서화}
+\mbox{\Hypertarget{mmu_8h_ab23e75f764f8314a83eaff23508c2ae5}\label{mmu_8h_ab23e75f764f8314a83eaff23508c2ae5}} 
+\index{mmu.h@{mmu.h}!pte\_t@{pte\_t}}
+\index{pte\_t@{pte\_t}!mmu.h@{mmu.h}}
+\doxysubsubsection{\texorpdfstring{pte\_t}{pte\_t}}
+{\footnotesize\ttfamily typedef \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{mmu_8h_ab23e75f764f8314a83eaff23508c2ae5}{pte\+\_\+t}}}
+
+
+
+mmu.\+h 파일의 104 번째 라인에서 정의되었습니다.
+

@@ -1,0 +1,202 @@
+\hypertarget{structproc}{}\doxysection{proc 구조체 참조}
+\label{structproc}\index{proc@{proc}}
+
+
+{\ttfamily \#include $<$proc.\+h$>$}
+
+
+
+proc에 대한 협력 다이어그램\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{d6/d98/structproc__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{데이터 필드}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{structproc_a6e67042bb361124ff287af88efc33e00}{sz}}
+\item 
+\mbox{\hyperlink{types_8h_ac131849542282b2c95dfeaf1f26dc010}{pde\+\_\+t}} $\ast$ \mbox{\hyperlink{structproc_ad430afc653e9eb6cee33954d5545b79d}{pgdir}}
+\item 
+char $\ast$ \mbox{\hyperlink{structproc_a9f556df98482bff6c9216013d7581ae4}{kstack}}
+\item 
+enum \mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7}{procstate}} \mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}}
+\item 
+int \mbox{\hyperlink{structproc_acf2bdf54d1f957ccbcdc987007029944}{pid}}
+\item 
+struct \mbox{\hyperlink{structproc}{proc}} $\ast$ \mbox{\hyperlink{structproc_a14ea8849701ffafba4d142725de154d4}{parent}}
+\item 
+struct \mbox{\hyperlink{structtrapframe}{trapframe}} $\ast$ \mbox{\hyperlink{structproc_a56ec07ac1e10ce42adfc8dd2a366071f}{tf}}
+\item 
+struct \mbox{\hyperlink{structcontext}{context}} $\ast$ \mbox{\hyperlink{structproc_ae0d9bffe1ad1c7d60dd2733be0a2333c}{context}}
+\item 
+void $\ast$ \mbox{\hyperlink{structproc_a03048a49756c2243576208ba4ec5fbd4}{chan}}
+\item 
+int \mbox{\hyperlink{structproc_afb4f94a3f4df9a835dbb41b0c26660a4}{killed}}
+\item 
+struct \mbox{\hyperlink{structfile}{file}} $\ast$ \mbox{\hyperlink{structproc_a4a9eb0352efe3fc097c91fccfaac50bd}{ofile}} \mbox{[}\mbox{\hyperlink{param_8h_a80bacbaea8dd6aecf216d85d981bcb21}{N\+O\+F\+I\+LE}}\mbox{]}
+\item 
+struct \mbox{\hyperlink{structinode}{inode}} $\ast$ \mbox{\hyperlink{structproc_a493bc338ce008a838eef521972a35257}{cwd}}
+\item 
+char \mbox{\hyperlink{structproc_ac04af53e17d24b90c3cbfab56d658d62}{name}} \mbox{[}16\mbox{]}
+\item 
+int \mbox{\hyperlink{structproc_a0ff9aeaee6acbf5ad55e497e0ed2f2ad}{tracemask}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{상세한 설명}
+
+
+proc.\+h 파일의 48 번째 라인에서 정의되었습니다.
+
+
+
+\doxysubsection{필드 문서화}
+\mbox{\Hypertarget{structproc_a03048a49756c2243576208ba4ec5fbd4}\label{structproc_a03048a49756c2243576208ba4ec5fbd4}} 
+\index{proc@{proc}!chan@{chan}}
+\index{chan@{chan}!proc@{proc}}
+\doxysubsubsection{\texorpdfstring{chan}{chan}}
+{\footnotesize\ttfamily void$\ast$ proc\+::chan}
+
+
+
+proc.\+h 파일의 58 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structproc_ae0d9bffe1ad1c7d60dd2733be0a2333c}\label{structproc_ae0d9bffe1ad1c7d60dd2733be0a2333c}} 
+\index{proc@{proc}!context@{context}}
+\index{context@{context}!proc@{proc}}
+\doxysubsubsection{\texorpdfstring{context}{context}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structcontext}{context}}$\ast$ proc\+::context}
+
+
+
+proc.\+h 파일의 57 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structproc_a493bc338ce008a838eef521972a35257}\label{structproc_a493bc338ce008a838eef521972a35257}} 
+\index{proc@{proc}!cwd@{cwd}}
+\index{cwd@{cwd}!proc@{proc}}
+\doxysubsubsection{\texorpdfstring{cwd}{cwd}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structinode}{inode}}$\ast$ proc\+::cwd}
+
+
+
+proc.\+h 파일의 61 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structproc_afb4f94a3f4df9a835dbb41b0c26660a4}\label{structproc_afb4f94a3f4df9a835dbb41b0c26660a4}} 
+\index{proc@{proc}!killed@{killed}}
+\index{killed@{killed}!proc@{proc}}
+\doxysubsubsection{\texorpdfstring{killed}{killed}}
+{\footnotesize\ttfamily int proc\+::killed}
+
+
+
+proc.\+h 파일의 59 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structproc_a9f556df98482bff6c9216013d7581ae4}\label{structproc_a9f556df98482bff6c9216013d7581ae4}} 
+\index{proc@{proc}!kstack@{kstack}}
+\index{kstack@{kstack}!proc@{proc}}
+\doxysubsubsection{\texorpdfstring{kstack}{kstack}}
+{\footnotesize\ttfamily char$\ast$ proc\+::kstack}
+
+
+
+proc.\+h 파일의 52 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structproc_ac04af53e17d24b90c3cbfab56d658d62}\label{structproc_ac04af53e17d24b90c3cbfab56d658d62}} 
+\index{proc@{proc}!name@{name}}
+\index{name@{name}!proc@{proc}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily char proc\+::name\mbox{[}16\mbox{]}}
+
+
+
+proc.\+h 파일의 62 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structproc_a4a9eb0352efe3fc097c91fccfaac50bd}\label{structproc_a4a9eb0352efe3fc097c91fccfaac50bd}} 
+\index{proc@{proc}!ofile@{ofile}}
+\index{ofile@{ofile}!proc@{proc}}
+\doxysubsubsection{\texorpdfstring{ofile}{ofile}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structfile}{file}}$\ast$ proc\+::ofile\mbox{[}\mbox{\hyperlink{param_8h_a80bacbaea8dd6aecf216d85d981bcb21}{N\+O\+F\+I\+LE}}\mbox{]}}
+
+
+
+proc.\+h 파일의 60 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structproc_a14ea8849701ffafba4d142725de154d4}\label{structproc_a14ea8849701ffafba4d142725de154d4}} 
+\index{proc@{proc}!parent@{parent}}
+\index{parent@{parent}!proc@{proc}}
+\doxysubsubsection{\texorpdfstring{parent}{parent}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structproc}{proc}}$\ast$ proc\+::parent}
+
+
+
+proc.\+h 파일의 55 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structproc_ad430afc653e9eb6cee33954d5545b79d}\label{structproc_ad430afc653e9eb6cee33954d5545b79d}} 
+\index{proc@{proc}!pgdir@{pgdir}}
+\index{pgdir@{pgdir}!proc@{proc}}
+\doxysubsubsection{\texorpdfstring{pgdir}{pgdir}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ac131849542282b2c95dfeaf1f26dc010}{pde\+\_\+t}}$\ast$ proc\+::pgdir}
+
+
+
+proc.\+h 파일의 51 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structproc_acf2bdf54d1f957ccbcdc987007029944}\label{structproc_acf2bdf54d1f957ccbcdc987007029944}} 
+\index{proc@{proc}!pid@{pid}}
+\index{pid@{pid}!proc@{proc}}
+\doxysubsubsection{\texorpdfstring{pid}{pid}}
+{\footnotesize\ttfamily int proc\+::pid}
+
+
+
+proc.\+h 파일의 54 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structproc_a0f2fe91548a1382672ae26e29ca9e736}\label{structproc_a0f2fe91548a1382672ae26e29ca9e736}} 
+\index{proc@{proc}!state@{state}}
+\index{state@{state}!proc@{proc}}
+\doxysubsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7}{procstate}} proc\+::state}
+
+
+
+proc.\+h 파일의 53 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structproc_a6e67042bb361124ff287af88efc33e00}\label{structproc_a6e67042bb361124ff287af88efc33e00}} 
+\index{proc@{proc}!sz@{sz}}
+\index{sz@{sz}!proc@{proc}}
+\doxysubsubsection{\texorpdfstring{sz}{sz}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} proc\+::sz}
+
+
+
+proc.\+h 파일의 50 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structproc_a56ec07ac1e10ce42adfc8dd2a366071f}\label{structproc_a56ec07ac1e10ce42adfc8dd2a366071f}} 
+\index{proc@{proc}!tf@{tf}}
+\index{tf@{tf}!proc@{proc}}
+\doxysubsubsection{\texorpdfstring{tf}{tf}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structtrapframe}{trapframe}}$\ast$ proc\+::tf}
+
+
+
+proc.\+h 파일의 56 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structproc_a0ff9aeaee6acbf5ad55e497e0ed2f2ad}\label{structproc_a0ff9aeaee6acbf5ad55e497e0ed2f2ad}} 
+\index{proc@{proc}!tracemask@{tracemask}}
+\index{tracemask@{tracemask}!proc@{proc}}
+\doxysubsubsection{\texorpdfstring{tracemask}{tracemask}}
+{\footnotesize\ttfamily int proc\+::tracemask}
+
+
+
+proc.\+h 파일의 63 번째 라인에서 정의되었습니다.
+
+
+
+이 구조체에 대한 문서화 페이지는 다음의 파일로부터 생성되었습니다.\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{proc_8h}{proc.\+h}}\end{DoxyCompactItemize}
