@@ -98,3 +98,16 @@ int sys_trace(void)
     return -1;
   return 0;
 }
+
+int sys_weightset(void)
+{
+  int weight;
+  if (argint(0, &weight) < 0)
+  {
+    cprintf("wrong weight value\n");
+    return -1;
+  }
+
+  do_weightset(weight);
+  return weight;
+}

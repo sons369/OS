@@ -22,3 +22,4 @@
 #define SYS_close 21
 #define SYS_memsize 22
 #define SYS_trace 23
+#define SYS_weightset 24

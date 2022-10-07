@@ -30,8 +30,8 @@ int main(void)
     }
     if (pid == 0)
     {
-      exec("ssu_login", argv);
-      // exec("sh", argv);
+      // exec("ssu_login", argv);
+      exec("sh", argv);
       printf(1, "init: exec ssu_login failed\n");
       exit();
     }

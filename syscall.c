@@ -101,6 +101,7 @@ extern int sys_write(void);
 extern int sys_uptime(void);
 extern int sys_memsize(void);
 extern int sys_trace(void);
+extern int sys_weightset(void);
 
 static int (*syscalls[])(void) = {
     [SYS_fork] sys_fork,
@@ -126,6 +127,7 @@ static int (*syscalls[])(void) = {
     [SYS_close] sys_close,
     [SYS_memsize] sys_memsize,
     [SYS_trace] sys_trace,
+    [SYS_weightset] sys_weightset,
 };
 
 char *systemcallname[] = {
@@ -152,6 +154,7 @@ char *systemcallname[] = {
     [SYS_close] "close",
     [SYS_memsize] "memsize",
     [SYS_trace] "trace",
+    [SYS_weightset] "weightset",
 };
 
 void syscall(void)
