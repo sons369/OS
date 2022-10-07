@@ -530,10 +530,12 @@ wakeup1(void *chan)
     if (p->state == SLEEPING && p->chan == chan)
     {
       p->state = RUNNABLE;
-      // wake up시 관리하고 있는 프로세스의 우선순위중 가장 작은 값 부여
-      p->priority = ptable.low_priority;
     }
   }
+  // wake up시 관리하고 있는 프로세스의 우선순위중 가장 작은 값 부여
+  if (p->priority < ptable.low_priority)
+    ptable.low_priority = p->priority;
+  p->priority = ptable.low_priority;
 }
 
 // Wake up all processes sleeping on chan.
