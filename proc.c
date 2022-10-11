@@ -16,7 +16,7 @@ struct
 {
   struct spinlock lock;
   struct proc proc[NPROC];
-  unsigned long long low_priority; // lowest priority
+  long long low_priority; // lowest priority
 } ptable;
 
 static struct proc *initproc;
@@ -92,7 +92,8 @@ allocproc(void)
 
   release(&ptable.lock);
   return 0;
-
+//프로세스 생성시 가중치++ 값 넣어줌
+//그리고 우선순위도 가장 낮은 값으로 넣어줌
 found:
   p->state = EMBRYO;
   p->weight = weight++;
@@ -340,25 +341,27 @@ int wait(void)
 //   - swtch to start running that process
 //   - eventually that process transfers control
 //       via swtch back to the scheduler.
-struct proc *ssu_schedule()
-{
-  struct proc *p;
-  struct proc *ret = NULL;
-  for (p = ptable.proc; p < &ptable.proc[NPROC]; p++)
-  {
-    if (p->state != RUNNABLE)
-      continue;
-    if (ret == NULL)
-      ret = p;
-    else if ((p->state == RUNNABLE) && (ret->priority > p->priority))
-      ret = p;
-  }
-#ifdef DEBUG
-  if (ret)
-    cprintf("PID: %d, NAME: %s, WEIGHT: %d, PRIORITY: %d\n", ret->pid, ret->name, ret->weight, ret->priority);
-#endif
-  return ret;
-}
+
+//ssu_스케줄러 함수화 버전이지만 사용은 안함
+// struct proc *ssu_schedule()
+// {
+//   struct proc *p;
+//   struct proc *ret = NULL;
+//   for (p = ptable.proc; p < &ptable.proc[NPROC]; p++)
+//   {
+//     if (p->state != RUNNABLE)
+//       continue;
+//     if (ret == NULL)
+//       ret = p;
+//     else if ((p->state == RUNNABLE) && (ret->priority > p->priority))
+//       ret = p;
+//   }
+// #ifdef DEBUG
+//   if (ret)
+//     cprintf("PID: %d, NAME: %s, WEIGHT: %d, PRIORITY: %d\n", ret->pid, ret->name, ret->weight, ret->priority);
+// #endif
+//   return ret;
+// }
 void scheduler(void)
 {
   struct proc *p;
@@ -383,6 +386,7 @@ void scheduler(void)
 
       //우선순위 스케쥴
       tmp = p;
+      // RUNNABLE 상태인 프로세스 중 priority가 가장 작은 프로세스 선택
       for (p2 = ptable.proc; p2 < &ptable.proc[NPROC]; p2++)
       {
         if ((p2->state == RUNNABLE) && (tmp->priority > p2->priority))
@@ -399,6 +403,7 @@ void scheduler(void)
 
       if (p != 0)
       {
+        //DEBUG 매크로 선언시 출력파트
 #ifdef DEBUG
         if (p)
           cprintf("PID: %d, NAME: %s, WEIGHT: %d, PRIORITY: %d\n", p->pid, p->name, p->weight, p->priority);
@@ -530,12 +535,10 @@ wakeup1(void *chan)
     if (p->state == SLEEPING && p->chan == chan)
     {
       p->state = RUNNABLE;
+      p->priority = ptable.low_priority;
     }
   }
-  // wake up시 관리하고 있는 프로세스의 우선순위중 가장 작은 값 부여
-  if (p->priority < ptable.low_priority)
-    ptable.low_priority = p->priority;
-  p->priority = ptable.low_priority;
+  // wake up시 프로세스의 우선순위 작은 값 부여
 }
 
 // Wake up all processes sleeping on chan.

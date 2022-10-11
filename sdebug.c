@@ -2,15 +2,16 @@
 #include "stat.h"
 #include "user.h"
 
-#define PNUM 5
-#define PRINT_CYCLE 100000000
-#define TOTAL_COUNTER 500000000
+#define PNUM 5                  // fork 프로세스 개수
+#define PRINT_CYCLE 100000000   // 각 프로세스 정보 출력 주기(틱)
+#define TOTAL_COUNTER 500000000 // 프로세스가 종료할 떄 카운터 값(틱)
 
 void sdebug_func(void)
 {
     int n, pid;
 
     printf(1, "start sdebug command\n");
+
     for (n = 0; n < PNUM; n++)
     {
         pid = fork();
@@ -20,11 +21,15 @@ void sdebug_func(void)
         }
         if (pid == 0)
         {
-            long cnt;
-            long start = uptime();
+            long cnt = 0;
             int get_weight = weightset(n + 1);
-            for (cnt = 0; cnt < TOTAL_COUNTER; cnt++)
+            long start = uptime();
+
+                        for (cnt = 0; cnt < TOTAL_COUNTER; cnt++)
             {
+                // tmp = uptime();
+
+                // printf(1, "\npid %d %d %d\n", getpid(), tmp, cnt);
                 if (cnt == PRINT_CYCLE)
                 {
                     long end = uptime();
@@ -38,11 +43,13 @@ void sdebug_func(void)
             }
         }
     }
+
     for (int i = 0; i < PNUM; i++)
     {
         if (pid != 0)
             wait();
     }
+
     printf(1, "end of sdebug command\n");
 }
 
