@@ -1,0 +1,78 @@
+\hypertarget{picirq_8c}{}\doxysection{picirq.\+c 파일 참조}
+\label{picirq_8c}\index{picirq.c@{picirq.c}}
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}x86.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}traps.\+h\char`\"{}}\newline
+picirq.\+c에 대한 include 의존 그래프
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{d4/dd0/picirq_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{매크로}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{picirq_8c_ad24a6214d0f5bb9bf67a8ac744907aa0}{I\+O\+\_\+\+P\+I\+C1}}~0x20
+\item 
+\#define \mbox{\hyperlink{picirq_8c_ab858a4b80bd8950398355e678c578d7d}{I\+O\+\_\+\+P\+I\+C2}}~0x\+A0
+\end{DoxyCompactItemize}
+\doxysubsection*{함수}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{picirq_8c_a8f19f54755d7fdec01e537228b10fbf6}{picinit}} (void)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{매크로 문서화}
+\mbox{\Hypertarget{picirq_8c_ad24a6214d0f5bb9bf67a8ac744907aa0}\label{picirq_8c_ad24a6214d0f5bb9bf67a8ac744907aa0}} 
+\index{picirq.c@{picirq.c}!IO\_PIC1@{IO\_PIC1}}
+\index{IO\_PIC1@{IO\_PIC1}!picirq.c@{picirq.c}}
+\doxysubsubsection{\texorpdfstring{IO\_PIC1}{IO\_PIC1}}
+{\footnotesize\ttfamily \#define I\+O\+\_\+\+P\+I\+C1~0x20}
+
+
+
+picirq.\+c 파일의 6 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{picirq_8c_ab858a4b80bd8950398355e678c578d7d}\label{picirq_8c_ab858a4b80bd8950398355e678c578d7d}} 
+\index{picirq.c@{picirq.c}!IO\_PIC2@{IO\_PIC2}}
+\index{IO\_PIC2@{IO\_PIC2}!picirq.c@{picirq.c}}
+\doxysubsubsection{\texorpdfstring{IO\_PIC2}{IO\_PIC2}}
+{\footnotesize\ttfamily \#define I\+O\+\_\+\+P\+I\+C2~0x\+A0}
+
+
+
+picirq.\+c 파일의 7 번째 라인에서 정의되었습니다.
+
+
+
+\doxysubsection{함수 문서화}
+\mbox{\Hypertarget{picirq_8c_a8f19f54755d7fdec01e537228b10fbf6}\label{picirq_8c_a8f19f54755d7fdec01e537228b10fbf6}} 
+\index{picirq.c@{picirq.c}!picinit@{picinit}}
+\index{picinit@{picinit}!picirq.c@{picirq.c}}
+\doxysubsubsection{\texorpdfstring{picinit()}{picinit()}}
+{\footnotesize\ttfamily void picinit (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+picirq.\+c 파일의 11 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{12 \{}
+\DoxyCodeLine{13   \textcolor{comment}{// mask all interrupts}}
+\DoxyCodeLine{14   \mbox{\hyperlink{x86_8h_ae83f752beecce9c8f6f8711ff936377f}{outb}}(\mbox{\hyperlink{picirq_8c_ad24a6214d0f5bb9bf67a8ac744907aa0}{IO\_PIC1}}+1, 0xFF);}
+\DoxyCodeLine{15   \mbox{\hyperlink{x86_8h_ae83f752beecce9c8f6f8711ff936377f}{outb}}(\mbox{\hyperlink{picirq_8c_ab858a4b80bd8950398355e678c578d7d}{IO\_PIC2}}+1, 0xFF);}
+\DoxyCodeLine{16 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=201pt]{d5/da8/picirq_8c_a8f19f54755d7fdec01e537228b10fbf6_cgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,42 @@
+<map id="allocuvm" name="allocuvm">
+<area shape="rect" id="node1" title=" " alt="" coords="5,841,88,868"/>
+<area shape="rect" id="node2" href="$d0/d56/console_8c.html#a90f0742d846503e4ed1804f1df421ec6" title=" " alt="" coords="427,537,491,564"/>
+<area shape="rect" id="node19" href="$d5/d64/defs_8h.html#a9d55c9f035076ed1a90b6452770d0b62" title=" " alt="" coords="951,841,1027,868"/>
+<area shape="rect" id="node25" href="$de/de9/vm_8c.html#a6d3019ea15a9bfdc5131ae97f3623c49" title=" " alt="" coords="136,841,235,868"/>
+<area shape="rect" id="node26" href="$d5/d64/defs_8h.html#ae79d6a7d0901b7c081cfded3f916d5bd" title=" " alt="" coords="431,765,487,792"/>
+<area shape="rect" id="node28" href="$d5/d64/defs_8h.html#a3af104ba40b66dcec8363ac5a70907ed" title=" " alt="" coords="429,703,489,729"/>
+<area shape="rect" id="node29" href="$de/de9/vm_8c.html#a6a272b2512f2e848e09281c4c7275273" title=" " alt="" coords="140,892,231,919"/>
+<area shape="rect" id="node30" href="$de/dc0/usertests_8c.html#aa1c6e6e76813ccb29a29bb119dba668a" title=" " alt="" coords="157,1221,213,1248"/>
+<area shape="rect" id="node3" href="$d5/d64/defs_8h.html#afe4ef8638f1ecb962a6e67fb086ee3b8" title=" " alt="" coords="549,512,620,539"/>
+<area shape="rect" id="node8" href="$d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a" title=" " alt="" coords="1101,613,1158,640"/>
+<area shape="rect" id="node15" href="$d0/d56/console_8c.html#a0504dbe97899f754f22dbe2b1e6b6102" title=" " alt="" coords="679,259,759,285"/>
+<area shape="rect" id="node23" href="$d0/d56/console_8c.html#aafb705f6d5b125c41825313da0d41252" title=" " alt="" coords="550,385,619,412"/>
+<area shape="rect" id="node24" href="$d5/d64/defs_8h.html#a4f8616948f3dbce65671f666eed1d669" title=" " alt="" coords="549,689,620,716"/>
+<area shape="rect" id="node4" href="$d3/d2d/spinlock_8c.html#a6ac35304ea80f01086b47edcc2328010" title=" " alt="" coords="668,461,769,488"/>
+<area shape="rect" id="node5" href="$d3/d2d/spinlock_8c.html#aea48df3e5cfb903179ad3dc78ab502d9" title=" " alt="" coords="683,512,754,539"/>
+<area shape="rect" id="node6" href="$d5/d64/defs_8h.html#a6ab45dc363c8d9b7beb14c25be49c6d7" title=" " alt="" coords="955,360,1022,387"/>
+<area shape="rect" id="node12" href="$d3/d2d/spinlock_8c.html#a206b749d1b7768dadce61cbcde7e0f1c" title=" " alt="" coords="821,309,889,336"/>
+<area shape="rect" id="node14" href="$d5/d39/x86_8h.html#a7882b181a4fc45195cbaa1cd6aa986d4" title=" " alt="" coords="692,411,745,437"/>
+<area shape="rect" id="node10" href="$d3/d2d/spinlock_8c.html#ae3424f669269fef400ce29c3aeb43fdb" title=" " alt="" coords="825,487,886,513"/>
+<area shape="rect" id="node7" href="$d5/d64/defs_8h.html#a627f7996b64f99d885244a5102c85164" title=" " alt="" coords="1097,335,1162,361"/>
+<area shape="rect" id="node9" href="$d5/d39/x86_8h.html#a216ef768ced2935b4fd2a7de7d65de5b" title=" " alt="" coords="1084,385,1175,412"/>
+<area shape="rect" id="node11" href="$d5/d39/x86_8h.html#af87d69b8449fc86a02b250af121cd29d" title=" " alt="" coords="969,461,1008,488"/>
+<area shape="rect" id="node13" href="$d5/d39/x86_8h.html#a89d04efedb6dc6e8d87c6a5b453529e1" title=" " alt="" coords="969,259,1008,285"/>
+<area shape="rect" id="node16" href="$d0/d56/console_8c.html#a9e775e33e5b346aba0be84dbeddcb312" title=" " alt="" coords="819,183,892,209"/>
+<area shape="rect" id="node21" href="$d5/d64/defs_8h.html#a571626618a1f05ff6854802e936845d6" title=" " alt="" coords="817,81,893,108"/>
+<area shape="rect" id="node17" href="$d5/d39/x86_8h.html#a2866d9720d8f4b0e23530f79171dfba9" title=" " alt="" coords="967,56,1010,83"/>
+<area shape="rect" id="node18" href="$d5/d64/defs_8h.html#aa9c8577c0e9d233f85892ec2d9bfe212" title=" " alt="" coords="942,157,1035,184"/>
+<area shape="rect" id="node20" href="$d5/d39/x86_8h.html#ae83f752beecce9c8f6f8711ff936377f" title=" " alt="" coords="963,107,1014,133"/>
+<area shape="rect" id="node22" href="$d5/d64/defs_8h.html#ada0e72e8d0a1a48090829fd03a0b76ba" title=" " alt="" coords="941,5,1036,32"/>
+<area shape="rect" id="node27" href="$de/de9/vm_8c.html#acb8e38162e861af59fa33ff89058bdb5" title=" " alt="" coords="283,867,369,893"/>
+<area shape="rect" id="node31" href="$d5/d64/defs_8h.html#aaf98ef7cdde3a0dfb2e49919de3298b1" title=" " alt="" coords="303,1069,349,1096"/>
+<area shape="rect" id="node32" href="$d5/d64/defs_8h.html#acd2e1ded4bb6fce4500438bf928330f4" title=" " alt="" coords="302,1120,350,1147"/>
+<area shape="rect" id="node33" href="$df/d5d/umalloc_8c.html#adebb229f063e66907017098087cbe791" title=" " alt="" coords="561,1196,609,1223"/>
+<area shape="rect" id="node34" href="$d8/ddb/user_8h.html#a939cb25a305fe68aad9b365077f1a8c7" title=" " alt="" coords="295,1221,357,1248"/>
+<area shape="rect" id="node35" href="$d5/d64/defs_8h.html#ab893e9671d6bfe2b2604002a50639f21" title=" " alt="" coords="305,1272,347,1299"/>
+<area shape="rect" id="node36" href="$df/d5d/umalloc_8c.html#a94267ee40e0547410676894ab3f23c15" title=" " alt="" coords="293,1323,359,1349"/>
+<area shape="rect" id="node39" href="$d5/de1/forktest_8c.html#a249680925885256274fa9f02dd51cec4" title=" " alt="" coords="297,1373,355,1400"/>
+<area shape="rect" id="node40" href="$d5/d64/defs_8h.html#af6f31822f7e737b4e414bdac1ccb59a4" title=" " alt="" coords="301,1424,351,1451"/>
+<area shape="rect" id="node37" href="$df/d5d/umalloc_8c.html#aebd1d1253256ebcdf864ab19a84743ad" title=" " alt="" coords="417,1297,501,1324"/>
+<area shape="rect" id="node38" href="$d8/ddb/user_8h.html#ab93887b632d2111cb006eaa3018ccef7" title=" " alt="" coords="559,1297,610,1324"/>
+</map>

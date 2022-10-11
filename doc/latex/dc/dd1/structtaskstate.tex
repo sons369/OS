@@ -1,0 +1,478 @@
+\hypertarget{structtaskstate}{}\doxysection{taskstate 구조체 참조}
+\label{structtaskstate}\index{taskstate@{taskstate}}
+
+
+{\ttfamily \#include $<$mmu.\+h$>$}
+
+
+
+taskstate에 대한 협력 다이어그램\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=187pt]{d0/d08/structtaskstate__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{데이터 필드}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{structtaskstate_a31a48a737b004273004ba8473ab6b0ed}{link}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{structtaskstate_a41b3e1d46a5068485eb6714974a979d6}{esp0}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtaskstate_a574e97ea3fd87f314da88afec3c6f574}{ss0}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtaskstate_a6b87ceb039ec11ccd265818673c53df5}{padding1}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} $\ast$ \mbox{\hyperlink{structtaskstate_a7ec69acf5f95163bd1ca2548fb0c541a}{esp1}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtaskstate_ac70c36414956cfee04c733a5b530d8ef}{ss1}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtaskstate_ae1bd6ae664d5899c3e118c21a27ba065}{padding2}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} $\ast$ \mbox{\hyperlink{structtaskstate_af206a117571ede3752b043e4e8cc6016}{esp2}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtaskstate_a573d8f57ef11630e782d8b7c924f28ce}{ss2}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtaskstate_a7989f7ea66e6e2100ef68c9e6964c231}{padding3}}
+\item 
+void $\ast$ \mbox{\hyperlink{structtaskstate_ac891b558913b4528fd2c9351c99da201}{cr3}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} $\ast$ \mbox{\hyperlink{structtaskstate_ae2bd660dd957f328d583e9a193dd250e}{eip}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{structtaskstate_a03952bc66789a00063ed9081c84cf01e}{eflags}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{structtaskstate_a6242c9879e9f87d1bcf5dfb6f3da4774}{eax}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{structtaskstate_a71af7c05a336906ef36771132ff5e804}{ecx}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{structtaskstate_a093193d42fe11c7d51e81fb41bfc0a60}{edx}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{structtaskstate_a0ef705c1f37c5c541ec9b688352e7b74}{ebx}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} $\ast$ \mbox{\hyperlink{structtaskstate_a9ee7c7c8cfe57f98eb72a6b8dd5342fa}{esp}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} $\ast$ \mbox{\hyperlink{structtaskstate_af20357700cba78c6e3a77610dcd47fb7}{ebp}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{structtaskstate_ab188878c1c090558d8d83a71282cc486}{esi}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{structtaskstate_a32fc8c63c3843c7ea2a675158498a029}{edi}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtaskstate_afcc56f9f9cba058c518a021babe00d9a}{es}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtaskstate_a9905f5108c60aab4b6e5c2a1ce1ce356}{padding4}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtaskstate_aec68e08358623490628d50e0ff9448f4}{cs}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtaskstate_ad462c3b654306417c32c78f42b5a9e42}{padding5}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtaskstate_afdd8f3985ac7ae69fc67c19d65653f12}{ss}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtaskstate_a3885094380c4d991fa86d31fdf1b9683}{padding6}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtaskstate_af5f19782df3eb439445274e08d9120f1}{ds}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtaskstate_a4c634b4b3cd489ca37979561394bf518}{padding7}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtaskstate_a4ce0e6f25b9721d7e2660c8840a0f9e3}{fs}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtaskstate_ab3077e8c9fe9b50ff7caedeeac075472}{padding8}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtaskstate_a15529ac51461a168be78130042a740e7}{gs}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtaskstate_a58a780ba0664e4ff8741adbdaccbcdd5}{padding9}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtaskstate_a960e5d4a40dcafb35f32ec047c0ca147}{ldt}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtaskstate_a6f95dd6d0ae39afaaf5ee8671220b00b}{padding10}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtaskstate_ad9d64e6139f851a3f8d2275f2748fae5}{t}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtaskstate_a5ee57b190324239a5d88f7c02039901f}{iomb}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{상세한 설명}
+
+
+mmu.\+h 파일의 107 번째 라인에서 정의되었습니다.
+
+
+
+\doxysubsection{필드 문서화}
+\mbox{\Hypertarget{structtaskstate_ac891b558913b4528fd2c9351c99da201}\label{structtaskstate_ac891b558913b4528fd2c9351c99da201}} 
+\index{taskstate@{taskstate}!cr3@{cr3}}
+\index{cr3@{cr3}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{cr3}{cr3}}
+{\footnotesize\ttfamily void$\ast$ taskstate\+::cr3}
+
+
+
+mmu.\+h 파일의 118 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_aec68e08358623490628d50e0ff9448f4}\label{structtaskstate_aec68e08358623490628d50e0ff9448f4}} 
+\index{taskstate@{taskstate}!cs@{cs}}
+\index{cs@{cs}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{cs}{cs}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} taskstate\+::cs}
+
+
+
+mmu.\+h 파일의 131 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_af5f19782df3eb439445274e08d9120f1}\label{structtaskstate_af5f19782df3eb439445274e08d9120f1}} 
+\index{taskstate@{taskstate}!ds@{ds}}
+\index{ds@{ds}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{ds}{ds}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} taskstate\+::ds}
+
+
+
+mmu.\+h 파일의 135 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_a6242c9879e9f87d1bcf5dfb6f3da4774}\label{structtaskstate_a6242c9879e9f87d1bcf5dfb6f3da4774}} 
+\index{taskstate@{taskstate}!eax@{eax}}
+\index{eax@{eax}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{eax}{eax}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} taskstate\+::eax}
+
+
+
+mmu.\+h 파일의 121 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_af20357700cba78c6e3a77610dcd47fb7}\label{structtaskstate_af20357700cba78c6e3a77610dcd47fb7}} 
+\index{taskstate@{taskstate}!ebp@{ebp}}
+\index{ebp@{ebp}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{ebp}{ebp}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}$\ast$ taskstate\+::ebp}
+
+
+
+mmu.\+h 파일의 126 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_a0ef705c1f37c5c541ec9b688352e7b74}\label{structtaskstate_a0ef705c1f37c5c541ec9b688352e7b74}} 
+\index{taskstate@{taskstate}!ebx@{ebx}}
+\index{ebx@{ebx}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{ebx}{ebx}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} taskstate\+::ebx}
+
+
+
+mmu.\+h 파일의 124 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_a71af7c05a336906ef36771132ff5e804}\label{structtaskstate_a71af7c05a336906ef36771132ff5e804}} 
+\index{taskstate@{taskstate}!ecx@{ecx}}
+\index{ecx@{ecx}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{ecx}{ecx}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} taskstate\+::ecx}
+
+
+
+mmu.\+h 파일의 122 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_a32fc8c63c3843c7ea2a675158498a029}\label{structtaskstate_a32fc8c63c3843c7ea2a675158498a029}} 
+\index{taskstate@{taskstate}!edi@{edi}}
+\index{edi@{edi}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{edi}{edi}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} taskstate\+::edi}
+
+
+
+mmu.\+h 파일의 128 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_a093193d42fe11c7d51e81fb41bfc0a60}\label{structtaskstate_a093193d42fe11c7d51e81fb41bfc0a60}} 
+\index{taskstate@{taskstate}!edx@{edx}}
+\index{edx@{edx}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{edx}{edx}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} taskstate\+::edx}
+
+
+
+mmu.\+h 파일의 123 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_a03952bc66789a00063ed9081c84cf01e}\label{structtaskstate_a03952bc66789a00063ed9081c84cf01e}} 
+\index{taskstate@{taskstate}!eflags@{eflags}}
+\index{eflags@{eflags}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{eflags}{eflags}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} taskstate\+::eflags}
+
+
+
+mmu.\+h 파일의 120 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_ae2bd660dd957f328d583e9a193dd250e}\label{structtaskstate_ae2bd660dd957f328d583e9a193dd250e}} 
+\index{taskstate@{taskstate}!eip@{eip}}
+\index{eip@{eip}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{eip}{eip}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}$\ast$ taskstate\+::eip}
+
+
+
+mmu.\+h 파일의 119 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_afcc56f9f9cba058c518a021babe00d9a}\label{structtaskstate_afcc56f9f9cba058c518a021babe00d9a}} 
+\index{taskstate@{taskstate}!es@{es}}
+\index{es@{es}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{es}{es}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} taskstate\+::es}
+
+
+
+mmu.\+h 파일의 129 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_ab188878c1c090558d8d83a71282cc486}\label{structtaskstate_ab188878c1c090558d8d83a71282cc486}} 
+\index{taskstate@{taskstate}!esi@{esi}}
+\index{esi@{esi}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{esi}{esi}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} taskstate\+::esi}
+
+
+
+mmu.\+h 파일의 127 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_a9ee7c7c8cfe57f98eb72a6b8dd5342fa}\label{structtaskstate_a9ee7c7c8cfe57f98eb72a6b8dd5342fa}} 
+\index{taskstate@{taskstate}!esp@{esp}}
+\index{esp@{esp}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{esp}{esp}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}$\ast$ taskstate\+::esp}
+
+
+
+mmu.\+h 파일의 125 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_a41b3e1d46a5068485eb6714974a979d6}\label{structtaskstate_a41b3e1d46a5068485eb6714974a979d6}} 
+\index{taskstate@{taskstate}!esp0@{esp0}}
+\index{esp0@{esp0}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{esp0}{esp0}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} taskstate\+::esp0}
+
+
+
+mmu.\+h 파일의 109 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_a7ec69acf5f95163bd1ca2548fb0c541a}\label{structtaskstate_a7ec69acf5f95163bd1ca2548fb0c541a}} 
+\index{taskstate@{taskstate}!esp1@{esp1}}
+\index{esp1@{esp1}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{esp1}{esp1}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}$\ast$ taskstate\+::esp1}
+
+
+
+mmu.\+h 파일의 112 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_af206a117571ede3752b043e4e8cc6016}\label{structtaskstate_af206a117571ede3752b043e4e8cc6016}} 
+\index{taskstate@{taskstate}!esp2@{esp2}}
+\index{esp2@{esp2}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{esp2}{esp2}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}$\ast$ taskstate\+::esp2}
+
+
+
+mmu.\+h 파일의 115 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_a4ce0e6f25b9721d7e2660c8840a0f9e3}\label{structtaskstate_a4ce0e6f25b9721d7e2660c8840a0f9e3}} 
+\index{taskstate@{taskstate}!fs@{fs}}
+\index{fs@{fs}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{fs}{fs}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} taskstate\+::fs}
+
+
+
+mmu.\+h 파일의 137 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_a15529ac51461a168be78130042a740e7}\label{structtaskstate_a15529ac51461a168be78130042a740e7}} 
+\index{taskstate@{taskstate}!gs@{gs}}
+\index{gs@{gs}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{gs}{gs}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} taskstate\+::gs}
+
+
+
+mmu.\+h 파일의 139 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_a5ee57b190324239a5d88f7c02039901f}\label{structtaskstate_a5ee57b190324239a5d88f7c02039901f}} 
+\index{taskstate@{taskstate}!iomb@{iomb}}
+\index{iomb@{iomb}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{iomb}{iomb}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} taskstate\+::iomb}
+
+
+
+mmu.\+h 파일의 144 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_a960e5d4a40dcafb35f32ec047c0ca147}\label{structtaskstate_a960e5d4a40dcafb35f32ec047c0ca147}} 
+\index{taskstate@{taskstate}!ldt@{ldt}}
+\index{ldt@{ldt}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{ldt}{ldt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} taskstate\+::ldt}
+
+
+
+mmu.\+h 파일의 141 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_a31a48a737b004273004ba8473ab6b0ed}\label{structtaskstate_a31a48a737b004273004ba8473ab6b0ed}} 
+\index{taskstate@{taskstate}!link@{link}}
+\index{link@{link}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{link}{link}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} taskstate\+::link}
+
+
+
+mmu.\+h 파일의 108 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_a6b87ceb039ec11ccd265818673c53df5}\label{structtaskstate_a6b87ceb039ec11ccd265818673c53df5}} 
+\index{taskstate@{taskstate}!padding1@{padding1}}
+\index{padding1@{padding1}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{padding1}{padding1}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} taskstate\+::padding1}
+
+
+
+mmu.\+h 파일의 111 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_a6f95dd6d0ae39afaaf5ee8671220b00b}\label{structtaskstate_a6f95dd6d0ae39afaaf5ee8671220b00b}} 
+\index{taskstate@{taskstate}!padding10@{padding10}}
+\index{padding10@{padding10}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{padding10}{padding10}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} taskstate\+::padding10}
+
+
+
+mmu.\+h 파일의 142 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_ae1bd6ae664d5899c3e118c21a27ba065}\label{structtaskstate_ae1bd6ae664d5899c3e118c21a27ba065}} 
+\index{taskstate@{taskstate}!padding2@{padding2}}
+\index{padding2@{padding2}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{padding2}{padding2}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} taskstate\+::padding2}
+
+
+
+mmu.\+h 파일의 114 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_a7989f7ea66e6e2100ef68c9e6964c231}\label{structtaskstate_a7989f7ea66e6e2100ef68c9e6964c231}} 
+\index{taskstate@{taskstate}!padding3@{padding3}}
+\index{padding3@{padding3}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{padding3}{padding3}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} taskstate\+::padding3}
+
+
+
+mmu.\+h 파일의 117 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_a9905f5108c60aab4b6e5c2a1ce1ce356}\label{structtaskstate_a9905f5108c60aab4b6e5c2a1ce1ce356}} 
+\index{taskstate@{taskstate}!padding4@{padding4}}
+\index{padding4@{padding4}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{padding4}{padding4}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} taskstate\+::padding4}
+
+
+
+mmu.\+h 파일의 130 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_ad462c3b654306417c32c78f42b5a9e42}\label{structtaskstate_ad462c3b654306417c32c78f42b5a9e42}} 
+\index{taskstate@{taskstate}!padding5@{padding5}}
+\index{padding5@{padding5}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{padding5}{padding5}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} taskstate\+::padding5}
+
+
+
+mmu.\+h 파일의 132 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_a3885094380c4d991fa86d31fdf1b9683}\label{structtaskstate_a3885094380c4d991fa86d31fdf1b9683}} 
+\index{taskstate@{taskstate}!padding6@{padding6}}
+\index{padding6@{padding6}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{padding6}{padding6}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} taskstate\+::padding6}
+
+
+
+mmu.\+h 파일의 134 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_a4c634b4b3cd489ca37979561394bf518}\label{structtaskstate_a4c634b4b3cd489ca37979561394bf518}} 
+\index{taskstate@{taskstate}!padding7@{padding7}}
+\index{padding7@{padding7}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{padding7}{padding7}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} taskstate\+::padding7}
+
+
+
+mmu.\+h 파일의 136 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_ab3077e8c9fe9b50ff7caedeeac075472}\label{structtaskstate_ab3077e8c9fe9b50ff7caedeeac075472}} 
+\index{taskstate@{taskstate}!padding8@{padding8}}
+\index{padding8@{padding8}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{padding8}{padding8}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} taskstate\+::padding8}
+
+
+
+mmu.\+h 파일의 138 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_a58a780ba0664e4ff8741adbdaccbcdd5}\label{structtaskstate_a58a780ba0664e4ff8741adbdaccbcdd5}} 
+\index{taskstate@{taskstate}!padding9@{padding9}}
+\index{padding9@{padding9}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{padding9}{padding9}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} taskstate\+::padding9}
+
+
+
+mmu.\+h 파일의 140 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_afdd8f3985ac7ae69fc67c19d65653f12}\label{structtaskstate_afdd8f3985ac7ae69fc67c19d65653f12}} 
+\index{taskstate@{taskstate}!ss@{ss}}
+\index{ss@{ss}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{ss}{ss}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} taskstate\+::ss}
+
+
+
+mmu.\+h 파일의 133 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_a574e97ea3fd87f314da88afec3c6f574}\label{structtaskstate_a574e97ea3fd87f314da88afec3c6f574}} 
+\index{taskstate@{taskstate}!ss0@{ss0}}
+\index{ss0@{ss0}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{ss0}{ss0}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} taskstate\+::ss0}
+
+
+
+mmu.\+h 파일의 110 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_ac70c36414956cfee04c733a5b530d8ef}\label{structtaskstate_ac70c36414956cfee04c733a5b530d8ef}} 
+\index{taskstate@{taskstate}!ss1@{ss1}}
+\index{ss1@{ss1}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{ss1}{ss1}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} taskstate\+::ss1}
+
+
+
+mmu.\+h 파일의 113 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_a573d8f57ef11630e782d8b7c924f28ce}\label{structtaskstate_a573d8f57ef11630e782d8b7c924f28ce}} 
+\index{taskstate@{taskstate}!ss2@{ss2}}
+\index{ss2@{ss2}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{ss2}{ss2}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} taskstate\+::ss2}
+
+
+
+mmu.\+h 파일의 116 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtaskstate_ad9d64e6139f851a3f8d2275f2748fae5}\label{structtaskstate_ad9d64e6139f851a3f8d2275f2748fae5}} 
+\index{taskstate@{taskstate}!t@{t}}
+\index{t@{t}!taskstate@{taskstate}}
+\doxysubsubsection{\texorpdfstring{t}{t}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} taskstate\+::t}
+
+
+
+mmu.\+h 파일의 143 번째 라인에서 정의되었습니다.
+
+
+
+이 구조체에 대한 문서화 페이지는 다음의 파일로부터 생성되었습니다.\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{mmu_8h}{mmu.\+h}}\end{DoxyCompactItemize}

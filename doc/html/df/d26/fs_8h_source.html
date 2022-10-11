@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: fs.h 소스 파일</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">My Project
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 다음에 의해 생성됨 :  Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'검색');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','검색');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">fs.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="../../df/d26/fs_8h.html">이 파일의 문서화 페이지로 가기</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// On-disk file system format.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Both the kernel and user programs use this header file.</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="../../df/d26/fs_8h.html#a22c8ea96d09283ed6496347806cc72a0">    5</a></span>&#160;<span class="preprocessor">#define ROOTINO 1  // root i-number</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="../../df/d26/fs_8h.html#a403cf3149c084cea115b85c90721039a">    6</a></span>&#160;<span class="preprocessor">#define BSIZE 512  // block size</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// Disk layout:</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// [ boot block | super block | log | inode blocks |</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//                                          free bit map | data blocks]</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// mkfs computes the super block and builds an initial file system. The</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// super block describes the disk layout:</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="../../df/d3d/structsuperblock.html">   14</a></span>&#160;<span class="keyword">struct </span><a class="code" href="../../df/d3d/structsuperblock.html">superblock</a> {</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="../../df/d3d/structsuperblock.html#a7c6e4d6da139ecee74eb7816d5d44fa6">   15</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../df/d3d/structsuperblock.html#a7c6e4d6da139ecee74eb7816d5d44fa6">size</a>;         <span class="comment">// Size of file system image (blocks)</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="../../df/d3d/structsuperblock.html#a2a27a7cfb54689f0e1dcd1788d049218">   16</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../df/d3d/structsuperblock.html#a2a27a7cfb54689f0e1dcd1788d049218">nblocks</a>;      <span class="comment">// Number of data blocks</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="../../df/d3d/structsuperblock.html#a355d2a1ebdc51f80820c23e69363cf42">   17</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../df/d3d/structsuperblock.html#a355d2a1ebdc51f80820c23e69363cf42">ninodes</a>;      <span class="comment">// Number of inodes.</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="../../df/d3d/structsuperblock.html#aea92ae872785fd4fb39b903d9157aac5">   18</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../df/d3d/structsuperblock.html#aea92ae872785fd4fb39b903d9157aac5">nlog</a>;         <span class="comment">// Number of log blocks</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="../../df/d3d/structsuperblock.html#a460268b28aced19797e8d7b84aa60ebf">   19</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../df/d3d/structsuperblock.html#a460268b28aced19797e8d7b84aa60ebf">logstart</a>;     <span class="comment">// Block number of first log block</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="../../df/d3d/structsuperblock.html#adde361528f3905445974301b424611c1">   20</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../df/d3d/structsuperblock.html#adde361528f3905445974301b424611c1">inodestart</a>;   <span class="comment">// Block number of first inode block</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="../../df/d3d/structsuperblock.html#a3c815dda5be6bda609389e76434171cc">   21</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../df/d3d/structsuperblock.html#a3c815dda5be6bda609389e76434171cc">bmapstart</a>;    <span class="comment">// Block number of first free map block</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;};</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="../../df/d26/fs_8h.html#acd38e9532d4b3623f844b93c012a8e06">   24</a></span>&#160;<span class="preprocessor">#define NDIRECT 12</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="../../df/d26/fs_8h.html#a6d24f098ea2928d61ff80b123d761715">   25</a></span>&#160;<span class="preprocessor">#define NINDIRECT (BSIZE / sizeof(uint))</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="../../df/d26/fs_8h.html#a714b2485a6dd312e37226e1f833728a9">   26</a></span>&#160;<span class="preprocessor">#define MAXFILE (NDIRECT + NINDIRECT)</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">// On-disk inode structure</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="../../db/dfa/structdinode.html">   29</a></span>&#160;<span class="keyword">struct </span><a class="code" href="../../db/dfa/structdinode.html">dinode</a> {</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="../../db/dfa/structdinode.html#abf6b2a8476a803284f1c927fb3b82259">   30</a></span>&#160;  <span class="keywordtype">short</span> <a class="code" href="../../db/dfa/structdinode.html#abf6b2a8476a803284f1c927fb3b82259">type</a>;           <span class="comment">// File type</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="../../db/dfa/structdinode.html#aca8272002020f48219df175c986db257">   31</a></span>&#160;  <span class="keywordtype">short</span> <a class="code" href="../../db/dfa/structdinode.html#aca8272002020f48219df175c986db257">major</a>;          <span class="comment">// Major device number (T_DEV only)</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="../../db/dfa/structdinode.html#ae97965f85e7353313f85035e8fc63495">   32</a></span>&#160;  <span class="keywordtype">short</span> <a class="code" href="../../db/dfa/structdinode.html#ae97965f85e7353313f85035e8fc63495">minor</a>;          <span class="comment">// Minor device number (T_DEV only)</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="../../db/dfa/structdinode.html#a105562253b461c11413c9a229ef15358">   33</a></span>&#160;  <span class="keywordtype">short</span> <a class="code" href="../../db/dfa/structdinode.html#a105562253b461c11413c9a229ef15358">nlink</a>;          <span class="comment">// Number of links to inode in file system</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="../../db/dfa/structdinode.html#a990ad8ddf5f8c051fbbe95cf550d2164">   34</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../db/dfa/structdinode.html#a990ad8ddf5f8c051fbbe95cf550d2164">size</a>;            <span class="comment">// Size of file (bytes)</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="../../db/dfa/structdinode.html#a705729b3a39c10c0ba6927fc5e4e0563">   35</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../db/dfa/structdinode.html#a705729b3a39c10c0ba6927fc5e4e0563">addrs</a>[<a class="code" href="../../df/d26/fs_8h.html#acd38e9532d4b3623f844b93c012a8e06">NDIRECT</a>+1];   <span class="comment">// Data block addresses</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;};</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">// Inodes per block.</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="../../df/d26/fs_8h.html#aadb6c866a6d0a173f5f0a6ed9c7e0228">   39</a></span>&#160;<span class="preprocessor">#define IPB           (BSIZE / sizeof(struct dinode))</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">// Block containing inode i</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="../../df/d26/fs_8h.html#ac9a5b990015f0f86e5d4c6b21d38ffa0">   42</a></span>&#160;<span class="preprocessor">#define IBLOCK(i, sb)     ((i) / IPB + sb.inodestart)</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">// Bitmap bits per block</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="../../df/d26/fs_8h.html#a3c88fd21abb83ef11461ce750c466828">   45</a></span>&#160;<span class="preprocessor">#define BPB           (BSIZE*8)</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">// Block of free map containing bit for block b</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="../../df/d26/fs_8h.html#a080eb729016328ec6da85bfe125fc04c">   48</a></span>&#160;<span class="preprocessor">#define BBLOCK(b, sb) (b/BPB + sb.bmapstart)</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">// Directory is a file containing a sequence of dirent structures.</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="../../df/d26/fs_8h.html#a48246fb9e5cb7f6a71ebc9ebc2f06562">   51</a></span>&#160;<span class="preprocessor">#define DIRSIZ 14</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="../../d5/de2/structdirent.html">   53</a></span>&#160;<span class="keyword">struct </span><a class="code" href="../../d5/de2/structdirent.html">dirent</a> {</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="../../d5/de2/structdirent.html#a68698c303a46d2a34232a2226629ac79">   54</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#ab95f123a6c9bcfee6a343170ef8c5f69">ushort</a> <a class="code" href="../../d5/de2/structdirent.html#a68698c303a46d2a34232a2226629ac79">inum</a>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="../../d5/de2/structdirent.html#a4e08a84dbac9b9f6a3e006151855d14d">   55</a></span>&#160;  <span class="keywordtype">char</span> <a class="code" href="../../d5/de2/structdirent.html#a4e08a84dbac9b9f6a3e006151855d14d">name</a>[<a class="code" href="../../df/d26/fs_8h.html#a48246fb9e5cb7f6a71ebc9ebc2f06562">DIRSIZ</a>];</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;};</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="astructdinode_html_ae97965f85e7353313f85035e8fc63495"><div class="ttname"><a href="../../db/dfa/structdinode.html#ae97965f85e7353313f85035e8fc63495">dinode::minor</a></div><div class="ttdeci">short minor</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00032">fs.h:32</a></div></div>
+<div class="ttc" id="astructdinode_html_a105562253b461c11413c9a229ef15358"><div class="ttname"><a href="../../db/dfa/structdinode.html#a105562253b461c11413c9a229ef15358">dinode::nlink</a></div><div class="ttdeci">short nlink</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00033">fs.h:33</a></div></div>
+<div class="ttc" id="astructsuperblock_html_aea92ae872785fd4fb39b903d9157aac5"><div class="ttname"><a href="../../df/d3d/structsuperblock.html#aea92ae872785fd4fb39b903d9157aac5">superblock::nlog</a></div><div class="ttdeci">uint nlog</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00018">fs.h:18</a></div></div>
+<div class="ttc" id="astructdinode_html_a705729b3a39c10c0ba6927fc5e4e0563"><div class="ttname"><a href="../../db/dfa/structdinode.html#a705729b3a39c10c0ba6927fc5e4e0563">dinode::addrs</a></div><div class="ttdeci">uint addrs[NDIRECT+1]</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00035">fs.h:35</a></div></div>
+<div class="ttc" id="astructsuperblock_html"><div class="ttname"><a href="../../df/d3d/structsuperblock.html">superblock</a></div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00014">fs.h:14</a></div></div>
+<div class="ttc" id="afs_8h_html_a48246fb9e5cb7f6a71ebc9ebc2f06562"><div class="ttname"><a href="../../df/d26/fs_8h.html#a48246fb9e5cb7f6a71ebc9ebc2f06562">DIRSIZ</a></div><div class="ttdeci">#define DIRSIZ</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00051">fs.h:51</a></div></div>
+<div class="ttc" id="astructsuperblock_html_adde361528f3905445974301b424611c1"><div class="ttname"><a href="../../df/d3d/structsuperblock.html#adde361528f3905445974301b424611c1">superblock::inodestart</a></div><div class="ttdeci">uint inodestart</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00020">fs.h:20</a></div></div>
+<div class="ttc" id="astructsuperblock_html_a3c815dda5be6bda609389e76434171cc"><div class="ttname"><a href="../../df/d3d/structsuperblock.html#a3c815dda5be6bda609389e76434171cc">superblock::bmapstart</a></div><div class="ttdeci">uint bmapstart</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00021">fs.h:21</a></div></div>
+<div class="ttc" id="astructsuperblock_html_a460268b28aced19797e8d7b84aa60ebf"><div class="ttname"><a href="../../df/d3d/structsuperblock.html#a460268b28aced19797e8d7b84aa60ebf">superblock::logstart</a></div><div class="ttdeci">uint logstart</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00019">fs.h:19</a></div></div>
+<div class="ttc" id="astructdinode_html_aca8272002020f48219df175c986db257"><div class="ttname"><a href="../../db/dfa/structdinode.html#aca8272002020f48219df175c986db257">dinode::major</a></div><div class="ttdeci">short major</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00031">fs.h:31</a></div></div>
+<div class="ttc" id="astructdinode_html"><div class="ttname"><a href="../../db/dfa/structdinode.html">dinode</a></div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00029">fs.h:29</a></div></div>
+<div class="ttc" id="astructdirent_html_a68698c303a46d2a34232a2226629ac79"><div class="ttname"><a href="../../d5/de2/structdirent.html#a68698c303a46d2a34232a2226629ac79">dirent::inum</a></div><div class="ttdeci">ushort inum</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00054">fs.h:54</a></div></div>
+<div class="ttc" id="astructdirent_html_a4e08a84dbac9b9f6a3e006151855d14d"><div class="ttname"><a href="../../d5/de2/structdirent.html#a4e08a84dbac9b9f6a3e006151855d14d">dirent::name</a></div><div class="ttdeci">char name[DIRSIZ]</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00055">fs.h:55</a></div></div>
+<div class="ttc" id="astructsuperblock_html_a7c6e4d6da139ecee74eb7816d5d44fa6"><div class="ttname"><a href="../../df/d3d/structsuperblock.html#a7c6e4d6da139ecee74eb7816d5d44fa6">superblock::size</a></div><div class="ttdeci">uint size</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00015">fs.h:15</a></div></div>
+<div class="ttc" id="atypes_8h_html_a91ad9478d81a7aaf2593e8d9c3d06a14"><div class="ttname"><a href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a></div><div class="ttdeci">unsigned int uint</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d49/types_8h_source.html#l00001">types.h:1</a></div></div>
+<div class="ttc" id="astructsuperblock_html_a2a27a7cfb54689f0e1dcd1788d049218"><div class="ttname"><a href="../../df/d3d/structsuperblock.html#a2a27a7cfb54689f0e1dcd1788d049218">superblock::nblocks</a></div><div class="ttdeci">uint nblocks</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00016">fs.h:16</a></div></div>
+<div class="ttc" id="atypes_8h_html_ab95f123a6c9bcfee6a343170ef8c5f69"><div class="ttname"><a href="../../d9/d49/types_8h.html#ab95f123a6c9bcfee6a343170ef8c5f69">ushort</a></div><div class="ttdeci">unsigned short ushort</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d49/types_8h_source.html#l00002">types.h:2</a></div></div>
+<div class="ttc" id="astructdirent_html"><div class="ttname"><a href="../../d5/de2/structdirent.html">dirent</a></div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00053">fs.h:53</a></div></div>
+<div class="ttc" id="astructdinode_html_a990ad8ddf5f8c051fbbe95cf550d2164"><div class="ttname"><a href="../../db/dfa/structdinode.html#a990ad8ddf5f8c051fbbe95cf550d2164">dinode::size</a></div><div class="ttdeci">uint size</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00034">fs.h:34</a></div></div>
+<div class="ttc" id="astructdinode_html_abf6b2a8476a803284f1c927fb3b82259"><div class="ttname"><a href="../../db/dfa/structdinode.html#abf6b2a8476a803284f1c927fb3b82259">dinode::type</a></div><div class="ttdeci">short type</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00030">fs.h:30</a></div></div>
+<div class="ttc" id="astructsuperblock_html_a355d2a1ebdc51f80820c23e69363cf42"><div class="ttname"><a href="../../df/d3d/structsuperblock.html#a355d2a1ebdc51f80820c23e69363cf42">superblock::ninodes</a></div><div class="ttdeci">uint ninodes</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00017">fs.h:17</a></div></div>
+<div class="ttc" id="afs_8h_html_acd38e9532d4b3623f844b93c012a8e06"><div class="ttname"><a href="../../df/d26/fs_8h.html#acd38e9532d4b3623f844b93c012a8e06">NDIRECT</a></div><div class="ttdeci">#define NDIRECT</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00024">fs.h:24</a></div></div>
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+다음에 의해 생성됨 :  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.17
+</small></address>
+</body>
+</html>

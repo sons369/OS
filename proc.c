@@ -342,26 +342,26 @@ int wait(void)
 //   - eventually that process transfers control
 //       via swtch back to the scheduler.
 
-//ssu_스케줄러 함수화 버전이지만 사용은 안함
-// struct proc *ssu_schedule()
-// {
-//   struct proc *p;
-//   struct proc *ret = NULL;
-//   for (p = ptable.proc; p < &ptable.proc[NPROC]; p++)
-//   {
-//     if (p->state != RUNNABLE)
-//       continue;
-//     if (ret == NULL)
-//       ret = p;
-//     else if ((p->state == RUNNABLE) && (ret->priority > p->priority))
-//       ret = p;
-//   }
-// #ifdef DEBUG
-//   if (ret)
-//     cprintf("PID: %d, NAME: %s, WEIGHT: %d, PRIORITY: %d\n", ret->pid, ret->name, ret->weight, ret->priority);
-// #endif
-//   return ret;
-// }
+// ssu_스케줄러 함수화 버전이지만 사용은 안함
+//  struct proc *ssu_schedule()
+//  {
+//    struct proc *p;
+//    struct proc *ret = NULL;
+//    for (p = ptable.proc; p < &ptable.proc[NPROC]; p++)
+//    {
+//      if (p->state != RUNNABLE)
+//        continue;
+//      if (ret == NULL)
+//        ret = p;
+//      else if ((p->state == RUNNABLE) && (ret->priority > p->priority))
+//        ret = p;
+//    }
+//  #ifdef DEBUG
+//    if (ret)
+//      cprintf("PID: %d, NAME: %s, WEIGHT: %d, PRIORITY: %d\n", ret->pid, ret->name, ret->weight, ret->priority);
+//  #endif
+//    return ret;
+//  }
 void scheduler(void)
 {
   struct proc *p;
@@ -403,7 +403,7 @@ void scheduler(void)
 
       if (p != 0)
       {
-        //DEBUG 매크로 선언시 출력파트
+        // DEBUG 매크로 선언시 출력파트
 #ifdef DEBUG
         if (p)
           cprintf("PID: %d, NAME: %s, WEIGHT: %d, PRIORITY: %d\n", p->pid, p->name, p->weight, p->priority);
@@ -535,10 +535,10 @@ wakeup1(void *chan)
     if (p->state == SLEEPING && p->chan == chan)
     {
       p->state = RUNNABLE;
+      // wake up시 프로세스의 우선순위 작은 값 부여
       p->priority = ptable.low_priority;
     }
   }
-  // wake up시 프로세스의 우선순위 작은 값 부여
 }
 
 // Wake up all processes sleeping on chan.

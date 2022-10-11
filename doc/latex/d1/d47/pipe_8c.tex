@@ -1,0 +1,264 @@
+\hypertarget{pipe_8c}{}\doxysection{pipe.\+c 파일 참조}
+\label{pipe_8c}\index{pipe.c@{pipe.c}}
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}defs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}param.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mmu.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}proc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}fs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}spinlock.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sleeplock.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}file.\+h\char`\"{}}\newline
+pipe.\+c에 대한 include 의존 그래프
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d4/d01/pipe_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{데이터 구조}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structpipe}{pipe}}
+\end{DoxyCompactItemize}
+\doxysubsection*{매크로}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{pipe_8c_ad3dc9214a710d7a6c516cbaa2a12a1de}{P\+I\+P\+E\+S\+I\+ZE}}~512
+\end{DoxyCompactItemize}
+\doxysubsection*{함수}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{pipe_8c_a9d6f0c526148e6002b6776619c7563e6}{pipealloc}} (struct \mbox{\hyperlink{structfile}{file}} $\ast$$\ast$f0, struct \mbox{\hyperlink{structfile}{file}} $\ast$$\ast$f1)
+\item 
+void \mbox{\hyperlink{pipe_8c_a48642f54734698f6f881ee07723292cb}{pipeclose}} (struct \mbox{\hyperlink{structpipe}{pipe}} $\ast$p, int writable)
+\item 
+int \mbox{\hyperlink{pipe_8c_acfca0fab7d2c0c0dcc56359c8febe14a}{pipewrite}} (struct \mbox{\hyperlink{structpipe}{pipe}} $\ast$p, char $\ast$addr, int n)
+\item 
+int \mbox{\hyperlink{pipe_8c_ad4cce6144039b615d139f8660c60293a}{piperead}} (struct \mbox{\hyperlink{structpipe}{pipe}} $\ast$p, char $\ast$addr, int n)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{매크로 문서화}
+\mbox{\Hypertarget{pipe_8c_ad3dc9214a710d7a6c516cbaa2a12a1de}\label{pipe_8c_ad3dc9214a710d7a6c516cbaa2a12a1de}} 
+\index{pipe.c@{pipe.c}!PIPESIZE@{PIPESIZE}}
+\index{PIPESIZE@{PIPESIZE}!pipe.c@{pipe.c}}
+\doxysubsubsection{\texorpdfstring{PIPESIZE}{PIPESIZE}}
+{\footnotesize\ttfamily \#define P\+I\+P\+E\+S\+I\+ZE~512}
+
+
+
+pipe.\+c 파일의 11 번째 라인에서 정의되었습니다.
+
+
+
+\doxysubsection{함수 문서화}
+\mbox{\Hypertarget{pipe_8c_a9d6f0c526148e6002b6776619c7563e6}\label{pipe_8c_a9d6f0c526148e6002b6776619c7563e6}} 
+\index{pipe.c@{pipe.c}!pipealloc@{pipealloc}}
+\index{pipealloc@{pipealloc}!pipe.c@{pipe.c}}
+\doxysubsubsection{\texorpdfstring{pipealloc()}{pipealloc()}}
+{\footnotesize\ttfamily int pipealloc (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structfile}{file}} $\ast$$\ast$}]{f0,  }\item[{struct \mbox{\hyperlink{structfile}{file}} $\ast$$\ast$}]{f1 }\end{DoxyParamCaption})}
+
+
+
+pipe.\+c 파일의 23 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{24 \{}
+\DoxyCodeLine{25   \textcolor{keyword}{struct }\mbox{\hyperlink{structpipe}{pipe}} *p;}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27   p = 0;}
+\DoxyCodeLine{28   *f0 = *f1 = 0;}
+\DoxyCodeLine{29   \textcolor{keywordflow}{if}((*f0 = \mbox{\hyperlink{defs_8h_a69d3d2dd94efa1f1ff8d0143f4d9b786}{filealloc}}()) == 0 || (*f1 = \mbox{\hyperlink{defs_8h_a69d3d2dd94efa1f1ff8d0143f4d9b786}{filealloc}}()) == 0)}
+\DoxyCodeLine{30     \textcolor{keywordflow}{goto} bad;}
+\DoxyCodeLine{31   \textcolor{keywordflow}{if}((p = (\textcolor{keyword}{struct} \mbox{\hyperlink{structpipe}{pipe}}*)\mbox{\hyperlink{defs_8h_a3af104ba40b66dcec8363ac5a70907ed}{kalloc}}()) == 0)}
+\DoxyCodeLine{32     \textcolor{keywordflow}{goto} bad;}
+\DoxyCodeLine{33   p-\/>\mbox{\hyperlink{structpipe_a7bdc57b39ef97dda61e468ad9e8dbfba}{readopen}} = 1;}
+\DoxyCodeLine{34   p-\/>\mbox{\hyperlink{structpipe_a9538da698ddd63615c991a318094663b}{writeopen}} = 1;}
+\DoxyCodeLine{35   p-\/>\mbox{\hyperlink{structpipe_a419b6fc2780013358de51c91371dac66}{nwrite}} = 0;}
+\DoxyCodeLine{36   p-\/>\mbox{\hyperlink{structpipe_ad71eb56c445f9178dac07ae47f352fd1}{nread}} = 0;}
+\DoxyCodeLine{37   \mbox{\hyperlink{defs_8h_ab56d728e6966819a0260c358d3ac3419}{initlock}}(\&p-\/>\mbox{\hyperlink{structpipe_a0ce399a2ba316d11cb8e678069bfd5b4}{lock}}, \textcolor{stringliteral}{"pipe"});}
+\DoxyCodeLine{38   (*f0)-\/>type = FD\_PIPE;}
+\DoxyCodeLine{39   (*f0)-\/>readable = 1;}
+\DoxyCodeLine{40   (*f0)-\/>writable = 0;}
+\DoxyCodeLine{41   (*f0)-\/>pipe = p;}
+\DoxyCodeLine{42   (*f1)-\/>type = FD\_PIPE;}
+\DoxyCodeLine{43   (*f1)-\/>readable = 0;}
+\DoxyCodeLine{44   (*f1)-\/>writable = 1;}
+\DoxyCodeLine{45   (*f1)-\/>pipe = p;}
+\DoxyCodeLine{46   \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 \textcolor{comment}{//PAGEBREAK: 20}}
+\DoxyCodeLine{49  bad:}
+\DoxyCodeLine{50   \textcolor{keywordflow}{if}(p)}
+\DoxyCodeLine{51     \mbox{\hyperlink{defs_8h_ae79d6a7d0901b7c081cfded3f916d5bd}{kfree}}((\textcolor{keywordtype}{char}*)p);}
+\DoxyCodeLine{52   \textcolor{keywordflow}{if}(*f0)}
+\DoxyCodeLine{53     \mbox{\hyperlink{defs_8h_ac865ee0b2d70f753d61d1fefef9de0f6}{fileclose}}(*f0);}
+\DoxyCodeLine{54   \textcolor{keywordflow}{if}(*f1)}
+\DoxyCodeLine{55     \mbox{\hyperlink{defs_8h_ac865ee0b2d70f753d61d1fefef9de0f6}{fileclose}}(*f1);}
+\DoxyCodeLine{56   \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{57 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d1/d47/pipe_8c_a9d6f0c526148e6002b6776619c7563e6_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=236pt]{d1/d47/pipe_8c_a9d6f0c526148e6002b6776619c7563e6_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{pipe_8c_a48642f54734698f6f881ee07723292cb}\label{pipe_8c_a48642f54734698f6f881ee07723292cb}} 
+\index{pipe.c@{pipe.c}!pipeclose@{pipeclose}}
+\index{pipeclose@{pipeclose}!pipe.c@{pipe.c}}
+\doxysubsubsection{\texorpdfstring{pipeclose()}{pipeclose()}}
+{\footnotesize\ttfamily void pipeclose (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structpipe}{pipe}} $\ast$}]{p,  }\item[{int}]{writable }\end{DoxyParamCaption})}
+
+
+
+pipe.\+c 파일의 60 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{61 \{}
+\DoxyCodeLine{62   \mbox{\hyperlink{defs_8h_afe4ef8638f1ecb962a6e67fb086ee3b8}{acquire}}(\&p-\/>\mbox{\hyperlink{structpipe_a0ce399a2ba316d11cb8e678069bfd5b4}{lock}});}
+\DoxyCodeLine{63   \textcolor{keywordflow}{if}(writable)\{}
+\DoxyCodeLine{64     p-\/>\mbox{\hyperlink{structpipe_a9538da698ddd63615c991a318094663b}{writeopen}} = 0;}
+\DoxyCodeLine{65     \mbox{\hyperlink{defs_8h_a245b56417239f499389b2e806bd99254}{wakeup}}(\&p-\/>\mbox{\hyperlink{structpipe_ad71eb56c445f9178dac07ae47f352fd1}{nread}});}
+\DoxyCodeLine{66   \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{67     p-\/>\mbox{\hyperlink{structpipe_a7bdc57b39ef97dda61e468ad9e8dbfba}{readopen}} = 0;}
+\DoxyCodeLine{68     \mbox{\hyperlink{defs_8h_a245b56417239f499389b2e806bd99254}{wakeup}}(\&p-\/>\mbox{\hyperlink{structpipe_a419b6fc2780013358de51c91371dac66}{nwrite}});}
+\DoxyCodeLine{69   \}}
+\DoxyCodeLine{70   \textcolor{keywordflow}{if}(p-\/>\mbox{\hyperlink{structpipe_a7bdc57b39ef97dda61e468ad9e8dbfba}{readopen}} == 0 \&\& p-\/>\mbox{\hyperlink{structpipe_a9538da698ddd63615c991a318094663b}{writeopen}} == 0)\{}
+\DoxyCodeLine{71     \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&p-\/>\mbox{\hyperlink{structpipe_a0ce399a2ba316d11cb8e678069bfd5b4}{lock}});}
+\DoxyCodeLine{72     \mbox{\hyperlink{defs_8h_ae79d6a7d0901b7c081cfded3f916d5bd}{kfree}}((\textcolor{keywordtype}{char}*)p);}
+\DoxyCodeLine{73   \} \textcolor{keywordflow}{else}}
+\DoxyCodeLine{74     \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&p-\/>\mbox{\hyperlink{structpipe_a0ce399a2ba316d11cb8e678069bfd5b4}{lock}});}
+\DoxyCodeLine{75 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d1/d47/pipe_8c_a48642f54734698f6f881ee07723292cb_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d1/d47/pipe_8c_a48642f54734698f6f881ee07723292cb_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{pipe_8c_ad4cce6144039b615d139f8660c60293a}\label{pipe_8c_ad4cce6144039b615d139f8660c60293a}} 
+\index{pipe.c@{pipe.c}!piperead@{piperead}}
+\index{piperead@{piperead}!pipe.c@{pipe.c}}
+\doxysubsubsection{\texorpdfstring{piperead()}{piperead()}}
+{\footnotesize\ttfamily int piperead (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structpipe}{pipe}} $\ast$}]{p,  }\item[{char $\ast$}]{addr,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+
+
+pipe.\+c 파일의 101 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{102 \{}
+\DoxyCodeLine{103   \textcolor{keywordtype}{int} i;}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105   \mbox{\hyperlink{defs_8h_afe4ef8638f1ecb962a6e67fb086ee3b8}{acquire}}(\&p-\/>\mbox{\hyperlink{structpipe_a0ce399a2ba316d11cb8e678069bfd5b4}{lock}});}
+\DoxyCodeLine{106   \textcolor{keywordflow}{while}(p-\/>\mbox{\hyperlink{structpipe_ad71eb56c445f9178dac07ae47f352fd1}{nread}} == p-\/>\mbox{\hyperlink{structpipe_a419b6fc2780013358de51c91371dac66}{nwrite}} \&\& p-\/>\mbox{\hyperlink{structpipe_a9538da698ddd63615c991a318094663b}{writeopen}})\{  \textcolor{comment}{//DOC: pipe-\/empty}}
+\DoxyCodeLine{107     \textcolor{keywordflow}{if}(\mbox{\hyperlink{defs_8h_addb64b689e3c266aaa67cc0126bba441}{myproc}}()-\/>killed)\{}
+\DoxyCodeLine{108       \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&p-\/>\mbox{\hyperlink{structpipe_a0ce399a2ba316d11cb8e678069bfd5b4}{lock}});}
+\DoxyCodeLine{109       \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{110     \}}
+\DoxyCodeLine{111     \mbox{\hyperlink{defs_8h_aca4a88f06b3ebbcc04330f7ae06c8507}{sleep}}(\&p-\/>\mbox{\hyperlink{structpipe_ad71eb56c445f9178dac07ae47f352fd1}{nread}}, \&p-\/>\mbox{\hyperlink{structpipe_a0ce399a2ba316d11cb8e678069bfd5b4}{lock}}); \textcolor{comment}{//DOC: piperead-\/sleep}}
+\DoxyCodeLine{112   \}}
+\DoxyCodeLine{113   \textcolor{keywordflow}{for}(i = 0; i < n; i++)\{  \textcolor{comment}{//DOC: piperead-\/copy}}
+\DoxyCodeLine{114     \textcolor{keywordflow}{if}(p-\/>\mbox{\hyperlink{structpipe_ad71eb56c445f9178dac07ae47f352fd1}{nread}} == p-\/>\mbox{\hyperlink{structpipe_a419b6fc2780013358de51c91371dac66}{nwrite}})}
+\DoxyCodeLine{115       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{116     addr[i] = p-\/>\mbox{\hyperlink{structpipe_ab02ae9fa0b8b092512c28c7c080f0c7b}{data}}[p-\/>\mbox{\hyperlink{structpipe_ad71eb56c445f9178dac07ae47f352fd1}{nread}}++ \% \mbox{\hyperlink{pipe_8c_ad3dc9214a710d7a6c516cbaa2a12a1de}{PIPESIZE}}];}
+\DoxyCodeLine{117   \}}
+\DoxyCodeLine{118   \mbox{\hyperlink{defs_8h_a245b56417239f499389b2e806bd99254}{wakeup}}(\&p-\/>\mbox{\hyperlink{structpipe_a419b6fc2780013358de51c91371dac66}{nwrite}});  \textcolor{comment}{//DOC: piperead-\/wakeup}}
+\DoxyCodeLine{119   \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&p-\/>\mbox{\hyperlink{structpipe_a0ce399a2ba316d11cb8e678069bfd5b4}{lock}});}
+\DoxyCodeLine{120   \textcolor{keywordflow}{return} i;}
+\DoxyCodeLine{121 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d1/d47/pipe_8c_ad4cce6144039b615d139f8660c60293a_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=324pt]{d1/d47/pipe_8c_ad4cce6144039b615d139f8660c60293a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{pipe_8c_acfca0fab7d2c0c0dcc56359c8febe14a}\label{pipe_8c_acfca0fab7d2c0c0dcc56359c8febe14a}} 
+\index{pipe.c@{pipe.c}!pipewrite@{pipewrite}}
+\index{pipewrite@{pipewrite}!pipe.c@{pipe.c}}
+\doxysubsubsection{\texorpdfstring{pipewrite()}{pipewrite()}}
+{\footnotesize\ttfamily int pipewrite (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structpipe}{pipe}} $\ast$}]{p,  }\item[{char $\ast$}]{addr,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+
+
+pipe.\+c 파일의 79 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{80 \{}
+\DoxyCodeLine{81   \textcolor{keywordtype}{int} i;}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83   \mbox{\hyperlink{defs_8h_afe4ef8638f1ecb962a6e67fb086ee3b8}{acquire}}(\&p-\/>\mbox{\hyperlink{structpipe_a0ce399a2ba316d11cb8e678069bfd5b4}{lock}});}
+\DoxyCodeLine{84   \textcolor{keywordflow}{for}(i = 0; i < n; i++)\{}
+\DoxyCodeLine{85     \textcolor{keywordflow}{while}(p-\/>\mbox{\hyperlink{structpipe_a419b6fc2780013358de51c91371dac66}{nwrite}} == p-\/>\mbox{\hyperlink{structpipe_ad71eb56c445f9178dac07ae47f352fd1}{nread}} + \mbox{\hyperlink{pipe_8c_ad3dc9214a710d7a6c516cbaa2a12a1de}{PIPESIZE}})\{  \textcolor{comment}{//DOC: pipewrite-\/full}}
+\DoxyCodeLine{86       \textcolor{keywordflow}{if}(p-\/>\mbox{\hyperlink{structpipe_a7bdc57b39ef97dda61e468ad9e8dbfba}{readopen}} == 0 || \mbox{\hyperlink{defs_8h_addb64b689e3c266aaa67cc0126bba441}{myproc}}()-\/>killed)\{}
+\DoxyCodeLine{87         \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&p-\/>\mbox{\hyperlink{structpipe_a0ce399a2ba316d11cb8e678069bfd5b4}{lock}});}
+\DoxyCodeLine{88         \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{89       \}}
+\DoxyCodeLine{90       \mbox{\hyperlink{defs_8h_a245b56417239f499389b2e806bd99254}{wakeup}}(\&p-\/>\mbox{\hyperlink{structpipe_ad71eb56c445f9178dac07ae47f352fd1}{nread}});}
+\DoxyCodeLine{91       \mbox{\hyperlink{defs_8h_aca4a88f06b3ebbcc04330f7ae06c8507}{sleep}}(\&p-\/>\mbox{\hyperlink{structpipe_a419b6fc2780013358de51c91371dac66}{nwrite}}, \&p-\/>\mbox{\hyperlink{structpipe_a0ce399a2ba316d11cb8e678069bfd5b4}{lock}});  \textcolor{comment}{//DOC: pipewrite-\/sleep}}
+\DoxyCodeLine{92     \}}
+\DoxyCodeLine{93     p-\/>\mbox{\hyperlink{structpipe_ab02ae9fa0b8b092512c28c7c080f0c7b}{data}}[p-\/>\mbox{\hyperlink{structpipe_a419b6fc2780013358de51c91371dac66}{nwrite}}++ \% \mbox{\hyperlink{pipe_8c_ad3dc9214a710d7a6c516cbaa2a12a1de}{PIPESIZE}}] = addr[i];}
+\DoxyCodeLine{94   \}}
+\DoxyCodeLine{95   \mbox{\hyperlink{defs_8h_a245b56417239f499389b2e806bd99254}{wakeup}}(\&p-\/>\mbox{\hyperlink{structpipe_ad71eb56c445f9178dac07ae47f352fd1}{nread}});  \textcolor{comment}{//DOC: pipewrite-\/wakeup1}}
+\DoxyCodeLine{96   \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&p-\/>\mbox{\hyperlink{structpipe_a0ce399a2ba316d11cb8e678069bfd5b4}{lock}});}
+\DoxyCodeLine{97   \textcolor{keywordflow}{return} n;}
+\DoxyCodeLine{98 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d1/d47/pipe_8c_acfca0fab7d2c0c0dcc56359c8febe14a_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=333pt]{d1/d47/pipe_8c_acfca0fab7d2c0c0dcc56359c8febe14a_icgraph}
+\end{center}
+\end{figure}

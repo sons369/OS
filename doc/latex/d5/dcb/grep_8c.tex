@@ -1,0 +1,266 @@
+\hypertarget{grep_8c}{}\doxysection{grep.\+c 파일 참조}
+\label{grep_8c}\index{grep.c@{grep.c}}
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stat.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}user.\+h\char`\"{}}\newline
+grep.\+c에 대한 include 의존 그래프
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=260pt]{d2/d2a/grep_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{함수}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{grep_8c_a21a26bd0e26e51f529e7fcc1f7ffbb0c}{match}} (char $\ast$, char $\ast$)
+\item 
+void \mbox{\hyperlink{grep_8c_aefb6587871b683544f860d4e2b518718}{grep}} (char $\ast$pattern, int fd)
+\item 
+int \mbox{\hyperlink{grep_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$\mbox{\hyperlink{init_8c_abd1a2cf54950f450187ef24c1cdcac0c}{argv}}\mbox{[}$\,$\mbox{]})
+\item 
+int \mbox{\hyperlink{grep_8c_a179fc8565cee7d1e5c9cf742e61f78e4}{matchhere}} (char $\ast$, char $\ast$)
+\item 
+int \mbox{\hyperlink{grep_8c_a1775658a8b4077f2284310c5cdab3ef1}{matchstar}} (int, char $\ast$, char $\ast$)
+\end{DoxyCompactItemize}
+\doxysubsection*{변수}
+\begin{DoxyCompactItemize}
+\item 
+char \mbox{\hyperlink{grep_8c_ac75fce8692fd1d41a8985f6aacc4a175}{buf}} \mbox{[}1024\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{함수 문서화}
+\mbox{\Hypertarget{grep_8c_aefb6587871b683544f860d4e2b518718}\label{grep_8c_aefb6587871b683544f860d4e2b518718}} 
+\index{grep.c@{grep.c}!grep@{grep}}
+\index{grep@{grep}!grep.c@{grep.c}}
+\doxysubsubsection{\texorpdfstring{grep()}{grep()}}
+{\footnotesize\ttfamily void grep (\begin{DoxyParamCaption}\item[{char $\ast$}]{pattern,  }\item[{int}]{fd }\end{DoxyParamCaption})}
+
+
+
+grep.\+c 파일의 11 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{12 \{}
+\DoxyCodeLine{13   \textcolor{keywordtype}{int} n, m;}
+\DoxyCodeLine{14   \textcolor{keywordtype}{char} *p, *q;}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16   m = 0;}
+\DoxyCodeLine{17   \textcolor{keywordflow}{while}((n = \mbox{\hyperlink{user_8h_a2d73522d6354b8a141ecfaa9585a0c77}{read}}(fd, \mbox{\hyperlink{structbuf}{buf}}+m, \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structbuf}{buf}})-\/m-\/1)) > 0)\{}
+\DoxyCodeLine{18     m += n;}
+\DoxyCodeLine{19     \mbox{\hyperlink{structbuf}{buf}}[m] = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{20     p = \mbox{\hyperlink{grep_8c_ac75fce8692fd1d41a8985f6aacc4a175}{buf}};}
+\DoxyCodeLine{21     \textcolor{keywordflow}{while}((q = \mbox{\hyperlink{ulib_8c_aa409596a785c33c8fabee6d6464df3ff}{strchr}}(p, \textcolor{charliteral}{'\(\backslash\)n'})) != 0)\{}
+\DoxyCodeLine{22       *q = 0;}
+\DoxyCodeLine{23       \textcolor{keywordflow}{if}(\mbox{\hyperlink{grep_8c_a21a26bd0e26e51f529e7fcc1f7ffbb0c}{match}}(pattern, p))\{}
+\DoxyCodeLine{24         *q = \textcolor{charliteral}{'\(\backslash\)n'};}
+\DoxyCodeLine{25         \mbox{\hyperlink{user_8h_ae57e95d717eb7386cd8b935a0c136abe}{write}}(1, p, q+1 -\/ p);}
+\DoxyCodeLine{26       \}}
+\DoxyCodeLine{27       p = q+1;}
+\DoxyCodeLine{28     \}}
+\DoxyCodeLine{29     \textcolor{keywordflow}{if}(p == \mbox{\hyperlink{structbuf}{buf}})}
+\DoxyCodeLine{30       m = 0;}
+\DoxyCodeLine{31     \textcolor{keywordflow}{if}(m > 0)\{}
+\DoxyCodeLine{32       m -\/= p -\/ \mbox{\hyperlink{grep_8c_ac75fce8692fd1d41a8985f6aacc4a175}{buf}};}
+\DoxyCodeLine{33       \mbox{\hyperlink{defs_8h_aa9c8577c0e9d233f85892ec2d9bfe212}{memmove}}(\mbox{\hyperlink{structbuf}{buf}}, p, m);}
+\DoxyCodeLine{34     \}}
+\DoxyCodeLine{35   \}}
+\DoxyCodeLine{36 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d5/dcb/grep_8c_aefb6587871b683544f860d4e2b518718_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=195pt]{d5/dcb/grep_8c_aefb6587871b683544f860d4e2b518718_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{grep_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{grep_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{grep.c@{grep.c}!main@{main}}
+\index{main@{main}!grep.c@{grep.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+grep.\+c 파일의 39 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{40 \{}
+\DoxyCodeLine{41   \textcolor{keywordtype}{int} fd, i;}
+\DoxyCodeLine{42   \textcolor{keywordtype}{char} *pattern;}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44   \textcolor{keywordflow}{if}(argc <= 1)\{}
+\DoxyCodeLine{45     \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(2, \textcolor{stringliteral}{"usage: grep pattern [file ...]\(\backslash\)n"});}
+\DoxyCodeLine{46     \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}();}
+\DoxyCodeLine{47   \}}
+\DoxyCodeLine{48   pattern = \mbox{\hyperlink{init_8c_abd1a2cf54950f450187ef24c1cdcac0c}{argv}}[1];}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50   \textcolor{keywordflow}{if}(argc <= 2)\{}
+\DoxyCodeLine{51     \mbox{\hyperlink{grep_8c_aefb6587871b683544f860d4e2b518718}{grep}}(pattern, 0);}
+\DoxyCodeLine{52     \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}();}
+\DoxyCodeLine{53   \}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55   \textcolor{keywordflow}{for}(i = 2; i < argc; i++)\{}
+\DoxyCodeLine{56     \textcolor{keywordflow}{if}((fd = \mbox{\hyperlink{user_8h_a2c4414339f388561554c2deab11a1a07}{open}}(\mbox{\hyperlink{init_8c_abd1a2cf54950f450187ef24c1cdcac0c}{argv}}[i], 0)) < 0)\{}
+\DoxyCodeLine{57       \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(1, \textcolor{stringliteral}{"grep: cannot open \%s\(\backslash\)n"}, \mbox{\hyperlink{init_8c_abd1a2cf54950f450187ef24c1cdcac0c}{argv}}[i]);}
+\DoxyCodeLine{58       \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}();}
+\DoxyCodeLine{59     \}}
+\DoxyCodeLine{60     \mbox{\hyperlink{grep_8c_aefb6587871b683544f860d4e2b518718}{grep}}(pattern, fd);}
+\DoxyCodeLine{61     \mbox{\hyperlink{user_8h_ae152484c890a24e4d9b4980e7b965be0}{close}}(fd);}
+\DoxyCodeLine{62   \}}
+\DoxyCodeLine{63   \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}();}
+\DoxyCodeLine{64 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d5/dcb/grep_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{grep_8c_a21a26bd0e26e51f529e7fcc1f7ffbb0c}\label{grep_8c_a21a26bd0e26e51f529e7fcc1f7ffbb0c}} 
+\index{grep.c@{grep.c}!match@{match}}
+\index{match@{match}!grep.c@{grep.c}}
+\doxysubsubsection{\texorpdfstring{match()}{match()}}
+{\footnotesize\ttfamily int match (\begin{DoxyParamCaption}\item[{char $\ast$}]{re,  }\item[{char $\ast$}]{text }\end{DoxyParamCaption})}
+
+
+
+grep.\+c 파일의 73 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{74 \{}
+\DoxyCodeLine{75   \textcolor{keywordflow}{if}(re[0] == \textcolor{charliteral}{'\string^'})}
+\DoxyCodeLine{76     \textcolor{keywordflow}{return} \mbox{\hyperlink{grep_8c_a179fc8565cee7d1e5c9cf742e61f78e4}{matchhere}}(re+1, text);}
+\DoxyCodeLine{77   \textcolor{keywordflow}{do}\{  \textcolor{comment}{// must look at empty string}}
+\DoxyCodeLine{78     \textcolor{keywordflow}{if}(\mbox{\hyperlink{grep_8c_a179fc8565cee7d1e5c9cf742e61f78e4}{matchhere}}(re, text))}
+\DoxyCodeLine{79       \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{80   \}\textcolor{keywordflow}{while}(*text++ != \textcolor{charliteral}{'\(\backslash\)0'});}
+\DoxyCodeLine{81   \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{82 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=334pt]{d5/dcb/grep_8c_a21a26bd0e26e51f529e7fcc1f7ffbb0c_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{d5/dcb/grep_8c_a21a26bd0e26e51f529e7fcc1f7ffbb0c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{grep_8c_a179fc8565cee7d1e5c9cf742e61f78e4}\label{grep_8c_a179fc8565cee7d1e5c9cf742e61f78e4}} 
+\index{grep.c@{grep.c}!matchhere@{matchhere}}
+\index{matchhere@{matchhere}!grep.c@{grep.c}}
+\doxysubsubsection{\texorpdfstring{matchhere()}{matchhere()}}
+{\footnotesize\ttfamily int matchhere (\begin{DoxyParamCaption}\item[{char $\ast$}]{re,  }\item[{char $\ast$}]{text }\end{DoxyParamCaption})}
+
+
+
+grep.\+c 파일의 85 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{86 \{}
+\DoxyCodeLine{87   \textcolor{keywordflow}{if}(re[0] == \textcolor{charliteral}{'\(\backslash\)0'})}
+\DoxyCodeLine{88     \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{89   \textcolor{keywordflow}{if}(re[1] == \textcolor{charliteral}{'*'})}
+\DoxyCodeLine{90     \textcolor{keywordflow}{return} \mbox{\hyperlink{grep_8c_a1775658a8b4077f2284310c5cdab3ef1}{matchstar}}(re[0], re+2, text);}
+\DoxyCodeLine{91   \textcolor{keywordflow}{if}(re[0] == \textcolor{charliteral}{'\$'} \&\& re[1] == \textcolor{charliteral}{'\(\backslash\)0'})}
+\DoxyCodeLine{92     \textcolor{keywordflow}{return} *text == \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{93   \textcolor{keywordflow}{if}(*text!=\textcolor{charliteral}{'\(\backslash\)0'} \&\& (re[0]==\textcolor{charliteral}{'.'} || re[0]==*text))}
+\DoxyCodeLine{94     \textcolor{keywordflow}{return} \mbox{\hyperlink{grep_8c_a179fc8565cee7d1e5c9cf742e61f78e4}{matchhere}}(re+1, text+1);}
+\DoxyCodeLine{95   \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{96 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=251pt]{d5/dcb/grep_8c_a179fc8565cee7d1e5c9cf742e61f78e4_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d5/dcb/grep_8c_a179fc8565cee7d1e5c9cf742e61f78e4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{grep_8c_a1775658a8b4077f2284310c5cdab3ef1}\label{grep_8c_a1775658a8b4077f2284310c5cdab3ef1}} 
+\index{grep.c@{grep.c}!matchstar@{matchstar}}
+\index{matchstar@{matchstar}!grep.c@{grep.c}}
+\doxysubsubsection{\texorpdfstring{matchstar()}{matchstar()}}
+{\footnotesize\ttfamily int matchstar (\begin{DoxyParamCaption}\item[{int}]{c,  }\item[{char $\ast$}]{re,  }\item[{char $\ast$}]{text }\end{DoxyParamCaption})}
+
+
+
+grep.\+c 파일의 99 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{100 \{}
+\DoxyCodeLine{101   \textcolor{keywordflow}{do}\{  \textcolor{comment}{// a * matches zero or more instances}}
+\DoxyCodeLine{102     \textcolor{keywordflow}{if}(\mbox{\hyperlink{grep_8c_a179fc8565cee7d1e5c9cf742e61f78e4}{matchhere}}(re, text))}
+\DoxyCodeLine{103       \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{104   \}\textcolor{keywordflow}{while}(*text!=\textcolor{charliteral}{'\(\backslash\)0'} \&\& (*text++==c || c==\textcolor{charliteral}{'.'}));}
+\DoxyCodeLine{105   \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{106 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=251pt]{d5/dcb/grep_8c_a1775658a8b4077f2284310c5cdab3ef1_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d5/dcb/grep_8c_a1775658a8b4077f2284310c5cdab3ef1_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{변수 문서화}
+\mbox{\Hypertarget{grep_8c_ac75fce8692fd1d41a8985f6aacc4a175}\label{grep_8c_ac75fce8692fd1d41a8985f6aacc4a175}} 
+\index{grep.c@{grep.c}!buf@{buf}}
+\index{buf@{buf}!grep.c@{grep.c}}
+\doxysubsubsection{\texorpdfstring{buf}{buf}}
+{\footnotesize\ttfamily char \mbox{\hyperlink{structbuf}{buf}}\mbox{[}1024\mbox{]}}
+
+
+
+grep.\+c 파일의 7 번째 라인에서 정의되었습니다.
+
