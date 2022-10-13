@@ -3,7 +3,7 @@
 #include "user.h"
 
 #define PNUM 5                  // fork 프로세스 개수
-#define PRINT_CYCLE 100000000   // 각 프로세스 정보 출력 주기(틱)
+#define PRINT_CYCLE 1000000     // 각 프로세스 정보 출력 주기(틱)
 #define TOTAL_COUNTER 500000000 // 프로세스가 종료할 떄 카운터 값(틱)
 
 void sdebug_func(void)
@@ -25,7 +25,7 @@ void sdebug_func(void)
             int get_weight = weightset(n + 1);
             long start = uptime();
 
-                        for (cnt = 0; cnt < TOTAL_COUNTER; cnt++)
+            for (cnt = 0; cnt < TOTAL_COUNTER; cnt++)
             {
                 // tmp = uptime();
 
