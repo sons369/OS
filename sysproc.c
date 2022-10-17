@@ -84,21 +84,6 @@ int sys_uptime(void)
   return xticks;
 }
 
-int sys_memsize(void)
-{
-  uint size;
-  size = myproc()->sz;
-  return size;
-}
-
-int sys_trace(void)
-{
-  // function
-  if (argint(0, &myproc()->tracemask) < 0)
-    return -1;
-  return 0;
-}
-
 int sys_weightset(void)
 {
   int weight;

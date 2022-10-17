@@ -125,8 +125,6 @@ static int (*syscalls[])(void) = {
     [SYS_link] sys_link,
     [SYS_mkdir] sys_mkdir,
     [SYS_close] sys_close,
-    [SYS_memsize] sys_memsize,
-    [SYS_trace] sys_trace,
     [SYS_weightset] sys_weightset,
 };
 
@@ -152,8 +150,6 @@ char *systemcallname[] = {
     [SYS_link] "link",
     [SYS_mkdir] "mkdir",
     [SYS_close] "close",
-    [SYS_memsize] "memsize",
-    [SYS_trace] "trace",
     [SYS_weightset] "weightset",
 };
 
@@ -172,11 +168,5 @@ void syscall(void)
     cprintf("%d %s: unknown sys call %d\n",
             curproc->pid, curproc->name, num);
     curproc->tf->eax = -1;
-  }
-
-  if (curproc->tracemask && curproc->tracemask & (1 << num))
-  {
-    // cprintf("%d\n", curproc->tracemask);
-    cprintf("syscall traced: pid = %d, syscall = %s, %d returned\n", curproc->pid, systemcallname[num], curproc->tf->eax);
   }
 }

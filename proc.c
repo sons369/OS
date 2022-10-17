@@ -16,7 +16,7 @@ struct
 {
   struct spinlock lock;
   struct proc proc[NPROC];
-  long long low_priority; // lowest priority
+  long low_priority; // lowest priority
 } ptable;
 
 static struct proc *initproc;
@@ -96,8 +96,10 @@ allocproc(void)
 //그리고 우선순위도 가장 낮은 값으로 넣어줌
 found:
   p->state = EMBRYO;
+  //새로운 프로세스 생성시 가중치 부여
   p->weight = weight++;
   p->pid = nextpid++;
+  //새로운 프로세스 생성시 최소우선순위 부여
   p->priority = ptable.low_priority;
   release(&ptable.lock);
 
@@ -122,8 +124,7 @@ found:
   p->context = (struct context *)sp;
   memset(p->context, 0, sizeof *p->context);
   p->context->eip = (uint)forkret;
-  p->tracemask = 0;
-  //새로운 프로세스 생성시 최소우선순위 부여
+  // p->tracemask = 0;
 
   return p;
 }
@@ -214,7 +215,6 @@ int fork(void)
   np->sz = curproc->sz;
   np->parent = curproc;
   *np->tf = *curproc->tf;
-  np->tracemask = curproc->tracemask;
 
   // Clear %eax so that fork returns 0 in the child.
   np->tf->eax = 0;
