@@ -476,8 +476,11 @@ itrunc(struct inode *ip)
   /*길이만큼 읽어서 해당 길이만큼 데이터 블럭들을 해제 시켜줘야함*/
   if (ip->type == T_CS)
   {
-    for (i = 0; i < NDIRECT; i++)
+    i = 0;
+    while (i < NDIRECT)
     {
+      if (i > NDIRECT)
+        break;
       /*addr[i]가 매핑 되었을 경우, 해당 데이터의 길이를 읽고 그 길이만큼 데이터 블록 해제를 시켜준다.*/
       if (ip->addrs[i])
       {
@@ -488,6 +491,7 @@ itrunc(struct inode *ip)
         }
         ip->addrs[i] = 0;
       }
+      i++;
     }
     return;
   }
