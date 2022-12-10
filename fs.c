@@ -72,11 +72,19 @@ balloc(uint dev)
         log_write(bp);
         brelse(bp);
         bzero(dev, b + bi);
+        // cprintf("block: %d\n", b + bi);
         return b + bi;
       }
     }
+    // 할당 할 수 있는 데이터 블록이 없을 경우 에러 출력
+    if (b + bi > 999)
+    {
+      cprintf("할당할 수 있는 블럭의 크기를 넘어섰습니다.");
+      return 0;
+    }
     brelse(bp);
   }
+
   panic("balloc: out of blocks");
 }
 
@@ -390,7 +398,7 @@ bmap(struct inode *ip, uint bn)
   {
     i = 0;
     cur = 0;
-    // cprintf("block: %d\n", bn);
+    // cprintf("bn: %d\n", bn);
     /*bmap은 새로운 데이터를 매핑해주는 역할 뿐만 아니라*/
     /*기존 데이터 접근할때도 있는지 체크해준 후 매핑을 해준다.*/
     while (ip->addrs[i])
@@ -420,14 +428,20 @@ bmap(struct inode *ip, uint bn)
     }
     /*만약 기존 bn을 찾지 못했을 때? 없을때 새로운 block number을 매핑*/
     // 새로운 블럭 넘버(빈공간) 할당받기
-    new = balloc(ip->dev);
-    len = (ip->addrs[i - 1] & 255);
-    // 새로운 블럭이 연속된 데이터 블럭일 경우
-    if ((new == ((ip->addrs[i - 1] >> 8) + len) && (ip->addrs[i - 1] & 255) < 255))
-      ip->addrs[i - 1] += 1; // 길이 추가
+    if ((new = balloc(ip->dev)) != 0)
+    {
+      len = (ip->addrs[i - 1] & 255);
+      // 새로운 블럭이 연속된 데이터 블럭일 경우
+      if ((new == ((ip->addrs[i - 1] >> 8) + len) && (ip->addrs[i - 1] & 255) < 255))
+        ip->addrs[i - 1] += 1; // 길이 추가
+      else
+        ip->addrs[i] = (new << 8 | 1);
+      return new;
+    }
     else
-      ip->addrs[i] = (new << 8 | 1);
-    return new;
+    {
+      panic("데이터를 할당하지 못했습니다.");
+    }
   }
   /*일반 파일 bmap*/
   else
@@ -455,8 +469,8 @@ bmap(struct inode *ip, uint bn)
       brelse(bp);
       return addr;
     }
-    panic("bmap: out of range");
   }
+  panic("bmap: out of range");
 }
 
 // Truncate inode (discard contents).
