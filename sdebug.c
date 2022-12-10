@@ -74,7 +74,14 @@ void sdebug_func(void)
 
 int main(void)
 {
-    sdebug_func();
+    // sdebug_func();
+    int i, cnt = 0;
 
+    for (i = 0; i != 3; i++)
+    {
+        fork();
+        cnt++;
+    }
+    printf(1, "%d\n", cnt);
     exit();
 }

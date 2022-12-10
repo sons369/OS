@@ -83,16 +83,3 @@ int sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
-
-int sys_weightset(void)
-{
-  int weight;
-  if (argint(0, &weight) < 0)
-  {
-    cprintf("wrong weight value\n");
-    return -1;
-  }
-
-  do_weightset(weight);
-  return weight;
-}

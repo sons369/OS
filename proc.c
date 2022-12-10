@@ -7,16 +7,10 @@
 #include "proc.h"
 #include "spinlock.h"
 
-#define TIME_SLICE 10000000
-#define NULL ((void *)0)
-
-int weight = 1;
-
 struct
 {
   struct spinlock lock;
   struct proc proc[NPROC];
-  long low_priority; // lowest priority
 } ptable;
 
 static struct proc *initproc;
@@ -92,15 +86,11 @@ allocproc(void)
 
   release(&ptable.lock);
   return 0;
-//프로세스 생성시 가중치++ 값 넣어줌
-//그리고 우선순위도 가장 낮은 값으로 넣어줌
+
 found:
   p->state = EMBRYO;
-  //새로운 프로세스 생성시 가중치 부여
-  p->weight = weight++;
   p->pid = nextpid++;
-  //새로운 프로세스 생성시 최소우선순위 부여
-  p->priority = ptable.low_priority;
+
   release(&ptable.lock);
 
   // Allocate kernel stack.
@@ -124,7 +114,6 @@ found:
   p->context = (struct context *)sp;
   memset(p->context, 0, sizeof *p->context);
   p->context->eip = (uint)forkret;
-  // p->tracemask = 0;
 
   return p;
 }
@@ -135,7 +124,7 @@ void userinit(void)
 {
   struct proc *p;
   extern char _binary_initcode_start[], _binary_initcode_size[];
-  ptable.low_priority = 3; // 처음 실행 시 프로세스 3개라 우선순위 3으로 스타트
+
   p = allocproc();
 
   initproc = p;
@@ -341,32 +330,10 @@ int wait(void)
 //   - swtch to start running that process
 //   - eventually that process transfers control
 //       via swtch back to the scheduler.
-
-// ssu_스케줄러 함수화 버전이지만 사용은 안함
-//  struct proc *ssu_schedule()
-//  {
-//    struct proc *p;
-//    struct proc *ret = NULL;
-//    for (p = ptable.proc; p < &ptable.proc[NPROC]; p++)
-//    {
-//      if (p->state != RUNNABLE)
-//        continue;
-//      if (ret == NULL)
-//        ret = p;
-//      else if ((p->state == RUNNABLE) && (ret->priority > p->priority))
-//        ret = p;
-//    }
-//  #ifdef DEBUG
-//    if (ret)
-//      cprintf("PID: %d, NAME: %s, WEIGHT: %d, PRIORITY: %d\n", ret->pid, ret->name, ret->weight, ret->priority);
-//  #endif
-//    return ret;
-//  }
 void scheduler(void)
 {
   struct proc *p;
   struct cpu *c = mycpu();
-
   c->proc = 0;
 
   for (;;)
@@ -376,53 +343,25 @@ void scheduler(void)
 
     // Loop over process table looking for process to run.
     acquire(&ptable.lock);
-
     for (p = ptable.proc; p < &ptable.proc[NPROC]; p++)
     {
-      struct proc *tmp = NULL;
-      struct proc *p2 = NULL;
       if (p->state != RUNNABLE)
         continue;
-
-      //우선순위 스케쥴
-      tmp = p;
-      // RUNNABLE 상태인 프로세스 중 priority가 가장 작은 프로세스 선택
-      for (p2 = ptable.proc; p2 < &ptable.proc[NPROC]; p2++)
-      {
-        if ((p2->state == RUNNABLE) && (tmp->priority > p2->priority))
-          tmp = p2;
-      }
-      if (tmp != 0)
-      {
-        p = tmp;
-      }
 
       // Switch to chosen process.  It is the process's job
       // to release ptable.lock and then reacquire it
       // before jumping back to us.
+      c->proc = p;
+      switchuvm(p);
+      p->state = RUNNING;
 
-      if (p != 0)
-      {
-        // DEBUG 매크로 선언시 출력파트
-#ifdef DEBUG
-        if (p)
-          cprintf("PID: %d, NAME: %s, WEIGHT: %d, PRIORITY: %d\n", p->pid, p->name, p->weight, p->priority);
-#endif
-        c->proc = p;
-        switchuvm(p);
-        p->state = RUNNING;
+      swtch(&(c->scheduler), p->context);
+      switchkvm();
 
-        swtch(&(c->scheduler), p->context);
-        switchkvm();
-        // 새로운 우선순위 지정 및 최소 우선순위 지정
-        ptable.low_priority = p->priority;
-        p->priority = p->priority + (TIME_SLICE / p->weight);
-        // Process is done running for now.
-        // It should have changed its p->state before coming back.
-        c->proc = 0;
-      }
+      // Process is done running for now.
+      // It should have changed its p->state before coming back.
+      c->proc = 0;
     }
-
     release(&ptable.lock);
   }
 }
@@ -531,14 +470,8 @@ wakeup1(void *chan)
   struct proc *p;
 
   for (p = ptable.proc; p < &ptable.proc[NPROC]; p++)
-  {
     if (p->state == SLEEPING && p->chan == chan)
-    {
       p->state = RUNNABLE;
-      // wake up시 프로세스의 우선순위 작은 값 부여
-      p->priority = ptable.low_priority;
-    }
-  }
 }
 
 // Wake up all processes sleeping on chan.
@@ -608,12 +541,4 @@ void procdump(void)
     }
     cprintf("\n");
   }
-}
-
-// 커널레벨의 weightset
-void do_weightset(int weight)
-{
-  acquire(&ptable.lock);
-  myproc()->weight = weight;
-  release(&ptable.lock);
 }

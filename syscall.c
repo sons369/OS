@@ -101,7 +101,6 @@ extern int sys_write(void);
 extern int sys_uptime(void);
 extern int sys_memsize(void);
 extern int sys_trace(void);
-extern int sys_weightset(void);
 
 static int (*syscalls[])(void) = {
     [SYS_fork] sys_fork,
@@ -125,7 +124,6 @@ static int (*syscalls[])(void) = {
     [SYS_link] sys_link,
     [SYS_mkdir] sys_mkdir,
     [SYS_close] sys_close,
-    [SYS_weightset] sys_weightset,
 };
 
 char *systemcallname[] = {
@@ -150,7 +148,6 @@ char *systemcallname[] = {
     [SYS_link] "link",
     [SYS_mkdir] "mkdir",
     [SYS_close] "close",
-    [SYS_weightset] "weightset",
 };
 
 void syscall(void)
