@@ -1,0 +1,1025 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: fs.c 소스 파일</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">My Project
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 다음에 의해 생성됨 :  Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'검색');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','검색');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">fs.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="../../d2/d5a/fs_8c.html">이 파일의 문서화 페이지로 가기</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// File system implementation.  Five layers:</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//   + Blocks: allocator for raw disk blocks.</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//   + Log: crash recovery for multi-step updates.</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//   + Files: inode allocator, reading, writing, metadata.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//   + Directories: inode with special contents (list of other inodes!)</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//   + Names: paths like /usr/rtm/xv6/fs.c for convenient naming.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// This file contains the low-level file system manipulation</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// routines.  The (higher-level) system call implementations</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// are in sysfile.c.</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d9/d49/types_8h.html">types.h</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d5/d64/defs_8h.html">defs.h</a>&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d5/d33/param_8h.html">param.h</a>&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d2/d1b/stat_8h.html">stat.h</a>&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d2/df1/mmu_8h.html">mmu.h</a>&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../df/d03/proc_8h.html">proc.h</a>&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../df/d63/spinlock_8h.html">spinlock.h</a>&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d0/d74/sleeplock_8h.html">sleeplock.h</a>&quot;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../df/d26/fs_8h.html">fs.h</a>&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d6/d6d/buf_8h.html">buf.h</a>&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d2/d4d/file_8h.html">file.h</a>&quot;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#ac6afabdc09a49a433ee19d8a9486056d">   24</a></span>&#160;<span class="preprocessor">#define min(a, b) ((a) &lt; (b) ? (a) : (b))</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="../../d2/d5a/fs_8c.html#a7c42ba96035fb59aef87372552b1a661">itrunc</a>(<span class="keyword">struct</span> <a class="code" href="../../d0/df8/structinode.html">inode</a> *);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">// there should be one superblock per disk device, but we run with</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">// only one device</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#a0248d0bac625de5a1415f2f8c91f3343">   29</a></span>&#160;<span class="keyword">struct </span><a class="code" href="../../df/d3d/structsuperblock.html">superblock</a> <a class="code" href="../../d2/d5a/fs_8c.html#a0248d0bac625de5a1415f2f8c91f3343">sb</a>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">// Read the super block.</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#aff0080b2133027be2e525ca088b40e78">   32</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="../../d2/d5a/fs_8c.html#aff0080b2133027be2e525ca088b40e78">readsb</a>(<span class="keywordtype">int</span> dev, <span class="keyword">struct</span> <a class="code" href="../../df/d3d/structsuperblock.html">superblock</a> *<a class="code" href="../../d2/d5a/fs_8c.html#a0248d0bac625de5a1415f2f8c91f3343">sb</a>)</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d9/dd0/structbuf.html">buf</a> *bp;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  bp = <a class="code" href="../../dc/de6/bio_8c.html#ae000984516278965dde3d125affd086c">bread</a>(<a class="code" href="../../d9/dd0/structbuf.html#ac96082c2b5f22133ac7092ef81487227">dev</a>, 1);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#aa9c8577c0e9d233f85892ec2d9bfe212">memmove</a>(<a class="code" href="../../d2/d5a/fs_8c.html#a0248d0bac625de5a1415f2f8c91f3343">sb</a>, bp-&gt;<a class="code" href="../../d9/dd0/structbuf.html#ab0ec38784ab94ed35e575cf6d33912d2">data</a>, <span class="keyword">sizeof</span>(*<a class="code" href="../../d2/d5a/fs_8c.html#a0248d0bac625de5a1415f2f8c91f3343">sb</a>));</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <a class="code" href="../../dc/de6/bio_8c.html#ab5335aeb503731104314321a78a6d727">brelse</a>(bp);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">// Zero a block.</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#ac93f607f4a954323f4c9ea485ca88538">   43</a></span>&#160;<a class="code" href="../../d2/d5a/fs_8c.html#ac93f607f4a954323f4c9ea485ca88538">bzero</a>(<span class="keywordtype">int</span> <a class="code" href="../../d9/dd0/structbuf.html#ac96082c2b5f22133ac7092ef81487227">dev</a>, <span class="keywordtype">int</span> bno)</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d9/dd0/structbuf.html">buf</a> *bp;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  bp = <a class="code" href="../../dc/de6/bio_8c.html#ae000984516278965dde3d125affd086c">bread</a>(<a class="code" href="../../d9/dd0/structbuf.html#ac96082c2b5f22133ac7092ef81487227">dev</a>, bno);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#a9d55c9f035076ed1a90b6452770d0b62">memset</a>(bp-&gt;<a class="code" href="../../d9/dd0/structbuf.html#ab0ec38784ab94ed35e575cf6d33912d2">data</a>, 0, <a class="code" href="../../df/d26/fs_8h.html#a403cf3149c084cea115b85c90721039a">BSIZE</a>);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#a270d0050dc50965f4f851717841ad33c">log_write</a>(bp);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <a class="code" href="../../dc/de6/bio_8c.html#ab5335aeb503731104314321a78a6d727">brelse</a>(bp);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">// Blocks.</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">// Allocate a zeroed disk block.</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">static</span> <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a></div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#a29272227722d57ff937caaffd03455a9">   57</a></span>&#160;<a class="code" href="../../d2/d5a/fs_8c.html#a29272227722d57ff937caaffd03455a9">balloc</a>(<a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../d9/dd0/structbuf.html#ac96082c2b5f22133ac7092ef81487227">dev</a>)</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;{</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordtype">int</span> b, bi, m;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d9/dd0/structbuf.html">buf</a> *bp;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  bp = 0;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="keywordflow">for</span> (b = 0; b &lt; <a class="code" href="../../d2/d5a/fs_8c.html#a0248d0bac625de5a1415f2f8c91f3343">sb</a>.<a class="code" href="../../df/d3d/structsuperblock.html#a7c6e4d6da139ecee74eb7816d5d44fa6">size</a>; b += <a class="code" href="../../df/d26/fs_8h.html#a3c88fd21abb83ef11461ce750c466828">BPB</a>)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    bp = <a class="code" href="../../dc/de6/bio_8c.html#ae000984516278965dde3d125affd086c">bread</a>(<a class="code" href="../../d9/dd0/structbuf.html#ac96082c2b5f22133ac7092ef81487227">dev</a>, <a class="code" href="../../df/d26/fs_8h.html#a080eb729016328ec6da85bfe125fc04c">BBLOCK</a>(b, <a class="code" href="../../d2/d5a/fs_8c.html#a0248d0bac625de5a1415f2f8c91f3343">sb</a>));</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">for</span> (bi = 0; bi &lt; <a class="code" href="../../df/d26/fs_8h.html#a3c88fd21abb83ef11461ce750c466828">BPB</a> &amp;&amp; b + bi &lt; <a class="code" href="../../d2/d5a/fs_8c.html#a0248d0bac625de5a1415f2f8c91f3343">sb</a>.<a class="code" href="../../df/d3d/structsuperblock.html#a7c6e4d6da139ecee74eb7816d5d44fa6">size</a>; bi++)</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    {</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      m = 1 &lt;&lt; (bi % 8);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      <span class="keywordflow">if</span> ((bp-&gt;<a class="code" href="../../d9/dd0/structbuf.html#ab0ec38784ab94ed35e575cf6d33912d2">data</a>[bi / 8] &amp; m) == 0)</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      {                        <span class="comment">// Is block free?</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        bp-&gt;<a class="code" href="../../d9/dd0/structbuf.html#ab0ec38784ab94ed35e575cf6d33912d2">data</a>[bi / 8] |= m; <span class="comment">// Mark block in use.</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <a class="code" href="../../d5/d64/defs_8h.html#a270d0050dc50965f4f851717841ad33c">log_write</a>(bp);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <a class="code" href="../../dc/de6/bio_8c.html#ab5335aeb503731104314321a78a6d727">brelse</a>(bp);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <a class="code" href="../../d2/d5a/fs_8c.html#ac93f607f4a954323f4c9ea485ca88538">bzero</a>(<a class="code" href="../../d9/dd0/structbuf.html#ac96082c2b5f22133ac7092ef81487227">dev</a>, b + bi);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="comment">// cprintf(&quot;block: %d\n&quot;, b + bi);</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordflow">return</span> b + bi;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      }</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="comment">// 할당 할 수 있는 데이터 블록이 없을 경우 에러 출력</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">if</span> (b + bi &gt; 999)</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      <a class="code" href="../../d0/d56/console_8c.html#a90f0742d846503e4ed1804f1df421ec6">cprintf</a>(<span class="stringliteral">&quot;할당할 수 있는 블럭의 크기를 넘어섰습니다.&quot;</span>);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <a class="code" href="../../dc/de6/bio_8c.html#ab5335aeb503731104314321a78a6d727">brelse</a>(bp);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  }</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <a class="code" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a>(<span class="stringliteral">&quot;balloc: out of blocks&quot;</span>);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;}</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">// Free a disk block.</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#a2800a4b570ae39363cec0613dac92fd7">   93</a></span>&#160;<a class="code" href="../../d2/d5a/fs_8c.html#a2800a4b570ae39363cec0613dac92fd7">bfree</a>(<span class="keywordtype">int</span> <a class="code" href="../../d9/dd0/structbuf.html#ac96082c2b5f22133ac7092ef81487227">dev</a>, <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> b)</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;{</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d9/dd0/structbuf.html">buf</a> *bp;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <span class="keywordtype">int</span> bi, m;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  bp = <a class="code" href="../../dc/de6/bio_8c.html#ae000984516278965dde3d125affd086c">bread</a>(<a class="code" href="../../d9/dd0/structbuf.html#ac96082c2b5f22133ac7092ef81487227">dev</a>, <a class="code" href="../../df/d26/fs_8h.html#a080eb729016328ec6da85bfe125fc04c">BBLOCK</a>(b, <a class="code" href="../../d2/d5a/fs_8c.html#a0248d0bac625de5a1415f2f8c91f3343">sb</a>));</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  bi = b % <a class="code" href="../../df/d26/fs_8h.html#a3c88fd21abb83ef11461ce750c466828">BPB</a>;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  m = 1 &lt;&lt; (bi % 8);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="keywordflow">if</span> ((bp-&gt;<a class="code" href="../../d9/dd0/structbuf.html#ab0ec38784ab94ed35e575cf6d33912d2">data</a>[bi / 8] &amp; m) == 0)</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <a class="code" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a>(<span class="stringliteral">&quot;freeing free block&quot;</span>);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  bp-&gt;<a class="code" href="../../d9/dd0/structbuf.html#ab0ec38784ab94ed35e575cf6d33912d2">data</a>[bi / 8] &amp;= ~m;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#a270d0050dc50965f4f851717841ad33c">log_write</a>(bp);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <a class="code" href="../../dc/de6/bio_8c.html#ab5335aeb503731104314321a78a6d727">brelse</a>(bp);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;}</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">// Inodes.</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">// An inode describes a single unnamed file.</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">// The inode disk structure holds metadata: the file&#39;s type,</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">// its size, the number of links referring to it, and the</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">// list of blocks holding the file&#39;s content.</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">// The inodes are laid out sequentially on disk at</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">// sb.startinode. Each inode has a number, indicating its</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">// position on the disk.</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">// The kernel keeps a cache of in-use inodes in memory</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">// to provide a place for synchronizing access</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">// to inodes used by multiple processes. The cached</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">// inodes include book-keeping information that is</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">// not stored on disk: ip-&gt;ref and ip-&gt;valid.</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">// An inode and its in-memory representation go through a</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">// sequence of states before they can be used by the</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">// rest of the file system code.</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">// * Allocation: an inode is allocated if its type (on disk)</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">//   is non-zero. ialloc() allocates, and iput() frees if</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">//   the reference and link counts have fallen to zero.</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">// * Referencing in cache: an entry in the inode cache</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">//   is free if ip-&gt;ref is zero. Otherwise ip-&gt;ref tracks</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">//   the number of in-memory pointers to the entry (open</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment">//   files and current directories). iget() finds or</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment">//   creates a cache entry and increments its ref; iput()</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment">//   decrements ref.</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment">// * Valid: the information (type, size, &amp;c) in an inode</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment">//   cache entry is only correct when ip-&gt;valid is 1.</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment">//   ilock() reads the inode from</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment">//   the disk and sets ip-&gt;valid, while iput() clears</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment">//   ip-&gt;valid if ip-&gt;ref has fallen to zero.</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment">// * Locked: file system code may only examine and modify</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment">//   the information in an inode and its content if it</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment">//   has first locked the inode.</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment">// Thus a typical sequence is:</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment">//   ip = iget(dev, inum)</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment">//   ilock(ip)</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment">//   ... examine and modify ip-&gt;xxx ...</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment">//   iunlock(ip)</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">//   iput(ip)</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">// ilock() is separate from iget() so that system calls can</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">// get a long-term reference to an inode (as for an open file)</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">// and only lock it for short periods (e.g., in read()).</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">// The separation also helps avoid deadlock and races during</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">// pathname lookup. iget() increments ip-&gt;ref so that the inode</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment">// stays cached and pointers to it remain valid.</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment">// Many internal file system functions expect the caller to</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">// have locked the inodes involved; this lets callers create</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment">// multi-step atomic operations.</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="comment">// The icache.lock spin-lock protects the allocation of icache</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="comment">// entries. Since ip-&gt;ref indicates whether an entry is free,</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">// and ip-&gt;dev and ip-&gt;inum indicate which i-node an entry</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment">// holds, one must hold icache.lock while using any of those fields.</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment">// An ip-&gt;lock sleep-lock protects all ip-&gt; fields other than ref,</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment">// dev, and inum.  One must hold ip-&gt;lock in order to</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment">// read or write that inode&#39;s ip-&gt;valid, ip-&gt;size, ip-&gt;type, &amp;c.</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="keyword">struct</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;{</div>
+<div class="line"><a name="l00179"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#ab28e82cd5dda7d960095706a3ea20572">  179</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d1/d08/structspinlock.html">spinlock</a> <a class="code" href="../../d2/d5a/fs_8c.html#ab28e82cd5dda7d960095706a3ea20572">lock</a>;</div>
+<div class="line"><a name="l00180"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#a6baaf26dd83b71b8d684c5d54a709e31">  180</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d0/df8/structinode.html">inode</a> <a class="code" href="../../d0/df8/structinode.html">inode</a>[<a class="code" href="../../d5/d33/param_8h.html#adabafa10c7951be7c875cd2ee212be85">NINODE</a>];</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;} <a class="code" href="../../d2/d5a/fs_8c.html#a5a78db4f7c856337d906f0606b19bff5">icache</a>;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
+<div class="line"><a name="l00183"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#a301761a27cf266e0bad483272fb31a3c">  183</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="../../d2/d5a/fs_8c.html#a301761a27cf266e0bad483272fb31a3c">iinit</a>(<span class="keywordtype">int</span> <a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a>)</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;{</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  <span class="keywordtype">int</span> i = 0;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#ab56d728e6966819a0260c358d3ac3419">initlock</a>(&amp;<a class="code" href="../../d2/d5a/fs_8c.html#a5a78db4f7c856337d906f0606b19bff5">icache</a>.lock, <span class="stringliteral">&quot;icache&quot;</span>);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; <a class="code" href="../../d5/d33/param_8h.html#adabafa10c7951be7c875cd2ee212be85">NINODE</a>; i++)</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  {</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#af5ca8072e3877a883fb34ce59eff88cb">initsleeplock</a>(&amp;<a class="code" href="../../d2/d5a/fs_8c.html#a5a78db4f7c856337d906f0606b19bff5">icache</a>.inode[i].lock, <span class="stringliteral">&quot;inode&quot;</span>);</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;  }</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;  <a class="code" href="../../d2/d5a/fs_8c.html#aff0080b2133027be2e525ca088b40e78">readsb</a>(<a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a>, &amp;<a class="code" href="../../d2/d5a/fs_8c.html#a0248d0bac625de5a1415f2f8c91f3343">sb</a>);</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  <a class="code" href="../../d0/d56/console_8c.html#a90f0742d846503e4ed1804f1df421ec6">cprintf</a>(<span class="stringliteral">&quot;sb: size %d nblocks %d ninodes %d nlog %d logstart %d\</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="stringliteral"> inodestart %d bmap start %d\n&quot;</span>,</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;          <a class="code" href="../../d2/d5a/fs_8c.html#a0248d0bac625de5a1415f2f8c91f3343">sb</a>.<a class="code" href="../../df/d3d/structsuperblock.html#a7c6e4d6da139ecee74eb7816d5d44fa6">size</a>, <a class="code" href="../../d2/d5a/fs_8c.html#a0248d0bac625de5a1415f2f8c91f3343">sb</a>.<a class="code" href="../../df/d3d/structsuperblock.html#a2a27a7cfb54689f0e1dcd1788d049218">nblocks</a>,</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;          <a class="code" href="../../d2/d5a/fs_8c.html#a0248d0bac625de5a1415f2f8c91f3343">sb</a>.<a class="code" href="../../df/d3d/structsuperblock.html#a355d2a1ebdc51f80820c23e69363cf42">ninodes</a>, <a class="code" href="../../d2/d5a/fs_8c.html#a0248d0bac625de5a1415f2f8c91f3343">sb</a>.<a class="code" href="../../df/d3d/structsuperblock.html#aea92ae872785fd4fb39b903d9157aac5">nlog</a>, <a class="code" href="../../d2/d5a/fs_8c.html#a0248d0bac625de5a1415f2f8c91f3343">sb</a>.<a class="code" href="../../df/d3d/structsuperblock.html#a460268b28aced19797e8d7b84aa60ebf">logstart</a>, <a class="code" href="../../d2/d5a/fs_8c.html#a0248d0bac625de5a1415f2f8c91f3343">sb</a>.<a class="code" href="../../df/d3d/structsuperblock.html#adde361528f3905445974301b424611c1">inodestart</a>,</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;          <a class="code" href="../../d2/d5a/fs_8c.html#a0248d0bac625de5a1415f2f8c91f3343">sb</a>.<a class="code" href="../../df/d3d/structsuperblock.html#a3c815dda5be6bda609389e76434171cc">bmapstart</a>);</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;}</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="keyword">static</span> <span class="keyword">struct </span><a class="code" href="../../d0/df8/structinode.html">inode</a> *<a class="code" href="../../d2/d5a/fs_8c.html#aa574143402896986fe315a0c2749fffa">iget</a>(<a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a>, <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../d0/df8/structinode.html#a8acc2b9df0bfc6856da62925763db7fe">inum</a>);</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment">// PAGEBREAK!</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment">//  Allocate an inode on device dev.</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment">//  Mark it as allocated by  giving it type type.</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment">//  Returns an unlocked but allocated and referenced inode.</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="keyword">struct </span><a class="code" href="../../d0/df8/structinode.html">inode</a> *</div>
+<div class="line"><a name="l00208"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#adb360ce0b70a32d19d089fba4cd91293">  208</a></span>&#160;<a class="code" href="../../d2/d5a/fs_8c.html#adb360ce0b70a32d19d089fba4cd91293">ialloc</a>(<a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a>, <span class="keywordtype">short</span> <a class="code" href="../../d0/df8/structinode.html#a8d74bec2898785c057111c328d23fda2">type</a>)</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;{</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;  <span class="keywordtype">int</span> <a class="code" href="../../d0/df8/structinode.html#a8acc2b9df0bfc6856da62925763db7fe">inum</a>;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d9/dd0/structbuf.html">buf</a> *bp;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../db/dfa/structdinode.html">dinode</a> *dip;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160; </div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;  <span class="keywordflow">for</span> (inum = 1; inum &lt; <a class="code" href="../../d2/d5a/fs_8c.html#a0248d0bac625de5a1415f2f8c91f3343">sb</a>.<a class="code" href="../../df/d3d/structsuperblock.html#a355d2a1ebdc51f80820c23e69363cf42">ninodes</a>; inum++)</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;  {</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    bp = <a class="code" href="../../dc/de6/bio_8c.html#ae000984516278965dde3d125affd086c">bread</a>(dev, <a class="code" href="../../df/d26/fs_8h.html#ac9a5b990015f0f86e5d4c6b21d38ffa0">IBLOCK</a>(inum, <a class="code" href="../../d2/d5a/fs_8c.html#a0248d0bac625de5a1415f2f8c91f3343">sb</a>));</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    dip = (<span class="keyword">struct </span><a class="code" href="../../db/dfa/structdinode.html">dinode</a> *)bp-&gt;<a class="code" href="../../d9/dd0/structbuf.html#ab0ec38784ab94ed35e575cf6d33912d2">data</a> + inum % <a class="code" href="../../df/d26/fs_8h.html#aadb6c866a6d0a173f5f0a6ed9c7e0228">IPB</a>;</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    if (dip-&gt;<a class="code" href="../../db/dfa/structdinode.html#abf6b2a8476a803284f1c927fb3b82259">type</a> == 0)</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    { <span class="comment">// a free inode</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;      <a class="code" href="../../d5/d64/defs_8h.html#a9d55c9f035076ed1a90b6452770d0b62">memset</a>(dip, 0, <span class="keyword">sizeof</span>(*dip));</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;      dip-&gt;<a class="code" href="../../db/dfa/structdinode.html#abf6b2a8476a803284f1c927fb3b82259">type</a> = <a class="code" href="../../db/dfa/structdinode.html#abf6b2a8476a803284f1c927fb3b82259">type</a>;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;      <a class="code" href="../../d5/d64/defs_8h.html#a270d0050dc50965f4f851717841ad33c">log_write</a>(bp); <span class="comment">// mark it allocated on the disk</span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;      <a class="code" href="../../dc/de6/bio_8c.html#ab5335aeb503731104314321a78a6d727">brelse</a>(bp);</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="../../d2/d5a/fs_8c.html#aa574143402896986fe315a0c2749fffa">iget</a>(dev, inum);</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    }</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <a class="code" href="../../dc/de6/bio_8c.html#ab5335aeb503731104314321a78a6d727">brelse</a>(bp);</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;  }</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;  <a class="code" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a>(<span class="stringliteral">&quot;ialloc: no inodes&quot;</span>);</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;}</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; </div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment">// Copy a modified in-memory inode to disk.</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment">// Must be called after every change to an ip-&gt;xxx field</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment">// that lives on disk, since i-node cache is write-through.</span></div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment">// Caller must hold ip-&gt;lock.</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#a7220afa8e5f4bea540eb95879ea7df6e">  235</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="../../d2/d5a/fs_8c.html#a7220afa8e5f4bea540eb95879ea7df6e">iupdate</a>(<span class="keyword">struct</span> <a class="code" href="../../d0/df8/structinode.html">inode</a> *ip)</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;{</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d9/dd0/structbuf.html">buf</a> *bp;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../db/dfa/structdinode.html">dinode</a> *dip;</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;  bp = <a class="code" href="../../dc/de6/bio_8c.html#ae000984516278965dde3d125affd086c">bread</a>(ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a>, <a class="code" href="../../df/d26/fs_8h.html#ac9a5b990015f0f86e5d4c6b21d38ffa0">IBLOCK</a>(ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a8acc2b9df0bfc6856da62925763db7fe">inum</a>, <a class="code" href="../../d2/d5a/fs_8c.html#a0248d0bac625de5a1415f2f8c91f3343">sb</a>));</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;  dip = (<span class="keyword">struct </span><a class="code" href="../../db/dfa/structdinode.html">dinode</a> *)bp-&gt;<a class="code" href="../../d9/dd0/structbuf.html#ab0ec38784ab94ed35e575cf6d33912d2">data</a> + ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a8acc2b9df0bfc6856da62925763db7fe">inum</a> % <a class="code" href="../../df/d26/fs_8h.html#aadb6c866a6d0a173f5f0a6ed9c7e0228">IPB</a>;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;  dip-&gt;<a class="code" href="../../db/dfa/structdinode.html#abf6b2a8476a803284f1c927fb3b82259">type</a> = ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a8d74bec2898785c057111c328d23fda2">type</a>;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;  dip-&gt;<a class="code" href="../../db/dfa/structdinode.html#aca8272002020f48219df175c986db257">major</a> = ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a34af7242018a977dace5730683850875">major</a>;</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;  dip-&gt;<a class="code" href="../../db/dfa/structdinode.html#ae97965f85e7353313f85035e8fc63495">minor</a> = ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a37878866e7905b666db2aa33076076a2">minor</a>;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;  dip-&gt;<a class="code" href="../../db/dfa/structdinode.html#a105562253b461c11413c9a229ef15358">nlink</a> = ip-&gt;<a class="code" href="../../d0/df8/structinode.html#af8b88b409bea7ef99c49a55f387538b2">nlink</a>;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;  dip-&gt;<a class="code" href="../../db/dfa/structdinode.html#a990ad8ddf5f8c051fbbe95cf550d2164">size</a> = ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a918af769c48a8ca8afac057bf83d12de">size</a>;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#aa9c8577c0e9d233f85892ec2d9bfe212">memmove</a>(dip-&gt;<a class="code" href="../../db/dfa/structdinode.html#a705729b3a39c10c0ba6927fc5e4e0563">addrs</a>, ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>, <span class="keyword">sizeof</span>(ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>));</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#a270d0050dc50965f4f851717841ad33c">log_write</a>(bp);</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;  <a class="code" href="../../dc/de6/bio_8c.html#ab5335aeb503731104314321a78a6d727">brelse</a>(bp);</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;}</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; </div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">// Find the inode with number inum on device dev</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">// and return the in-memory copy. Does not lock</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">// the inode and does not read it from disk.</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="keyword">static</span> <span class="keyword">struct </span><a class="code" href="../../d0/df8/structinode.html">inode</a> *</div>
+<div class="line"><a name="l00256"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#aa574143402896986fe315a0c2749fffa">  256</a></span>&#160;<a class="code" href="../../d2/d5a/fs_8c.html#aa574143402896986fe315a0c2749fffa">iget</a>(<a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a>, <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../d0/df8/structinode.html#a8acc2b9df0bfc6856da62925763db7fe">inum</a>)</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;{</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d0/df8/structinode.html">inode</a> *ip, *empty;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#afe4ef8638f1ecb962a6e67fb086ee3b8">acquire</a>(&amp;<a class="code" href="../../d2/d5a/fs_8c.html#a5a78db4f7c856337d906f0606b19bff5">icache</a>.lock);</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;  <span class="comment">// Is the inode already cached?</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;  empty = 0;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;  <span class="keywordflow">for</span> (ip = &amp;<a class="code" href="../../d2/d5a/fs_8c.html#a5a78db4f7c856337d906f0606b19bff5">icache</a>.inode[0]; ip &lt; &amp;<a class="code" href="../../d2/d5a/fs_8c.html#a5a78db4f7c856337d906f0606b19bff5">icache</a>.inode[<a class="code" href="../../d5/d33/param_8h.html#adabafa10c7951be7c875cd2ee212be85">NINODE</a>]; ip++)</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;  {</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="keywordflow">if</span> (ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a6a519028ee67f805482b3e1725bf09c5">ref</a> &gt; 0 &amp;&amp; ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a> == <a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a> &amp;&amp; ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a8acc2b9df0bfc6856da62925763db7fe">inum</a> == <a class="code" href="../../d0/df8/structinode.html#a8acc2b9df0bfc6856da62925763db7fe">inum</a>)</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    {</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;      ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a6a519028ee67f805482b3e1725bf09c5">ref</a>++;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;      <a class="code" href="../../d5/d64/defs_8h.html#a4f8616948f3dbce65671f666eed1d669">release</a>(&amp;<a class="code" href="../../d2/d5a/fs_8c.html#a5a78db4f7c856337d906f0606b19bff5">icache</a>.lock);</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;      <span class="keywordflow">return</span> ip;</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    }</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    <span class="keywordflow">if</span> (empty == 0 &amp;&amp; ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a6a519028ee67f805482b3e1725bf09c5">ref</a> == 0) <span class="comment">// Remember empty slot.</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;      empty = ip;</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;  }</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;  <span class="comment">// Recycle an inode cache entry.</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;  <span class="keywordflow">if</span> (empty == 0)</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    <a class="code" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a>(<span class="stringliteral">&quot;iget: no inodes&quot;</span>);</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;  ip = empty;</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;  ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a> = <a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a>;</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;  ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a8acc2b9df0bfc6856da62925763db7fe">inum</a> = <a class="code" href="../../d0/df8/structinode.html#a8acc2b9df0bfc6856da62925763db7fe">inum</a>;</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;  ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a6a519028ee67f805482b3e1725bf09c5">ref</a> = 1;</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;  ip-&gt;<a class="code" href="../../d0/df8/structinode.html#aad324382ba30eb83daa5304fce7dca08">valid</a> = 0;</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#a4f8616948f3dbce65671f666eed1d669">release</a>(&amp;<a class="code" href="../../d2/d5a/fs_8c.html#a5a78db4f7c856337d906f0606b19bff5">icache</a>.lock);</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;  <span class="keywordflow">return</span> ip;</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;}</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160; </div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="comment">// Increment reference count for ip.</span></div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="comment">// Returns ip to enable ip = idup(ip1) idiom.</span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="keyword">struct </span><a class="code" href="../../d0/df8/structinode.html">inode</a> *</div>
+<div class="line"><a name="l00292"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#a6b41577cc09b2a009be8f84bfb500079">  292</a></span>&#160;<a class="code" href="../../d2/d5a/fs_8c.html#a6b41577cc09b2a009be8f84bfb500079">idup</a>(<span class="keyword">struct</span> <a class="code" href="../../d0/df8/structinode.html">inode</a> *ip)</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;{</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#afe4ef8638f1ecb962a6e67fb086ee3b8">acquire</a>(&amp;<a class="code" href="../../d2/d5a/fs_8c.html#a5a78db4f7c856337d906f0606b19bff5">icache</a>.lock);</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;  ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a6a519028ee67f805482b3e1725bf09c5">ref</a>++;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#a4f8616948f3dbce65671f666eed1d669">release</a>(&amp;<a class="code" href="../../d2/d5a/fs_8c.html#a5a78db4f7c856337d906f0606b19bff5">icache</a>.lock);</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;  <span class="keywordflow">return</span> ip;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;}</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160; </div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="comment">// Lock the given inode.</span></div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment">// Reads the inode from disk if necessary.</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#aed28187406d84a3aa71f10c6235a03ec">  302</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="../../d2/d5a/fs_8c.html#aed28187406d84a3aa71f10c6235a03ec">ilock</a>(<span class="keyword">struct</span> <a class="code" href="../../d0/df8/structinode.html">inode</a> *ip)</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;{</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d9/dd0/structbuf.html">buf</a> *bp;</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../db/dfa/structdinode.html">dinode</a> *dip;</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;  <span class="keywordflow">if</span> (ip == 0 || ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a6a519028ee67f805482b3e1725bf09c5">ref</a> &lt; 1)</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    <a class="code" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a>(<span class="stringliteral">&quot;ilock&quot;</span>);</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; </div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#aecd4639fe2f9aaad8e8cee2b5e0688c3">acquiresleep</a>(&amp;ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a46bad0e938fbd348ac02bdef0c8d6215">lock</a>);</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;  <span class="keywordflow">if</span> (ip-&gt;<a class="code" href="../../d0/df8/structinode.html#aad324382ba30eb83daa5304fce7dca08">valid</a> == 0)</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;  {</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    bp = <a class="code" href="../../dc/de6/bio_8c.html#ae000984516278965dde3d125affd086c">bread</a>(ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a>, <a class="code" href="../../df/d26/fs_8h.html#ac9a5b990015f0f86e5d4c6b21d38ffa0">IBLOCK</a>(ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a8acc2b9df0bfc6856da62925763db7fe">inum</a>, <a class="code" href="../../d2/d5a/fs_8c.html#a0248d0bac625de5a1415f2f8c91f3343">sb</a>));</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    dip = (<span class="keyword">struct </span><a class="code" href="../../db/dfa/structdinode.html">dinode</a> *)bp-&gt;<a class="code" href="../../d9/dd0/structbuf.html#ab0ec38784ab94ed35e575cf6d33912d2">data</a> + ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a8acc2b9df0bfc6856da62925763db7fe">inum</a> % <a class="code" href="../../df/d26/fs_8h.html#aadb6c866a6d0a173f5f0a6ed9c7e0228">IPB</a>;</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a8d74bec2898785c057111c328d23fda2">type</a> = dip-&gt;<a class="code" href="../../db/dfa/structdinode.html#abf6b2a8476a803284f1c927fb3b82259">type</a>;</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a34af7242018a977dace5730683850875">major</a> = dip-&gt;<a class="code" href="../../db/dfa/structdinode.html#aca8272002020f48219df175c986db257">major</a>;</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a37878866e7905b666db2aa33076076a2">minor</a> = dip-&gt;<a class="code" href="../../db/dfa/structdinode.html#ae97965f85e7353313f85035e8fc63495">minor</a>;</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    ip-&gt;<a class="code" href="../../d0/df8/structinode.html#af8b88b409bea7ef99c49a55f387538b2">nlink</a> = dip-&gt;<a class="code" href="../../db/dfa/structdinode.html#a105562253b461c11413c9a229ef15358">nlink</a>;</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a918af769c48a8ca8afac057bf83d12de">size</a> = dip-&gt;<a class="code" href="../../db/dfa/structdinode.html#a990ad8ddf5f8c051fbbe95cf550d2164">size</a>;</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#aa9c8577c0e9d233f85892ec2d9bfe212">memmove</a>(ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>, dip-&gt;<a class="code" href="../../db/dfa/structdinode.html#a705729b3a39c10c0ba6927fc5e4e0563">addrs</a>, <span class="keyword">sizeof</span>(ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>));</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    <a class="code" href="../../dc/de6/bio_8c.html#ab5335aeb503731104314321a78a6d727">brelse</a>(bp);</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    ip-&gt;<a class="code" href="../../d0/df8/structinode.html#aad324382ba30eb83daa5304fce7dca08">valid</a> = 1;</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    <span class="keywordflow">if</span> (ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a8d74bec2898785c057111c328d23fda2">type</a> == 0)</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;      <a class="code" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a>(<span class="stringliteral">&quot;ilock: no type&quot;</span>);</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;  }</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;}</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160; </div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="comment">// Unlock the given inode.</span></div>
+<div class="line"><a name="l00330"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#ae4e29916219b9293b37f9c34220694fe">  330</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="../../d2/d5a/fs_8c.html#ae4e29916219b9293b37f9c34220694fe">iunlock</a>(<span class="keyword">struct</span> <a class="code" href="../../d0/df8/structinode.html">inode</a> *ip)</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;{</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;  <span class="keywordflow">if</span> (ip == 0 || !<a class="code" href="../../d5/d64/defs_8h.html#afa76133bc67c6026376d630da9b53b68">holdingsleep</a>(&amp;ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a46bad0e938fbd348ac02bdef0c8d6215">lock</a>) || ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a6a519028ee67f805482b3e1725bf09c5">ref</a> &lt; 1)</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <a class="code" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a>(<span class="stringliteral">&quot;iunlock&quot;</span>);</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160; </div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#a840b479c87b1c047d7142f58e0ad0b27">releasesleep</a>(&amp;ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a46bad0e938fbd348ac02bdef0c8d6215">lock</a>);</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;}</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160; </div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="comment">// Drop a reference to an in-memory inode.</span></div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="comment">// If that was the last reference, the inode cache entry can</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="comment">// be recycled.</span></div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="comment">// If that was the last reference and the inode has no links</span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="comment">// to it, free the inode (and its content) on disk.</span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="comment">// All calls to iput() must be inside a transaction in</span></div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="comment">// case it has to free the inode.</span></div>
+<div class="line"><a name="l00345"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#ab3c447f135c68e4c3c1f8d5866f6e77b">  345</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="../../d2/d5a/fs_8c.html#ab3c447f135c68e4c3c1f8d5866f6e77b">iput</a>(<span class="keyword">struct</span> <a class="code" href="../../d0/df8/structinode.html">inode</a> *ip)</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;{</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#aecd4639fe2f9aaad8e8cee2b5e0688c3">acquiresleep</a>(&amp;ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a46bad0e938fbd348ac02bdef0c8d6215">lock</a>);</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;  <span class="keywordflow">if</span> (ip-&gt;<a class="code" href="../../d0/df8/structinode.html#aad324382ba30eb83daa5304fce7dca08">valid</a> &amp;&amp; ip-&gt;<a class="code" href="../../d0/df8/structinode.html#af8b88b409bea7ef99c49a55f387538b2">nlink</a> == 0)</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;  {</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#afe4ef8638f1ecb962a6e67fb086ee3b8">acquire</a>(&amp;<a class="code" href="../../d2/d5a/fs_8c.html#a5a78db4f7c856337d906f0606b19bff5">icache</a>.lock);</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="../../d0/d56/console_8c.html#af10fa12dd785c91e29528fbdc50cf9af">r</a> = ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a6a519028ee67f805482b3e1725bf09c5">ref</a>;</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#a4f8616948f3dbce65671f666eed1d669">release</a>(&amp;<a class="code" href="../../d2/d5a/fs_8c.html#a5a78db4f7c856337d906f0606b19bff5">icache</a>.lock);</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="../../d0/d56/console_8c.html#af10fa12dd785c91e29528fbdc50cf9af">r</a> == 1)</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    {</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;      <span class="comment">// inode has no links and no other references: truncate and free.</span></div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;      <a class="code" href="../../d2/d5a/fs_8c.html#a7c42ba96035fb59aef87372552b1a661">itrunc</a>(ip);</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;      ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a8d74bec2898785c057111c328d23fda2">type</a> = 0;</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;      <a class="code" href="../../d2/d5a/fs_8c.html#a7220afa8e5f4bea540eb95879ea7df6e">iupdate</a>(ip);</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;      ip-&gt;<a class="code" href="../../d0/df8/structinode.html#aad324382ba30eb83daa5304fce7dca08">valid</a> = 0;</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    }</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;  }</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#a840b479c87b1c047d7142f58e0ad0b27">releasesleep</a>(&amp;ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a46bad0e938fbd348ac02bdef0c8d6215">lock</a>);</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160; </div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#afe4ef8638f1ecb962a6e67fb086ee3b8">acquire</a>(&amp;<a class="code" href="../../d2/d5a/fs_8c.html#a5a78db4f7c856337d906f0606b19bff5">icache</a>.lock);</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;  ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a6a519028ee67f805482b3e1725bf09c5">ref</a>--;</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#a4f8616948f3dbce65671f666eed1d669">release</a>(&amp;<a class="code" href="../../d2/d5a/fs_8c.html#a5a78db4f7c856337d906f0606b19bff5">icache</a>.lock);</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;}</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;<span class="comment">// Common idiom: unlock, then put.</span></div>
+<div class="line"><a name="l00370"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#a207b3008bae35596c55ec7c4fc6875eb">  370</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="../../d2/d5a/fs_8c.html#a207b3008bae35596c55ec7c4fc6875eb">iunlockput</a>(<span class="keyword">struct</span> <a class="code" href="../../d0/df8/structinode.html">inode</a> *ip)</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;{</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;  <a class="code" href="../../d2/d5a/fs_8c.html#ae4e29916219b9293b37f9c34220694fe">iunlock</a>(ip);</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;  <a class="code" href="../../d2/d5a/fs_8c.html#ab3c447f135c68e4c3c1f8d5866f6e77b">iput</a>(ip);</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;}</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160; </div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;<span class="comment">// PAGEBREAK!</span></div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="comment">//  Inode content</span></div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="comment">//  The content (data) associated with each inode is stored</span></div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;<span class="comment">//  in blocks on the disk. The first NDIRECT block numbers</span></div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="comment">//  are listed in ip-&gt;addrs[].  The next NINDIRECT blocks are</span></div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;<span class="comment">//  listed in block ip-&gt;addrs[NDIRECT].</span></div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160; </div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;<span class="comment">// Return the disk block address of the nth block in inode ip.</span></div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="comment">// If there is no such block, bmap allocates one.</span></div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160; </div>
+<div class="line"><a name="l00387"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#ac9f31f726d2933782e2efda7136a25fd">  387</a></span>&#160;<span class="preprocessor">#define ADDR 1</span></div>
+<div class="line"><a name="l00388"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#a05b49c662c073f89e86804f7856622a0">  388</a></span>&#160;<span class="preprocessor">#define LEN 2</span></div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="comment">/* mode에 따라서 addr 혹은 len을 리턴해주는 함수*/</span></div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="comment">/* 4바이트 addrs를 3바이트, 1바이트로 쪼개서 리턴해준다*/</span></div>
+<div class="line"><a name="l00391"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#a4a942a8fde303c8392d4f302170e5626">  391</a></span>&#160;<a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../d2/d5a/fs_8c.html#a4a942a8fde303c8392d4f302170e5626">addrLen</a>(<a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../db/dfa/structdinode.html#a705729b3a39c10c0ba6927fc5e4e0563">addrs</a>, <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> mode)</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;{</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160; </div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;  <span class="keywordflow">if</span> (mode == <a class="code" href="../../d2/d5a/fs_8c.html#ac9f31f726d2933782e2efda7136a25fd">ADDR</a> || mode == <a class="code" href="../../d2/d5a/fs_8c.html#a05b49c662c073f89e86804f7856622a0">LEN</a>)</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;  {</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    <span class="keywordflow">if</span> (mode == <a class="code" href="../../d2/d5a/fs_8c.html#ac9f31f726d2933782e2efda7136a25fd">ADDR</a>)</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="../../db/dfa/structdinode.html#a705729b3a39c10c0ba6927fc5e4e0563">addrs</a> &gt;&gt; 8;</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (mode == <a class="code" href="../../d2/d5a/fs_8c.html#a05b49c662c073f89e86804f7856622a0">LEN</a>)</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="../../db/dfa/structdinode.html#a705729b3a39c10c0ba6927fc5e4e0563">addrs</a> &amp; 255;</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;  }</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;  <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;}</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160; </div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="keyword">static</span> <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a></div>
+<div class="line"><a name="l00405"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#a965e83e1fa9b15abf268784ce74181bb">  405</a></span>&#160;<a class="code" href="../../d2/d5a/fs_8c.html#a965e83e1fa9b15abf268784ce74181bb">bmap</a>(<span class="keyword">struct</span> <a class="code" href="../../d0/df8/structinode.html">inode</a> *ip, <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> bn)</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;{</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> addr, *a;</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d9/dd0/structbuf.html">buf</a> *bp;</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;  <span class="keywordtype">int</span> i;</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> cur;</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> len;</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <span class="keyword">new</span>;</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160; </div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;  <span class="comment">/*T_CS 파일의 데이터 매핑*/</span></div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;  <span class="keywordflow">if</span> (ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a8d74bec2898785c057111c328d23fda2">type</a> == <a class="code" href="../../d2/d1b/stat_8h.html#a234ef1d69dd84e7134072c05c5b87eaf">T_CS</a>)</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;  {</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;    i = 0;</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;    cur = 0;</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;    <span class="comment">// cprintf(&quot;bn: %d\n&quot;, bn);</span></div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;    <span class="comment">/*bmap은 새로운 데이터를 매핑해주는 역할 뿐만 아니라*/</span></div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;    <span class="comment">/*기존 데이터 접근할때도 있는지 체크해준 후 매핑을 해준다.*/</span></div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;    <span class="keywordflow">while</span> (ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[i])</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;    {</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;      <span class="keywordflow">if</span> (i &gt; <a class="code" href="../../df/d26/fs_8h.html#acd38e9532d4b3623f844b93c012a8e06">NDIRECT</a>)</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;      <span class="comment">/*addrs[i]는 4바이트인데 3바이트는 주소이고 1바이트는 길이이다*/</span></div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;      <span class="comment">/* 비트 연산으로 &amp; 255를 해주면 하위 1바이트, 즉 길이를 얻을 수 있다.*/</span></div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;      <span class="comment">// len = (ip-&gt;addrs[i] &amp; 255);</span></div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;      len = <a class="code" href="../../d2/d5a/fs_8c.html#a4a942a8fde303c8392d4f302170e5626">addrLen</a>(ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[i], <a class="code" href="../../d2/d5a/fs_8c.html#a05b49c662c073f89e86804f7856622a0">LEN</a>);</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;      <span class="comment">/*블럭 넘버 할당*/</span></div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;      <span class="comment">/*T_CS 파일중에 해당 블럭 넘버가 있는지 체크*/</span></div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;      <span class="keywordflow">if</span> (bn &gt;= cur &amp;&amp; bn &lt; len + cur)</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;      {</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;        <span class="comment">/*addrs[i] &gt;&gt; 8 연산을 하면 상위 3바이트, 즉 주소를 얻을 수 있다.*/</span></div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;        addr = <a class="code" href="../../d2/d5a/fs_8c.html#a4a942a8fde303c8392d4f302170e5626">addrLen</a>(ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[i], <a class="code" href="../../d2/d5a/fs_8c.html#ac9f31f726d2933782e2efda7136a25fd">ADDR</a>) + bn - cur;</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;        <span class="keywordflow">return</span> addr;</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;      }</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;      cur += len;</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;      i++;</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;    }</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;    <span class="comment">// T_CS인데 마지막 NDIRECT(12번지)를 접근할 경우</span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;    <span class="keywordflow">if</span> (i &gt;= <a class="code" href="../../df/d26/fs_8h.html#acd38e9532d4b3623f844b93c012a8e06">NDIRECT</a>)</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;    {</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;      <a class="code" href="../../d0/d56/console_8c.html#a90f0742d846503e4ed1804f1df421ec6">cprintf</a>(<span class="stringliteral">&quot;Excess NDIRECT or Data block!&quot;</span>);</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;      <span class="comment">// 혹은 panic으로 에러처리</span></div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;      <span class="keywordflow">return</span> (ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[i - 1] &gt;&gt; 8);</div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;    }</div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;    <span class="comment">/*만약 기존 bn을 찾지 못했을 때? 없을때 새로운 block number을 매핑*/</span></div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;    <span class="comment">// 새로운 블럭 넘버(빈공간) 할당받기</span></div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;    <span class="keywordflow">if</span> ((<span class="keyword">new</span> = <a class="code" href="../../d2/d5a/fs_8c.html#a29272227722d57ff937caaffd03455a9">balloc</a>(ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a>)) != 0)</div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;    {</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;      <span class="comment">// len = (ip-&gt;addrs[i - 1] &amp; 255);</span></div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;      len = <a class="code" href="../../d2/d5a/fs_8c.html#a4a942a8fde303c8392d4f302170e5626">addrLen</a>(ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[i - 1], <a class="code" href="../../d2/d5a/fs_8c.html#a05b49c662c073f89e86804f7856622a0">LEN</a>);</div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;      <span class="comment">// 새로운 블럭이 연속된 데이터 블럭일 경우</span></div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;      <span class="keywordflow">if</span> ((<span class="keyword">new</span> == (<a class="code" href="../../d2/d5a/fs_8c.html#a4a942a8fde303c8392d4f302170e5626">addrLen</a>(ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[i - 1], <a class="code" href="../../d2/d5a/fs_8c.html#ac9f31f726d2933782e2efda7136a25fd">ADDR</a>) + len) &amp;&amp; len &lt; 255))</div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;        ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[i - 1] += 1; <span class="comment">// 길이 추가</span></div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;      <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;        ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[i] = (<span class="keyword">new</span> &lt;&lt; 8 | 1);</div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">new</span>;</div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;    }</div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;    {</div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;      <a class="code" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a>(<span class="stringliteral">&quot;데이터를 할당하지 못했습니다.&quot;</span>);</div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;    }</div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;  }</div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;  <span class="comment">/*일반 파일 bmap*/</span></div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;  <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;  {</div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;    <span class="keywordflow">if</span> (bn &lt; <a class="code" href="../../df/d26/fs_8h.html#acd38e9532d4b3623f844b93c012a8e06">NDIRECT</a>)</div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;    {</div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;      <span class="keywordflow">if</span> ((addr = ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[bn]) == 0)</div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;        ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[bn] = addr = <a class="code" href="../../d2/d5a/fs_8c.html#a29272227722d57ff937caaffd03455a9">balloc</a>(ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a>);</div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;      <span class="keywordflow">return</span> addr;</div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;    }</div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;    bn -= <a class="code" href="../../df/d26/fs_8h.html#acd38e9532d4b3623f844b93c012a8e06">NDIRECT</a>;</div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160; </div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;    <span class="keywordflow">if</span> (bn &lt; <a class="code" href="../../df/d26/fs_8h.html#a6d24f098ea2928d61ff80b123d761715">NINDIRECT</a>)</div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;    {</div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;      <span class="comment">// Load indirect block, allocating if necessary.</span></div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;      <span class="keywordflow">if</span> ((addr = ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[<a class="code" href="../../df/d26/fs_8h.html#acd38e9532d4b3623f844b93c012a8e06">NDIRECT</a>]) == 0)</div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;        ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[<a class="code" href="../../df/d26/fs_8h.html#acd38e9532d4b3623f844b93c012a8e06">NDIRECT</a>] = addr = <a class="code" href="../../d2/d5a/fs_8c.html#a29272227722d57ff937caaffd03455a9">balloc</a>(ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a>);</div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;      bp = <a class="code" href="../../dc/de6/bio_8c.html#ae000984516278965dde3d125affd086c">bread</a>(ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a>, addr);</div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;      a = (<a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> *)bp-&gt;<a class="code" href="../../d9/dd0/structbuf.html#ab0ec38784ab94ed35e575cf6d33912d2">data</a>;</div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;      if ((addr = a[bn]) == 0)</div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;      {</div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;        a[bn] = addr = <a class="code" href="../../d2/d5a/fs_8c.html#a29272227722d57ff937caaffd03455a9">balloc</a>(ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a>);</div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;        <a class="code" href="../../d5/d64/defs_8h.html#a270d0050dc50965f4f851717841ad33c">log_write</a>(bp);</div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;      }</div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;      <a class="code" href="../../dc/de6/bio_8c.html#ab5335aeb503731104314321a78a6d727">brelse</a>(bp);</div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;      <span class="keywordflow">return</span> addr;</div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;    }</div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;  }</div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;  <a class="code" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a>(<span class="stringliteral">&quot;bmap: out of range&quot;</span>);</div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;}</div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160; </div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;<span class="comment">// Truncate inode (discard contents).</span></div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;<span class="comment">// Only called when the inode has no links</span></div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;<span class="comment">// to it (no directory entries referring to it)</span></div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;<span class="comment">// and has no in-memory reference to it (is</span></div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;<span class="comment">// not an open file or current directory).</span></div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00502"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#a7c42ba96035fb59aef87372552b1a661">  502</a></span>&#160;<a class="code" href="../../d2/d5a/fs_8c.html#a7c42ba96035fb59aef87372552b1a661">itrunc</a>(<span class="keyword">struct</span> <a class="code" href="../../d0/df8/structinode.html">inode</a> *ip)</div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;{</div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;  <span class="keywordtype">int</span> i, j;</div>
+<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d9/dd0/structbuf.html">buf</a> *bp;</div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> *a;</div>
+<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> len;</div>
+<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160; </div>
+<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;  <span class="comment">/*T_CS 파일 일 경우는 삭제 방법이 다르다.*/</span></div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;  <span class="comment">/*길이만큼 읽어서 해당 길이만큼 데이터 블럭들을 해제 시켜줘야함*/</span></div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;  <span class="keywordflow">if</span> (ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a8d74bec2898785c057111c328d23fda2">type</a> == <a class="code" href="../../d2/d1b/stat_8h.html#a234ef1d69dd84e7134072c05c5b87eaf">T_CS</a>)</div>
+<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;  {</div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;    i = 0;</div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;    <span class="keywordflow">while</span> (i &lt; <a class="code" href="../../df/d26/fs_8h.html#acd38e9532d4b3623f844b93c012a8e06">NDIRECT</a>)</div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;    {</div>
+<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;      <span class="keywordflow">if</span> (i &gt; <a class="code" href="../../df/d26/fs_8h.html#acd38e9532d4b3623f844b93c012a8e06">NDIRECT</a>)</div>
+<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;      <span class="comment">/*addr[i]가 매핑 되었을 경우, 해당 데이터의 길이를 읽고 그 길이만큼 데이터 블록 해제를 시켜준다.*/</span></div>
+<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;      <span class="keywordflow">if</span> (ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[i])</div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;      {</div>
+<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;        <span class="comment">// len = (ip-&gt;addrs[i] &amp; 255);</span></div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;        len = <a class="code" href="../../d2/d5a/fs_8c.html#a4a942a8fde303c8392d4f302170e5626">addrLen</a>(ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[i], <a class="code" href="../../d2/d5a/fs_8c.html#a05b49c662c073f89e86804f7856622a0">LEN</a>);</div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;        <span class="keywordflow">for</span> (j = 0; j &lt; len; j++)</div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;        {</div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;          <a class="code" href="../../d2/d5a/fs_8c.html#a2800a4b570ae39363cec0613dac92fd7">bfree</a>(ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a>, (ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[i] &gt;&gt; 8) + j);</div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;        }</div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;        ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[i] = 0;</div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;      }</div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;      i++;</div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;    }</div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;  }</div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;  <span class="comment">/*일반 파일의 삭제*/</span></div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; <a class="code" href="../../df/d26/fs_8h.html#acd38e9532d4b3623f844b93c012a8e06">NDIRECT</a>; i++)</div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;  {</div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;    <span class="keywordflow">if</span> (ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[i])</div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;    {</div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;      <a class="code" href="../../d2/d5a/fs_8c.html#a2800a4b570ae39363cec0613dac92fd7">bfree</a>(ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a>, ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[i]);</div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;      ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[i] = 0;</div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;    }</div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;  }</div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160; </div>
+<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;  <span class="keywordflow">if</span> (ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[<a class="code" href="../../df/d26/fs_8h.html#acd38e9532d4b3623f844b93c012a8e06">NDIRECT</a>])</div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;  {</div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;    bp = <a class="code" href="../../dc/de6/bio_8c.html#ae000984516278965dde3d125affd086c">bread</a>(ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a>, ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[<a class="code" href="../../df/d26/fs_8h.html#acd38e9532d4b3623f844b93c012a8e06">NDIRECT</a>]);</div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;    a = (<a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> *)bp-&gt;<a class="code" href="../../d9/dd0/structbuf.html#ab0ec38784ab94ed35e575cf6d33912d2">data</a>;</div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;    for (j = 0; j &lt; <a class="code" href="../../df/d26/fs_8h.html#a6d24f098ea2928d61ff80b123d761715">NINDIRECT</a>; j++)</div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;    {</div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;      <span class="keywordflow">if</span> (a[j])</div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;        <a class="code" href="../../d2/d5a/fs_8c.html#a2800a4b570ae39363cec0613dac92fd7">bfree</a>(ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a>, a[j]);</div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;    }</div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;    <a class="code" href="../../dc/de6/bio_8c.html#ab5335aeb503731104314321a78a6d727">brelse</a>(bp);</div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;    <a class="code" href="../../d2/d5a/fs_8c.html#a2800a4b570ae39363cec0613dac92fd7">bfree</a>(ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a>, ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[<a class="code" href="../../df/d26/fs_8h.html#acd38e9532d4b3623f844b93c012a8e06">NDIRECT</a>]);</div>
+<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;    ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[<a class="code" href="../../df/d26/fs_8h.html#acd38e9532d4b3623f844b93c012a8e06">NDIRECT</a>] = 0;</div>
+<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;  }</div>
+<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160; </div>
+<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;  ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a918af769c48a8ca8afac057bf83d12de">size</a> = 0;</div>
+<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;  <a class="code" href="../../d2/d5a/fs_8c.html#a7220afa8e5f4bea540eb95879ea7df6e">iupdate</a>(ip);</div>
+<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;}</div>
+<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160; </div>
+<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;<span class="comment">// Copy stat information from inode.</span></div>
+<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;<span class="comment">// Caller must hold ip-&gt;lock.</span></div>
+<div class="line"><a name="l00563"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#a4ccff0bd4d9802e709d0af8d71a59861">  563</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="../../d2/d5a/fs_8c.html#a4ccff0bd4d9802e709d0af8d71a59861">stati</a>(<span class="keyword">struct</span> <a class="code" href="../../d0/df8/structinode.html">inode</a> *ip, <span class="keyword">struct</span> <a class="code" href="../../da/de7/structstat.html">stat</a> *st)</div>
+<div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;{</div>
+<div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;  st-&gt;<a class="code" href="../../da/de7/structstat.html#a14ef4f85e6fb86bf296360361d0f393b">dev</a> = ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a>;</div>
+<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;  st-&gt;<a class="code" href="../../da/de7/structstat.html#abf15624517ed5d79d0fa2a5553a68e25">ino</a> = ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a8acc2b9df0bfc6856da62925763db7fe">inum</a>;</div>
+<div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160;  st-&gt;<a class="code" href="../../da/de7/structstat.html#a01f1b4cd7627d192a7875c9a188e0699">type</a> = ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a8d74bec2898785c057111c328d23fda2">type</a>;</div>
+<div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160;  st-&gt;<a class="code" href="../../da/de7/structstat.html#a99ca3487fd2f4799337eb4281f8871e4">nlink</a> = ip-&gt;<a class="code" href="../../d0/df8/structinode.html#af8b88b409bea7ef99c49a55f387538b2">nlink</a>;</div>
+<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;  st-&gt;<a class="code" href="../../da/de7/structstat.html#a4ac15b64dd4d787c59a8a687d79adb35">size</a> = ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a918af769c48a8ca8afac057bf83d12de">size</a>;</div>
+<div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160;  <span class="comment">/*fstat를 했을 때 파일 정보 출력을 위한 추가 정보 복사*/</span></div>
+<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;  <span class="keywordtype">int</span> i = 0;</div>
+<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;  <span class="comment">// 일반 파일의 주소 출력을 위한 정보복사</span></div>
+<div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; <a class="code" href="../../df/d26/fs_8h.html#acd38e9532d4b3623f844b93c012a8e06">NDIRECT</a>; i++)</div>
+<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;    st-&gt;<a class="code" href="../../da/de7/structstat.html#aaa92f67184b0dfef3a3bc8dd40a1024d">addr</a>[i] = ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[i];</div>
+<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;  if (st-&gt;<a class="code" href="../../da/de7/structstat.html#a01f1b4cd7627d192a7875c9a188e0699">type</a> == <a class="code" href="../../d2/d1b/stat_8h.html#a234ef1d69dd84e7134072c05c5b87eaf">T_CS</a>)</div>
+<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;  {</div>
+<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160;    <span class="comment">// TS파일 용 주소 및 길이 복사.</span></div>
+<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;    <span class="comment">// 구조체 맴버변수 32비트 중 24비트 8비트로 쪼개져서 각각 들어감.</span></div>
+<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;    <span class="keywordflow">for</span> (i = 0; i &lt; <a class="code" href="../../df/d26/fs_8h.html#acd38e9532d4b3623f844b93c012a8e06">NDIRECT</a>; i++)</div>
+<div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160;    {</div>
+<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;      st-&gt;<a class="code" href="../../da/de7/structstat.html#aa165846eb7054d6933b314d62314011c">cs</a>[i].<a class="code" href="../../da/d85/structstat_1_1cs.html#a11753c8b5c90962b2a3e673365d9f203">addr</a> = (ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[i] &gt;&gt; 8);</div>
+<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160;      st-&gt;<a class="code" href="../../da/de7/structstat.html#aa165846eb7054d6933b314d62314011c">cs</a>[i].<a class="code" href="../../da/d85/structstat_1_1cs.html#ab3a1ceae3abadd0869dd8a8cd772dd90">len</a> = (ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[i] &amp; 255);</div>
+<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160;    }</div>
+<div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;  }</div>
+<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;}</div>
+<div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160; </div>
+<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;<span class="comment">// PAGEBREAK!</span></div>
+<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;<span class="comment">//  Read data from inode.</span></div>
+<div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160;<span class="comment">//  Caller must hold ip-&gt;lock.</span></div>
+<div class="line"><a name="l00590"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#a3aba1fa9f6789d09356aec5b96d91fa8">  590</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d2/d5a/fs_8c.html#a3aba1fa9f6789d09356aec5b96d91fa8">readi</a>(<span class="keyword">struct</span> <a class="code" href="../../d0/df8/structinode.html">inode</a> *ip, <span class="keywordtype">char</span> *dst, <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> off, <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> n)</div>
+<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;{</div>
+<div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> tot, m;</div>
+<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d9/dd0/structbuf.html">buf</a> *bp;</div>
+<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160; </div>
+<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;  <span class="keywordflow">if</span> (ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a8d74bec2898785c057111c328d23fda2">type</a> == <a class="code" href="../../d2/d1b/stat_8h.html#a62b045a3e4fdf204bdddda0f3fc3d8c4">T_DEV</a>)</div>
+<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160;  {</div>
+<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;    <span class="keywordflow">if</span> (ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a34af7242018a977dace5730683850875">major</a> &lt; 0 || ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a34af7242018a977dace5730683850875">major</a> &gt;= <a class="code" href="../../d5/d33/param_8h.html#aa564a41c8409694da49b0badf2bb2853">NDEV</a> || !<a class="code" href="../../de/d6a/structdevsw.html">devsw</a>[ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a34af7242018a977dace5730683850875">major</a>].<a class="code" href="../../de/d6a/structdevsw.html#a4efbe00d0031a1c9005ef2186947ea37">read</a>)</div>
+<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;      <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="../../de/d6a/structdevsw.html">devsw</a>[ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a34af7242018a977dace5730683850875">major</a>].<a class="code" href="../../de/d6a/structdevsw.html#a4efbe00d0031a1c9005ef2186947ea37">read</a>(ip, dst, n);</div>
+<div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160;  }</div>
+<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160; </div>
+<div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160;  <span class="keywordflow">if</span> (off &gt; ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a918af769c48a8ca8afac057bf83d12de">size</a> || off + n &lt; off)</div>
+<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;  <span class="keywordflow">if</span> (off + n &gt; ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a918af769c48a8ca8afac057bf83d12de">size</a>)</div>
+<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;    n = ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a918af769c48a8ca8afac057bf83d12de">size</a> - off;</div>
+<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160; </div>
+<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;  <span class="keywordflow">for</span> (tot = 0; tot &lt; n; tot += m, off += m, dst += m)</div>
+<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;  {</div>
+<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;    bp = <a class="code" href="../../dc/de6/bio_8c.html#ae000984516278965dde3d125affd086c">bread</a>(ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a>, <a class="code" href="../../d2/d5a/fs_8c.html#a965e83e1fa9b15abf268784ce74181bb">bmap</a>(ip, off / <a class="code" href="../../df/d26/fs_8h.html#a403cf3149c084cea115b85c90721039a">BSIZE</a>));</div>
+<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;    m = <a class="code" href="../../d2/d5a/fs_8c.html#ac6afabdc09a49a433ee19d8a9486056d">min</a>(n - tot, <a class="code" href="../../df/d26/fs_8h.html#a403cf3149c084cea115b85c90721039a">BSIZE</a> - off % <a class="code" href="../../df/d26/fs_8h.html#a403cf3149c084cea115b85c90721039a">BSIZE</a>);</div>
+<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#aa9c8577c0e9d233f85892ec2d9bfe212">memmove</a>(dst, bp-&gt;<a class="code" href="../../d9/dd0/structbuf.html#ab0ec38784ab94ed35e575cf6d33912d2">data</a> + off % <a class="code" href="../../df/d26/fs_8h.html#a403cf3149c084cea115b85c90721039a">BSIZE</a>, m);</div>
+<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;    <a class="code" href="../../dc/de6/bio_8c.html#ab5335aeb503731104314321a78a6d727">brelse</a>(bp);</div>
+<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;  }</div>
+<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;  <span class="keywordflow">return</span> n;</div>
+<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;}</div>
+<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160; </div>
+<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;<span class="comment">// PAGEBREAK!</span></div>
+<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;<span class="comment">// Write data to inode.</span></div>
+<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;<span class="comment">// Caller must hold ip-&gt;lock.</span></div>
+<div class="line"><a name="l00620"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#a15858f4d8a4cc1def3d84d03c312836b">  620</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d2/d5a/fs_8c.html#a15858f4d8a4cc1def3d84d03c312836b">writei</a>(<span class="keyword">struct</span> <a class="code" href="../../d0/df8/structinode.html">inode</a> *ip, <span class="keywordtype">char</span> *src, <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> off, <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> n)</div>
+<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;{</div>
+<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> tot, m;</div>
+<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d9/dd0/structbuf.html">buf</a> *bp;</div>
+<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160; </div>
+<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;  <span class="keywordflow">if</span> (ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a8d74bec2898785c057111c328d23fda2">type</a> == <a class="code" href="../../d2/d1b/stat_8h.html#a62b045a3e4fdf204bdddda0f3fc3d8c4">T_DEV</a>)</div>
+<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;  {</div>
+<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;    <span class="keywordflow">if</span> (ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a34af7242018a977dace5730683850875">major</a> &lt; 0 || ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a34af7242018a977dace5730683850875">major</a> &gt;= <a class="code" href="../../d5/d33/param_8h.html#aa564a41c8409694da49b0badf2bb2853">NDEV</a> || !<a class="code" href="../../de/d6a/structdevsw.html">devsw</a>[ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a34af7242018a977dace5730683850875">major</a>].<a class="code" href="../../de/d6a/structdevsw.html#a87fd7af6c9a6fb8663fc206be7a233d4">write</a>)</div>
+<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;      <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="../../de/d6a/structdevsw.html">devsw</a>[ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a34af7242018a977dace5730683850875">major</a>].<a class="code" href="../../de/d6a/structdevsw.html#a87fd7af6c9a6fb8663fc206be7a233d4">write</a>(ip, src, n);</div>
+<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;  }</div>
+<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160; </div>
+<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;  <span class="keywordflow">if</span> (off &gt; ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a918af769c48a8ca8afac057bf83d12de">size</a> || off + n &lt; off)</div>
+<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160; </div>
+<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;  <span class="comment">// T_CS는 다음 블록에서 쭉 쓰기 때문에 상관이 없다.</span></div>
+<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;  <span class="keywordflow">if</span> (off + n &gt; <a class="code" href="../../df/d26/fs_8h.html#a714b2485a6dd312e37226e1f833728a9">MAXFILE</a> * <a class="code" href="../../df/d26/fs_8h.html#a403cf3149c084cea115b85c90721039a">BSIZE</a> &amp;&amp; ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a8d74bec2898785c057111c328d23fda2">type</a> != <a class="code" href="../../d2/d1b/stat_8h.html#a234ef1d69dd84e7134072c05c5b87eaf">T_CS</a>)</div>
+<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160; </div>
+<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;  <span class="keywordflow">for</span> (tot = 0; tot &lt; n; tot += m, off += m, src += m)</div>
+<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;  {</div>
+<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;    bp = <a class="code" href="../../dc/de6/bio_8c.html#ae000984516278965dde3d125affd086c">bread</a>(ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a>, <a class="code" href="../../d2/d5a/fs_8c.html#a965e83e1fa9b15abf268784ce74181bb">bmap</a>(ip, off / <a class="code" href="../../df/d26/fs_8h.html#a403cf3149c084cea115b85c90721039a">BSIZE</a>));</div>
+<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;    m = <a class="code" href="../../d2/d5a/fs_8c.html#ac6afabdc09a49a433ee19d8a9486056d">min</a>(n - tot, <a class="code" href="../../df/d26/fs_8h.html#a403cf3149c084cea115b85c90721039a">BSIZE</a> - off % <a class="code" href="../../df/d26/fs_8h.html#a403cf3149c084cea115b85c90721039a">BSIZE</a>);</div>
+<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#aa9c8577c0e9d233f85892ec2d9bfe212">memmove</a>(bp-&gt;<a class="code" href="../../d9/dd0/structbuf.html#ab0ec38784ab94ed35e575cf6d33912d2">data</a> + off % <a class="code" href="../../df/d26/fs_8h.html#a403cf3149c084cea115b85c90721039a">BSIZE</a>, src, m);</div>
+<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#a270d0050dc50965f4f851717841ad33c">log_write</a>(bp);</div>
+<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;    <a class="code" href="../../dc/de6/bio_8c.html#ab5335aeb503731104314321a78a6d727">brelse</a>(bp);</div>
+<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;  }</div>
+<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160; </div>
+<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;  <span class="keywordflow">if</span> (n &gt; 0 &amp;&amp; off &gt; ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a918af769c48a8ca8afac057bf83d12de">size</a>)</div>
+<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;  {</div>
+<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;    ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a918af769c48a8ca8afac057bf83d12de">size</a> = off;</div>
+<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;    <a class="code" href="../../d2/d5a/fs_8c.html#a7220afa8e5f4bea540eb95879ea7df6e">iupdate</a>(ip);</div>
+<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;  }</div>
+<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;  <span class="keywordflow">return</span> n;</div>
+<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;}</div>
+<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160; </div>
+<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;<span class="comment">// PAGEBREAK!</span></div>
+<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;<span class="comment">//  Directories</span></div>
+<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160; </div>
+<div class="line"><a name="l00659"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#ae74f6e5b19a4e7f3e72807ee67141819">  659</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d2/d5a/fs_8c.html#ae74f6e5b19a4e7f3e72807ee67141819">namecmp</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *s, <span class="keyword">const</span> <span class="keywordtype">char</span> *t)</div>
+<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;{</div>
+<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="../../d5/d64/defs_8h.html#a27e878168063a98eae64b4273dcf33cc">strncmp</a>(s, t, <a class="code" href="../../df/d26/fs_8h.html#a48246fb9e5cb7f6a71ebc9ebc2f06562">DIRSIZ</a>);</div>
+<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;}</div>
+<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160; </div>
+<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;<span class="comment">// Look for a directory entry in a directory.</span></div>
+<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;<span class="comment">// If found, set *poff to byte offset of entry.</span></div>
+<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;<span class="keyword">struct </span><a class="code" href="../../d0/df8/structinode.html">inode</a> *</div>
+<div class="line"><a name="l00667"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#aa182c62fade7a0bae9408830d5e06d4f">  667</a></span>&#160;<a class="code" href="../../d2/d5a/fs_8c.html#aa182c62fade7a0bae9408830d5e06d4f">dirlookup</a>(<span class="keyword">struct</span> <a class="code" href="../../d0/df8/structinode.html">inode</a> *dp, <span class="keywordtype">char</span> *<a class="code" href="../../de/dc0/usertests_8c.html#aee754febd402311e2a552cb0d6ab6629">name</a>, <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> *poff)</div>
+<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;{</div>
+<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> off, <a class="code" href="../../d0/df8/structinode.html#a8acc2b9df0bfc6856da62925763db7fe">inum</a>;</div>
+<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d5/de2/structdirent.html">dirent</a> de;</div>
+<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160; </div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;  <span class="keywordflow">if</span> (dp-&gt;<a class="code" href="../../d0/df8/structinode.html#a8d74bec2898785c057111c328d23fda2">type</a> != <a class="code" href="../../d2/d1b/stat_8h.html#a91136bcd71a9f499304f5d7e7e9d6376">T_DIR</a>)</div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;    <a class="code" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a>(<span class="stringliteral">&quot;dirlookup not DIR&quot;</span>);</div>
+<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160; </div>
+<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;  <span class="keywordflow">for</span> (off = 0; off &lt; dp-&gt;<a class="code" href="../../d0/df8/structinode.html#a918af769c48a8ca8afac057bf83d12de">size</a>; off += <span class="keyword">sizeof</span>(de))</div>
+<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;  {</div>
+<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160; </div>
+<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="../../d2/d5a/fs_8c.html#a3aba1fa9f6789d09356aec5b96d91fa8">readi</a>(dp, (<span class="keywordtype">char</span> *)&amp;de, off, <span class="keyword">sizeof</span>(de)) != <span class="keyword">sizeof</span>(de))</div>
+<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;      <a class="code" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a>(<span class="stringliteral">&quot;dirlookup read&quot;</span>);</div>
+<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;    <span class="keywordflow">if</span> (de.inum == 0)</div>
+<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;      <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="../../d2/d5a/fs_8c.html#ae74f6e5b19a4e7f3e72807ee67141819">namecmp</a>(<a class="code" href="../../de/dc0/usertests_8c.html#aee754febd402311e2a552cb0d6ab6629">name</a>, de.name) == 0)</div>
+<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;    {</div>
+<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;      <span class="comment">// entry matches path element</span></div>
+<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;      <span class="keywordflow">if</span> (poff)</div>
+<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;        *poff = off;</div>
+<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;      <a class="code" href="../../d5/de2/structdirent.html#a68698c303a46d2a34232a2226629ac79">inum</a> = de.inum;</div>
+<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="../../d2/d5a/fs_8c.html#aa574143402896986fe315a0c2749fffa">iget</a>(dp-&gt;<a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a>, <a class="code" href="../../d5/de2/structdirent.html#a68698c303a46d2a34232a2226629ac79">inum</a>);</div>
+<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;    }</div>
+<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;  }</div>
+<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160; </div>
+<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;}</div>
+<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160; </div>
+<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;<span class="comment">// Write a new directory entry (name, inum) into the directory dp.</span></div>
+<div class="line"><a name="l00696"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#a69a135a0e8a06d9f306d77ebc0c1f7a0">  696</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d2/d5a/fs_8c.html#a69a135a0e8a06d9f306d77ebc0c1f7a0">dirlink</a>(<span class="keyword">struct</span> <a class="code" href="../../d0/df8/structinode.html">inode</a> *dp, <span class="keywordtype">char</span> *<a class="code" href="../../de/dc0/usertests_8c.html#aee754febd402311e2a552cb0d6ab6629">name</a>, <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../d5/de2/structdirent.html#a68698c303a46d2a34232a2226629ac79">inum</a>)</div>
+<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;{</div>
+<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;  <span class="keywordtype">int</span> off;</div>
+<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d5/de2/structdirent.html">dirent</a> de;</div>
+<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d0/df8/structinode.html">inode</a> *ip;</div>
+<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160; </div>
+<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;  <span class="comment">// Check that name is not present.</span></div>
+<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;  <span class="keywordflow">if</span> ((ip = <a class="code" href="../../d2/d5a/fs_8c.html#aa182c62fade7a0bae9408830d5e06d4f">dirlookup</a>(dp, <a class="code" href="../../de/dc0/usertests_8c.html#aee754febd402311e2a552cb0d6ab6629">name</a>, 0)) != 0)</div>
+<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;  {</div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;    <a class="code" href="../../d2/d5a/fs_8c.html#ab3c447f135c68e4c3c1f8d5866f6e77b">iput</a>(ip);</div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;  }</div>
+<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160; </div>
+<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;  <span class="comment">// Look for an empty dirent.</span></div>
+<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;  <span class="keywordflow">for</span> (off = 0; off &lt; dp-&gt;<a class="code" href="../../d0/df8/structinode.html#a918af769c48a8ca8afac057bf83d12de">size</a>; off += <span class="keyword">sizeof</span>(de))</div>
+<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;  {</div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="../../d2/d5a/fs_8c.html#a3aba1fa9f6789d09356aec5b96d91fa8">readi</a>(dp, (<span class="keywordtype">char</span> *)&amp;de, off, <span class="keyword">sizeof</span>(de)) != <span class="keyword">sizeof</span>(de))</div>
+<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;      <a class="code" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a>(<span class="stringliteral">&quot;dirlink read&quot;</span>);</div>
+<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;    <span class="keywordflow">if</span> (de.inum == 0)</div>
+<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;      <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;  }</div>
+<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160; </div>
+<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#afcc0bb831ec06288e3a951e09e8d5b7d">strncpy</a>(de.<a class="code" href="../../d5/de2/structdirent.html#a4e08a84dbac9b9f6a3e006151855d14d">name</a>, <a class="code" href="../../de/dc0/usertests_8c.html#aee754febd402311e2a552cb0d6ab6629">name</a>, <a class="code" href="../../df/d26/fs_8h.html#a48246fb9e5cb7f6a71ebc9ebc2f06562">DIRSIZ</a>);</div>
+<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;  de.<a class="code" href="../../d5/de2/structdirent.html#a68698c303a46d2a34232a2226629ac79">inum</a> = <a class="code" href="../../d0/df8/structinode.html#a8acc2b9df0bfc6856da62925763db7fe">inum</a>;</div>
+<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="../../d2/d5a/fs_8c.html#a15858f4d8a4cc1def3d84d03c312836b">writei</a>(dp, (<span class="keywordtype">char</span> *)&amp;de, off, <span class="keyword">sizeof</span>(de)) != <span class="keyword">sizeof</span>(de))</div>
+<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;    <a class="code" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a>(<span class="stringliteral">&quot;dirlink&quot;</span>);</div>
+<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160; </div>
+<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;}</div>
+<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160; </div>
+<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;<span class="comment">// PAGEBREAK!</span></div>
+<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;<span class="comment">//  Paths</span></div>
+<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160; </div>
+<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;<span class="comment">// Copy the next path element from path into name.</span></div>
+<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;<span class="comment">// Return a pointer to the element following the copied one.</span></div>
+<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;<span class="comment">// The returned path has no leading slashes,</span></div>
+<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;<span class="comment">// so the caller can check *path==&#39;\0&#39; to see if the name is the last one.</span></div>
+<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;<span class="comment">// If no name to remove, return 0.</span></div>
+<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;<span class="comment">// Examples:</span></div>
+<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;<span class="comment">//   skipelem(&quot;a/bb/c&quot;, name) = &quot;bb/c&quot;, setting name = &quot;a&quot;</span></div>
+<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;<span class="comment">//   skipelem(&quot;///a//bb&quot;, name) = &quot;bb&quot;, setting name = &quot;a&quot;</span></div>
+<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;<span class="comment">//   skipelem(&quot;a&quot;, name) = &quot;&quot;, setting name = &quot;a&quot;</span></div>
+<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;<span class="comment">//   skipelem(&quot;&quot;, name) = skipelem(&quot;////&quot;, name) = 0</span></div>
+<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;<span class="keyword">static</span> <span class="keywordtype">char</span> *</div>
+<div class="line"><a name="l00742"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#aa696af27cc6f5d87271f9eb1c863f770">  742</a></span>&#160;<a class="code" href="../../d2/d5a/fs_8c.html#aa696af27cc6f5d87271f9eb1c863f770">skipelem</a>(<span class="keywordtype">char</span> *path, <span class="keywordtype">char</span> *<a class="code" href="../../de/dc0/usertests_8c.html#aee754febd402311e2a552cb0d6ab6629">name</a>)</div>
+<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;{</div>
+<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;  <span class="keywordtype">char</span> *s;</div>
+<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;  <span class="keywordtype">int</span> len;</div>
+<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160; </div>
+<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;  <span class="keywordflow">while</span> (*path == <span class="charliteral">&#39;/&#39;</span>)</div>
+<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;    path++;</div>
+<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;  <span class="keywordflow">if</span> (*path == 0)</div>
+<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;  s = path;</div>
+<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;  <span class="keywordflow">while</span> (*path != <span class="charliteral">&#39;/&#39;</span> &amp;&amp; *path != 0)</div>
+<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;    path++;</div>
+<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;  len = path - s;</div>
+<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;  <span class="keywordflow">if</span> (len &gt;= <a class="code" href="../../df/d26/fs_8h.html#a48246fb9e5cb7f6a71ebc9ebc2f06562">DIRSIZ</a>)</div>
+<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#aa9c8577c0e9d233f85892ec2d9bfe212">memmove</a>(<a class="code" href="../../de/dc0/usertests_8c.html#aee754febd402311e2a552cb0d6ab6629">name</a>, s, <a class="code" href="../../df/d26/fs_8h.html#a48246fb9e5cb7f6a71ebc9ebc2f06562">DIRSIZ</a>);</div>
+<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;  <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;  {</div>
+<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#aa9c8577c0e9d233f85892ec2d9bfe212">memmove</a>(<a class="code" href="../../de/dc0/usertests_8c.html#aee754febd402311e2a552cb0d6ab6629">name</a>, s, len);</div>
+<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;    <a class="code" href="../../de/dc0/usertests_8c.html#aee754febd402311e2a552cb0d6ab6629">name</a>[len] = 0;</div>
+<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;  }</div>
+<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;  <span class="keywordflow">while</span> (*path == <span class="charliteral">&#39;/&#39;</span>)</div>
+<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;    path++;</div>
+<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;  <span class="keywordflow">return</span> path;</div>
+<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;}</div>
+<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160; </div>
+<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;<span class="comment">// Look up and return the inode for a path name.</span></div>
+<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;<span class="comment">// If parent != 0, return the inode for the parent and copy the final</span></div>
+<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;<span class="comment">// path element into name, which must have room for DIRSIZ bytes.</span></div>
+<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;<span class="comment">// Must be called inside a transaction since it calls iput().</span></div>
+<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;<span class="keyword">static</span> <span class="keyword">struct </span><a class="code" href="../../d0/df8/structinode.html">inode</a> *</div>
+<div class="line"><a name="l00772"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#a85139e533a212f0e8961b88e73fd6510">  772</a></span>&#160;<a class="code" href="../../d2/d5a/fs_8c.html#a85139e533a212f0e8961b88e73fd6510">namex</a>(<span class="keywordtype">char</span> *path, <span class="keywordtype">int</span> <a class="code" href="../../d2/d5a/fs_8c.html#a5a987ca4f8ffd579b96a8b9a60e61a7c">nameiparent</a>, <span class="keywordtype">char</span> *<a class="code" href="../../de/dc0/usertests_8c.html#aee754febd402311e2a552cb0d6ab6629">name</a>)</div>
+<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;{</div>
+<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d0/df8/structinode.html">inode</a> *ip, *next;</div>
+<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160; </div>
+<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;  <span class="keywordflow">if</span> (*path == <span class="charliteral">&#39;/&#39;</span>)</div>
+<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;    ip = <a class="code" href="../../d2/d5a/fs_8c.html#aa574143402896986fe315a0c2749fffa">iget</a>(<a class="code" href="../../d5/d33/param_8h.html#ae9ce6b24fe2aae59ff60b469c35febbc">ROOTDEV</a>, <a class="code" href="../../df/d26/fs_8h.html#a22c8ea96d09283ed6496347806cc72a0">ROOTINO</a>);</div>
+<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;  <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;    ip = <a class="code" href="../../d2/d5a/fs_8c.html#a6b41577cc09b2a009be8f84bfb500079">idup</a>(<a class="code" href="../../d5/d64/defs_8h.html#addb64b689e3c266aaa67cc0126bba441">myproc</a>()-&gt;cwd);</div>
+<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160; </div>
+<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;  <span class="keywordflow">while</span> ((path = <a class="code" href="../../d2/d5a/fs_8c.html#aa696af27cc6f5d87271f9eb1c863f770">skipelem</a>(path, <a class="code" href="../../de/dc0/usertests_8c.html#aee754febd402311e2a552cb0d6ab6629">name</a>)) != 0)</div>
+<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;  {</div>
+<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160;    <a class="code" href="../../d2/d5a/fs_8c.html#aed28187406d84a3aa71f10c6235a03ec">ilock</a>(ip);</div>
+<div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160;    <span class="keywordflow">if</span> (ip-&gt;<a class="code" href="../../d0/df8/structinode.html#a8d74bec2898785c057111c328d23fda2">type</a> != <a class="code" href="../../d2/d1b/stat_8h.html#a91136bcd71a9f499304f5d7e7e9d6376">T_DIR</a>)</div>
+<div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160;    {</div>
+<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160;      <a class="code" href="../../d2/d5a/fs_8c.html#a207b3008bae35596c55ec7c4fc6875eb">iunlockput</a>(ip);</div>
+<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160;      <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160;    }</div>
+<div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="../../d2/d5a/fs_8c.html#a5a987ca4f8ffd579b96a8b9a60e61a7c">nameiparent</a> &amp;&amp; *path == <span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;    {</div>
+<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;      <span class="comment">// Stop one level early.</span></div>
+<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160;      <a class="code" href="../../d2/d5a/fs_8c.html#ae4e29916219b9293b37f9c34220694fe">iunlock</a>(ip);</div>
+<div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160;      <span class="keywordflow">return</span> ip;</div>
+<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160;    }</div>
+<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160;    <span class="keywordflow">if</span> ((next = <a class="code" href="../../d2/d5a/fs_8c.html#aa182c62fade7a0bae9408830d5e06d4f">dirlookup</a>(ip, <a class="code" href="../../de/dc0/usertests_8c.html#aee754febd402311e2a552cb0d6ab6629">name</a>, 0)) == 0)</div>
+<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160;    {</div>
+<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;      <a class="code" href="../../d2/d5a/fs_8c.html#a207b3008bae35596c55ec7c4fc6875eb">iunlockput</a>(ip);</div>
+<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;      <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;    }</div>
+<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;    <a class="code" href="../../d2/d5a/fs_8c.html#a207b3008bae35596c55ec7c4fc6875eb">iunlockput</a>(ip);</div>
+<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;    ip = next;</div>
+<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;  }</div>
+<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="../../d2/d5a/fs_8c.html#a5a987ca4f8ffd579b96a8b9a60e61a7c">nameiparent</a>)</div>
+<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;  {</div>
+<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;    <a class="code" href="../../d2/d5a/fs_8c.html#ab3c447f135c68e4c3c1f8d5866f6e77b">iput</a>(ip);</div>
+<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;  }</div>
+<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;  <span class="keywordflow">return</span> ip;</div>
+<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;}</div>
+<div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160; </div>
+<div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160;<span class="keyword">struct </span><a class="code" href="../../d0/df8/structinode.html">inode</a> *</div>
+<div class="line"><a name="l00812"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#a9baba030d5bc6e9e20cf8b7d181edf35">  812</a></span>&#160;<a class="code" href="../../d2/d5a/fs_8c.html#a9baba030d5bc6e9e20cf8b7d181edf35">namei</a>(<span class="keywordtype">char</span> *path)</div>
+<div class="line"><a name="l00813"></a><span class="lineno">  813</span>&#160;{</div>
+<div class="line"><a name="l00814"></a><span class="lineno">  814</span>&#160;  <span class="keywordtype">char</span> <a class="code" href="../../de/dc0/usertests_8c.html#aee754febd402311e2a552cb0d6ab6629">name</a>[<a class="code" href="../../df/d26/fs_8h.html#a48246fb9e5cb7f6a71ebc9ebc2f06562">DIRSIZ</a>];</div>
+<div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="../../d2/d5a/fs_8c.html#a85139e533a212f0e8961b88e73fd6510">namex</a>(path, 0, <a class="code" href="../../de/dc0/usertests_8c.html#aee754febd402311e2a552cb0d6ab6629">name</a>);</div>
+<div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160;}</div>
+<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160; </div>
+<div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160;<span class="keyword">struct </span><a class="code" href="../../d0/df8/structinode.html">inode</a> *</div>
+<div class="line"><a name="l00819"></a><span class="lineno"><a class="line" href="../../d2/d5a/fs_8c.html#a5a987ca4f8ffd579b96a8b9a60e61a7c">  819</a></span>&#160;<a class="code" href="../../d2/d5a/fs_8c.html#a5a987ca4f8ffd579b96a8b9a60e61a7c">nameiparent</a>(<span class="keywordtype">char</span> *path, <span class="keywordtype">char</span> *<a class="code" href="../../de/dc0/usertests_8c.html#aee754febd402311e2a552cb0d6ab6629">name</a>)</div>
+<div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;{</div>
+<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="../../d2/d5a/fs_8c.html#a85139e533a212f0e8961b88e73fd6510">namex</a>(path, 1, <a class="code" href="../../de/dc0/usertests_8c.html#aee754febd402311e2a552cb0d6ab6629">name</a>);</div>
+<div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;}</div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="astructdinode_html_ae97965f85e7353313f85035e8fc63495"><div class="ttname"><a href="../../db/dfa/structdinode.html#ae97965f85e7353313f85035e8fc63495">dinode::minor</a></div><div class="ttdeci">short minor</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00033">fs.h:33</a></div></div>
+<div class="ttc" id="astructinode_html_a7ba4ab7e52404b80d6d854678715ae30"><div class="ttname"><a href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">inode::addrs</a></div><div class="ttdeci">uint addrs[NDIRECT+1]</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00025">file.h:25</a></div></div>
+<div class="ttc" id="afs_8c_html_a15858f4d8a4cc1def3d84d03c312836b"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#a15858f4d8a4cc1def3d84d03c312836b">writei</a></div><div class="ttdeci">int writei(struct inode *ip, char *src, uint off, uint n)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00620">fs.c:620</a></div></div>
+<div class="ttc" id="afs_8c_html_a7220afa8e5f4bea540eb95879ea7df6e"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#a7220afa8e5f4bea540eb95879ea7df6e">iupdate</a></div><div class="ttdeci">void iupdate(struct inode *ip)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00235">fs.c:235</a></div></div>
+<div class="ttc" id="astructdinode_html_a105562253b461c11413c9a229ef15358"><div class="ttname"><a href="../../db/dfa/structdinode.html#a105562253b461c11413c9a229ef15358">dinode::nlink</a></div><div class="ttdeci">short nlink</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00034">fs.h:34</a></div></div>
+<div class="ttc" id="adefs_8h_html_a27e878168063a98eae64b4273dcf33cc"><div class="ttname"><a href="../../d5/d64/defs_8h.html#a27e878168063a98eae64b4273dcf33cc">strncmp</a></div><div class="ttdeci">int strncmp(const char *, const char *, uint)</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/db0/string_8c_source.html#l00059">string.c:59</a></div></div>
+<div class="ttc" id="astructstat_html"><div class="ttname"><a href="../../da/de7/structstat.html">stat</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d1b/stat_8h_source.html#l00006">stat.h:6</a></div></div>
+<div class="ttc" id="afs_8h_html_a6d24f098ea2928d61ff80b123d761715"><div class="ttname"><a href="../../df/d26/fs_8h.html#a6d24f098ea2928d61ff80b123d761715">NINDIRECT</a></div><div class="ttdeci">#define NINDIRECT</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00025">fs.h:25</a></div></div>
+<div class="ttc" id="astructsuperblock_html_aea92ae872785fd4fb39b903d9157aac5"><div class="ttname"><a href="../../df/d3d/structsuperblock.html#aea92ae872785fd4fb39b903d9157aac5">superblock::nlog</a></div><div class="ttdeci">uint nlog</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00018">fs.h:18</a></div></div>
+<div class="ttc" id="aspinlock_8h_html"><div class="ttname"><a href="../../df/d63/spinlock_8h.html">spinlock.h</a></div></div>
+<div class="ttc" id="astructdinode_html_a705729b3a39c10c0ba6927fc5e4e0563"><div class="ttname"><a href="../../db/dfa/structdinode.html#a705729b3a39c10c0ba6927fc5e4e0563">dinode::addrs</a></div><div class="ttdeci">uint addrs[NDIRECT+1]</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00036">fs.h:36</a></div></div>
+<div class="ttc" id="astructinode_html_a46bad0e938fbd348ac02bdef0c8d6215"><div class="ttname"><a href="../../d0/df8/structinode.html#a46bad0e938fbd348ac02bdef0c8d6215">inode::lock</a></div><div class="ttdeci">struct sleeplock lock</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00017">file.h:17</a></div></div>
+<div class="ttc" id="afs_8c_html_a29272227722d57ff937caaffd03455a9"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#a29272227722d57ff937caaffd03455a9">balloc</a></div><div class="ttdeci">static uint balloc(uint dev)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00057">fs.c:57</a></div></div>
+<div class="ttc" id="afs_8h_html"><div class="ttname"><a href="../../df/d26/fs_8h.html">fs.h</a></div></div>
+<div class="ttc" id="astat_8h_html_a62b045a3e4fdf204bdddda0f3fc3d8c4"><div class="ttname"><a href="../../d2/d1b/stat_8h.html#a62b045a3e4fdf204bdddda0f3fc3d8c4">T_DEV</a></div><div class="ttdeci">#define T_DEV</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d1b/stat_8h_source.html#l00003">stat.h:3</a></div></div>
+<div class="ttc" id="afs_8h_html_a714b2485a6dd312e37226e1f833728a9"><div class="ttname"><a href="../../df/d26/fs_8h.html#a714b2485a6dd312e37226e1f833728a9">MAXFILE</a></div><div class="ttdeci">#define MAXFILE</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00026">fs.h:26</a></div></div>
+<div class="ttc" id="atypes_8h_html"><div class="ttname"><a href="../../d9/d49/types_8h.html">types.h</a></div></div>
+<div class="ttc" id="adefs_8h_html_a4f8616948f3dbce65671f666eed1d669"><div class="ttname"><a href="../../d5/d64/defs_8h.html#a4f8616948f3dbce65671f666eed1d669">release</a></div><div class="ttdeci">void release(struct spinlock *)</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d2d/spinlock_8c_source.html#l00047">spinlock.c:47</a></div></div>
+<div class="ttc" id="afs_8c_html_aa182c62fade7a0bae9408830d5e06d4f"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#aa182c62fade7a0bae9408830d5e06d4f">dirlookup</a></div><div class="ttdeci">struct inode * dirlookup(struct inode *dp, char *name, uint *poff)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00667">fs.c:667</a></div></div>
+<div class="ttc" id="afs_8c_html_ae4e29916219b9293b37f9c34220694fe"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#ae4e29916219b9293b37f9c34220694fe">iunlock</a></div><div class="ttdeci">void iunlock(struct inode *ip)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00330">fs.c:330</a></div></div>
+<div class="ttc" id="astructsuperblock_html"><div class="ttname"><a href="../../df/d3d/structsuperblock.html">superblock</a></div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00013">fs.h:13</a></div></div>
+<div class="ttc" id="astructinode_html_a34af7242018a977dace5730683850875"><div class="ttname"><a href="../../d0/df8/structinode.html#a34af7242018a977dace5730683850875">inode::major</a></div><div class="ttdeci">short major</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00021">file.h:21</a></div></div>
+<div class="ttc" id="astructstat_1_1cs_html_ab3a1ceae3abadd0869dd8a8cd772dd90"><div class="ttname"><a href="../../da/d85/structstat_1_1cs.html#ab3a1ceae3abadd0869dd8a8cd772dd90">stat::cs::len</a></div><div class="ttdeci">uint len</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d1b/stat_8h_source.html#l00018">stat.h:18</a></div></div>
+<div class="ttc" id="adefs_8h_html_afa76133bc67c6026376d630da9b53b68"><div class="ttname"><a href="../../d5/d64/defs_8h.html#afa76133bc67c6026376d630da9b53b68">holdingsleep</a></div><div class="ttdeci">int holdingsleep(struct sleeplock *)</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/dd1/sleeplock_8c_source.html#l00045">sleeplock.c:45</a></div></div>
+<div class="ttc" id="afs_8h_html_a48246fb9e5cb7f6a71ebc9ebc2f06562"><div class="ttname"><a href="../../df/d26/fs_8h.html#a48246fb9e5cb7f6a71ebc9ebc2f06562">DIRSIZ</a></div><div class="ttdeci">#define DIRSIZ</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00052">fs.h:52</a></div></div>
+<div class="ttc" id="adefs_8h_html_aecd4639fe2f9aaad8e8cee2b5e0688c3"><div class="ttname"><a href="../../d5/d64/defs_8h.html#aecd4639fe2f9aaad8e8cee2b5e0688c3">acquiresleep</a></div><div class="ttdeci">void acquiresleep(struct sleeplock *)</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/dd1/sleeplock_8c_source.html#l00023">sleeplock.c:23</a></div></div>
+<div class="ttc" id="afs_8c_html_a6b41577cc09b2a009be8f84bfb500079"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#a6b41577cc09b2a009be8f84bfb500079">idup</a></div><div class="ttdeci">struct inode * idup(struct inode *ip)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00292">fs.c:292</a></div></div>
+<div class="ttc" id="ammu_8h_html"><div class="ttname"><a href="../../d2/df1/mmu_8h.html">mmu.h</a></div></div>
+<div class="ttc" id="astat_8h_html_a234ef1d69dd84e7134072c05c5b87eaf"><div class="ttname"><a href="../../d2/d1b/stat_8h.html#a234ef1d69dd84e7134072c05c5b87eaf">T_CS</a></div><div class="ttdeci">#define T_CS</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d1b/stat_8h_source.html#l00004">stat.h:4</a></div></div>
+<div class="ttc" id="adefs_8h_html_a270d0050dc50965f4f851717841ad33c"><div class="ttname"><a href="../../d5/d64/defs_8h.html#a270d0050dc50965f4f851717841ad33c">log_write</a></div><div class="ttdeci">void log_write(struct buf *)</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/df8/log_8c_source.html#l00214">log.c:214</a></div></div>
+<div class="ttc" id="afs_8c_html_a4ccff0bd4d9802e709d0af8d71a59861"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#a4ccff0bd4d9802e709d0af8d71a59861">stati</a></div><div class="ttdeci">void stati(struct inode *ip, struct stat *st)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00563">fs.c:563</a></div></div>
+<div class="ttc" id="adefs_8h_html_a9d55c9f035076ed1a90b6452770d0b62"><div class="ttname"><a href="../../d5/d64/defs_8h.html#a9d55c9f035076ed1a90b6452770d0b62">memset</a></div><div class="ttdeci">void * memset(void *, int, uint)</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/db0/string_8c_source.html#l00005">string.c:5</a></div></div>
+<div class="ttc" id="astructsuperblock_html_adde361528f3905445974301b424611c1"><div class="ttname"><a href="../../df/d3d/structsuperblock.html#adde361528f3905445974301b424611c1">superblock::inodestart</a></div><div class="ttdeci">uint inodestart</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00020">fs.h:20</a></div></div>
+<div class="ttc" id="astructsuperblock_html_a3c815dda5be6bda609389e76434171cc"><div class="ttname"><a href="../../df/d3d/structsuperblock.html#a3c815dda5be6bda609389e76434171cc">superblock::bmapstart</a></div><div class="ttdeci">uint bmapstart</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00021">fs.h:21</a></div></div>
+<div class="ttc" id="astructsuperblock_html_a460268b28aced19797e8d7b84aa60ebf"><div class="ttname"><a href="../../df/d3d/structsuperblock.html#a460268b28aced19797e8d7b84aa60ebf">superblock::logstart</a></div><div class="ttdeci">uint logstart</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00019">fs.h:19</a></div></div>
+<div class="ttc" id="afs_8c_html_a2800a4b570ae39363cec0613dac92fd7"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#a2800a4b570ae39363cec0613dac92fd7">bfree</a></div><div class="ttdeci">static void bfree(int dev, uint b)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00093">fs.c:93</a></div></div>
+<div class="ttc" id="afs_8c_html_a301761a27cf266e0bad483272fb31a3c"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#a301761a27cf266e0bad483272fb31a3c">iinit</a></div><div class="ttdeci">void iinit(int dev)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00183">fs.c:183</a></div></div>
+<div class="ttc" id="astructdinode_html_aca8272002020f48219df175c986db257"><div class="ttname"><a href="../../db/dfa/structdinode.html#aca8272002020f48219df175c986db257">dinode::major</a></div><div class="ttdeci">short major</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00032">fs.h:32</a></div></div>
+<div class="ttc" id="afs_8h_html_a22c8ea96d09283ed6496347806cc72a0"><div class="ttname"><a href="../../df/d26/fs_8h.html#a22c8ea96d09283ed6496347806cc72a0">ROOTINO</a></div><div class="ttdeci">#define ROOTINO</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00004">fs.h:4</a></div></div>
+<div class="ttc" id="astructdevsw_html_a4efbe00d0031a1c9005ef2186947ea37"><div class="ttname"><a href="../../de/d6a/structdevsw.html#a4efbe00d0031a1c9005ef2186947ea37">devsw::read</a></div><div class="ttdeci">int(* read)(struct inode *, char *, int)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00031">file.h:31</a></div></div>
+<div class="ttc" id="afs_8c_html_a85139e533a212f0e8961b88e73fd6510"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#a85139e533a212f0e8961b88e73fd6510">namex</a></div><div class="ttdeci">static struct inode * namex(char *path, int nameiparent, char *name)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00772">fs.c:772</a></div></div>
+<div class="ttc" id="afs_8c_html_aff0080b2133027be2e525ca088b40e78"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#aff0080b2133027be2e525ca088b40e78">readsb</a></div><div class="ttdeci">void readsb(int dev, struct superblock *sb)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00032">fs.c:32</a></div></div>
+<div class="ttc" id="afs_8c_html_aed28187406d84a3aa71f10c6235a03ec"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#aed28187406d84a3aa71f10c6235a03ec">ilock</a></div><div class="ttdeci">void ilock(struct inode *ip)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00302">fs.c:302</a></div></div>
+<div class="ttc" id="astructdinode_html"><div class="ttname"><a href="../../db/dfa/structdinode.html">dinode</a></div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00029">fs.h:29</a></div></div>
+<div class="ttc" id="astructdirent_html_a68698c303a46d2a34232a2226629ac79"><div class="ttname"><a href="../../d5/de2/structdirent.html#a68698c303a46d2a34232a2226629ac79">dirent::inum</a></div><div class="ttdeci">ushort inum</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00056">fs.h:56</a></div></div>
+<div class="ttc" id="adefs_8h_html_ab56d728e6966819a0260c358d3ac3419"><div class="ttname"><a href="../../d5/d64/defs_8h.html#ab56d728e6966819a0260c358d3ac3419">initlock</a></div><div class="ttdeci">void initlock(struct spinlock *, char *)</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d2d/spinlock_8c_source.html#l00013">spinlock.c:13</a></div></div>
+<div class="ttc" id="afs_8c_html_ae74f6e5b19a4e7f3e72807ee67141819"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#ae74f6e5b19a4e7f3e72807ee67141819">namecmp</a></div><div class="ttdeci">int namecmp(const char *s, const char *t)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00659">fs.c:659</a></div></div>
+<div class="ttc" id="afs_8c_html_a05b49c662c073f89e86804f7856622a0"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#a05b49c662c073f89e86804f7856622a0">LEN</a></div><div class="ttdeci">#define LEN</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00388">fs.c:388</a></div></div>
+<div class="ttc" id="afs_8h_html_a3c88fd21abb83ef11461ce750c466828"><div class="ttname"><a href="../../df/d26/fs_8h.html#a3c88fd21abb83ef11461ce750c466828">BPB</a></div><div class="ttdeci">#define BPB</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00046">fs.h:46</a></div></div>
+<div class="ttc" id="adefs_8h_html_afcc0bb831ec06288e3a951e09e8d5b7d"><div class="ttname"><a href="../../d5/d64/defs_8h.html#afcc0bb831ec06288e3a951e09e8d5b7d">strncpy</a></div><div class="ttdeci">char * strncpy(char *, const char *, int)</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/db0/string_8c_source.html#l00069">string.c:69</a></div></div>
+<div class="ttc" id="afs_8c_html_ab28e82cd5dda7d960095706a3ea20572"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#ab28e82cd5dda7d960095706a3ea20572">lock</a></div><div class="ttdeci">struct spinlock lock</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00179">fs.c:179</a></div></div>
+<div class="ttc" id="astructdirent_html_a4e08a84dbac9b9f6a3e006151855d14d"><div class="ttname"><a href="../../d5/de2/structdirent.html#a4e08a84dbac9b9f6a3e006151855d14d">dirent::name</a></div><div class="ttdeci">char name[DIRSIZ]</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00057">fs.h:57</a></div></div>
+<div class="ttc" id="afs_8h_html_ac9a5b990015f0f86e5d4c6b21d38ffa0"><div class="ttname"><a href="../../df/d26/fs_8h.html#ac9a5b990015f0f86e5d4c6b21d38ffa0">IBLOCK</a></div><div class="ttdeci">#define IBLOCK(i, sb)</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00043">fs.h:43</a></div></div>
+<div class="ttc" id="astructstat_html_a4ac15b64dd4d787c59a8a687d79adb35"><div class="ttname"><a href="../../da/de7/structstat.html#a4ac15b64dd4d787c59a8a687d79adb35">stat::size</a></div><div class="ttdeci">uint size</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d1b/stat_8h_source.html#l00012">stat.h:12</a></div></div>
+<div class="ttc" id="afs_8c_html_aa574143402896986fe315a0c2749fffa"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#aa574143402896986fe315a0c2749fffa">iget</a></div><div class="ttdeci">static struct inode * iget(uint dev, uint inum)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00256">fs.c:256</a></div></div>
+<div class="ttc" id="abuf_8h_html"><div class="ttname"><a href="../../d6/d6d/buf_8h.html">buf.h</a></div></div>
+<div class="ttc" id="astructsuperblock_html_a7c6e4d6da139ecee74eb7816d5d44fa6"><div class="ttname"><a href="../../df/d3d/structsuperblock.html#a7c6e4d6da139ecee74eb7816d5d44fa6">superblock::size</a></div><div class="ttdeci">uint size</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00015">fs.h:15</a></div></div>
+<div class="ttc" id="astructstat_html_aaa92f67184b0dfef3a3bc8dd40a1024d"><div class="ttname"><a href="../../da/de7/structstat.html#aaa92f67184b0dfef3a3bc8dd40a1024d">stat::addr</a></div><div class="ttdeci">uint addr[12+1]</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d1b/stat_8h_source.html#l00013">stat.h:13</a></div></div>
+<div class="ttc" id="astructstat_html_a14ef4f85e6fb86bf296360361d0f393b"><div class="ttname"><a href="../../da/de7/structstat.html#a14ef4f85e6fb86bf296360361d0f393b">stat::dev</a></div><div class="ttdeci">int dev</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d1b/stat_8h_source.html#l00009">stat.h:9</a></div></div>
+<div class="ttc" id="astructstat_html_a99ca3487fd2f4799337eb4281f8871e4"><div class="ttname"><a href="../../da/de7/structstat.html#a99ca3487fd2f4799337eb4281f8871e4">stat::nlink</a></div><div class="ttdeci">short nlink</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d1b/stat_8h_source.html#l00011">stat.h:11</a></div></div>
+<div class="ttc" id="afs_8h_html_a403cf3149c084cea115b85c90721039a"><div class="ttname"><a href="../../df/d26/fs_8h.html#a403cf3149c084cea115b85c90721039a">BSIZE</a></div><div class="ttdeci">#define BSIZE</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00005">fs.h:5</a></div></div>
+<div class="ttc" id="atypes_8h_html_a91ad9478d81a7aaf2593e8d9c3d06a14"><div class="ttname"><a href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a></div><div class="ttdeci">unsigned int uint</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d49/types_8h_source.html#l00001">types.h:1</a></div></div>
+<div class="ttc" id="astructinode_html"><div class="ttname"><a href="../../d0/df8/structinode.html">inode</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00013">file.h:13</a></div></div>
+<div class="ttc" id="astructsuperblock_html_a2a27a7cfb54689f0e1dcd1788d049218"><div class="ttname"><a href="../../df/d3d/structsuperblock.html#a2a27a7cfb54689f0e1dcd1788d049218">superblock::nblocks</a></div><div class="ttdeci">uint nblocks</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00016">fs.h:16</a></div></div>
+<div class="ttc" id="afs_8c_html_a4a942a8fde303c8392d4f302170e5626"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#a4a942a8fde303c8392d4f302170e5626">addrLen</a></div><div class="ttdeci">uint addrLen(uint addrs, uint mode)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00391">fs.c:391</a></div></div>
+<div class="ttc" id="astructstat_1_1cs_html_a11753c8b5c90962b2a3e673365d9f203"><div class="ttname"><a href="../../da/d85/structstat_1_1cs.html#a11753c8b5c90962b2a3e673365d9f203">stat::cs::addr</a></div><div class="ttdeci">uint addr</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d1b/stat_8h_source.html#l00017">stat.h:17</a></div></div>
+<div class="ttc" id="astructdirent_html"><div class="ttname"><a href="../../d5/de2/structdirent.html">dirent</a></div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00054">fs.h:54</a></div></div>
+<div class="ttc" id="astructbuf_html"><div class="ttname"><a href="../../d9/dd0/structbuf.html">buf</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d6d/buf_8h_source.html#l00001">buf.h:1</a></div></div>
+<div class="ttc" id="astructstat_html_aa165846eb7054d6933b314d62314011c"><div class="ttname"><a href="../../da/de7/structstat.html#aa165846eb7054d6933b314d62314011c">stat::cs</a></div><div class="ttdeci">struct stat::cs cs[12]</div></div>
+<div class="ttc" id="afs_8h_html_a080eb729016328ec6da85bfe125fc04c"><div class="ttname"><a href="../../df/d26/fs_8h.html#a080eb729016328ec6da85bfe125fc04c">BBLOCK</a></div><div class="ttdeci">#define BBLOCK(b, sb)</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00049">fs.h:49</a></div></div>
+<div class="ttc" id="astructdinode_html_a990ad8ddf5f8c051fbbe95cf550d2164"><div class="ttname"><a href="../../db/dfa/structdinode.html#a990ad8ddf5f8c051fbbe95cf550d2164">dinode::size</a></div><div class="ttdeci">uint size</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00035">fs.h:35</a></div></div>
+<div class="ttc" id="aparam_8h_html"><div class="ttname"><a href="../../d5/d33/param_8h.html">param.h</a></div></div>
+<div class="ttc" id="afs_8c_html_a69a135a0e8a06d9f306d77ebc0c1f7a0"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#a69a135a0e8a06d9f306d77ebc0c1f7a0">dirlink</a></div><div class="ttdeci">int dirlink(struct inode *dp, char *name, uint inum)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00696">fs.c:696</a></div></div>
+<div class="ttc" id="afs_8c_html_a965e83e1fa9b15abf268784ce74181bb"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#a965e83e1fa9b15abf268784ce74181bb">bmap</a></div><div class="ttdeci">static uint bmap(struct inode *ip, uint bn)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00405">fs.c:405</a></div></div>
+<div class="ttc" id="aconsole_8c_html_a90f0742d846503e4ed1804f1df421ec6"><div class="ttname"><a href="../../d0/d56/console_8c.html#a90f0742d846503e4ed1804f1df421ec6">cprintf</a></div><div class="ttdeci">void cprintf(char *fmt,...)</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/d56/console_8c_source.html#l00055">console.c:55</a></div></div>
+<div class="ttc" id="adefs_8h_html_addb64b689e3c266aaa67cc0126bba441"><div class="ttname"><a href="../../d5/d64/defs_8h.html#addb64b689e3c266aaa67cc0126bba441">myproc</a></div><div class="ttdeci">struct proc * myproc()</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/dda/proc_8c_source.html#l00059">proc.c:59</a></div></div>
+<div class="ttc" id="astructstat_html_abf15624517ed5d79d0fa2a5553a68e25"><div class="ttname"><a href="../../da/de7/structstat.html#abf15624517ed5d79d0fa2a5553a68e25">stat::ino</a></div><div class="ttdeci">uint ino</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d1b/stat_8h_source.html#l00010">stat.h:10</a></div></div>
+<div class="ttc" id="afs_8c_html_a5a78db4f7c856337d906f0606b19bff5"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#a5a78db4f7c856337d906f0606b19bff5">icache</a></div><div class="ttdeci">struct @5 icache</div></div>
+<div class="ttc" id="adefs_8h_html_aa9c8577c0e9d233f85892ec2d9bfe212"><div class="ttname"><a href="../../d5/d64/defs_8h.html#aa9c8577c0e9d233f85892ec2d9bfe212">memmove</a></div><div class="ttdeci">void * memmove(void *, const void *, uint)</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/db0/string_8c_source.html#l00032">string.c:32</a></div></div>
+<div class="ttc" id="afs_8c_html_a3aba1fa9f6789d09356aec5b96d91fa8"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#a3aba1fa9f6789d09356aec5b96d91fa8">readi</a></div><div class="ttdeci">int readi(struct inode *ip, char *dst, uint off, uint n)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00590">fs.c:590</a></div></div>
+<div class="ttc" id="astructinode_html_a6a519028ee67f805482b3e1725bf09c5"><div class="ttname"><a href="../../d0/df8/structinode.html#a6a519028ee67f805482b3e1725bf09c5">inode::ref</a></div><div class="ttdeci">int ref</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00016">file.h:16</a></div></div>
+<div class="ttc" id="astructdinode_html_abf6b2a8476a803284f1c927fb3b82259"><div class="ttname"><a href="../../db/dfa/structdinode.html#abf6b2a8476a803284f1c927fb3b82259">dinode::type</a></div><div class="ttdeci">short type</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00031">fs.h:31</a></div></div>
+<div class="ttc" id="afs_8c_html_a9baba030d5bc6e9e20cf8b7d181edf35"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#a9baba030d5bc6e9e20cf8b7d181edf35">namei</a></div><div class="ttdeci">struct inode * namei(char *path)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00812">fs.c:812</a></div></div>
+<div class="ttc" id="astructinode_html_af8b88b409bea7ef99c49a55f387538b2"><div class="ttname"><a href="../../d0/df8/structinode.html#af8b88b409bea7ef99c49a55f387538b2">inode::nlink</a></div><div class="ttdeci">short nlink</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00023">file.h:23</a></div></div>
+<div class="ttc" id="asleeplock_8h_html"><div class="ttname"><a href="../../d0/d74/sleeplock_8h.html">sleeplock.h</a></div></div>
+<div class="ttc" id="astructinode_html_a121742a89c4531f03a7de1613d5be605"><div class="ttname"><a href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">inode::dev</a></div><div class="ttdeci">uint dev</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00014">file.h:14</a></div></div>
+<div class="ttc" id="aparam_8h_html_aa564a41c8409694da49b0badf2bb2853"><div class="ttname"><a href="../../d5/d33/param_8h.html#aa564a41c8409694da49b0badf2bb2853">NDEV</a></div><div class="ttdeci">#define NDEV</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d33/param_8h_source.html#l00007">param.h:7</a></div></div>
+<div class="ttc" id="astructsuperblock_html_a355d2a1ebdc51f80820c23e69363cf42"><div class="ttname"><a href="../../df/d3d/structsuperblock.html#a355d2a1ebdc51f80820c23e69363cf42">superblock::ninodes</a></div><div class="ttdeci">uint ninodes</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00017">fs.h:17</a></div></div>
+<div class="ttc" id="abio_8c_html_ae000984516278965dde3d125affd086c"><div class="ttname"><a href="../../dc/de6/bio_8c.html#ae000984516278965dde3d125affd086c">bread</a></div><div class="ttdeci">struct buf * bread(uint dev, uint blockno)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/de6/bio_8c_source.html#l00097">bio.c:97</a></div></div>
+<div class="ttc" id="astructinode_html_a8d74bec2898785c057111c328d23fda2"><div class="ttname"><a href="../../d0/df8/structinode.html#a8d74bec2898785c057111c328d23fda2">inode::type</a></div><div class="ttdeci">short type</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00020">file.h:20</a></div></div>
+<div class="ttc" id="abio_8c_html_ab5335aeb503731104314321a78a6d727"><div class="ttname"><a href="../../dc/de6/bio_8c.html#ab5335aeb503731104314321a78a6d727">brelse</a></div><div class="ttdeci">void brelse(struct buf *b)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/de6/bio_8c_source.html#l00121">bio.c:121</a></div></div>
+<div class="ttc" id="aconsole_8c_html_af10fa12dd785c91e29528fbdc50cf9af"><div class="ttname"><a href="../../d0/d56/console_8c.html#af10fa12dd785c91e29528fbdc50cf9af">r</a></div><div class="ttdeci">uint r</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/d56/console_8c_source.html#l00184">console.c:184</a></div></div>
+<div class="ttc" id="astructdevsw_html"><div class="ttname"><a href="../../de/d6a/structdevsw.html">devsw</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00030">file.h:30</a></div></div>
+<div class="ttc" id="afs_8h_html_acd38e9532d4b3623f844b93c012a8e06"><div class="ttname"><a href="../../df/d26/fs_8h.html#acd38e9532d4b3623f844b93c012a8e06">NDIRECT</a></div><div class="ttdeci">#define NDIRECT</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00024">fs.h:24</a></div></div>
+<div class="ttc" id="afs_8c_html_ab3c447f135c68e4c3c1f8d5866f6e77b"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#ab3c447f135c68e4c3c1f8d5866f6e77b">iput</a></div><div class="ttdeci">void iput(struct inode *ip)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00345">fs.c:345</a></div></div>
+<div class="ttc" id="astat_8h_html"><div class="ttname"><a href="../../d2/d1b/stat_8h.html">stat.h</a></div></div>
+<div class="ttc" id="afs_8c_html_ac93f607f4a954323f4c9ea485ca88538"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#ac93f607f4a954323f4c9ea485ca88538">bzero</a></div><div class="ttdeci">static void bzero(int dev, int bno)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00043">fs.c:43</a></div></div>
+<div class="ttc" id="aproc_8h_html"><div class="ttname"><a href="../../df/d03/proc_8h.html">proc.h</a></div></div>
+<div class="ttc" id="aparam_8h_html_ae9ce6b24fe2aae59ff60b469c35febbc"><div class="ttname"><a href="../../d5/d33/param_8h.html#ae9ce6b24fe2aae59ff60b469c35febbc">ROOTDEV</a></div><div class="ttdeci">#define ROOTDEV</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d33/param_8h_source.html#l00008">param.h:8</a></div></div>
+<div class="ttc" id="astructstat_html_a01f1b4cd7627d192a7875c9a188e0699"><div class="ttname"><a href="../../da/de7/structstat.html#a01f1b4cd7627d192a7875c9a188e0699">stat::type</a></div><div class="ttdeci">short type</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d1b/stat_8h_source.html#l00008">stat.h:8</a></div></div>
+<div class="ttc" id="aconsole_8c_html_a95c0aca5d6d7487933984f08b189917a"><div class="ttname"><a href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a></div><div class="ttdeci">void panic(char *s)</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/d56/console_8c_source.html#l00107">console.c:107</a></div></div>
+<div class="ttc" id="astructinode_html_aad324382ba30eb83daa5304fce7dca08"><div class="ttname"><a href="../../d0/df8/structinode.html#aad324382ba30eb83daa5304fce7dca08">inode::valid</a></div><div class="ttdeci">int valid</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00018">file.h:18</a></div></div>
+<div class="ttc" id="adefs_8h_html_a840b479c87b1c047d7142f58e0ad0b27"><div class="ttname"><a href="../../d5/d64/defs_8h.html#a840b479c87b1c047d7142f58e0ad0b27">releasesleep</a></div><div class="ttdeci">void releasesleep(struct sleeplock *)</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/dd1/sleeplock_8c_source.html#l00035">sleeplock.c:35</a></div></div>
+<div class="ttc" id="afs_8c_html_a7c42ba96035fb59aef87372552b1a661"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#a7c42ba96035fb59aef87372552b1a661">itrunc</a></div><div class="ttdeci">static void itrunc(struct inode *)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00502">fs.c:502</a></div></div>
+<div class="ttc" id="afs_8c_html_ac6afabdc09a49a433ee19d8a9486056d"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#ac6afabdc09a49a433ee19d8a9486056d">min</a></div><div class="ttdeci">#define min(a, b)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00024">fs.c:24</a></div></div>
+<div class="ttc" id="afs_8c_html_adb360ce0b70a32d19d089fba4cd91293"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#adb360ce0b70a32d19d089fba4cd91293">ialloc</a></div><div class="ttdeci">struct inode * ialloc(uint dev, short type)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00208">fs.c:208</a></div></div>
+<div class="ttc" id="aparam_8h_html_adabafa10c7951be7c875cd2ee212be85"><div class="ttname"><a href="../../d5/d33/param_8h.html#adabafa10c7951be7c875cd2ee212be85">NINODE</a></div><div class="ttdeci">#define NINODE</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d33/param_8h_source.html#l00006">param.h:6</a></div></div>
+<div class="ttc" id="astructbuf_html_ab0ec38784ab94ed35e575cf6d33912d2"><div class="ttname"><a href="../../d9/dd0/structbuf.html#ab0ec38784ab94ed35e575cf6d33912d2">buf::data</a></div><div class="ttdeci">uchar data[BSIZE]</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d6d/buf_8h_source.html#l00010">buf.h:10</a></div></div>
+<div class="ttc" id="afs_8c_html_aa696af27cc6f5d87271f9eb1c863f770"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#aa696af27cc6f5d87271f9eb1c863f770">skipelem</a></div><div class="ttdeci">static char * skipelem(char *path, char *name)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00742">fs.c:742</a></div></div>
+<div class="ttc" id="astat_8h_html_a91136bcd71a9f499304f5d7e7e9d6376"><div class="ttname"><a href="../../d2/d1b/stat_8h.html#a91136bcd71a9f499304f5d7e7e9d6376">T_DIR</a></div><div class="ttdeci">#define T_DIR</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d1b/stat_8h_source.html#l00001">stat.h:1</a></div></div>
+<div class="ttc" id="adefs_8h_html"><div class="ttname"><a href="../../d5/d64/defs_8h.html">defs.h</a></div></div>
+<div class="ttc" id="afile_8h_html"><div class="ttname"><a href="../../d2/d4d/file_8h.html">file.h</a></div></div>
+<div class="ttc" id="astructinode_html_a37878866e7905b666db2aa33076076a2"><div class="ttname"><a href="../../d0/df8/structinode.html#a37878866e7905b666db2aa33076076a2">inode::minor</a></div><div class="ttdeci">short minor</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00022">file.h:22</a></div></div>
+<div class="ttc" id="astructdevsw_html_a87fd7af6c9a6fb8663fc206be7a233d4"><div class="ttname"><a href="../../de/d6a/structdevsw.html#a87fd7af6c9a6fb8663fc206be7a233d4">devsw::write</a></div><div class="ttdeci">int(* write)(struct inode *, char *, int)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00032">file.h:32</a></div></div>
+<div class="ttc" id="ausertests_8c_html_aee754febd402311e2a552cb0d6ab6629"><div class="ttname"><a href="../../de/dc0/usertests_8c.html#aee754febd402311e2a552cb0d6ab6629">name</a></div><div class="ttdeci">char name[3]</div><div class="ttdef"><b>Definition:</b> <a href="../../de/dc0/usertests_8c_source.html#l00012">usertests.c:12</a></div></div>
+<div class="ttc" id="astructbuf_html_ac96082c2b5f22133ac7092ef81487227"><div class="ttname"><a href="../../d9/dd0/structbuf.html#ac96082c2b5f22133ac7092ef81487227">buf::dev</a></div><div class="ttdeci">uint dev</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d6d/buf_8h_source.html#l00003">buf.h:3</a></div></div>
+<div class="ttc" id="afs_8c_html_a0248d0bac625de5a1415f2f8c91f3343"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#a0248d0bac625de5a1415f2f8c91f3343">sb</a></div><div class="ttdeci">struct superblock sb</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00029">fs.c:29</a></div></div>
+<div class="ttc" id="adefs_8h_html_afe4ef8638f1ecb962a6e67fb086ee3b8"><div class="ttname"><a href="../../d5/d64/defs_8h.html#afe4ef8638f1ecb962a6e67fb086ee3b8">acquire</a></div><div class="ttdeci">void acquire(struct spinlock *)</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d2d/spinlock_8c_source.html#l00025">spinlock.c:25</a></div></div>
+<div class="ttc" id="afs_8c_html_a207b3008bae35596c55ec7c4fc6875eb"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#a207b3008bae35596c55ec7c4fc6875eb">iunlockput</a></div><div class="ttdeci">void iunlockput(struct inode *ip)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00370">fs.c:370</a></div></div>
+<div class="ttc" id="astructinode_html_a918af769c48a8ca8afac057bf83d12de"><div class="ttname"><a href="../../d0/df8/structinode.html#a918af769c48a8ca8afac057bf83d12de">inode::size</a></div><div class="ttdeci">uint size</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00024">file.h:24</a></div></div>
+<div class="ttc" id="astructspinlock_html"><div class="ttname"><a href="../../d1/d08/structspinlock.html">spinlock</a></div><div class="ttdef"><b>Definition:</b> <a href="../../df/d63/spinlock_8h_source.html#l00002">spinlock.h:2</a></div></div>
+<div class="ttc" id="afs_8h_html_aadb6c866a6d0a173f5f0a6ed9c7e0228"><div class="ttname"><a href="../../df/d26/fs_8h.html#aadb6c866a6d0a173f5f0a6ed9c7e0228">IPB</a></div><div class="ttdeci">#define IPB</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00040">fs.h:40</a></div></div>
+<div class="ttc" id="adefs_8h_html_af5ca8072e3877a883fb34ce59eff88cb"><div class="ttname"><a href="../../d5/d64/defs_8h.html#af5ca8072e3877a883fb34ce59eff88cb">initsleeplock</a></div><div class="ttdeci">void initsleeplock(struct sleeplock *, char *)</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/dd1/sleeplock_8c_source.html#l00014">sleeplock.c:14</a></div></div>
+<div class="ttc" id="afs_8c_html_a5a987ca4f8ffd579b96a8b9a60e61a7c"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#a5a987ca4f8ffd579b96a8b9a60e61a7c">nameiparent</a></div><div class="ttdeci">struct inode * nameiparent(char *path, char *name)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00819">fs.c:819</a></div></div>
+<div class="ttc" id="astructinode_html_a8acc2b9df0bfc6856da62925763db7fe"><div class="ttname"><a href="../../d0/df8/structinode.html#a8acc2b9df0bfc6856da62925763db7fe">inode::inum</a></div><div class="ttdeci">uint inum</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00015">file.h:15</a></div></div>
+<div class="ttc" id="afs_8c_html_ac9f31f726d2933782e2efda7136a25fd"><div class="ttname"><a href="../../d2/d5a/fs_8c.html#ac9f31f726d2933782e2efda7136a25fd">ADDR</a></div><div class="ttdeci">#define ADDR</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00387">fs.c:387</a></div></div>
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+다음에 의해 생성됨 :  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.17
+</small></address>
+</body>
+</html>

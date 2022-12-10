@@ -1,0 +1,125 @@
+\hypertarget{cat_8c}{}\doxysection{cat.\+c 파일 참조}
+\label{cat_8c}\index{cat.c@{cat.c}}
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stat.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}user.\+h\char`\"{}}\newline
+cat.\+c에 대한 include 의존 그래프
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=260pt]{d3/d8f/cat_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{함수}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{cat_8c_a90a33618884bcf5e892297879bc016ff}{cat}} (int fd)
+\item 
+int \mbox{\hyperlink{cat_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$\mbox{\hyperlink{init_8c_abd1a2cf54950f450187ef24c1cdcac0c}{argv}}\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\doxysubsection*{변수}
+\begin{DoxyCompactItemize}
+\item 
+char \mbox{\hyperlink{cat_8c_a78a05cf530dddc61e7a26aefe187bd31}{buf}} \mbox{[}512\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{함수 문서화}
+\mbox{\Hypertarget{cat_8c_a90a33618884bcf5e892297879bc016ff}\label{cat_8c_a90a33618884bcf5e892297879bc016ff}} 
+\index{cat.c@{cat.c}!cat@{cat}}
+\index{cat@{cat}!cat.c@{cat.c}}
+\doxysubsubsection{\texorpdfstring{cat()}{cat()}}
+{\footnotesize\ttfamily void cat (\begin{DoxyParamCaption}\item[{int}]{fd }\end{DoxyParamCaption})}
+
+
+
+cat.\+c 파일의 8 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{9 \{}
+\DoxyCodeLine{10   \textcolor{keywordtype}{int} n;}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12   \textcolor{keywordflow}{while}((n = \mbox{\hyperlink{user_8h_a2d73522d6354b8a141ecfaa9585a0c77}{read}}(fd, \mbox{\hyperlink{structbuf}{buf}}, \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structbuf}{buf}}))) > 0) \{}
+\DoxyCodeLine{13     \textcolor{keywordflow}{if} (\mbox{\hyperlink{user_8h_ae57e95d717eb7386cd8b935a0c136abe}{write}}(1, \mbox{\hyperlink{structbuf}{buf}}, n) != n) \{}
+\DoxyCodeLine{14       \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(1, \textcolor{stringliteral}{"cat: write error\(\backslash\)n"});}
+\DoxyCodeLine{15       \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}();}
+\DoxyCodeLine{16     \}}
+\DoxyCodeLine{17   \}}
+\DoxyCodeLine{18   \textcolor{keywordflow}{if}(n < 0)\{}
+\DoxyCodeLine{19     \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(1, \textcolor{stringliteral}{"cat: read error\(\backslash\)n"});}
+\DoxyCodeLine{20     \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}();}
+\DoxyCodeLine{21   \}}
+\DoxyCodeLine{22 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=191pt]{d1/d8f/cat_8c_a90a33618884bcf5e892297879bc016ff_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=189pt]{d1/d8f/cat_8c_a90a33618884bcf5e892297879bc016ff_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{cat_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{cat_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{cat.c@{cat.c}!main@{main}}
+\index{main@{main}!cat.c@{cat.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+cat.\+c 파일의 25 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{26 \{}
+\DoxyCodeLine{27   \textcolor{keywordtype}{int} fd, i;}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29   \textcolor{keywordflow}{if}(argc <= 1)\{}
+\DoxyCodeLine{30     \mbox{\hyperlink{cat_8c_a90a33618884bcf5e892297879bc016ff}{cat}}(0);}
+\DoxyCodeLine{31     \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}();}
+\DoxyCodeLine{32   \}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34   \textcolor{keywordflow}{for}(i = 1; i < argc; i++)\{}
+\DoxyCodeLine{35     \textcolor{keywordflow}{if}((fd = \mbox{\hyperlink{user_8h_a2c4414339f388561554c2deab11a1a07}{open}}(\mbox{\hyperlink{init_8c_abd1a2cf54950f450187ef24c1cdcac0c}{argv}}[i], 0)) < 0)\{}
+\DoxyCodeLine{36       \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(1, \textcolor{stringliteral}{"cat: cannot open \%s\(\backslash\)n"}, \mbox{\hyperlink{init_8c_abd1a2cf54950f450187ef24c1cdcac0c}{argv}}[i]);}
+\DoxyCodeLine{37       \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}();}
+\DoxyCodeLine{38     \}}
+\DoxyCodeLine{39     \mbox{\hyperlink{cat_8c_a90a33618884bcf5e892297879bc016ff}{cat}}(fd);}
+\DoxyCodeLine{40     \mbox{\hyperlink{user_8h_ae152484c890a24e4d9b4980e7b965be0}{close}}(fd);}
+\DoxyCodeLine{41   \}}
+\DoxyCodeLine{42   \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}();}
+\DoxyCodeLine{43 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{d1/d8f/cat_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{변수 문서화}
+\mbox{\Hypertarget{cat_8c_a78a05cf530dddc61e7a26aefe187bd31}\label{cat_8c_a78a05cf530dddc61e7a26aefe187bd31}} 
+\index{cat.c@{cat.c}!buf@{buf}}
+\index{buf@{buf}!cat.c@{cat.c}}
+\doxysubsubsection{\texorpdfstring{buf}{buf}}
+{\footnotesize\ttfamily char \mbox{\hyperlink{structbuf}{buf}}\mbox{[}512\mbox{]}}
+
+
+
+cat.\+c 파일의 5 번째 라인에서 정의되었습니다.
+

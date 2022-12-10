@@ -1,0 +1,334 @@
+\hypertarget{structtrapframe}{}\doxysection{trapframe 구조체 참조}
+\label{structtrapframe}\index{trapframe@{trapframe}}
+
+
+{\ttfamily \#include $<$x86.\+h$>$}
+
+
+
+trapframe에 대한 협력 다이어그램\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=187pt]{d4/d47/structtrapframe__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{데이터 필드}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{structtrapframe_ad20959553b558987a0d475b6367c87d0}{edi}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{structtrapframe_a11cbc20a968f2ce7a9b71590a709bb46}{esi}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{structtrapframe_a258f414f983f95f6799372d548fbd6d3}{ebp}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{structtrapframe_a8466e7bcbbbe2d19fbe7f4fe0daa29fb}{oesp}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{structtrapframe_a0f93026966ea52a69a94870fb394ba04}{ebx}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{structtrapframe_a62585fbda8434a03de564611b89c02ad}{edx}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{structtrapframe_ad42fe2bbc83c7fe778f0127ac038efa3}{ecx}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{structtrapframe_ab1dd3a10936b61129d7395c3a21bc2fe}{eax}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtrapframe_a3df62e3ed00405cbaaa4d72902c617da}{gs}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtrapframe_a84a5fbe43d7f11df983d97c80aabb454}{padding1}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtrapframe_a4791a272cca7213d324e59db2d9d0b71}{fs}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtrapframe_a63737765c58491a8604ef180a3864ad0}{padding2}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtrapframe_ab974b358098da0aaa5897c32827a038d}{es}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtrapframe_acd8a8fee013b35212fab787b645f8dd9}{padding3}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtrapframe_a421be1ec9ad2a55f1d1adeac9b0b89c3}{ds}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtrapframe_aef4bc72b31fb4a0cf6b32782b40a7e2f}{padding4}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{structtrapframe_abc7f81b0a6a91d13e9fefe171b0a7d12}{trapno}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{structtrapframe_acfb2346e6184b0d2438960b4f2a67e4f}{err}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{structtrapframe_a886a5973a537894e3a95435f38767d5c}{eip}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtrapframe_a61261f63223a73e25be79fcc8c625265}{cs}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtrapframe_a5715f786df145b0bf6faf3aa3304f05f}{padding5}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{structtrapframe_ae6b3005ad34416546603ab18dbb4a644}{eflags}}
+\item 
+\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{structtrapframe_acd319e2dbd720d217c10f8fb620d73e2}{esp}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtrapframe_aa9c9b52b242d4f42fe4252e26b655bf6}{ss}}
+\item 
+\mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} \mbox{\hyperlink{structtrapframe_a1c079b271df9fdd3502bfe9e00888dfa}{padding6}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{상세한 설명}
+
+
+x86.\+h 파일의 150 번째 라인에서 정의되었습니다.
+
+
+
+\doxysubsection{필드 문서화}
+\mbox{\Hypertarget{structtrapframe_a61261f63223a73e25be79fcc8c625265}\label{structtrapframe_a61261f63223a73e25be79fcc8c625265}} 
+\index{trapframe@{trapframe}!cs@{cs}}
+\index{cs@{cs}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{cs}{cs}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} trapframe\+::cs}
+
+
+
+x86.\+h 파일의 175 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtrapframe_a421be1ec9ad2a55f1d1adeac9b0b89c3}\label{structtrapframe_a421be1ec9ad2a55f1d1adeac9b0b89c3}} 
+\index{trapframe@{trapframe}!ds@{ds}}
+\index{ds@{ds}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{ds}{ds}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} trapframe\+::ds}
+
+
+
+x86.\+h 파일의 168 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtrapframe_ab1dd3a10936b61129d7395c3a21bc2fe}\label{structtrapframe_ab1dd3a10936b61129d7395c3a21bc2fe}} 
+\index{trapframe@{trapframe}!eax@{eax}}
+\index{eax@{eax}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{eax}{eax}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} trapframe\+::eax}
+
+
+
+x86.\+h 파일의 159 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtrapframe_a258f414f983f95f6799372d548fbd6d3}\label{structtrapframe_a258f414f983f95f6799372d548fbd6d3}} 
+\index{trapframe@{trapframe}!ebp@{ebp}}
+\index{ebp@{ebp}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{ebp}{ebp}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} trapframe\+::ebp}
+
+
+
+x86.\+h 파일의 154 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtrapframe_a0f93026966ea52a69a94870fb394ba04}\label{structtrapframe_a0f93026966ea52a69a94870fb394ba04}} 
+\index{trapframe@{trapframe}!ebx@{ebx}}
+\index{ebx@{ebx}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{ebx}{ebx}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} trapframe\+::ebx}
+
+
+
+x86.\+h 파일의 156 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtrapframe_ad42fe2bbc83c7fe778f0127ac038efa3}\label{structtrapframe_ad42fe2bbc83c7fe778f0127ac038efa3}} 
+\index{trapframe@{trapframe}!ecx@{ecx}}
+\index{ecx@{ecx}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{ecx}{ecx}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} trapframe\+::ecx}
+
+
+
+x86.\+h 파일의 158 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtrapframe_ad20959553b558987a0d475b6367c87d0}\label{structtrapframe_ad20959553b558987a0d475b6367c87d0}} 
+\index{trapframe@{trapframe}!edi@{edi}}
+\index{edi@{edi}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{edi}{edi}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} trapframe\+::edi}
+
+
+
+x86.\+h 파일의 152 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtrapframe_a62585fbda8434a03de564611b89c02ad}\label{structtrapframe_a62585fbda8434a03de564611b89c02ad}} 
+\index{trapframe@{trapframe}!edx@{edx}}
+\index{edx@{edx}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{edx}{edx}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} trapframe\+::edx}
+
+
+
+x86.\+h 파일의 157 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtrapframe_ae6b3005ad34416546603ab18dbb4a644}\label{structtrapframe_ae6b3005ad34416546603ab18dbb4a644}} 
+\index{trapframe@{trapframe}!eflags@{eflags}}
+\index{eflags@{eflags}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{eflags}{eflags}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} trapframe\+::eflags}
+
+
+
+x86.\+h 파일의 177 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtrapframe_a886a5973a537894e3a95435f38767d5c}\label{structtrapframe_a886a5973a537894e3a95435f38767d5c}} 
+\index{trapframe@{trapframe}!eip@{eip}}
+\index{eip@{eip}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{eip}{eip}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} trapframe\+::eip}
+
+
+
+x86.\+h 파일의 174 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtrapframe_acfb2346e6184b0d2438960b4f2a67e4f}\label{structtrapframe_acfb2346e6184b0d2438960b4f2a67e4f}} 
+\index{trapframe@{trapframe}!err@{err}}
+\index{err@{err}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{err}{err}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} trapframe\+::err}
+
+
+
+x86.\+h 파일의 173 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtrapframe_ab974b358098da0aaa5897c32827a038d}\label{structtrapframe_ab974b358098da0aaa5897c32827a038d}} 
+\index{trapframe@{trapframe}!es@{es}}
+\index{es@{es}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{es}{es}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} trapframe\+::es}
+
+
+
+x86.\+h 파일의 166 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtrapframe_a11cbc20a968f2ce7a9b71590a709bb46}\label{structtrapframe_a11cbc20a968f2ce7a9b71590a709bb46}} 
+\index{trapframe@{trapframe}!esi@{esi}}
+\index{esi@{esi}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{esi}{esi}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} trapframe\+::esi}
+
+
+
+x86.\+h 파일의 153 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtrapframe_acd319e2dbd720d217c10f8fb620d73e2}\label{structtrapframe_acd319e2dbd720d217c10f8fb620d73e2}} 
+\index{trapframe@{trapframe}!esp@{esp}}
+\index{esp@{esp}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{esp}{esp}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} trapframe\+::esp}
+
+
+
+x86.\+h 파일의 180 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtrapframe_a4791a272cca7213d324e59db2d9d0b71}\label{structtrapframe_a4791a272cca7213d324e59db2d9d0b71}} 
+\index{trapframe@{trapframe}!fs@{fs}}
+\index{fs@{fs}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{fs}{fs}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} trapframe\+::fs}
+
+
+
+x86.\+h 파일의 164 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtrapframe_a3df62e3ed00405cbaaa4d72902c617da}\label{structtrapframe_a3df62e3ed00405cbaaa4d72902c617da}} 
+\index{trapframe@{trapframe}!gs@{gs}}
+\index{gs@{gs}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{gs}{gs}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} trapframe\+::gs}
+
+
+
+x86.\+h 파일의 162 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtrapframe_a8466e7bcbbbe2d19fbe7f4fe0daa29fb}\label{structtrapframe_a8466e7bcbbbe2d19fbe7f4fe0daa29fb}} 
+\index{trapframe@{trapframe}!oesp@{oesp}}
+\index{oesp@{oesp}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{oesp}{oesp}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} trapframe\+::oesp}
+
+
+
+x86.\+h 파일의 155 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtrapframe_a84a5fbe43d7f11df983d97c80aabb454}\label{structtrapframe_a84a5fbe43d7f11df983d97c80aabb454}} 
+\index{trapframe@{trapframe}!padding1@{padding1}}
+\index{padding1@{padding1}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{padding1}{padding1}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} trapframe\+::padding1}
+
+
+
+x86.\+h 파일의 163 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtrapframe_a63737765c58491a8604ef180a3864ad0}\label{structtrapframe_a63737765c58491a8604ef180a3864ad0}} 
+\index{trapframe@{trapframe}!padding2@{padding2}}
+\index{padding2@{padding2}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{padding2}{padding2}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} trapframe\+::padding2}
+
+
+
+x86.\+h 파일의 165 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtrapframe_acd8a8fee013b35212fab787b645f8dd9}\label{structtrapframe_acd8a8fee013b35212fab787b645f8dd9}} 
+\index{trapframe@{trapframe}!padding3@{padding3}}
+\index{padding3@{padding3}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{padding3}{padding3}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} trapframe\+::padding3}
+
+
+
+x86.\+h 파일의 167 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtrapframe_aef4bc72b31fb4a0cf6b32782b40a7e2f}\label{structtrapframe_aef4bc72b31fb4a0cf6b32782b40a7e2f}} 
+\index{trapframe@{trapframe}!padding4@{padding4}}
+\index{padding4@{padding4}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{padding4}{padding4}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} trapframe\+::padding4}
+
+
+
+x86.\+h 파일의 169 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtrapframe_a5715f786df145b0bf6faf3aa3304f05f}\label{structtrapframe_a5715f786df145b0bf6faf3aa3304f05f}} 
+\index{trapframe@{trapframe}!padding5@{padding5}}
+\index{padding5@{padding5}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{padding5}{padding5}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} trapframe\+::padding5}
+
+
+
+x86.\+h 파일의 176 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtrapframe_a1c079b271df9fdd3502bfe9e00888dfa}\label{structtrapframe_a1c079b271df9fdd3502bfe9e00888dfa}} 
+\index{trapframe@{trapframe}!padding6@{padding6}}
+\index{padding6@{padding6}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{padding6}{padding6}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} trapframe\+::padding6}
+
+
+
+x86.\+h 파일의 182 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtrapframe_aa9c9b52b242d4f42fe4252e26b655bf6}\label{structtrapframe_aa9c9b52b242d4f42fe4252e26b655bf6}} 
+\index{trapframe@{trapframe}!ss@{ss}}
+\index{ss@{ss}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{ss}{ss}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort}} trapframe\+::ss}
+
+
+
+x86.\+h 파일의 181 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{structtrapframe_abc7f81b0a6a91d13e9fefe171b0a7d12}\label{structtrapframe_abc7f81b0a6a91d13e9fefe171b0a7d12}} 
+\index{trapframe@{trapframe}!trapno@{trapno}}
+\index{trapno@{trapno}!trapframe@{trapframe}}
+\doxysubsubsection{\texorpdfstring{trapno}{trapno}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} trapframe\+::trapno}
+
+
+
+x86.\+h 파일의 170 번째 라인에서 정의되었습니다.
+
+
+
+이 구조체에 대한 문서화 페이지는 다음의 파일로부터 생성되었습니다.\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{x86_8h}{x86.\+h}}\end{DoxyCompactItemize}

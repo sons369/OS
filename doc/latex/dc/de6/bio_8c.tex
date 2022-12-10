@@ -1,0 +1,309 @@
+\hypertarget{bio_8c}{}\doxysection{bio.\+c 파일 참조}
+\label{bio_8c}\index{bio.c@{bio.c}}
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}defs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}param.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}spinlock.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sleeplock.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}fs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}buf.\+h\char`\"{}}\newline
+bio.\+c에 대한 include 의존 그래프
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d9/d72/bio_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{함수}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{bio_8c_a53cca0ddc98c5f1de37124eca2575a59}{binit}} (void)
+\item 
+static struct \mbox{\hyperlink{structbuf}{buf}} $\ast$ \mbox{\hyperlink{bio_8c_ae58af86fda152e537209b86758f777ee}{bget}} (\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} dev, \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} blockno)
+\item 
+struct \mbox{\hyperlink{structbuf}{buf}} $\ast$ \mbox{\hyperlink{bio_8c_ae000984516278965dde3d125affd086c}{bread}} (\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} dev, \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} blockno)
+\item 
+void \mbox{\hyperlink{bio_8c_a63c899c13b176ddf80064d32225e1298}{bwrite}} (struct \mbox{\hyperlink{structbuf}{buf}} $\ast$b)
+\item 
+void \mbox{\hyperlink{bio_8c_ab5335aeb503731104314321a78a6d727}{brelse}} (struct \mbox{\hyperlink{structbuf}{buf}} $\ast$b)
+\end{DoxyCompactItemize}
+\doxysubsection*{변수}
+\begin{DoxyCompactItemize}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>struct \mbox{\hyperlink{structspinlock}{spinlock}} \mbox{\hyperlink{bio_8c_ab28e82cd5dda7d960095706a3ea20572}{lock}}\\
+\>struct \mbox{\hyperlink{structbuf}{buf}} \mbox{\hyperlink{bio_8c_a72ee90c61d41547b10a533c219e081c6}{buf}} \mbox{[}\mbox{\hyperlink{param_8h_ad51e2f8dffd163c263ec676a268d0f0a}{NBUF}}\mbox{]}\\
+\>struct \mbox{\hyperlink{structbuf}{buf}} \mbox{\hyperlink{bio_8c_aa6e692c16f1b909f5cb2a1832cf43430}{head}}\\
+\} \mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}\\
+
+\end{tabbing}\end{DoxyCompactItemize}
+
+
+\doxysubsection{함수 문서화}
+\mbox{\Hypertarget{bio_8c_ae58af86fda152e537209b86758f777ee}\label{bio_8c_ae58af86fda152e537209b86758f777ee}} 
+\index{bio.c@{bio.c}!bget@{bget}}
+\index{bget@{bget}!bio.c@{bio.c}}
+\doxysubsubsection{\texorpdfstring{bget()}{bget()}}
+{\footnotesize\ttfamily static struct \mbox{\hyperlink{structbuf}{buf}}$\ast$ bget (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}}]{dev,  }\item[{\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}}]{blockno }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+bio.\+c 파일의 62 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{63 \{}
+\DoxyCodeLine{64   \textcolor{keyword}{struct }\mbox{\hyperlink{structbuf}{buf}} *b;}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66   \mbox{\hyperlink{defs_8h_afe4ef8638f1ecb962a6e67fb086ee3b8}{acquire}}(\&\mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}.lock);}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68   \textcolor{comment}{// Is the block already cached?}}
+\DoxyCodeLine{69   \textcolor{keywordflow}{for}(b = \mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}.head.next; b != \&\mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}.head; b = b-\/>\mbox{\hyperlink{structbuf_ab18c18abb22f07617619e9a74c71f51a}{next}})\{}
+\DoxyCodeLine{70     \textcolor{keywordflow}{if}(b-\/>\mbox{\hyperlink{structbuf_ac96082c2b5f22133ac7092ef81487227}{dev}} == \mbox{\hyperlink{structbuf_ac96082c2b5f22133ac7092ef81487227}{dev}} \&\& b-\/>\mbox{\hyperlink{structbuf_a756b2bcc88008bef7f21d688aa4a7a48}{blockno}} == \mbox{\hyperlink{structbuf_a756b2bcc88008bef7f21d688aa4a7a48}{blockno}})\{}
+\DoxyCodeLine{71       b-\/>\mbox{\hyperlink{structbuf_aaf5efe777371aaeb9944508fd52adda5}{refcnt}}++;}
+\DoxyCodeLine{72       \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}.lock);}
+\DoxyCodeLine{73       \mbox{\hyperlink{defs_8h_aecd4639fe2f9aaad8e8cee2b5e0688c3}{acquiresleep}}(\&b-\/>\mbox{\hyperlink{structbuf_a626ad748d91d4bd7f4e65b74c73f2644}{lock}});}
+\DoxyCodeLine{74       \textcolor{keywordflow}{return} b;}
+\DoxyCodeLine{75     \}}
+\DoxyCodeLine{76   \}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78   \textcolor{comment}{// Not cached; recycle an unused buffer.}}
+\DoxyCodeLine{79   \textcolor{comment}{// Even if refcnt==0, B\_DIRTY indicates a buffer is in use}}
+\DoxyCodeLine{80   \textcolor{comment}{// because log.c has modified it but not yet committed it.}}
+\DoxyCodeLine{81   \textcolor{keywordflow}{for}(b = \mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}.head.prev; b != \&\mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}.head; b = b-\/>\mbox{\hyperlink{structbuf_a930cab1e1b3751795d31bfd0291dff4a}{prev}})\{}
+\DoxyCodeLine{82     \textcolor{keywordflow}{if}(b-\/>\mbox{\hyperlink{structbuf_aaf5efe777371aaeb9944508fd52adda5}{refcnt}} == 0 \&\& (b-\/>\mbox{\hyperlink{structbuf_ae7d6b6c34fdeadb38970efd0554aa1a9}{flags}} \& \mbox{\hyperlink{buf_8h_adc32011df267adb9740bcd0abf0f0663}{B\_DIRTY}}) == 0) \{}
+\DoxyCodeLine{83       b-\/>\mbox{\hyperlink{structbuf_ac96082c2b5f22133ac7092ef81487227}{dev}} = \mbox{\hyperlink{structbuf_ac96082c2b5f22133ac7092ef81487227}{dev}};}
+\DoxyCodeLine{84       b-\/>\mbox{\hyperlink{structbuf_a756b2bcc88008bef7f21d688aa4a7a48}{blockno}} = \mbox{\hyperlink{structbuf_a756b2bcc88008bef7f21d688aa4a7a48}{blockno}};}
+\DoxyCodeLine{85       b-\/>\mbox{\hyperlink{structbuf_ae7d6b6c34fdeadb38970efd0554aa1a9}{flags}} = 0;}
+\DoxyCodeLine{86       b-\/>\mbox{\hyperlink{structbuf_aaf5efe777371aaeb9944508fd52adda5}{refcnt}} = 1;}
+\DoxyCodeLine{87       \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}.lock);}
+\DoxyCodeLine{88       \mbox{\hyperlink{defs_8h_aecd4639fe2f9aaad8e8cee2b5e0688c3}{acquiresleep}}(\&b-\/>\mbox{\hyperlink{structbuf_a626ad748d91d4bd7f4e65b74c73f2644}{lock}});}
+\DoxyCodeLine{89       \textcolor{keywordflow}{return} b;}
+\DoxyCodeLine{90     \}}
+\DoxyCodeLine{91   \}}
+\DoxyCodeLine{92   \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"bget: no buffers"});}
+\DoxyCodeLine{93 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/de6/bio_8c_ae58af86fda152e537209b86758f777ee_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/de6/bio_8c_ae58af86fda152e537209b86758f777ee_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{bio_8c_a53cca0ddc98c5f1de37124eca2575a59}\label{bio_8c_a53cca0ddc98c5f1de37124eca2575a59}} 
+\index{bio.c@{bio.c}!binit@{binit}}
+\index{binit@{binit}!bio.c@{bio.c}}
+\doxysubsubsection{\texorpdfstring{binit()}{binit()}}
+{\footnotesize\ttfamily void binit (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+bio.\+c 파일의 39 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{40 \{}
+\DoxyCodeLine{41   \textcolor{keyword}{struct }\mbox{\hyperlink{structbuf}{buf}} *b;}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43   \mbox{\hyperlink{defs_8h_ab56d728e6966819a0260c358d3ac3419}{initlock}}(\&\mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}.lock, \textcolor{stringliteral}{"bcache"});}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 \textcolor{comment}{//PAGEBREAK!}}
+\DoxyCodeLine{46   \textcolor{comment}{// Create linked list of buffers}}
+\DoxyCodeLine{47   \mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}.head.prev = \&\mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}.head;}
+\DoxyCodeLine{48   \mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}.head.next = \&\mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}.head;}
+\DoxyCodeLine{49   \textcolor{keywordflow}{for}(b = \mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}.buf; b < \mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}.buf+\mbox{\hyperlink{param_8h_ad51e2f8dffd163c263ec676a268d0f0a}{NBUF}}; b++)\{}
+\DoxyCodeLine{50     b-\/>\mbox{\hyperlink{structbuf_ab18c18abb22f07617619e9a74c71f51a}{next}} = \mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}.head.next;}
+\DoxyCodeLine{51     b-\/>\mbox{\hyperlink{structbuf_a930cab1e1b3751795d31bfd0291dff4a}{prev}} = \&\mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}.head;}
+\DoxyCodeLine{52     \mbox{\hyperlink{defs_8h_af5ca8072e3877a883fb34ce59eff88cb}{initsleeplock}}(\&b-\/>\mbox{\hyperlink{structbuf_a626ad748d91d4bd7f4e65b74c73f2644}{lock}}, \textcolor{stringliteral}{"buffer"});}
+\DoxyCodeLine{53     \mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}.head.next-\/>prev = b;}
+\DoxyCodeLine{54     \mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}.head.next = b;}
+\DoxyCodeLine{55   \}}
+\DoxyCodeLine{56 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{dc/de6/bio_8c_a53cca0ddc98c5f1de37124eca2575a59_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{bio_8c_ae000984516278965dde3d125affd086c}\label{bio_8c_ae000984516278965dde3d125affd086c}} 
+\index{bio.c@{bio.c}!bread@{bread}}
+\index{bread@{bread}!bio.c@{bio.c}}
+\doxysubsubsection{\texorpdfstring{bread()}{bread()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structbuf}{buf}}$\ast$ bread (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}}]{dev,  }\item[{\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}}]{blockno }\end{DoxyParamCaption})}
+
+
+
+bio.\+c 파일의 97 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{98 \{}
+\DoxyCodeLine{99   \textcolor{keyword}{struct }\mbox{\hyperlink{structbuf}{buf}} *b;}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101   b = \mbox{\hyperlink{bio_8c_ae58af86fda152e537209b86758f777ee}{bget}}(\mbox{\hyperlink{structbuf_ac96082c2b5f22133ac7092ef81487227}{dev}}, \mbox{\hyperlink{structbuf_a756b2bcc88008bef7f21d688aa4a7a48}{blockno}});}
+\DoxyCodeLine{102   \textcolor{keywordflow}{if}((b-\/>\mbox{\hyperlink{structbuf_ae7d6b6c34fdeadb38970efd0554aa1a9}{flags}} \& \mbox{\hyperlink{buf_8h_afab4199c0d27da71061f1c0cd5b51520}{B\_VALID}}) == 0) \{}
+\DoxyCodeLine{103     \mbox{\hyperlink{defs_8h_a70985c3f5b2fb79737457b5c88f5327a}{iderw}}(b);}
+\DoxyCodeLine{104   \}}
+\DoxyCodeLine{105   \textcolor{keywordflow}{return} b;}
+\DoxyCodeLine{106 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/de6/bio_8c_ae000984516278965dde3d125affd086c_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/de6/bio_8c_ae000984516278965dde3d125affd086c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{bio_8c_ab5335aeb503731104314321a78a6d727}\label{bio_8c_ab5335aeb503731104314321a78a6d727}} 
+\index{bio.c@{bio.c}!brelse@{brelse}}
+\index{brelse@{brelse}!bio.c@{bio.c}}
+\doxysubsubsection{\texorpdfstring{brelse()}{brelse()}}
+{\footnotesize\ttfamily void brelse (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structbuf}{buf}} $\ast$}]{b }\end{DoxyParamCaption})}
+
+
+
+bio.\+c 파일의 121 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{122 \{}
+\DoxyCodeLine{123   \textcolor{keywordflow}{if}(!\mbox{\hyperlink{defs_8h_afa76133bc67c6026376d630da9b53b68}{holdingsleep}}(\&b-\/>\mbox{\hyperlink{structbuf_a626ad748d91d4bd7f4e65b74c73f2644}{lock}}))}
+\DoxyCodeLine{124     \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"brelse"});}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126   \mbox{\hyperlink{defs_8h_a840b479c87b1c047d7142f58e0ad0b27}{releasesleep}}(\&b-\/>\mbox{\hyperlink{structbuf_a626ad748d91d4bd7f4e65b74c73f2644}{lock}});}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128   \mbox{\hyperlink{defs_8h_afe4ef8638f1ecb962a6e67fb086ee3b8}{acquire}}(\&\mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}.lock);}
+\DoxyCodeLine{129   b-\/>\mbox{\hyperlink{structbuf_aaf5efe777371aaeb9944508fd52adda5}{refcnt}}-\/-\/;}
+\DoxyCodeLine{130   \textcolor{keywordflow}{if} (b-\/>\mbox{\hyperlink{structbuf_aaf5efe777371aaeb9944508fd52adda5}{refcnt}} == 0) \{}
+\DoxyCodeLine{131     \textcolor{comment}{// no one is waiting for it.}}
+\DoxyCodeLine{132     b-\/>\mbox{\hyperlink{structbuf_ab18c18abb22f07617619e9a74c71f51a}{next}}-\/>\mbox{\hyperlink{structbuf_a930cab1e1b3751795d31bfd0291dff4a}{prev}} = b-\/>\mbox{\hyperlink{structbuf_a930cab1e1b3751795d31bfd0291dff4a}{prev}};}
+\DoxyCodeLine{133     b-\/>\mbox{\hyperlink{structbuf_a930cab1e1b3751795d31bfd0291dff4a}{prev}}-\/>\mbox{\hyperlink{structbuf_ab18c18abb22f07617619e9a74c71f51a}{next}} = b-\/>\mbox{\hyperlink{structbuf_ab18c18abb22f07617619e9a74c71f51a}{next}};}
+\DoxyCodeLine{134     b-\/>\mbox{\hyperlink{structbuf_ab18c18abb22f07617619e9a74c71f51a}{next}} = \mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}.head.next;}
+\DoxyCodeLine{135     b-\/>\mbox{\hyperlink{structbuf_a930cab1e1b3751795d31bfd0291dff4a}{prev}} = \&\mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}.head;}
+\DoxyCodeLine{136     \mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}.head.next-\/>prev = b;}
+\DoxyCodeLine{137     \mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}.head.next = b;}
+\DoxyCodeLine{138   \}}
+\DoxyCodeLine{139   }
+\DoxyCodeLine{140   \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{bio_8c_a7725a9957148b7740449a091ea12b0e4}{bcache}}.lock);}
+\DoxyCodeLine{141 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/de6/bio_8c_ab5335aeb503731104314321a78a6d727_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/de6/bio_8c_ab5335aeb503731104314321a78a6d727_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{bio_8c_a63c899c13b176ddf80064d32225e1298}\label{bio_8c_a63c899c13b176ddf80064d32225e1298}} 
+\index{bio.c@{bio.c}!bwrite@{bwrite}}
+\index{bwrite@{bwrite}!bio.c@{bio.c}}
+\doxysubsubsection{\texorpdfstring{bwrite()}{bwrite()}}
+{\footnotesize\ttfamily void bwrite (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structbuf}{buf}} $\ast$}]{b }\end{DoxyParamCaption})}
+
+
+
+bio.\+c 파일의 110 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{111 \{}
+\DoxyCodeLine{112   \textcolor{keywordflow}{if}(!\mbox{\hyperlink{defs_8h_afa76133bc67c6026376d630da9b53b68}{holdingsleep}}(\&b-\/>\mbox{\hyperlink{structbuf_a626ad748d91d4bd7f4e65b74c73f2644}{lock}}))}
+\DoxyCodeLine{113     \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"bwrite"});}
+\DoxyCodeLine{114   b-\/>\mbox{\hyperlink{structbuf_ae7d6b6c34fdeadb38970efd0554aa1a9}{flags}} |= \mbox{\hyperlink{buf_8h_adc32011df267adb9740bcd0abf0f0663}{B\_DIRTY}};}
+\DoxyCodeLine{115   \mbox{\hyperlink{defs_8h_a70985c3f5b2fb79737457b5c88f5327a}{iderw}}(b);}
+\DoxyCodeLine{116 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/de6/bio_8c_a63c899c13b176ddf80064d32225e1298_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/de6/bio_8c_a63c899c13b176ddf80064d32225e1298_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{변수 문서화}
+\mbox{\Hypertarget{bio_8c_a7725a9957148b7740449a091ea12b0e4}\label{bio_8c_a7725a9957148b7740449a091ea12b0e4}} 
+\index{bio.c@{bio.c}!bcache@{bcache}}
+\index{bcache@{bcache}!bio.c@{bio.c}}
+\doxysubsubsection{\texorpdfstring{bcache}{bcache}}
+{\footnotesize\ttfamily struct \{ ... \}  bcache}
+
+\mbox{\Hypertarget{bio_8c_a72ee90c61d41547b10a533c219e081c6}\label{bio_8c_a72ee90c61d41547b10a533c219e081c6}} 
+\index{bio.c@{bio.c}!buf@{buf}}
+\index{buf@{buf}!bio.c@{bio.c}}
+\doxysubsubsection{\texorpdfstring{buf}{buf}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structbuf}{buf}} \mbox{\hyperlink{structbuf}{buf}}\mbox{[}\mbox{\hyperlink{param_8h_ad51e2f8dffd163c263ec676a268d0f0a}{N\+B\+UF}}\mbox{]}}
+
+
+
+bio.\+c 파일의 31 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{bio_8c_aa6e692c16f1b909f5cb2a1832cf43430}\label{bio_8c_aa6e692c16f1b909f5cb2a1832cf43430}} 
+\index{bio.c@{bio.c}!head@{head}}
+\index{head@{head}!bio.c@{bio.c}}
+\doxysubsubsection{\texorpdfstring{head}{head}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structbuf}{buf}} head}
+
+
+
+bio.\+c 파일의 35 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{bio_8c_ab28e82cd5dda7d960095706a3ea20572}\label{bio_8c_ab28e82cd5dda7d960095706a3ea20572}} 
+\index{bio.c@{bio.c}!lock@{lock}}
+\index{lock@{lock}!bio.c@{bio.c}}
+\doxysubsubsection{\texorpdfstring{lock}{lock}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structspinlock}{spinlock}} lock}
+
+
+
+bio.\+c 파일의 30 번째 라인에서 정의되었습니다.
+

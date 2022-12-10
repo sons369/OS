@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['data_119',['data',['../d9/dd0/structbuf.html#ab0ec38784ab94ed35e575cf6d33912d2',1,'buf::data()'],['../d3/d9b/structioapic.html#a0612c6bb75dc56f0c4c91ad214a02b3a',1,'ioapic::data()'],['../d8/d53/structpipe.html#ab02ae9fa0b8b092512c28c7c080f0c7b',1,'pipe::data()'],['../de/de9/vm_8c.html#a923b2158227405b9f7a6eceb6c7104c8',1,'data():&#160;vm.c']]],
+  ['date_2eh_120',['date.h',['../db/d96/date_8h.html',1,'']]],
+  ['day_121',['day',['../d3/de7/structrtcdate.html#a476a4a04d68d88b1515123aa24af8a4d',1,'rtcdate::day()'],['../dc/df6/lapic_8c.html#a509a01c55cbe47386fe24602b7c7fda1',1,'DAY():&#160;lapic.c']]],
+  ['db_122',['db',['../d8/d3e/structsegdesc.html#a08edbd480d21bfd147e304b6f5a3788f',1,'segdesc']]],
+  ['deallocuvm_123',['deallocuvm',['../d5/d64/defs_8h.html#ac45969a8875b6dc87245e0a642aa2d8d',1,'deallocuvm(pde_t *, uint, uint):&#160;vm.c'],['../de/de9/vm_8c.html#a6d3019ea15a9bfdc5131ae97f3623c49',1,'deallocuvm(pde_t *pgdir, uint oldsz, uint newsz):&#160;vm.c']]],
+  ['deassert_124',['DEASSERT',['../dc/df6/lapic_8c.html#a8b48e10f84b81902cf66c89ac52649b7',1,'lapic.c']]],
+  ['defs_2eh_125',['defs.h',['../d5/d64/defs_8h.html',1,'']]],
+  ['delivs_126',['DELIVS',['../dc/df6/lapic_8c.html#a5f0b856b460d14d6fac161e35cfdb9d1',1,'lapic.c']]],
+  ['dev_127',['dev',['../d9/dd0/structbuf.html#ac96082c2b5f22133ac7092ef81487227',1,'buf::dev()'],['../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605',1,'inode::dev()'],['../d0/d4a/structlog.html#aebeeb9df7326549fb5d8b7221c9b0aa3',1,'log::dev()'],['../da/de7/structstat.html#a14ef4f85e6fb86bf296360361d0f393b',1,'stat::dev()']]],
+  ['devspace_128',['DEVSPACE',['../d8/da9/memlayout_8h.html#a643ab4c8a98a6f7bfde12c8f52f6aafa',1,'memlayout.h']]],
+  ['devsw_129',['devsw',['../de/d6a/structdevsw.html',1,'devsw'],['../d6/d13/file_8c.html#aadbb32b41c0d0e9c19d6d8fa3a0a6502',1,'devsw():&#160;file.c'],['../d2/d4d/file_8h.html#aef498b4c2cbc1a4286c67ff5f20afec9',1,'devsw():&#160;file.c']]],
+  ['dinode_130',['dinode',['../db/dfa/structdinode.html',1,'']]],
+  ['dirent_131',['dirent',['../d5/de2/structdirent.html',1,'']]],
+  ['dirfile_132',['dirfile',['../de/dc0/usertests_8c.html#aedd6d3f148dd5c99b47900215c1ac43f',1,'usertests.c']]],
+  ['dirlink_133',['dirlink',['../d5/d64/defs_8h.html#ae4ccea0aa02557162963e597737f665a',1,'dirlink(struct inode *, char *, uint):&#160;fs.c'],['../d2/d5a/fs_8c.html#a69a135a0e8a06d9f306d77ebc0c1f7a0',1,'dirlink(struct inode *dp, char *name, uint inum):&#160;fs.c']]],
+  ['dirlookup_134',['dirlookup',['../d5/d64/defs_8h.html#a91ded9e61402d5e0d9f16b2a8cbff5c3',1,'dirlookup(struct inode *, char *, uint *):&#160;fs.c'],['../d2/d5a/fs_8c.html#aa182c62fade7a0bae9408830d5e06d4f',1,'dirlookup(struct inode *dp, char *name, uint *poff):&#160;fs.c']]],
+  ['dirsiz_135',['DIRSIZ',['../df/d26/fs_8h.html#a48246fb9e5cb7f6a71ebc9ebc2f06562',1,'fs.h']]],
+  ['dirtest_136',['dirtest',['../de/dc0/usertests_8c.html#a8db9f9a2634bab29096bab0b8bc6945c',1,'usertests.c']]],
+  ['disksize_137',['disksize',['../da/d9b/memide_8c.html#a6c6c74725f99265c4ff7e7e4d3a94a8b',1,'memide.c']]],
+  ['dpl_138',['dpl',['../d8/d3e/structsegdesc.html#ab22349cefd6990e4a9a1d93e42ee0c03',1,'segdesc::dpl()'],['../d8/dd3/structgatedesc.html#a4c62f5618440769c78ed976cae23c13d',1,'gatedesc::dpl()']]],
+  ['dpl_5fuser_139',['DPL_USER',['../d2/df1/mmu_8h.html#a060d4d4e32af81cab881fe77e58d7b78',1,'mmu.h']]],
+  ['ds_140',['ds',['../dc/dd1/structtaskstate.html#af5f19782df3eb439445274e08d9120f1',1,'taskstate::ds()'],['../df/d05/structtrapframe.html#a421be1ec9ad2a55f1d1adeac9b0b89c3',1,'trapframe::ds()']]],
+  ['dup_141',['dup',['../d8/ddb/user_8h.html#a530ea95b243a1bf148adaf399e2a6292',1,'user.h']]]
+];

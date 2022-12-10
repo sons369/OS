@@ -1,0 +1,866 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: file.c 파일 참조</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">My Project
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 다음에 의해 생성됨 :  Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'검색');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','검색');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">함수</a> &#124;
+<a href="#var-members">변수</a>  </div>
+  <div class="headertitle">
+<div class="title">file.c 파일 참조</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="../../d9/d49/types_8h_source.html">types.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../d5/d64/defs_8h_source.html">defs.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../d5/d33/param_8h_source.html">param.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../df/d26/fs_8h_source.html">fs.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../df/d63/spinlock_8h_source.html">spinlock.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../d0/d74/sleeplock_8h_source.html">sleeplock.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../d2/d4d/file_8h_source.html">file.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+file.c에 대한 include 의존 그래프</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d5/da4/file_8c__incl.png" border="0" usemap="#file_8c" alt=""/></div>
+<map name="file_8c" id="file_8c">
+<area shape="rect" title=" " alt="" coords="283,5,337,32"/>
+<area shape="rect" href="../../d9/d49/types_8h.html" title=" " alt="" coords="5,80,76,107"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html" title=" " alt="" coords="100,80,163,107"/>
+<area shape="rect" href="../../d5/d33/param_8h.html" title=" " alt="" coords="187,80,263,107"/>
+<area shape="rect" href="../../df/d26/fs_8h.html" title=" " alt="" coords="287,80,333,107"/>
+<area shape="rect" href="../../df/d63/spinlock_8h.html" title=" " alt="" coords="358,80,446,107"/>
+<area shape="rect" href="../../d0/d74/sleeplock_8h.html" title=" " alt="" coords="470,80,566,107"/>
+<area shape="rect" href="../../d2/d4d/file_8h.html" title=" " alt="" coords="591,80,645,107"/>
+</map>
+</div>
+</div>
+<p><a href="../../d6/d13/file_8c_source.html">이 파일의 소스 코드 페이지로 가기</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+함수</h2></td></tr>
+<tr class="memitem:a66bb5a4b304ea0f851dd999fc8195fa4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d13/file_8c.html#a66bb5a4b304ea0f851dd999fc8195fa4">fileinit</a> (void)</td></tr>
+<tr class="separator:a66bb5a4b304ea0f851dd999fc8195fa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69d3d2dd94efa1f1ff8d0143f4d9b786"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="../../d7/d3a/structfile.html">file</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d13/file_8c.html#a69d3d2dd94efa1f1ff8d0143f4d9b786">filealloc</a> (void)</td></tr>
+<tr class="separator:a69d3d2dd94efa1f1ff8d0143f4d9b786"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a014992e93368bee9318b5e1ff575cb91"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="../../d7/d3a/structfile.html">file</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d13/file_8c.html#a014992e93368bee9318b5e1ff575cb91">filedup</a> (struct <a class="el" href="../../d7/d3a/structfile.html">file</a> *f)</td></tr>
+<tr class="separator:a014992e93368bee9318b5e1ff575cb91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae557c81ab89c24219146144bb6adaa2c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d13/file_8c.html#ae557c81ab89c24219146144bb6adaa2c">fileclose</a> (struct <a class="el" href="../../d7/d3a/structfile.html">file</a> *f)</td></tr>
+<tr class="separator:ae557c81ab89c24219146144bb6adaa2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afff8e849fa54dea2a5a27dbb97474607"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d13/file_8c.html#afff8e849fa54dea2a5a27dbb97474607">filestat</a> (struct <a class="el" href="../../d7/d3a/structfile.html">file</a> *f, struct <a class="el" href="../../da/de7/structstat.html">stat</a> *st)</td></tr>
+<tr class="separator:afff8e849fa54dea2a5a27dbb97474607"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dc8c87c7e48bdaaf98e9c7047928f29"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d13/file_8c.html#a1dc8c87c7e48bdaaf98e9c7047928f29">fileread</a> (struct <a class="el" href="../../d7/d3a/structfile.html">file</a> *f, char *addr, int n)</td></tr>
+<tr class="separator:a1dc8c87c7e48bdaaf98e9c7047928f29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8de757a0a9f58dcc6511ea5e46ebb88"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d13/file_8c.html#ab8de757a0a9f58dcc6511ea5e46ebb88">filewrite</a> (struct <a class="el" href="../../d7/d3a/structfile.html">file</a> *f, char *addr, int n)</td></tr>
+<tr class="separator:ab8de757a0a9f58dcc6511ea5e46ebb88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+변수</h2></td></tr>
+<tr class="memitem:aadbb32b41c0d0e9c19d6d8fa3a0a6502"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="../../de/d6a/structdevsw.html">devsw</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d13/file_8c.html#aadbb32b41c0d0e9c19d6d8fa3a0a6502">devsw</a> [<a class="el" href="../../d5/d33/param_8h.html#aa564a41c8409694da49b0badf2bb2853">NDEV</a>]</td></tr>
+<tr class="separator:aadbb32b41c0d0e9c19d6d8fa3a0a6502"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3cdfe534b83322d79f0605488e11ecc"><td class="memItemLeft" >struct {</td></tr>
+<tr class="memitem:a1f9abe803b02a6bb7cfa7456b895a057"><td class="memItemLeft" >&#160;&#160;&#160;struct <a class="el" href="../../d1/d08/structspinlock.html">spinlock</a>&#160;&#160;&#160;<a class="el" href="../../d6/d13/file_8c.html#ab28e82cd5dda7d960095706a3ea20572">lock</a></td></tr>
+<tr class="separator:a1f9abe803b02a6bb7cfa7456b895a057"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfabab21490fa7692095afc90c5ee26b"><td class="memItemLeft" >&#160;&#160;&#160;struct <a class="el" href="../../d7/d3a/structfile.html">file</a>&#160;&#160;&#160;<a class="el" href="../../d6/d13/file_8c.html#a7cfa5243b3d349a415c7500c962fe9a5">file</a> [<a class="el" href="../../d5/d33/param_8h.html#a8485f4e81de2537e6a0935626167a775">NFILE</a>]</td></tr>
+<tr class="separator:abfabab21490fa7692095afc90c5ee26b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3cdfe534b83322d79f0605488e11ecc"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d13/file_8c.html#aa3cdfe534b83322d79f0605488e11ecc">ftable</a></td></tr>
+<tr class="separator:aa3cdfe534b83322d79f0605488e11ecc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">함수 문서화</h2>
+<a id="a69d3d2dd94efa1f1ff8d0143f4d9b786"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69d3d2dd94efa1f1ff8d0143f4d9b786">&#9670;&nbsp;</a></span>filealloc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="../../d7/d3a/structfile.html">file</a>* filealloc </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"><a class="el" href="../../d6/d13/file_8c_source.html">file.c</a> 파일의 <a class="el" href="../../d6/d13/file_8c_source.html#l00027">27</a> 번째 라인에서 정의되었습니다.</p>
+<div class="fragment"><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d7/d3a/structfile.html">file</a> *f;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#afe4ef8638f1ecb962a6e67fb086ee3b8">acquire</a>(&amp;<a class="code" href="../../d6/d13/file_8c.html#aa3cdfe534b83322d79f0605488e11ecc">ftable</a>.lock);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keywordflow">for</span> (f = <a class="code" href="../../d6/d13/file_8c.html#aa3cdfe534b83322d79f0605488e11ecc">ftable</a>.file; f &lt; <a class="code" href="../../d6/d13/file_8c.html#aa3cdfe534b83322d79f0605488e11ecc">ftable</a>.file + <a class="code" href="../../d5/d33/param_8h.html#a8485f4e81de2537e6a0935626167a775">NFILE</a>; f++)</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">if</span> (f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a41c818f828adea488058bca63e4df23f">ref</a> == 0)</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    {</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;      f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a41c818f828adea488058bca63e4df23f">ref</a> = 1;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;      <a class="code" href="../../d5/d64/defs_8h.html#a4f8616948f3dbce65671f666eed1d669">release</a>(&amp;<a class="code" href="../../d6/d13/file_8c.html#aa3cdfe534b83322d79f0605488e11ecc">ftable</a>.lock);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;      <span class="keywordflow">return</span> f;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  }</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#a4f8616948f3dbce65671f666eed1d669">release</a>(&amp;<a class="code" href="../../d6/d13/file_8c.html#aa3cdfe534b83322d79f0605488e11ecc">ftable</a>.lock);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
+</div><!-- fragment --><div class="dynheader">
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d6/d13/file_8c_a69d3d2dd94efa1f1ff8d0143f4d9b786_cgraph.png" border="0" usemap="#d6/d13/file_8c_a69d3d2dd94efa1f1ff8d0143f4d9b786_cgraph" alt=""/></div>
+<map name="d6/d13/file_8c_a69d3d2dd94efa1f1ff8d0143f4d9b786_cgraph" id="d6/d13/file_8c_a69d3d2dd94efa1f1ff8d0143f4d9b786_cgraph">
+<area shape="rect" title=" " alt="" coords="5,208,79,235"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#afe4ef8638f1ecb962a6e67fb086ee3b8" title=" " alt="" coords="127,157,197,184"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a4f8616948f3dbce65671f666eed1d669" title=" " alt="" coords="127,233,197,260"/>
+<area shape="rect" href="../../d3/d2d/spinlock_8c.html#a6ac35304ea80f01086b47edcc2328010" title=" " alt="" coords="245,157,347,184"/>
+<area shape="rect" href="../../d3/d2d/spinlock_8c.html#aea48df3e5cfb903179ad3dc78ab502d9" title=" " alt="" coords="261,208,331,235"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a6ab45dc363c8d9b7beb14c25be49c6d7" title=" " alt="" coords="511,107,577,133"/>
+<area shape="rect" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a" title=" " alt="" coords="642,259,699,285"/>
+<area shape="rect" href="../../d3/d2d/spinlock_8c.html#a206b749d1b7768dadce61cbcde7e0f1c" title=" " alt="" coords="395,5,463,32"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#a7882b181a4fc45195cbaa1cd6aa986d4" title=" " alt="" coords="269,107,323,133"/>
+<area shape="rect" href="../../d3/d2d/spinlock_8c.html#ae3424f669269fef400ce29c3aeb43fdb" title=" " alt="" coords="398,208,459,235"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a627f7996b64f99d885244a5102c85164" title=" " alt="" coords="638,132,703,159"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#a216ef768ced2935b4fd2a7de7d65de5b" title=" " alt="" coords="625,81,716,108"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#af87d69b8449fc86a02b250af121cd29d" title=" " alt="" coords="525,259,563,285"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#a89d04efedb6dc6e8d87c6a5b453529e1" title=" " alt="" coords="525,56,563,83"/>
+</map>
+</div>
+<div class="dynheader">
+이 함수를 호출하는 함수들에 대한 그래프입니다.:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d6/d13/file_8c_a69d3d2dd94efa1f1ff8d0143f4d9b786_icgraph.png" border="0" usemap="#d6/d13/file_8c_a69d3d2dd94efa1f1ff8d0143f4d9b786_icgraph" alt=""/></div>
+<map name="d6/d13/file_8c_a69d3d2dd94efa1f1ff8d0143f4d9b786_icgraph" id="d6/d13/file_8c_a69d3d2dd94efa1f1ff8d0143f4d9b786_icgraph">
+<area shape="rect" title=" " alt="" coords="263,31,336,57"/>
+<area shape="rect" href="../../d1/d47/pipe_8c.html#a9d6f0c526148e6002b6776619c7563e6" title=" " alt="" coords="133,5,214,32"/>
+<area shape="rect" href="../../d1/d14/sysfile_8c.html#a74e45efc661ca17c068bc283b3842e6d" title=" " alt="" coords="132,56,215,83"/>
+<area shape="rect" href="../../d1/d14/sysfile_8c.html#a9a70db941def46ec25939e6c2d30e399" title=" " alt="" coords="5,5,84,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ae557c81ab89c24219146144bb6adaa2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae557c81ab89c24219146144bb6adaa2c">&#9670;&nbsp;</a></span>fileclose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fileclose </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="../../d7/d3a/structfile.html">file</a> *&#160;</td>
+          <td class="paramname"><em>f</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"><a class="el" href="../../d6/d13/file_8c_source.html">file.c</a> 파일의 <a class="el" href="../../d6/d13/file_8c_source.html#l00058">58</a> 번째 라인에서 정의되었습니다.</p>
+<div class="fragment"><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;{</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d7/d3a/structfile.html">file</a> ff;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#afe4ef8638f1ecb962a6e67fb086ee3b8">acquire</a>(&amp;<a class="code" href="../../d6/d13/file_8c.html#aa3cdfe534b83322d79f0605488e11ecc">ftable</a>.lock);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="keywordflow">if</span> (f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a41c818f828adea488058bca63e4df23f">ref</a> &lt; 1)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <a class="code" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a>(<span class="stringliteral">&quot;fileclose&quot;</span>);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordflow">if</span> (--f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a41c818f828adea488058bca63e4df23f">ref</a> &gt; 0)</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#a4f8616948f3dbce65671f666eed1d669">release</a>(&amp;<a class="code" href="../../d6/d13/file_8c.html#aa3cdfe534b83322d79f0605488e11ecc">ftable</a>.lock);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  }</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  ff = *f;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a41c818f828adea488058bca63e4df23f">ref</a> = 0;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a3a28c808a8dcd4acf45087ac30c075e7">type</a> = <a class="code" href="../../d7/d3a/structfile.html#a4aeeba6a286e58966d853aa1f510d3d5a224e095442d50a6bd1058fd742fb68c7">FD_NONE</a>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#a4f8616948f3dbce65671f666eed1d669">release</a>(&amp;<a class="code" href="../../d6/d13/file_8c.html#aa3cdfe534b83322d79f0605488e11ecc">ftable</a>.lock);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keywordflow">if</span> (ff.type == <a class="code" href="../../d7/d3a/structfile.html#a4aeeba6a286e58966d853aa1f510d3d5a59fcf59caf6e70c3cc3cc48291b89752">FD_PIPE</a>)</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#af6220973e389c74782d76ae641a5e7db">pipeclose</a>(ff.pipe, ff.writable);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ff.type == <a class="code" href="../../d7/d3a/structfile.html#a4aeeba6a286e58966d853aa1f510d3d5aa5d8c5e0d95ed88367e96ecebfdf326d">FD_INODE</a>)</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#a603ca98212e00d2ffdba7827ef0f1003">begin_op</a>();</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#a29530a0afdfe924818d8c70b6724528d">iput</a>(ff.ip);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#a2504e37a109f9bae5ca11fe89e4e8fa1">end_op</a>();</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;}</div>
+</div><!-- fragment --><div class="dynheader">
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d6/d13/file_8c_ae557c81ab89c24219146144bb6adaa2c_cgraph.png" border="0" usemap="#d6/d13/file_8c_ae557c81ab89c24219146144bb6adaa2c_cgraph" alt=""/></div>
+<map name="d6/d13/file_8c_ae557c81ab89c24219146144bb6adaa2c_cgraph" id="d6/d13/file_8c_ae557c81ab89c24219146144bb6adaa2c_cgraph">
+<area shape="rect" title=" " alt="" coords="5,1968,81,1995"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#afe4ef8638f1ecb962a6e67fb086ee3b8" title=" " alt="" coords="1325,1379,1395,1405"/>
+<area shape="rect" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a" title=" " alt="" coords="1845,1157,1902,1184"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a603ca98212e00d2ffdba7827ef0f1003" title=" " alt="" coords="739,676,820,703"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a4f8616948f3dbce65671f666eed1d669" title=" " alt="" coords="1325,853,1395,880"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a2504e37a109f9bae5ca11fe89e4e8fa1" title=" " alt="" coords="129,2019,199,2045"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a29530a0afdfe924818d8c70b6724528d" title=" " alt="" coords="141,1347,187,1373"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#af6220973e389c74782d76ae641a5e7db" title=" " alt="" coords="1044,1968,1128,1995"/>
+<area shape="rect" href="../../d3/d2d/spinlock_8c.html#a6ac35304ea80f01086b47edcc2328010" title=" " alt="" coords="1448,1296,1549,1323"/>
+<area shape="rect" href="../../d3/d2d/spinlock_8c.html#aea48df3e5cfb903179ad3dc78ab502d9" title=" " alt="" coords="1463,600,1534,627"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a6ab45dc363c8d9b7beb14c25be49c6d7" title=" " alt="" coords="1713,499,1780,525"/>
+<area shape="rect" href="../../d3/d2d/spinlock_8c.html#a206b749d1b7768dadce61cbcde7e0f1c" title=" " alt="" coords="1597,701,1665,728"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#a7882b181a4fc45195cbaa1cd6aa986d4" title=" " alt="" coords="1472,1347,1525,1373"/>
+<area shape="rect" href="../../d3/d2d/spinlock_8c.html#ae3424f669269fef400ce29c3aeb43fdb" title=" " alt="" coords="1601,549,1662,576"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a627f7996b64f99d885244a5102c85164" title=" " alt="" coords="1841,93,1906,120"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#a216ef768ced2935b4fd2a7de7d65de5b" title=" " alt="" coords="1828,296,1919,323"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#af87d69b8449fc86a02b250af121cd29d" title=" " alt="" coords="1727,448,1766,475"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#a89d04efedb6dc6e8d87c6a5b453529e1" title=" " alt="" coords="1727,600,1766,627"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#aca4a88f06b3ebbcc04330f7ae06c8507" title=" " alt="" coords="904,701,961,728"/>
+<area shape="rect" href="../../d3/dda/proc_8c.html#aac2d0e6895b990d37e7c675637e9e40f" title=" " alt="" coords="1463,321,1534,348"/>
+<area shape="rect" href="../../d3/dda/proc_8c.html#ad788da91743c333b5bed7c4a0dd12365" title=" " alt="" coords="1056,296,1116,323"/>
+<area shape="rect" href="../../d3/dda/proc_8c.html#a6ab45dc363c8d9b7beb14c25be49c6d7" title=" " alt="" coords="1598,271,1665,297"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#ae3424f669269fef400ce29c3aeb43fdb" title=" " alt="" coords="1601,347,1662,373"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a206b749d1b7768dadce61cbcde7e0f1c" title=" " alt="" coords="1597,397,1665,424"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#ac44b13cc76bf4040e3baf34df75ff230" title=" " alt="" coords="1463,499,1534,525"/>
+<area shape="rect" href="../../d3/dda/proc_8c.html#a9fa00b0be5d3c4781048861e2506eb63" title=" " alt="" coords="1187,397,1272,424"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a1d9e7047d3dfb57809a2541d8387705e" title=" " alt="" coords="1330,347,1390,373"/>
+<area shape="rect" href="../../d7/df8/log_8c.html#a504ac82448623ae8ad27b97dbed82694" title=" " alt="" coords="247,1575,319,1601"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a245b56417239f499389b2e806bd99254" title=" " alt="" coords="1193,1867,1265,1893"/>
+<area shape="rect" href="../../d7/df8/log_8c.html#ab5eaeac1ab988530dcda4fd57a634df0" title=" " alt="" coords="367,1549,469,1576"/>
+<area shape="rect" href="../../d7/df8/log_8c.html#a34322134c00d3e9ad7fb48a7baa9a4c5" title=" " alt="" coords="371,1499,465,1525"/>
+<area shape="rect" href="../../d7/df8/log_8c.html#af4e7fbf2920c27568c9b88d45f0bd5e1" title=" " alt="" coords="377,1600,459,1627"/>
+<area shape="rect" href="../../dc/de6/bio_8c.html#ae000984516278965dde3d125affd086c" title=" " alt="" coords="519,1335,578,1361"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#aa9c8577c0e9d233f85892ec2d9bfe212" title=" " alt="" coords="886,1867,979,1893"/>
+<area shape="rect" href="../../dc/de6/bio_8c.html#ab5335aeb503731104314321a78a6d727" title=" " alt="" coords="517,1499,580,1525"/>
+<area shape="rect" href="../../dc/de6/bio_8c.html#a63c899c13b176ddf80064d32225e1298" title=" " alt="" coords="517,1556,580,1583"/>
+<area shape="rect" href="../../dc/de6/bio_8c.html#ae58af86fda152e537209b86758f777ee" title=" " alt="" coords="628,1259,679,1285"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a70985c3f5b2fb79737457b5c88f5327a" title=" " alt="" coords="750,1411,809,1437"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#aecd4639fe2f9aaad8e8cee2b5e0688c3" title=" " alt="" coords="727,752,832,779"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#addb64b689e3c266aaa67cc0126bba441" title=" " alt="" coords="1463,372,1534,399"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#afa76133bc67c6026376d630da9b53b68" title=" " alt="" coords="880,1360,985,1387"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a840b479c87b1c047d7142f58e0ad0b27" title=" " alt="" coords="1033,1613,1139,1640"/>
+<area shape="rect" href="../../d3/dda/proc_8c.html#ab5b9e3505045fa920a190e14e0ab2717" title=" " alt="" coords="1320,1867,1400,1893"/>
+<area shape="rect" href="../../d2/d5a/fs_8c.html#a7c42ba96035fb59aef87372552b1a661" title=" " alt="" coords="253,1296,312,1323"/>
+<area shape="rect" href="../../d2/d5a/fs_8c.html#a7220afa8e5f4bea540eb95879ea7df6e" title=" " alt="" coords="383,1347,453,1373"/>
+<area shape="rect" href="../../d2/d5a/fs_8c.html#a4a942a8fde303c8392d4f302170e5626" title=" " alt="" coords="381,1195,455,1221"/>
+<area shape="rect" href="../../d2/d5a/fs_8c.html#a2800a4b570ae39363cec0613dac92fd7" title=" " alt="" coords="390,1245,446,1272"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a270d0050dc50965f4f851717841ad33c" title=" " alt="" coords="1188,1157,1271,1184"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#ae79d6a7d0901b7c081cfded3f916d5bd" title=" " alt="" coords="1201,1968,1257,1995"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a9d55c9f035076ed1a90b6452770d0b62" title=" " alt="" coords="1322,1968,1398,1995"/>
+</map>
+</div>
+<div class="dynheader">
+이 함수를 호출하는 함수들에 대한 그래프입니다.:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d6/d13/file_8c_ae557c81ab89c24219146144bb6adaa2c_icgraph.png" border="0" usemap="#d6/d13/file_8c_ae557c81ab89c24219146144bb6adaa2c_icgraph" alt=""/></div>
+<map name="d6/d13/file_8c_ae557c81ab89c24219146144bb6adaa2c_icgraph" id="d6/d13/file_8c_ae557c81ab89c24219146144bb6adaa2c_icgraph">
+<area shape="rect" title=" " alt="" coords="265,107,341,133"/>
+<area shape="rect" href="../../d8/ddb/user_8h.html#ab3db880e623854a39a18d618e360323d" title=" " alt="" coords="151,5,198,32"/>
+<area shape="rect" href="../../d1/d47/pipe_8c.html#a9d6f0c526148e6002b6776619c7563e6" title=" " alt="" coords="134,56,215,83"/>
+<area shape="rect" href="../../d1/d14/sysfile_8c.html#a9a70db941def46ec25939e6c2d30e399" title=" " alt="" coords="5,81,84,108"/>
+<area shape="rect" href="../../d1/d14/sysfile_8c.html#a32945488fd39bc405757177b37cd2250" title=" " alt="" coords="132,157,217,184"/>
+<area shape="rect" href="../../d1/d14/sysfile_8c.html#a74e45efc661ca17c068bc283b3842e6d" title=" " alt="" coords="133,208,216,235"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a014992e93368bee9318b5e1ff575cb91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a014992e93368bee9318b5e1ff575cb91">&#9670;&nbsp;</a></span>filedup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="../../d7/d3a/structfile.html">file</a>* filedup </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="../../d7/d3a/structfile.html">file</a> *&#160;</td>
+          <td class="paramname"><em>f</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"><a class="el" href="../../d6/d13/file_8c_source.html">file.c</a> 파일의 <a class="el" href="../../d6/d13/file_8c_source.html#l00047">47</a> 번째 라인에서 정의되었습니다.</p>
+<div class="fragment"><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#afe4ef8638f1ecb962a6e67fb086ee3b8">acquire</a>(&amp;<a class="code" href="../../d6/d13/file_8c.html#aa3cdfe534b83322d79f0605488e11ecc">ftable</a>.lock);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keywordflow">if</span> (f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a41c818f828adea488058bca63e4df23f">ref</a> &lt; 1)</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a>(<span class="stringliteral">&quot;filedup&quot;</span>);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a41c818f828adea488058bca63e4df23f">ref</a>++;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#a4f8616948f3dbce65671f666eed1d669">release</a>(&amp;<a class="code" href="../../d6/d13/file_8c.html#aa3cdfe534b83322d79f0605488e11ecc">ftable</a>.lock);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordflow">return</span> f;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
+</div><!-- fragment --><div class="dynheader">
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d6/d13/file_8c_a014992e93368bee9318b5e1ff575cb91_cgraph.png" border="0" usemap="#d6/d13/file_8c_a014992e93368bee9318b5e1ff575cb91_cgraph" alt=""/></div>
+<map name="d6/d13/file_8c_a014992e93368bee9318b5e1ff575cb91_cgraph" id="d6/d13/file_8c_a014992e93368bee9318b5e1ff575cb91_cgraph">
+<area shape="rect" title=" " alt="" coords="5,259,72,285"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#afe4ef8638f1ecb962a6e67fb086ee3b8" title=" " alt="" coords="120,157,191,184"/>
+<area shape="rect" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a" title=" " alt="" coords="635,309,693,336"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a4f8616948f3dbce65671f666eed1d669" title=" " alt="" coords="120,259,191,285"/>
+<area shape="rect" href="../../d3/d2d/spinlock_8c.html#a6ac35304ea80f01086b47edcc2328010" title=" " alt="" coords="239,157,340,184"/>
+<area shape="rect" href="../../d3/d2d/spinlock_8c.html#aea48df3e5cfb903179ad3dc78ab502d9" title=" " alt="" coords="254,208,325,235"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a6ab45dc363c8d9b7beb14c25be49c6d7" title=" " alt="" coords="504,107,571,133"/>
+<area shape="rect" href="../../d3/d2d/spinlock_8c.html#a206b749d1b7768dadce61cbcde7e0f1c" title=" " alt="" coords="388,5,456,32"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#a7882b181a4fc45195cbaa1cd6aa986d4" title=" " alt="" coords="263,107,316,133"/>
+<area shape="rect" href="../../d3/d2d/spinlock_8c.html#ae3424f669269fef400ce29c3aeb43fdb" title=" " alt="" coords="391,208,453,235"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a627f7996b64f99d885244a5102c85164" title=" " alt="" coords="631,132,697,159"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#a216ef768ced2935b4fd2a7de7d65de5b" title=" " alt="" coords="619,81,709,108"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#af87d69b8449fc86a02b250af121cd29d" title=" " alt="" coords="518,208,557,235"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#a89d04efedb6dc6e8d87c6a5b453529e1" title=" " alt="" coords="518,5,557,32"/>
+</map>
+</div>
+<div class="dynheader">
+이 함수를 호출하는 함수들에 대한 그래프입니다.:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d6/d13/file_8c_a014992e93368bee9318b5e1ff575cb91_icgraph.png" border="0" usemap="#d6/d13/file_8c_a014992e93368bee9318b5e1ff575cb91_icgraph" alt=""/></div>
+<map name="d6/d13/file_8c_a014992e93368bee9318b5e1ff575cb91_icgraph" id="d6/d13/file_8c_a014992e93368bee9318b5e1ff575cb91_icgraph">
+<area shape="rect" title=" " alt="" coords="128,31,195,57"/>
+<area shape="rect" href="../../d8/ddb/user_8h.html#acd2e1ded4bb6fce4500438bf928330f4" title=" " alt="" coords="19,5,67,32"/>
+<area shape="rect" href="../../d1/d14/sysfile_8c.html#a8f8b9e2d98e8b444f23a39ae8992feff" title=" " alt="" coords="5,56,80,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a66bb5a4b304ea0f851dd999fc8195fa4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66bb5a4b304ea0f851dd999fc8195fa4">&#9670;&nbsp;</a></span>fileinit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fileinit </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"><a class="el" href="../../d6/d13/file_8c_source.html">file.c</a> 파일의 <a class="el" href="../../d6/d13/file_8c_source.html#l00020">20</a> 번째 라인에서 정의되었습니다.</p>
+<div class="fragment"><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#ab56d728e6966819a0260c358d3ac3419">initlock</a>(&amp;<a class="code" href="../../d6/d13/file_8c.html#aa3cdfe534b83322d79f0605488e11ecc">ftable</a>.lock, <span class="stringliteral">&quot;ftable&quot;</span>);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;}</div>
+</div><!-- fragment --><div class="dynheader">
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d6/d13/file_8c_a66bb5a4b304ea0f851dd999fc8195fa4_cgraph.png" border="0" usemap="#d6/d13/file_8c_a66bb5a4b304ea0f851dd999fc8195fa4_cgraph" alt=""/></div>
+<map name="d6/d13/file_8c_a66bb5a4b304ea0f851dd999fc8195fa4_cgraph" id="d6/d13/file_8c_a66bb5a4b304ea0f851dd999fc8195fa4_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,68,32"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#ab56d728e6966819a0260c358d3ac3419" title=" " alt="" coords="116,5,187,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a1dc8c87c7e48bdaaf98e9c7047928f29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1dc8c87c7e48bdaaf98e9c7047928f29">&#9670;&nbsp;</a></span>fileread()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int fileread </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="../../d7/d3a/structfile.html">file</a> *&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>addr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"><a class="el" href="../../d6/d13/file_8c_source.html">file.c</a> 파일의 <a class="el" href="../../d6/d13/file_8c_source.html#l00099">99</a> 번째 라인에서 정의되었습니다.</p>
+<div class="fragment"><div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;{</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="keywordtype">int</span> <a class="code" href="../../d0/d56/console_8c.html#af10fa12dd785c91e29528fbdc50cf9af">r</a>;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <span class="keywordflow">if</span> (f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a0c5c8eced8bc562dbbecc8d450a6b646">readable</a> == 0)</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <span class="keywordflow">if</span> (f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a3a28c808a8dcd4acf45087ac30c075e7">type</a> == <a class="code" href="../../d7/d3a/structfile.html#a4aeeba6a286e58966d853aa1f510d3d5a59fcf59caf6e70c3cc3cc48291b89752">FD_PIPE</a>)</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="../../d5/d64/defs_8h.html#acd589a0d0d6d34b446baf33755eef519">piperead</a>(f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a19d83a8d6cb47902fe8c762d2798c198">pipe</a>, addr, n);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  <span class="keywordflow">if</span> (f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a3a28c808a8dcd4acf45087ac30c075e7">type</a> == <a class="code" href="../../d7/d3a/structfile.html#a4aeeba6a286e58966d853aa1f510d3d5aa5d8c5e0d95ed88367e96ecebfdf326d">FD_INODE</a>)</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  {</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#a29a4d743d41fe659f74b0a57fdc25012">ilock</a>(f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a4fd095f927715574dc2a4f243690e508">ip</a>);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordflow">if</span> ((<a class="code" href="../../d0/d56/console_8c.html#af10fa12dd785c91e29528fbdc50cf9af">r</a> = <a class="code" href="../../d5/d64/defs_8h.html#a2415273b06f31f0f2587b7325588a7e4">readi</a>(f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a4fd095f927715574dc2a4f243690e508">ip</a>, addr, f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a94a911be6cc1b1326728392d8b40150d">off</a>, n)) &gt; 0)</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;      f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a94a911be6cc1b1326728392d8b40150d">off</a> += <a class="code" href="../../d0/d56/console_8c.html#af10fa12dd785c91e29528fbdc50cf9af">r</a>;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#af301c10ad8ced77a5dfb2de3a64c666c">iunlock</a>(f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a4fd095f927715574dc2a4f243690e508">ip</a>);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="../../d0/d56/console_8c.html#af10fa12dd785c91e29528fbdc50cf9af">r</a>;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  }</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <a class="code" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a>(<span class="stringliteral">&quot;fileread&quot;</span>);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;}</div>
+</div><!-- fragment --><div class="dynheader">
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d6/d13/file_8c_a1dc8c87c7e48bdaaf98e9c7047928f29_cgraph.png" border="0" usemap="#d6/d13/file_8c_a1dc8c87c7e48bdaaf98e9c7047928f29_cgraph" alt=""/></div>
+<map name="d6/d13/file_8c_a1dc8c87c7e48bdaaf98e9c7047928f29_cgraph" id="d6/d13/file_8c_a1dc8c87c7e48bdaaf98e9c7047928f29_cgraph">
+<area shape="rect" title=" " alt="" coords="5,1389,76,1415"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a29a4d743d41fe659f74b0a57fdc25012" title=" " alt="" coords="459,1021,512,1047"/>
+<area shape="rect" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a" title=" " alt="" coords="1910,1262,1967,1289"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#af301c10ad8ced77a5dfb2de3a64c666c" title=" " alt="" coords="969,1819,1039,1846"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#acd589a0d0d6d34b446baf33755eef519" title=" " alt="" coords="817,603,896,630"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a2415273b06f31f0f2587b7325588a7e4" title=" " alt="" coords="124,1389,179,1415"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#aecd4639fe2f9aaad8e8cee2b5e0688c3" title=" " alt="" coords="804,857,909,883"/>
+<area shape="rect" href="../../dc/de6/bio_8c.html#ae000984516278965dde3d125affd086c" title=" " alt="" coords="565,1363,623,1390"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#aa9c8577c0e9d233f85892ec2d9bfe212" title=" " alt="" coords="957,1009,1051,1035"/>
+<area shape="rect" href="../../dc/de6/bio_8c.html#ab5335aeb503731104314321a78a6d727" title=" " alt="" coords="563,1566,625,1593"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#afe4ef8638f1ecb962a6e67fb086ee3b8" title=" " alt="" coords="1390,1313,1461,1339"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#addb64b689e3c266aaa67cc0126bba441" title=" " alt="" coords="1259,173,1330,199"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a4f8616948f3dbce65671f666eed1d669" title=" " alt="" coords="1390,958,1461,985"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#aca4a88f06b3ebbcc04330f7ae06c8507" title=" " alt="" coords="975,629,1033,655"/>
+<area shape="rect" href="../../d3/d2d/spinlock_8c.html#a6ac35304ea80f01086b47edcc2328010" title=" " alt="" coords="1513,1313,1615,1339"/>
+<area shape="rect" href="../../d3/d2d/spinlock_8c.html#aea48df3e5cfb903179ad3dc78ab502d9" title=" " alt="" coords="1529,806,1599,833"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a6ab45dc363c8d9b7beb14c25be49c6d7" title=" " alt="" coords="1779,654,1845,681"/>
+<area shape="rect" href="../../d3/d2d/spinlock_8c.html#a206b749d1b7768dadce61cbcde7e0f1c" title=" " alt="" coords="1663,806,1731,833"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#a7882b181a4fc45195cbaa1cd6aa986d4" title=" " alt="" coords="1537,1363,1591,1390"/>
+<area shape="rect" href="../../d3/d2d/spinlock_8c.html#ae3424f669269fef400ce29c3aeb43fdb" title=" " alt="" coords="1666,705,1727,731"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a627f7996b64f99d885244a5102c85164" title=" " alt="" coords="1906,527,1971,554"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#a216ef768ced2935b4fd2a7de7d65de5b" title=" " alt="" coords="1893,350,1984,377"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#af87d69b8449fc86a02b250af121cd29d" title=" " alt="" coords="1793,502,1831,529"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#a89d04efedb6dc6e8d87c6a5b453529e1" title=" " alt="" coords="1793,755,1831,782"/>
+<area shape="rect" href="../../d3/dda/proc_8c.html#a6ab45dc363c8d9b7beb14c25be49c6d7" title=" " alt="" coords="1663,350,1730,377"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#ae3424f669269fef400ce29c3aeb43fdb" title=" " alt="" coords="1666,249,1727,275"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a206b749d1b7768dadce61cbcde7e0f1c" title=" " alt="" coords="1663,299,1731,326"/>
+<area shape="rect" href="../../d3/dda/proc_8c.html#aac2d0e6895b990d37e7c675637e9e40f" title=" " alt="" coords="1529,249,1599,275"/>
+<area shape="rect" href="../../d3/dda/proc_8c.html#ad788da91743c333b5bed7c4a0dd12365" title=" " alt="" coords="1121,426,1181,453"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#ac44b13cc76bf4040e3baf34df75ff230" title=" " alt="" coords="1529,666,1599,693"/>
+<area shape="rect" href="../../d3/dda/proc_8c.html#a9fa00b0be5d3c4781048861e2506eb63" title=" " alt="" coords="1252,502,1337,529"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a1d9e7047d3dfb57809a2541d8387705e" title=" " alt="" coords="1395,451,1455,478"/>
+<area shape="rect" href="../../dc/de6/bio_8c.html#ae58af86fda152e537209b86758f777ee" title=" " alt="" coords="689,1313,740,1339"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a70985c3f5b2fb79737457b5c88f5327a" title=" " alt="" coords="827,1135,886,1162"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#afa76133bc67c6026376d630da9b53b68" title=" " alt="" coords="1099,1313,1204,1339"/>
+<area shape="rect" href="../../d9/d2f/ide_8c.html#a8dd5da18ae27fdeef2e7f854b855700e" title=" " alt="" coords="968,1110,1040,1137"/>
+<area shape="rect" href="../../d9/d2f/ide_8c.html#a20e7bdb8447d25c59f86be50a373963c" title=" " alt="" coords="1116,1059,1187,1086"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#ae83f752beecce9c8f6f8711ff936377f" title=" " alt="" coords="1126,1110,1177,1137"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#af20064a96968f84c40bd6c633bc844f4" title=" " alt="" coords="1124,1009,1179,1035"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a840b479c87b1c047d7142f58e0ad0b27" title=" " alt="" coords="1099,1617,1204,1643"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a245b56417239f499389b2e806bd99254" title=" " alt="" coords="1259,1262,1331,1289"/>
+<area shape="rect" href="../../d3/dda/proc_8c.html#ab5b9e3505045fa920a190e14e0ab2717" title=" " alt="" coords="1385,1262,1465,1289"/>
+<area shape="rect" href="../../d2/d5a/fs_8c.html#a965e83e1fa9b15abf268784ce74181bb" title=" " alt="" coords="227,1693,285,1719"/>
+<area shape="rect" href="../../d2/d5a/fs_8c.html#a4a942a8fde303c8392d4f302170e5626" title=" " alt="" coords="333,1718,408,1745"/>
+<area shape="rect" href="../../d2/d5a/fs_8c.html#a29272227722d57ff937caaffd03455a9" title=" " alt="" coords="340,1667,401,1694"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a270d0050dc50965f4f851717841ad33c" title=" " alt="" coords="673,1743,756,1770"/>
+<area shape="rect" href="../../d0/d56/console_8c.html#a90f0742d846503e4ed1804f1df421ec6" title=" " alt="" coords="1263,1870,1327,1897"/>
+<area shape="rect" href="../../d2/d5a/fs_8c.html#ac93f607f4a954323f4c9ea485ca88538" title=" " alt="" coords="456,1617,515,1643"/>
+<area shape="rect" href="../../d0/d56/console_8c.html#a0504dbe97899f754f22dbe2b1e6b6102" title=" " alt="" coords="1524,1870,1604,1897"/>
+<area shape="rect" href="../../d0/d56/console_8c.html#aafb705f6d5b125c41825313da0d41252" title=" " alt="" coords="1391,1921,1460,1947"/>
+</map>
+</div>
+<div class="dynheader">
+이 함수를 호출하는 함수들에 대한 그래프입니다.:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d6/d13/file_8c_a1dc8c87c7e48bdaaf98e9c7047928f29_icgraph.png" border="0" usemap="#d6/d13/file_8c_a1dc8c87c7e48bdaaf98e9c7047928f29_icgraph" alt=""/></div>
+<map name="d6/d13/file_8c_a1dc8c87c7e48bdaaf98e9c7047928f29_icgraph" id="d6/d13/file_8c_a1dc8c87c7e48bdaaf98e9c7047928f29_icgraph">
+<area shape="rect" title=" " alt="" coords="133,5,204,32"/>
+<area shape="rect" href="../../d1/d14/sysfile_8c.html#a54bf714d9e898cbdcbc061b280bbfae0" title=" " alt="" coords="5,5,85,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="afff8e849fa54dea2a5a27dbb97474607"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afff8e849fa54dea2a5a27dbb97474607">&#9670;&nbsp;</a></span>filestat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int filestat </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="../../d7/d3a/structfile.html">file</a> *&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="../../da/de7/structstat.html">stat</a> *&#160;</td>
+          <td class="paramname"><em>st</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"><a class="el" href="../../d6/d13/file_8c_source.html">file.c</a> 파일의 <a class="el" href="../../d6/d13/file_8c_source.html#l00086">86</a> 번째 라인에서 정의되었습니다.</p>
+<div class="fragment"><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;{</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="keywordflow">if</span> (f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a3a28c808a8dcd4acf45087ac30c075e7">type</a> == <a class="code" href="../../d7/d3a/structfile.html#a4aeeba6a286e58966d853aa1f510d3d5aa5d8c5e0d95ed88367e96ecebfdf326d">FD_INODE</a>)</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  {</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#a29a4d743d41fe659f74b0a57fdc25012">ilock</a>(f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a4fd095f927715574dc2a4f243690e508">ip</a>);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#a528f45ea5530504abc7113acc2154348">stati</a>(f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a4fd095f927715574dc2a4f243690e508">ip</a>, st);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#af301c10ad8ced77a5dfb2de3a64c666c">iunlock</a>(f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a4fd095f927715574dc2a4f243690e508">ip</a>);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;}</div>
+</div><!-- fragment --><div class="dynheader">
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d6/d13/file_8c_afff8e849fa54dea2a5a27dbb97474607_cgraph.png" border="0" usemap="#d6/d13/file_8c_afff8e849fa54dea2a5a27dbb97474607_cgraph" alt=""/></div>
+<map name="d6/d13/file_8c_afff8e849fa54dea2a5a27dbb97474607_cgraph" id="d6/d13/file_8c_afff8e849fa54dea2a5a27dbb97474607_cgraph">
+<area shape="rect" title=" " alt="" coords="5,1211,72,1237"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a29a4d743d41fe659f74b0a57fdc25012" title=" " alt="" coords="120,1211,173,1237"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#af301c10ad8ced77a5dfb2de3a64c666c" title=" " alt="" coords="592,777,661,804"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a528f45ea5530504abc7113acc2154348" title=" " alt="" coords="121,1261,172,1288"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#aecd4639fe2f9aaad8e8cee2b5e0688c3" title=" " alt="" coords="427,600,532,627"/>
+<area shape="rect" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a" title=" " alt="" coords="1566,904,1623,931"/>
+<area shape="rect" href="../../dc/de6/bio_8c.html#ae000984516278965dde3d125affd086c" title=" " alt="" coords="221,1227,280,1253"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#aa9c8577c0e9d233f85892ec2d9bfe212" title=" " alt="" coords="580,1563,673,1589"/>
+<area shape="rect" href="../../dc/de6/bio_8c.html#ab5335aeb503731104314321a78a6d727" title=" " alt="" coords="595,1021,658,1048"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#afe4ef8638f1ecb962a6e67fb086ee3b8" title=" " alt="" coords="1039,993,1110,1020"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#addb64b689e3c266aaa67cc0126bba441" title=" " alt="" coords="1185,271,1255,297"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a4f8616948f3dbce65671f666eed1d669" title=" " alt="" coords="1039,676,1110,703"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#aca4a88f06b3ebbcc04330f7ae06c8507" title=" " alt="" coords="598,600,655,627"/>
+<area shape="rect" href="../../d3/d2d/spinlock_8c.html#a6ac35304ea80f01086b47edcc2328010" title=" " alt="" coords="1169,1044,1271,1071"/>
+<area shape="rect" href="../../d3/d2d/spinlock_8c.html#aea48df3e5cfb903179ad3dc78ab502d9" title=" " alt="" coords="1185,651,1255,677"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a6ab45dc363c8d9b7beb14c25be49c6d7" title=" " alt="" coords="1435,499,1501,525"/>
+<area shape="rect" href="../../d3/d2d/spinlock_8c.html#a206b749d1b7768dadce61cbcde7e0f1c" title=" " alt="" coords="1319,600,1387,627"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#a7882b181a4fc45195cbaa1cd6aa986d4" title=" " alt="" coords="1193,993,1247,1020"/>
+<area shape="rect" href="../../d3/d2d/spinlock_8c.html#ae3424f669269fef400ce29c3aeb43fdb" title=" " alt="" coords="1322,701,1383,728"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a627f7996b64f99d885244a5102c85164" title=" " alt="" coords="1562,220,1627,247"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#a216ef768ced2935b4fd2a7de7d65de5b" title=" " alt="" coords="1549,347,1640,373"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#af87d69b8449fc86a02b250af121cd29d" title=" " alt="" coords="1449,549,1487,576"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#a89d04efedb6dc6e8d87c6a5b453529e1" title=" " alt="" coords="1449,448,1487,475"/>
+<area shape="rect" href="../../d3/dda/proc_8c.html#a6ab45dc363c8d9b7beb14c25be49c6d7" title=" " alt="" coords="1319,144,1386,171"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#ae3424f669269fef400ce29c3aeb43fdb" title=" " alt="" coords="1322,245,1383,272"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a206b749d1b7768dadce61cbcde7e0f1c" title=" " alt="" coords="1319,195,1387,221"/>
+<area shape="rect" href="../../d3/dda/proc_8c.html#aac2d0e6895b990d37e7c675637e9e40f" title=" " alt="" coords="1185,169,1255,196"/>
+<area shape="rect" href="../../d3/dda/proc_8c.html#ad788da91743c333b5bed7c4a0dd12365" title=" " alt="" coords="744,321,804,348"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#ac44b13cc76bf4040e3baf34df75ff230" title=" " alt="" coords="1185,575,1255,601"/>
+<area shape="rect" href="../../d3/dda/proc_8c.html#a9fa00b0be5d3c4781048861e2506eb63" title=" " alt="" coords="885,347,970,373"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a1d9e7047d3dfb57809a2541d8387705e" title=" " alt="" coords="1045,245,1105,272"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a02ca0670bc1fe12e38453082631ff360" title=" " alt="" coords="1028,347,1121,373"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#ad43d81fa3edec39a200abd0853bc84b1" title=" " alt="" coords="1173,372,1267,399"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#ad478e855c39b8cbc88b72327ef4cd6f7" title=" " alt="" coords="1329,296,1376,323"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#a4221d3a95c4a39db73a96c2332990ab0" title=" " alt="" coords="1333,397,1372,424"/>
+<area shape="rect" href="../../dc/de6/bio_8c.html#ae58af86fda152e537209b86758f777ee" title=" " alt="" coords="328,1227,379,1253"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a70985c3f5b2fb79737457b5c88f5327a" title=" " alt="" coords="450,1309,509,1336"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#afa76133bc67c6026376d630da9b53b68" title=" " alt="" coords="875,752,980,779"/>
+<area shape="rect" href="../../d9/d2f/ide_8c.html#a8dd5da18ae27fdeef2e7f854b855700e" title=" " alt="" coords="591,1411,663,1437"/>
+<area shape="rect" href="../../d9/d2f/ide_8c.html#a20e7bdb8447d25c59f86be50a373963c" title=" " alt="" coords="739,1461,809,1488"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#ae83f752beecce9c8f6f8711ff936377f" title=" " alt="" coords="749,1360,799,1387"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#af20064a96968f84c40bd6c633bc844f4" title=" " alt="" coords="747,1411,801,1437"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#a2866d9720d8f4b0e23530f79171dfba9" title=" " alt="" coords="906,1461,949,1488"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a840b479c87b1c047d7142f58e0ad0b27" title=" " alt="" coords="721,1005,827,1032"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a245b56417239f499389b2e806bd99254" title=" " alt="" coords="891,904,963,931"/>
+<area shape="rect" href="../../d3/dda/proc_8c.html#ab5b9e3505045fa920a190e14e0ab2717" title=" " alt="" coords="1035,904,1115,931"/>
+</map>
+</div>
+<div class="dynheader">
+이 함수를 호출하는 함수들에 대한 그래프입니다.:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d6/d13/file_8c_afff8e849fa54dea2a5a27dbb97474607_icgraph.png" border="0" usemap="#d6/d13/file_8c_afff8e849fa54dea2a5a27dbb97474607_icgraph" alt=""/></div>
+<map name="d6/d13/file_8c_afff8e849fa54dea2a5a27dbb97474607_icgraph" id="d6/d13/file_8c_afff8e849fa54dea2a5a27dbb97474607_icgraph">
+<area shape="rect" title=" " alt="" coords="160,31,227,57"/>
+<area shape="rect" href="../../d1/d14/sysfile_8c.html#ac243c8f20f5fb2e3e257b5007af2c204" title=" " alt="" coords="18,5,99,32"/>
+<area shape="rect" href="../../d1/d14/sysfile_8c.html#aa580fe977b4fec2c0a3194fd1131fbfa" title=" " alt="" coords="5,56,112,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab8de757a0a9f58dcc6511ea5e46ebb88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8de757a0a9f58dcc6511ea5e46ebb88">&#9670;&nbsp;</a></span>filewrite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int filewrite </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="../../d7/d3a/structfile.html">file</a> *&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>addr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"><a class="el" href="../../d6/d13/file_8c_source.html">file.c</a> 파일의 <a class="el" href="../../d6/d13/file_8c_source.html#l00120">120</a> 번째 라인에서 정의되었습니다.</p>
+<div class="fragment"><div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;{</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  <span class="keywordtype">int</span> <a class="code" href="../../d0/d56/console_8c.html#af10fa12dd785c91e29528fbdc50cf9af">r</a>;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  <span class="keywordflow">if</span> (f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a6e1b641ea1551ac4316a0c11a683df45">writable</a> == 0)</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  <span class="keywordflow">if</span> (f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a3a28c808a8dcd4acf45087ac30c075e7">type</a> == <a class="code" href="../../d7/d3a/structfile.html#a4aeeba6a286e58966d853aa1f510d3d5a59fcf59caf6e70c3cc3cc48291b89752">FD_PIPE</a>)</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="../../d5/d64/defs_8h.html#ae63b0db4ca2cbb2025b89d977c6535b1">pipewrite</a>(f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a19d83a8d6cb47902fe8c762d2798c198">pipe</a>, addr, n);</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  <span class="keywordflow">if</span> (f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a3a28c808a8dcd4acf45087ac30c075e7">type</a> == <a class="code" href="../../d7/d3a/structfile.html#a4aeeba6a286e58966d853aa1f510d3d5aa5d8c5e0d95ed88367e96ecebfdf326d">FD_INODE</a>)</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  {</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="comment">// write a few blocks at a time to avoid exceeding</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="comment">// the maximum log transaction size, including</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="comment">// i-node, indirect block, allocation blocks,</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="comment">// and 2 blocks of slop for non-aligned writes.</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="comment">// this really belongs lower down, since writei()</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="comment">// might be writing a device like the console.</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="keywordtype">int</span> max = ((<a class="code" href="../../d5/d33/param_8h.html#a31cde324007b4e52bbba7079ec5e5f45">MAXOPBLOCKS</a> - 1 - 1 - 2) / 2) * 512;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keywordtype">int</span> i = 0;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keywordflow">while</span> (i &lt; n)</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    {</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;      <span class="keywordtype">int</span> n1 = n - i;</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;      <span class="keywordflow">if</span> (n1 &gt; max)</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        n1 = max;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;      <a class="code" href="../../d5/d64/defs_8h.html#a603ca98212e00d2ffdba7827ef0f1003">begin_op</a>();</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;      <a class="code" href="../../d5/d64/defs_8h.html#a29a4d743d41fe659f74b0a57fdc25012">ilock</a>(f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a4fd095f927715574dc2a4f243690e508">ip</a>);</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;      <span class="keywordflow">if</span> ((<a class="code" href="../../d0/d56/console_8c.html#af10fa12dd785c91e29528fbdc50cf9af">r</a> = <a class="code" href="../../d5/d64/defs_8h.html#a515876d4653cefef4732806ef7f2833f">writei</a>(f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a4fd095f927715574dc2a4f243690e508">ip</a>, addr + i, f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a94a911be6cc1b1326728392d8b40150d">off</a>, n1)) &gt; 0)</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a94a911be6cc1b1326728392d8b40150d">off</a> += <a class="code" href="../../d0/d56/console_8c.html#af10fa12dd785c91e29528fbdc50cf9af">r</a>;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;      <a class="code" href="../../d5/d64/defs_8h.html#af301c10ad8ced77a5dfb2de3a64c666c">iunlock</a>(f-&gt;<a class="code" href="../../d7/d3a/structfile.html#a4fd095f927715574dc2a4f243690e508">ip</a>);</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;      <a class="code" href="../../d5/d64/defs_8h.html#a2504e37a109f9bae5ca11fe89e4e8fa1">end_op</a>();</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;      <span class="keywordflow">if</span> (<a class="code" href="../../d0/d56/console_8c.html#af10fa12dd785c91e29528fbdc50cf9af">r</a> &lt; 0)</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;      <span class="keywordflow">if</span> (<a class="code" href="../../d0/d56/console_8c.html#af10fa12dd785c91e29528fbdc50cf9af">r</a> != n1)</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <a class="code" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a>(<span class="stringliteral">&quot;short filewrite&quot;</span>);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;      i += <a class="code" href="../../d0/d56/console_8c.html#af10fa12dd785c91e29528fbdc50cf9af">r</a>;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    }</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="keywordflow">return</span> i == n ? n : -1;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  }</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;  <a class="code" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a>(<span class="stringliteral">&quot;filewrite&quot;</span>);</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;}</div>
+</div><!-- fragment --><div class="dynheader">
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d6/d13/file_8c_ab8de757a0a9f58dcc6511ea5e46ebb88_cgraph.png" border="0" usemap="#d6/d13/file_8c_ab8de757a0a9f58dcc6511ea5e46ebb88_cgraph" alt=""/></div>
+<map name="d6/d13/file_8c_ab8de757a0a9f58dcc6511ea5e46ebb88_cgraph" id="d6/d13/file_8c_ab8de757a0a9f58dcc6511ea5e46ebb88_cgraph">
+<area shape="rect" title=" " alt="" coords="5,1309,80,1336"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a603ca98212e00d2ffdba7827ef0f1003" title=" " alt="" coords="765,701,847,728"/>
+<area shape="rect" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a" title=" " alt="" coords="1835,1664,1893,1691"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a2504e37a109f9bae5ca11fe89e4e8fa1" title=" " alt="" coords="128,1309,197,1336"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a29a4d743d41fe659f74b0a57fdc25012" title=" " alt="" coords="390,1005,443,1032"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#af301c10ad8ced77a5dfb2de3a64c666c" title=" " alt="" coords="907,1360,976,1387"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#ae63b0db4ca2cbb2025b89d977c6535b1" title=" " alt="" coords="765,600,847,627"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a515876d4653cefef4732806ef7f2833f" title=" " alt="" coords="133,1512,192,1539"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#afe4ef8638f1ecb962a6e67fb086ee3b8" title=" " alt="" coords="1315,1233,1386,1260"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a4f8616948f3dbce65671f666eed1d669" title=" " alt="" coords="1315,803,1386,829"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#aca4a88f06b3ebbcc04330f7ae06c8507" title=" " alt="" coords="913,600,970,627"/>
+<area shape="rect" href="../../d3/d2d/spinlock_8c.html#a6ac35304ea80f01086b47edcc2328010" title=" " alt="" coords="1439,1309,1540,1336"/>
+<area shape="rect" href="../../d3/d2d/spinlock_8c.html#aea48df3e5cfb903179ad3dc78ab502d9" title=" " alt="" coords="1454,600,1525,627"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a6ab45dc363c8d9b7beb14c25be49c6d7" title=" " alt="" coords="1704,448,1771,475"/>
+<area shape="rect" href="../../d3/d2d/spinlock_8c.html#a206b749d1b7768dadce61cbcde7e0f1c" title=" " alt="" coords="1588,397,1656,424"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#a7882b181a4fc45195cbaa1cd6aa986d4" title=" " alt="" coords="1463,1259,1516,1285"/>
+<area shape="rect" href="../../d3/d2d/spinlock_8c.html#ae3424f669269fef400ce29c3aeb43fdb" title=" " alt="" coords="1591,600,1653,627"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a627f7996b64f99d885244a5102c85164" title=" " alt="" coords="1831,321,1897,348"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#a216ef768ced2935b4fd2a7de7d65de5b" title=" " alt="" coords="1819,144,1909,171"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#af87d69b8449fc86a02b250af121cd29d" title=" " alt="" coords="1718,499,1757,525"/>
+<area shape="rect" href="../../d5/d39/x86_8h.html#a89d04efedb6dc6e8d87c6a5b453529e1" title=" " alt="" coords="1718,347,1757,373"/>
+<area shape="rect" href="../../d3/dda/proc_8c.html#aac2d0e6895b990d37e7c675637e9e40f" title=" " alt="" coords="1454,144,1525,171"/>
+<area shape="rect" href="../../d3/dda/proc_8c.html#ad788da91743c333b5bed7c4a0dd12365" title=" " alt="" coords="1047,347,1107,373"/>
+<area shape="rect" href="../../d3/dda/proc_8c.html#a6ab45dc363c8d9b7beb14c25be49c6d7" title=" " alt="" coords="1589,144,1655,171"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#ae3424f669269fef400ce29c3aeb43fdb" title=" " alt="" coords="1591,296,1653,323"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a206b749d1b7768dadce61cbcde7e0f1c" title=" " alt="" coords="1588,245,1656,272"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#ac44b13cc76bf4040e3baf34df75ff230" title=" " alt="" coords="1454,448,1525,475"/>
+<area shape="rect" href="../../d3/dda/proc_8c.html#a9fa00b0be5d3c4781048861e2506eb63" title=" " alt="" coords="1177,347,1263,373"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a1d9e7047d3dfb57809a2541d8387705e" title=" " alt="" coords="1321,347,1381,373"/>
+<area shape="rect" href="../../d7/df8/log_8c.html#a504ac82448623ae8ad27b97dbed82694" title=" " alt="" coords="245,1233,317,1260"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a245b56417239f499389b2e806bd99254" title=" " alt="" coords="1184,1411,1256,1437"/>
+<area shape="rect" href="../../d7/df8/log_8c.html#ab5eaeac1ab988530dcda4fd57a634df0" title=" " alt="" coords="365,1259,468,1285"/>
+<area shape="rect" href="../../d7/df8/log_8c.html#a34322134c00d3e9ad7fb48a7baa9a4c5" title=" " alt="" coords="369,1157,464,1184"/>
+<area shape="rect" href="../../d7/df8/log_8c.html#af4e7fbf2920c27568c9b88d45f0bd5e1" title=" " alt="" coords="375,1208,458,1235"/>
+<area shape="rect" href="../../dc/de6/bio_8c.html#ae000984516278965dde3d125affd086c" title=" " alt="" coords="528,1107,587,1133"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#aa9c8577c0e9d233f85892ec2d9bfe212" title=" " alt="" coords="759,1259,853,1285"/>
+<area shape="rect" href="../../dc/de6/bio_8c.html#ab5335aeb503731104314321a78a6d727" title=" " alt="" coords="526,1512,589,1539"/>
+<area shape="rect" href="../../dc/de6/bio_8c.html#ae58af86fda152e537209b86758f777ee" title=" " alt="" coords="651,955,701,981"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a70985c3f5b2fb79737457b5c88f5327a" title=" " alt="" coords="647,1005,705,1032"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#aecd4639fe2f9aaad8e8cee2b5e0688c3" title=" " alt="" coords="753,833,859,860"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#addb64b689e3c266aaa67cc0126bba441" title=" " alt="" coords="1185,195,1255,221"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#afa76133bc67c6026376d630da9b53b68" title=" " alt="" coords="1024,1208,1129,1235"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a840b479c87b1c047d7142f58e0ad0b27" title=" " alt="" coords="1024,1360,1129,1387"/>
+<area shape="rect" href="../../d3/dda/proc_8c.html#ab5b9e3505045fa920a190e14e0ab2717" title=" " alt="" coords="1311,1411,1391,1437"/>
+<area shape="rect" href="../../d2/d5a/fs_8c.html#a965e83e1fa9b15abf268784ce74181bb" title=" " alt="" coords="252,1791,311,1817"/>
+<area shape="rect" href="../../d5/d64/defs_8h.html#a270d0050dc50965f4f851717841ad33c" title=" " alt="" coords="516,1917,599,1944"/>
+<area shape="rect" href="../../d2/d5a/fs_8c.html#a7220afa8e5f4bea540eb95879ea7df6e" title=" " alt="" coords="381,1512,452,1539"/>
+<area shape="rect" href="../../d2/d5a/fs_8c.html#a4a942a8fde303c8392d4f302170e5626" title=" " alt="" coords="379,1816,454,1843"/>
+<area shape="rect" href="../../d2/d5a/fs_8c.html#a29272227722d57ff937caaffd03455a9" title=" " alt="" coords="386,1867,447,1893"/>
+<area shape="rect" href="../../d0/d56/console_8c.html#a90f0742d846503e4ed1804f1df421ec6" title=" " alt="" coords="1188,1715,1252,1741"/>
+</map>
+</div>
+<div class="dynheader">
+이 함수를 호출하는 함수들에 대한 그래프입니다.:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d6/d13/file_8c_ab8de757a0a9f58dcc6511ea5e46ebb88_icgraph.png" border="0" usemap="#d6/d13/file_8c_ab8de757a0a9f58dcc6511ea5e46ebb88_icgraph" alt=""/></div>
+<map name="d6/d13/file_8c_ab8de757a0a9f58dcc6511ea5e46ebb88_icgraph" id="d6/d13/file_8c_ab8de757a0a9f58dcc6511ea5e46ebb88_icgraph">
+<area shape="rect" title=" " alt="" coords="137,5,212,32"/>
+<area shape="rect" href="../../d1/d14/sysfile_8c.html#a687d939a9e4792af15db96f2c2f34378" title=" " alt="" coords="5,5,89,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">변수 문서화</h2>
+<a id="aadbb32b41c0d0e9c19d6d8fa3a0a6502"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadbb32b41c0d0e9c19d6d8fa3a0a6502">&#9670;&nbsp;</a></span>devsw</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="../../de/d6a/structdevsw.html">devsw</a> <a class="el" href="../../de/d6a/structdevsw.html">devsw</a>[<a class="el" href="../../d5/d33/param_8h.html#aa564a41c8409694da49b0badf2bb2853">NDEV</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"><a class="el" href="../../d6/d13/file_8c_source.html">file.c</a> 파일의 <a class="el" href="../../d6/d13/file_8c_source.html#l00013">13</a> 번째 라인에서 정의되었습니다.</p>
+
+</div>
+</div>
+<a id="a7cfa5243b3d349a415c7500c962fe9a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cfa5243b3d349a415c7500c962fe9a5">&#9670;&nbsp;</a></span>file</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="../../d7/d3a/structfile.html">file</a> <a class="el" href="../../d7/d3a/structfile.html">file</a>[<a class="el" href="../../d5/d33/param_8h.html#a8485f4e81de2537e6a0935626167a775">NFILE</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"><a class="el" href="../../d6/d13/file_8c_source.html">file.c</a> 파일의 <a class="el" href="../../d6/d13/file_8c_source.html#l00017">17</a> 번째 라인에서 정의되었습니다.</p>
+
+</div>
+</div>
+<a id="aa3cdfe534b83322d79f0605488e11ecc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3cdfe534b83322d79f0605488e11ecc">&#9670;&nbsp;</a></span>ftable</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct { ... }  ftable</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab28e82cd5dda7d960095706a3ea20572"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab28e82cd5dda7d960095706a3ea20572">&#9670;&nbsp;</a></span>lock</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="../../d1/d08/structspinlock.html">spinlock</a> lock</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"><a class="el" href="../../d6/d13/file_8c_source.html">file.c</a> 파일의 <a class="el" href="../../d6/d13/file_8c_source.html#l00016">16</a> 번째 라인에서 정의되었습니다.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="astructfile_html_a6e1b641ea1551ac4316a0c11a683df45"><div class="ttname"><a href="../../d7/d3a/structfile.html#a6e1b641ea1551ac4316a0c11a683df45">file::writable</a></div><div class="ttdeci">char writable</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00005">file.h:5</a></div></div>
+<div class="ttc" id="astructfile_html_a4fd095f927715574dc2a4f243690e508"><div class="ttname"><a href="../../d7/d3a/structfile.html#a4fd095f927715574dc2a4f243690e508">file::ip</a></div><div class="ttdeci">struct inode * ip</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00007">file.h:7</a></div></div>
+<div class="ttc" id="aparam_8h_html_a8485f4e81de2537e6a0935626167a775"><div class="ttname"><a href="../../d5/d33/param_8h.html#a8485f4e81de2537e6a0935626167a775">NFILE</a></div><div class="ttdeci">#define NFILE</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d33/param_8h_source.html#l00005">param.h:5</a></div></div>
+<div class="ttc" id="adefs_8h_html_a4f8616948f3dbce65671f666eed1d669"><div class="ttname"><a href="../../d5/d64/defs_8h.html#a4f8616948f3dbce65671f666eed1d669">release</a></div><div class="ttdeci">void release(struct spinlock *)</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d2d/spinlock_8c_source.html#l00047">spinlock.c:47</a></div></div>
+<div class="ttc" id="adefs_8h_html_a29530a0afdfe924818d8c70b6724528d"><div class="ttname"><a href="../../d5/d64/defs_8h.html#a29530a0afdfe924818d8c70b6724528d">iput</a></div><div class="ttdeci">void iput(struct inode *)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00345">fs.c:345</a></div></div>
+<div class="ttc" id="astructfile_html"><div class="ttname"><a href="../../d7/d3a/structfile.html">file</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00001">file.h:1</a></div></div>
+<div class="ttc" id="adefs_8h_html_a2504e37a109f9bae5ca11fe89e4e8fa1"><div class="ttname"><a href="../../d5/d64/defs_8h.html#a2504e37a109f9bae5ca11fe89e4e8fa1">end_op</a></div><div class="ttdeci">void end_op()</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/df8/log_8c_source.html#l00146">log.c:146</a></div></div>
+<div class="ttc" id="adefs_8h_html_a515876d4653cefef4732806ef7f2833f"><div class="ttname"><a href="../../d5/d64/defs_8h.html#a515876d4653cefef4732806ef7f2833f">writei</a></div><div class="ttdeci">int writei(struct inode *, char *, uint, uint)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00620">fs.c:620</a></div></div>
+<div class="ttc" id="adefs_8h_html_ab56d728e6966819a0260c358d3ac3419"><div class="ttname"><a href="../../d5/d64/defs_8h.html#ab56d728e6966819a0260c358d3ac3419">initlock</a></div><div class="ttdeci">void initlock(struct spinlock *, char *)</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d2d/spinlock_8c_source.html#l00013">spinlock.c:13</a></div></div>
+<div class="ttc" id="astructfile_html_a4aeeba6a286e58966d853aa1f510d3d5a224e095442d50a6bd1058fd742fb68c7"><div class="ttname"><a href="../../d7/d3a/structfile.html#a4aeeba6a286e58966d853aa1f510d3d5a224e095442d50a6bd1058fd742fb68c7">file::FD_NONE</a></div><div class="ttdeci">@ FD_NONE</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00002">file.h:2</a></div></div>
+<div class="ttc" id="adefs_8h_html_a603ca98212e00d2ffdba7827ef0f1003"><div class="ttname"><a href="../../d5/d64/defs_8h.html#a603ca98212e00d2ffdba7827ef0f1003">begin_op</a></div><div class="ttdeci">void begin_op()</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/df8/log_8c_source.html#l00126">log.c:126</a></div></div>
+<div class="ttc" id="afile_8c_html_aa3cdfe534b83322d79f0605488e11ecc"><div class="ttname"><a href="../../d6/d13/file_8c.html#aa3cdfe534b83322d79f0605488e11ecc">ftable</a></div><div class="ttdeci">struct @3 ftable</div></div>
+<div class="ttc" id="astructfile_html_a94a911be6cc1b1326728392d8b40150d"><div class="ttname"><a href="../../d7/d3a/structfile.html#a94a911be6cc1b1326728392d8b40150d">file::off</a></div><div class="ttdeci">uint off</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00008">file.h:8</a></div></div>
+<div class="ttc" id="adefs_8h_html_a528f45ea5530504abc7113acc2154348"><div class="ttname"><a href="../../d5/d64/defs_8h.html#a528f45ea5530504abc7113acc2154348">stati</a></div><div class="ttdeci">void stati(struct inode *, struct stat *)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00563">fs.c:563</a></div></div>
+<div class="ttc" id="adefs_8h_html_a2415273b06f31f0f2587b7325588a7e4"><div class="ttname"><a href="../../d5/d64/defs_8h.html#a2415273b06f31f0f2587b7325588a7e4">readi</a></div><div class="ttdeci">int readi(struct inode *, char *, uint, uint)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00590">fs.c:590</a></div></div>
+<div class="ttc" id="astructfile_html_a4aeeba6a286e58966d853aa1f510d3d5a59fcf59caf6e70c3cc3cc48291b89752"><div class="ttname"><a href="../../d7/d3a/structfile.html#a4aeeba6a286e58966d853aa1f510d3d5a59fcf59caf6e70c3cc3cc48291b89752">file::FD_PIPE</a></div><div class="ttdeci">@ FD_PIPE</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00002">file.h:2</a></div></div>
+<div class="ttc" id="astructfile_html_a3a28c808a8dcd4acf45087ac30c075e7"><div class="ttname"><a href="../../d7/d3a/structfile.html#a3a28c808a8dcd4acf45087ac30c075e7">file::type</a></div><div class="ttdeci">enum file::@4 type</div></div>
+<div class="ttc" id="aconsole_8c_html_af10fa12dd785c91e29528fbdc50cf9af"><div class="ttname"><a href="../../d0/d56/console_8c.html#af10fa12dd785c91e29528fbdc50cf9af">r</a></div><div class="ttdeci">uint r</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/d56/console_8c_source.html#l00184">console.c:184</a></div></div>
+<div class="ttc" id="astructfile_html_a41c818f828adea488058bca63e4df23f"><div class="ttname"><a href="../../d7/d3a/structfile.html#a41c818f828adea488058bca63e4df23f">file::ref</a></div><div class="ttdeci">int ref</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00003">file.h:3</a></div></div>
+<div class="ttc" id="adefs_8h_html_acd589a0d0d6d34b446baf33755eef519"><div class="ttname"><a href="../../d5/d64/defs_8h.html#acd589a0d0d6d34b446baf33755eef519">piperead</a></div><div class="ttdeci">int piperead(struct pipe *, char *, int)</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d47/pipe_8c_source.html#l00101">pipe.c:101</a></div></div>
+<div class="ttc" id="aconsole_8c_html_a95c0aca5d6d7487933984f08b189917a"><div class="ttname"><a href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a></div><div class="ttdeci">void panic(char *s)</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/d56/console_8c_source.html#l00107">console.c:107</a></div></div>
+<div class="ttc" id="astructfile_html_a4aeeba6a286e58966d853aa1f510d3d5aa5d8c5e0d95ed88367e96ecebfdf326d"><div class="ttname"><a href="../../d7/d3a/structfile.html#a4aeeba6a286e58966d853aa1f510d3d5aa5d8c5e0d95ed88367e96ecebfdf326d">file::FD_INODE</a></div><div class="ttdeci">@ FD_INODE</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00002">file.h:2</a></div></div>
+<div class="ttc" id="aparam_8h_html_a31cde324007b4e52bbba7079ec5e5f45"><div class="ttname"><a href="../../d5/d33/param_8h.html#a31cde324007b4e52bbba7079ec5e5f45">MAXOPBLOCKS</a></div><div class="ttdeci">#define MAXOPBLOCKS</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d33/param_8h_source.html#l00010">param.h:10</a></div></div>
+<div class="ttc" id="astructfile_html_a0c5c8eced8bc562dbbecc8d450a6b646"><div class="ttname"><a href="../../d7/d3a/structfile.html#a0c5c8eced8bc562dbbecc8d450a6b646">file::readable</a></div><div class="ttdeci">char readable</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00004">file.h:4</a></div></div>
+<div class="ttc" id="adefs_8h_html_afe4ef8638f1ecb962a6e67fb086ee3b8"><div class="ttname"><a href="../../d5/d64/defs_8h.html#afe4ef8638f1ecb962a6e67fb086ee3b8">acquire</a></div><div class="ttdeci">void acquire(struct spinlock *)</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d2d/spinlock_8c_source.html#l00025">spinlock.c:25</a></div></div>
+<div class="ttc" id="adefs_8h_html_a29a4d743d41fe659f74b0a57fdc25012"><div class="ttname"><a href="../../d5/d64/defs_8h.html#a29a4d743d41fe659f74b0a57fdc25012">ilock</a></div><div class="ttdeci">void ilock(struct inode *)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00302">fs.c:302</a></div></div>
+<div class="ttc" id="astructfile_html_a19d83a8d6cb47902fe8c762d2798c198"><div class="ttname"><a href="../../d7/d3a/structfile.html#a19d83a8d6cb47902fe8c762d2798c198">file::pipe</a></div><div class="ttdeci">struct pipe * pipe</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00006">file.h:6</a></div></div>
+<div class="ttc" id="adefs_8h_html_ae63b0db4ca2cbb2025b89d977c6535b1"><div class="ttname"><a href="../../d5/d64/defs_8h.html#ae63b0db4ca2cbb2025b89d977c6535b1">pipewrite</a></div><div class="ttdeci">int pipewrite(struct pipe *, char *, int)</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d47/pipe_8c_source.html#l00079">pipe.c:79</a></div></div>
+<div class="ttc" id="adefs_8h_html_af6220973e389c74782d76ae641a5e7db"><div class="ttname"><a href="../../d5/d64/defs_8h.html#af6220973e389c74782d76ae641a5e7db">pipeclose</a></div><div class="ttdeci">void pipeclose(struct pipe *, int)</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d47/pipe_8c_source.html#l00060">pipe.c:60</a></div></div>
+<div class="ttc" id="adefs_8h_html_af301c10ad8ced77a5dfb2de3a64c666c"><div class="ttname"><a href="../../d5/d64/defs_8h.html#af301c10ad8ced77a5dfb2de3a64c666c">iunlock</a></div><div class="ttdeci">void iunlock(struct inode *)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d5a/fs_8c_source.html#l00330">fs.c:330</a></div></div>
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+다음에 의해 생성됨 :  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.17
+</small></address>
+</body>
+</html>

@@ -383,6 +383,24 @@ void iunlockput(struct inode *ip)
 
 // Return the disk block address of the nth block in inode ip.
 // If there is no such block, bmap allocates one.
+
+#define ADDR 1
+#define LEN 2
+/* mode에 따라서 addr 혹은 len을 리턴해주는 함수*/
+/* 4바이트 addrs를 3바이트, 1바이트로 쪼개서 리턴해준다*/
+uint addrLen(uint addrs, uint mode)
+{
+
+  if (mode == ADDR || mode == LEN)
+  {
+    if (mode == ADDR)
+      return addrs >> 8;
+    else if (mode == LEN)
+      return addrs & 255;
+  }
+  return -1;
+}
+
 static uint
 bmap(struct inode *ip, uint bn)
 {
@@ -407,13 +425,14 @@ bmap(struct inode *ip, uint bn)
         break;
       /*addrs[i]는 4바이트인데 3바이트는 주소이고 1바이트는 길이이다*/
       /* 비트 연산으로 & 255를 해주면 하위 1바이트, 즉 길이를 얻을 수 있다.*/
-      len = (ip->addrs[i] & 255);
+      // len = (ip->addrs[i] & 255);
+      len = addrLen(ip->addrs[i], LEN);
       /*블럭 넘버 할당*/
       /*T_CS 파일중에 해당 블럭 넘버가 있는지 체크*/
       if (bn >= cur && bn < len + cur)
       {
         /*addrs[i] >> 8 연산을 하면 상위 3바이트, 즉 주소를 얻을 수 있다.*/
-        addr = (ip->addrs[i] >> 8) + bn - cur;
+        addr = addrLen(ip->addrs[i], ADDR) + bn - cur;
         return addr;
       }
       cur += len;
@@ -430,9 +449,10 @@ bmap(struct inode *ip, uint bn)
     // 새로운 블럭 넘버(빈공간) 할당받기
     if ((new = balloc(ip->dev)) != 0)
     {
-      len = (ip->addrs[i - 1] & 255);
+      // len = (ip->addrs[i - 1] & 255);
+      len = addrLen(ip->addrs[i - 1], LEN);
       // 새로운 블럭이 연속된 데이터 블럭일 경우
-      if ((new == ((ip->addrs[i - 1] >> 8) + len) && (ip->addrs[i - 1] & 255) < 255))
+      if ((new == (addrLen(ip->addrs[i - 1], ADDR) + len) && len < 255))
         ip->addrs[i - 1] += 1; // 길이 추가
       else
         ip->addrs[i] = (new << 8 | 1);
@@ -498,7 +518,8 @@ itrunc(struct inode *ip)
       /*addr[i]가 매핑 되었을 경우, 해당 데이터의 길이를 읽고 그 길이만큼 데이터 블록 해제를 시켜준다.*/
       if (ip->addrs[i])
       {
-        len = (ip->addrs[i] & 255);
+        // len = (ip->addrs[i] & 255);
+        len = addrLen(ip->addrs[i], LEN);
         for (j = 0; j < len; j++)
         {
           bfree(ip->dev, (ip->addrs[i] >> 8) + j);

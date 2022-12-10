@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: trap.c 소스 파일</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">My Project
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 다음에 의해 생성됨 :  Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'검색');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','검색');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">trap.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="../../dc/d6f/trap_8c.html">이 파일의 문서화 페이지로 가기</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d9/d49/types_8h.html">types.h</a>&quot;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d5/d64/defs_8h.html">defs.h</a>&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d5/d33/param_8h.html">param.h</a>&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d8/da9/memlayout_8h.html">memlayout.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d2/df1/mmu_8h.html">mmu.h</a>&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../df/d03/proc_8h.html">proc.h</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d5/d39/x86_8h.html">x86.h</a>&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d5/d98/traps_8h.html">traps.h</a>&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../df/d63/spinlock_8h.html">spinlock.h</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// Interrupt descriptor table (shared by all CPUs).</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="../../dc/d6f/trap_8c.html#a3facbc1e1e6618fb238fc124bd9aa827">   12</a></span>&#160;<span class="keyword">struct </span><a class="code" href="../../d8/dd3/structgatedesc.html">gatedesc</a> <a class="code" href="../../dc/d6f/trap_8c.html#a3facbc1e1e6618fb238fc124bd9aa827">idt</a>[256];</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">extern</span> <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../dc/d6f/trap_8c.html#a3e6e0e8b5ba8014e09de2d9aa3740486">vectors</a>[];  <span class="comment">// in vectors.S: array of 256 entry pointers</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="../../dc/d6f/trap_8c.html#a094a4703b62095e2fa469fab3ffea5c7">   14</a></span>&#160;<span class="keyword">struct </span><a class="code" href="../../d1/d08/structspinlock.html">spinlock</a> <a class="code" href="../../dc/d6f/trap_8c.html#a094a4703b62095e2fa469fab3ffea5c7">tickslock</a>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="../../dc/d6f/trap_8c.html#a7fcd6915876e066781399d7b00f1b1f0">   15</a></span>&#160;<a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../dc/d6f/trap_8c.html#a7fcd6915876e066781399d7b00f1b1f0">ticks</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="../../dc/d6f/trap_8c.html#a9e7167b8e20e217c4af4e757f612ba6a">   18</a></span>&#160;<a class="code" href="../../dc/d6f/trap_8c.html#a9e7167b8e20e217c4af4e757f612ba6a">tvinit</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keywordtype">int</span> i;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keywordflow">for</span>(i = 0; i &lt; 256; i++)</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="../../d2/df1/mmu_8h.html#a23e7ddf0a414b66cf9badd182edf1eca">SETGATE</a>(<a class="code" href="../../dc/d6f/trap_8c.html#a3facbc1e1e6618fb238fc124bd9aa827">idt</a>[i], 0, <a class="code" href="../../d2/df1/mmu_8h.html#a0d4e0c4c738af60d6092941469642429">SEG_KCODE</a>&lt;&lt;3, <a class="code" href="../../dc/d6f/trap_8c.html#a3e6e0e8b5ba8014e09de2d9aa3740486">vectors</a>[i], 0);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <a class="code" href="../../d2/df1/mmu_8h.html#a23e7ddf0a414b66cf9badd182edf1eca">SETGATE</a>(<a class="code" href="../../dc/d6f/trap_8c.html#a3facbc1e1e6618fb238fc124bd9aa827">idt</a>[<a class="code" href="../../d5/d98/traps_8h.html#a6914c7173b6fe6d04e78d0876e39d95e">T_SYSCALL</a>], 1, <a class="code" href="../../d2/df1/mmu_8h.html#a0d4e0c4c738af60d6092941469642429">SEG_KCODE</a>&lt;&lt;3, <a class="code" href="../../dc/d6f/trap_8c.html#a3e6e0e8b5ba8014e09de2d9aa3740486">vectors</a>[<a class="code" href="../../d5/d98/traps_8h.html#a6914c7173b6fe6d04e78d0876e39d95e">T_SYSCALL</a>], <a class="code" href="../../d2/df1/mmu_8h.html#a060d4d4e32af81cab881fe77e58d7b78">DPL_USER</a>);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#ab56d728e6966819a0260c358d3ac3419">initlock</a>(&amp;<a class="code" href="../../dc/d6f/trap_8c.html#a094a4703b62095e2fa469fab3ffea5c7">tickslock</a>, <span class="stringliteral">&quot;time&quot;</span>);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;}</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="../../dc/d6f/trap_8c.html#a9b6e7f6c302700cb54216ad22cbc1591">   30</a></span>&#160;<a class="code" href="../../dc/d6f/trap_8c.html#a9b6e7f6c302700cb54216ad22cbc1591">idtinit</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <a class="code" href="../../d5/d39/x86_8h.html#aed8d4ebc9c0fb1110cf77a1b2c7038e5">lidt</a>(<a class="code" href="../../dc/d6f/trap_8c.html#a3facbc1e1e6618fb238fc124bd9aa827">idt</a>, <span class="keyword">sizeof</span>(<a class="code" href="../../dc/d6f/trap_8c.html#a3facbc1e1e6618fb238fc124bd9aa827">idt</a>));</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">//PAGEBREAK: 41</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="../../dc/d6f/trap_8c.html#a372d166e36c086c91e5f5d81e5fead3a">   37</a></span>&#160;<a class="code" href="../../dc/d6f/trap_8c.html#a372d166e36c086c91e5f5d81e5fead3a">trap</a>(<span class="keyword">struct</span> <a class="code" href="../../df/d05/structtrapframe.html">trapframe</a> *tf)</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keywordflow">if</span>(tf-&gt;<a class="code" href="../../df/d05/structtrapframe.html#abc7f81b0a6a91d13e9fefe171b0a7d12">trapno</a> == <a class="code" href="../../d5/d98/traps_8h.html#a6914c7173b6fe6d04e78d0876e39d95e">T_SYSCALL</a>){</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="../../d5/d64/defs_8h.html#addb64b689e3c266aaa67cc0126bba441">myproc</a>()-&gt;killed)</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;      <a class="code" href="../../d5/d64/defs_8h.html#aaf98ef7cdde3a0dfb2e49919de3298b1">exit</a>();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#addb64b689e3c266aaa67cc0126bba441">myproc</a>()-&gt;<a class="code" href="../../de/d48/structproc.html#a56ec07ac1e10ce42adfc8dd2a366071f">tf</a> = tf;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#acd6bcafe6626fe8e7d00cacdbc3cc4f1">syscall</a>();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="../../d5/d64/defs_8h.html#addb64b689e3c266aaa67cc0126bba441">myproc</a>()-&gt;killed)</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      <a class="code" href="../../d5/d64/defs_8h.html#aaf98ef7cdde3a0dfb2e49919de3298b1">exit</a>();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  }</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordflow">switch</span>(tf-&gt;<a class="code" href="../../df/d05/structtrapframe.html#abc7f81b0a6a91d13e9fefe171b0a7d12">trapno</a>){</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keywordflow">case</span> <a class="code" href="../../d5/d98/traps_8h.html#a17129100154901eb81be6e438843a0e1">T_IRQ0</a> + <a class="code" href="../../d5/d98/traps_8h.html#a85fc66e3edd4ed6a4db6e455feaba8ca">IRQ_TIMER</a>:</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="../../d5/d64/defs_8h.html#a1444de2903d3d2624a50de058d19c635">cpuid</a>() == 0){</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;      <a class="code" href="../../d5/d64/defs_8h.html#afe4ef8638f1ecb962a6e67fb086ee3b8">acquire</a>(&amp;<a class="code" href="../../dc/d6f/trap_8c.html#a094a4703b62095e2fa469fab3ffea5c7">tickslock</a>);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;      <a class="code" href="../../dc/d6f/trap_8c.html#a7fcd6915876e066781399d7b00f1b1f0">ticks</a>++;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      <a class="code" href="../../d5/d64/defs_8h.html#a245b56417239f499389b2e806bd99254">wakeup</a>(&amp;<a class="code" href="../../dc/d6f/trap_8c.html#a7fcd6915876e066781399d7b00f1b1f0">ticks</a>);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;      <a class="code" href="../../d5/d64/defs_8h.html#a4f8616948f3dbce65671f666eed1d669">release</a>(&amp;<a class="code" href="../../dc/d6f/trap_8c.html#a094a4703b62095e2fa469fab3ffea5c7">tickslock</a>);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#a42fdd0783bbeb7cdc646d360191cdcac">lapiceoi</a>();</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordflow">case</span> <a class="code" href="../../d5/d98/traps_8h.html#a17129100154901eb81be6e438843a0e1">T_IRQ0</a> + <a class="code" href="../../d5/d98/traps_8h.html#ae17548e9192fbdecfb02247721aaf2df">IRQ_IDE</a>:</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#a709693afdb9b89d848e684e7acde1f8f">ideintr</a>();</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#a42fdd0783bbeb7cdc646d360191cdcac">lapiceoi</a>();</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="keywordflow">case</span> <a class="code" href="../../d5/d98/traps_8h.html#a17129100154901eb81be6e438843a0e1">T_IRQ0</a> + <a class="code" href="../../d5/d98/traps_8h.html#ae17548e9192fbdecfb02247721aaf2df">IRQ_IDE</a>+1:</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="comment">// Bochs generates spurious IDE1 interrupts.</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keywordflow">case</span> <a class="code" href="../../d5/d98/traps_8h.html#a17129100154901eb81be6e438843a0e1">T_IRQ0</a> + <a class="code" href="../../d5/d98/traps_8h.html#a0b7569cda71298859ffb6ea55c03a36a">IRQ_KBD</a>:</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#af3d6113fa152781400e1e0e728c55e54">kbdintr</a>();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#a42fdd0783bbeb7cdc646d360191cdcac">lapiceoi</a>();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordflow">case</span> <a class="code" href="../../d5/d98/traps_8h.html#a17129100154901eb81be6e438843a0e1">T_IRQ0</a> + <a class="code" href="../../d5/d98/traps_8h.html#a603b478f70a928f442e33fefba73494a">IRQ_COM1</a>:</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#aa64047002b0e84e2611ebf7dc46b7c99">uartintr</a>();</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#a42fdd0783bbeb7cdc646d360191cdcac">lapiceoi</a>();</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keywordflow">case</span> <a class="code" href="../../d5/d98/traps_8h.html#a17129100154901eb81be6e438843a0e1">T_IRQ0</a> + 7:</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keywordflow">case</span> <a class="code" href="../../d5/d98/traps_8h.html#a17129100154901eb81be6e438843a0e1">T_IRQ0</a> + <a class="code" href="../../d5/d98/traps_8h.html#a0e95f09d5e5653670eede10844d73875">IRQ_SPURIOUS</a>:</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <a class="code" href="../../d0/d56/console_8c.html#a90f0742d846503e4ed1804f1df421ec6">cprintf</a>(<span class="stringliteral">&quot;cpu%d: spurious interrupt at %x:%x\n&quot;</span>,</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <a class="code" href="../../d5/d64/defs_8h.html#a1444de2903d3d2624a50de058d19c635">cpuid</a>(), tf-&gt;<a class="code" href="../../df/d05/structtrapframe.html#a61261f63223a73e25be79fcc8c625265">cs</a>, tf-&gt;<a class="code" href="../../df/d05/structtrapframe.html#a886a5973a537894e3a95435f38767d5c">eip</a>);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#a42fdd0783bbeb7cdc646d360191cdcac">lapiceoi</a>();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <span class="comment">//PAGEBREAK: 13</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="../../d5/d64/defs_8h.html#addb64b689e3c266aaa67cc0126bba441">myproc</a>() == 0 || (tf-&gt;<a class="code" href="../../df/d05/structtrapframe.html#a61261f63223a73e25be79fcc8c625265">cs</a>&amp;3) == 0){</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      <span class="comment">// In kernel, it must be our mistake.</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      <a class="code" href="../../d0/d56/console_8c.html#a90f0742d846503e4ed1804f1df421ec6">cprintf</a>(<span class="stringliteral">&quot;unexpected trap %d from cpu %d eip %x (cr2=0x%x)\n&quot;</span>,</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;              tf-&gt;<a class="code" href="../../df/d05/structtrapframe.html#abc7f81b0a6a91d13e9fefe171b0a7d12">trapno</a>, <a class="code" href="../../d5/d64/defs_8h.html#a1444de2903d3d2624a50de058d19c635">cpuid</a>(), tf-&gt;<a class="code" href="../../df/d05/structtrapframe.html#a886a5973a537894e3a95435f38767d5c">eip</a>, <a class="code" href="../../d5/d39/x86_8h.html#a02554001f8514fdcdfb6b3a719797c6c">rcr2</a>());</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      <a class="code" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a>(<span class="stringliteral">&quot;trap&quot;</span>);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="comment">// In user space, assume process misbehaved.</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <a class="code" href="../../d0/d56/console_8c.html#a90f0742d846503e4ed1804f1df421ec6">cprintf</a>(<span class="stringliteral">&quot;pid %d %s: trap %d err %d on cpu %d &quot;</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            <span class="stringliteral">&quot;eip 0x%x addr 0x%x--kill proc\n&quot;</span>,</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            <a class="code" href="../../d5/d64/defs_8h.html#addb64b689e3c266aaa67cc0126bba441">myproc</a>()-&gt;pid, <a class="code" href="../../d5/d64/defs_8h.html#addb64b689e3c266aaa67cc0126bba441">myproc</a>()-&gt;<a class="code" href="../../de/dc0/usertests_8c.html#aee754febd402311e2a552cb0d6ab6629">name</a>, tf-&gt;<a class="code" href="../../df/d05/structtrapframe.html#abc7f81b0a6a91d13e9fefe171b0a7d12">trapno</a>,</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            tf-&gt;<a class="code" href="../../df/d05/structtrapframe.html#acfb2346e6184b0d2438960b4f2a67e4f">err</a>, <a class="code" href="../../d5/d64/defs_8h.html#a1444de2903d3d2624a50de058d19c635">cpuid</a>(), tf-&gt;<a class="code" href="../../df/d05/structtrapframe.html#a886a5973a537894e3a95435f38767d5c">eip</a>, <a class="code" href="../../d5/d39/x86_8h.html#a02554001f8514fdcdfb6b3a719797c6c">rcr2</a>());</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#addb64b689e3c266aaa67cc0126bba441">myproc</a>()-&gt;<a class="code" href="../../de/d48/structproc.html#afb4f94a3f4df9a835dbb41b0c26660a4">killed</a> = 1;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  }</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <span class="comment">// Force process exit if it has been killed and is in user space.</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="comment">// (If it is still executing in the kernel, let it keep running</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="comment">// until it gets to the regular system call return.)</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="../../d5/d64/defs_8h.html#addb64b689e3c266aaa67cc0126bba441">myproc</a>() &amp;&amp; <a class="code" href="../../d5/d64/defs_8h.html#addb64b689e3c266aaa67cc0126bba441">myproc</a>()-&gt;killed &amp;&amp; (tf-&gt;<a class="code" href="../../df/d05/structtrapframe.html#a61261f63223a73e25be79fcc8c625265">cs</a>&amp;3) == <a class="code" href="../../d2/df1/mmu_8h.html#a060d4d4e32af81cab881fe77e58d7b78">DPL_USER</a>)</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#aaf98ef7cdde3a0dfb2e49919de3298b1">exit</a>();</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <span class="comment">// Force process to give up CPU on clock tick.</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="comment">// If interrupts were on while locks held, would need to check nlock.</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="../../d5/d64/defs_8h.html#addb64b689e3c266aaa67cc0126bba441">myproc</a>() &amp;&amp; <a class="code" href="../../d5/d64/defs_8h.html#addb64b689e3c266aaa67cc0126bba441">myproc</a>()-&gt;state == <a class="code" href="../../df/d03/proc_8h.html#aa1ced7d2b60040fded3fa873d0c03ba7a1061be6c3fb88d32829cba6f6b2be304">RUNNING</a> &amp;&amp;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;     tf-&gt;<a class="code" href="../../df/d05/structtrapframe.html#abc7f81b0a6a91d13e9fefe171b0a7d12">trapno</a> == <a class="code" href="../../d5/d98/traps_8h.html#a17129100154901eb81be6e438843a0e1">T_IRQ0</a>+<a class="code" href="../../d5/d98/traps_8h.html#a85fc66e3edd4ed6a4db6e455feaba8ca">IRQ_TIMER</a>)</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#a7cb51f5c2b5cad3766f19eb69c92793b">yield</a>();</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  <span class="comment">// Check if the process has been killed since we yielded</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="../../d5/d64/defs_8h.html#addb64b689e3c266aaa67cc0126bba441">myproc</a>() &amp;&amp; <a class="code" href="../../d5/d64/defs_8h.html#addb64b689e3c266aaa67cc0126bba441">myproc</a>()-&gt;killed &amp;&amp; (tf-&gt;<a class="code" href="../../df/d05/structtrapframe.html#a61261f63223a73e25be79fcc8c625265">cs</a>&amp;3) == <a class="code" href="../../d2/df1/mmu_8h.html#a060d4d4e32af81cab881fe77e58d7b78">DPL_USER</a>)</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#aaf98ef7cdde3a0dfb2e49919de3298b1">exit</a>();</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;}</div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="atrap_8c_html_a3e6e0e8b5ba8014e09de2d9aa3740486"><div class="ttname"><a href="../../dc/d6f/trap_8c.html#a3e6e0e8b5ba8014e09de2d9aa3740486">vectors</a></div><div class="ttdeci">uint vectors[]</div></div>
+<div class="ttc" id="atraps_8h_html"><div class="ttname"><a href="../../d5/d98/traps_8h.html">traps.h</a></div></div>
+<div class="ttc" id="atrap_8c_html_a9e7167b8e20e217c4af4e757f612ba6a"><div class="ttname"><a href="../../dc/d6f/trap_8c.html#a9e7167b8e20e217c4af4e757f612ba6a">tvinit</a></div><div class="ttdeci">void tvinit(void)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d6f/trap_8c_source.html#l00018">trap.c:18</a></div></div>
+<div class="ttc" id="adefs_8h_html_acd6bcafe6626fe8e7d00cacdbc3cc4f1"><div class="ttname"><a href="../../d5/d64/defs_8h.html#acd6bcafe6626fe8e7d00cacdbc3cc4f1">syscall</a></div><div class="ttdeci">void syscall(void)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/dd8/syscall_8c_source.html#l00156">syscall.c:156</a></div></div>
+<div class="ttc" id="astructtrapframe_html_a61261f63223a73e25be79fcc8c625265"><div class="ttname"><a href="../../df/d05/structtrapframe.html#a61261f63223a73e25be79fcc8c625265">trapframe::cs</a></div><div class="ttdeci">ushort cs</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d39/x86_8h_source.html#l00175">x86.h:175</a></div></div>
+<div class="ttc" id="aspinlock_8h_html"><div class="ttname"><a href="../../df/d63/spinlock_8h.html">spinlock.h</a></div></div>
+<div class="ttc" id="astructproc_html_a56ec07ac1e10ce42adfc8dd2a366071f"><div class="ttname"><a href="../../de/d48/structproc.html#a56ec07ac1e10ce42adfc8dd2a366071f">proc::tf</a></div><div class="ttdeci">struct trapframe * tf</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d03/proc_8h_source.html#l00056">proc.h:56</a></div></div>
+<div class="ttc" id="atraps_8h_html_a603b478f70a928f442e33fefba73494a"><div class="ttname"><a href="../../d5/d98/traps_8h.html#a603b478f70a928f442e33fefba73494a">IRQ_COM1</a></div><div class="ttdeci">#define IRQ_COM1</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d98/traps_8h_source.html#l00034">traps.h:34</a></div></div>
+<div class="ttc" id="atypes_8h_html"><div class="ttname"><a href="../../d9/d49/types_8h.html">types.h</a></div></div>
+<div class="ttc" id="atraps_8h_html_a0b7569cda71298859ffb6ea55c03a36a"><div class="ttname"><a href="../../d5/d98/traps_8h.html#a0b7569cda71298859ffb6ea55c03a36a">IRQ_KBD</a></div><div class="ttdeci">#define IRQ_KBD</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d98/traps_8h_source.html#l00033">traps.h:33</a></div></div>
+<div class="ttc" id="adefs_8h_html_a4f8616948f3dbce65671f666eed1d669"><div class="ttname"><a href="../../d5/d64/defs_8h.html#a4f8616948f3dbce65671f666eed1d669">release</a></div><div class="ttdeci">void release(struct spinlock *)</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d2d/spinlock_8c_source.html#l00047">spinlock.c:47</a></div></div>
+<div class="ttc" id="astructtrapframe_html_acfb2346e6184b0d2438960b4f2a67e4f"><div class="ttname"><a href="../../df/d05/structtrapframe.html#acfb2346e6184b0d2438960b4f2a67e4f">trapframe::err</a></div><div class="ttdeci">uint err</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d39/x86_8h_source.html#l00173">x86.h:173</a></div></div>
+<div class="ttc" id="atrap_8c_html_a9b6e7f6c302700cb54216ad22cbc1591"><div class="ttname"><a href="../../dc/d6f/trap_8c.html#a9b6e7f6c302700cb54216ad22cbc1591">idtinit</a></div><div class="ttdeci">void idtinit(void)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d6f/trap_8c_source.html#l00030">trap.c:30</a></div></div>
+<div class="ttc" id="atraps_8h_html_a6914c7173b6fe6d04e78d0876e39d95e"><div class="ttname"><a href="../../d5/d98/traps_8h.html#a6914c7173b6fe6d04e78d0876e39d95e">T_SYSCALL</a></div><div class="ttdeci">#define T_SYSCALL</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d98/traps_8h_source.html#l00027">traps.h:27</a></div></div>
+<div class="ttc" id="ammu_8h_html"><div class="ttname"><a href="../../d2/df1/mmu_8h.html">mmu.h</a></div></div>
+<div class="ttc" id="adefs_8h_html_a42fdd0783bbeb7cdc646d360191cdcac"><div class="ttname"><a href="../../d5/d64/defs_8h.html#a42fdd0783bbeb7cdc646d360191cdcac">lapiceoi</a></div><div class="ttdeci">void lapiceoi(void)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/df6/lapic_8c_source.html#l00110">lapic.c:110</a></div></div>
+<div class="ttc" id="atrap_8c_html_a372d166e36c086c91e5f5d81e5fead3a"><div class="ttname"><a href="../../dc/d6f/trap_8c.html#a372d166e36c086c91e5f5d81e5fead3a">trap</a></div><div class="ttdeci">void trap(struct trapframe *tf)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d6f/trap_8c_source.html#l00037">trap.c:37</a></div></div>
+<div class="ttc" id="aproc_8h_html_aa1ced7d2b60040fded3fa873d0c03ba7a1061be6c3fb88d32829cba6f6b2be304"><div class="ttname"><a href="../../df/d03/proc_8h.html#aa1ced7d2b60040fded3fa873d0c03ba7a1061be6c3fb88d32829cba6f6b2be304">RUNNING</a></div><div class="ttdeci">@ RUNNING</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d03/proc_8h_source.html#l00043">proc.h:43</a></div></div>
+<div class="ttc" id="astructtrapframe_html_a886a5973a537894e3a95435f38767d5c"><div class="ttname"><a href="../../df/d05/structtrapframe.html#a886a5973a537894e3a95435f38767d5c">trapframe::eip</a></div><div class="ttdeci">uint eip</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d39/x86_8h_source.html#l00174">x86.h:174</a></div></div>
+<div class="ttc" id="adefs_8h_html_af3d6113fa152781400e1e0e728c55e54"><div class="ttname"><a href="../../d5/d64/defs_8h.html#af3d6113fa152781400e1e0e728c55e54">kbdintr</a></div><div class="ttdeci">void kbdintr(void)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/da9/kbd_8c_source.html#l00047">kbd.c:47</a></div></div>
+<div class="ttc" id="adefs_8h_html_ab56d728e6966819a0260c358d3ac3419"><div class="ttname"><a href="../../d5/d64/defs_8h.html#ab56d728e6966819a0260c358d3ac3419">initlock</a></div><div class="ttdeci">void initlock(struct spinlock *, char *)</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d2d/spinlock_8c_source.html#l00013">spinlock.c:13</a></div></div>
+<div class="ttc" id="ammu_8h_html_a060d4d4e32af81cab881fe77e58d7b78"><div class="ttname"><a href="../../d2/df1/mmu_8h.html#a060d4d4e32af81cab881fe77e58d7b78">DPL_USER</a></div><div class="ttdeci">#define DPL_USER</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/df1/mmu_8h_source.html#l00053">mmu.h:53</a></div></div>
+<div class="ttc" id="atrap_8c_html_a094a4703b62095e2fa469fab3ffea5c7"><div class="ttname"><a href="../../dc/d6f/trap_8c.html#a094a4703b62095e2fa469fab3ffea5c7">tickslock</a></div><div class="ttdeci">struct spinlock tickslock</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d6f/trap_8c_source.html#l00014">trap.c:14</a></div></div>
+<div class="ttc" id="adefs_8h_html_a245b56417239f499389b2e806bd99254"><div class="ttname"><a href="../../d5/d64/defs_8h.html#a245b56417239f499389b2e806bd99254">wakeup</a></div><div class="ttdeci">void wakeup(void *)</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/dda/proc_8c_source.html#l00478">proc.c:478</a></div></div>
+<div class="ttc" id="adefs_8h_html_aa64047002b0e84e2611ebf7dc46b7c99"><div class="ttname"><a href="../../d5/d64/defs_8h.html#aa64047002b0e84e2611ebf7dc46b7c99">uartintr</a></div><div class="ttdeci">void uartintr(void)</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d87/uart_8c_source.html#l00074">uart.c:74</a></div></div>
+<div class="ttc" id="atypes_8h_html_a91ad9478d81a7aaf2593e8d9c3d06a14"><div class="ttname"><a href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a></div><div class="ttdeci">unsigned int uint</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d49/types_8h_source.html#l00001">types.h:1</a></div></div>
+<div class="ttc" id="ammu_8h_html_a0d4e0c4c738af60d6092941469642429"><div class="ttname"><a href="../../d2/df1/mmu_8h.html#a0d4e0c4c738af60d6092941469642429">SEG_KCODE</a></div><div class="ttdeci">#define SEG_KCODE</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/df1/mmu_8h_source.html#l00015">mmu.h:15</a></div></div>
+<div class="ttc" id="atraps_8h_html_ae17548e9192fbdecfb02247721aaf2df"><div class="ttname"><a href="../../d5/d98/traps_8h.html#ae17548e9192fbdecfb02247721aaf2df">IRQ_IDE</a></div><div class="ttdeci">#define IRQ_IDE</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d98/traps_8h_source.html#l00035">traps.h:35</a></div></div>
+<div class="ttc" id="aparam_8h_html"><div class="ttname"><a href="../../d5/d33/param_8h.html">param.h</a></div></div>
+<div class="ttc" id="aconsole_8c_html_a90f0742d846503e4ed1804f1df421ec6"><div class="ttname"><a href="../../d0/d56/console_8c.html#a90f0742d846503e4ed1804f1df421ec6">cprintf</a></div><div class="ttdeci">void cprintf(char *fmt,...)</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/d56/console_8c_source.html#l00055">console.c:55</a></div></div>
+<div class="ttc" id="adefs_8h_html_addb64b689e3c266aaa67cc0126bba441"><div class="ttname"><a href="../../d5/d64/defs_8h.html#addb64b689e3c266aaa67cc0126bba441">myproc</a></div><div class="ttdeci">struct proc * myproc()</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/dda/proc_8c_source.html#l00059">proc.c:59</a></div></div>
+<div class="ttc" id="adefs_8h_html_a1444de2903d3d2624a50de058d19c635"><div class="ttname"><a href="../../d5/d64/defs_8h.html#a1444de2903d3d2624a50de058d19c635">cpuid</a></div><div class="ttdeci">int cpuid(void)</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/dda/proc_8c_source.html#l00030">proc.c:30</a></div></div>
+<div class="ttc" id="atraps_8h_html_a0e95f09d5e5653670eede10844d73875"><div class="ttname"><a href="../../d5/d98/traps_8h.html#a0e95f09d5e5653670eede10844d73875">IRQ_SPURIOUS</a></div><div class="ttdeci">#define IRQ_SPURIOUS</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d98/traps_8h_source.html#l00037">traps.h:37</a></div></div>
+<div class="ttc" id="astructtrapframe_html"><div class="ttname"><a href="../../df/d05/structtrapframe.html">trapframe</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d39/x86_8h_source.html#l00150">x86.h:150</a></div></div>
+<div class="ttc" id="ax86_8h_html"><div class="ttname"><a href="../../d5/d39/x86_8h.html">x86.h</a></div></div>
+<div class="ttc" id="atraps_8h_html_a17129100154901eb81be6e438843a0e1"><div class="ttname"><a href="../../d5/d98/traps_8h.html#a17129100154901eb81be6e438843a0e1">T_IRQ0</a></div><div class="ttdeci">#define T_IRQ0</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d98/traps_8h_source.html#l00030">traps.h:30</a></div></div>
+<div class="ttc" id="adefs_8h_html_a7cb51f5c2b5cad3766f19eb69c92793b"><div class="ttname"><a href="../../d5/d64/defs_8h.html#a7cb51f5c2b5cad3766f19eb69c92793b">yield</a></div><div class="ttdeci">void yield(void)</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/dda/proc_8c_source.html#l00395">proc.c:395</a></div></div>
+<div class="ttc" id="ax86_8h_html_aed8d4ebc9c0fb1110cf77a1b2c7038e5"><div class="ttname"><a href="../../d5/d39/x86_8h.html#aed8d4ebc9c0fb1110cf77a1b2c7038e5">lidt</a></div><div class="ttdeci">static void lidt(struct gatedesc *p, int size)</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d39/x86_8h_source.html#l00077">x86.h:77</a></div></div>
+<div class="ttc" id="atrap_8c_html_a3facbc1e1e6618fb238fc124bd9aa827"><div class="ttname"><a href="../../dc/d6f/trap_8c.html#a3facbc1e1e6618fb238fc124bd9aa827">idt</a></div><div class="ttdeci">struct gatedesc idt[256]</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d6f/trap_8c_source.html#l00012">trap.c:12</a></div></div>
+<div class="ttc" id="aproc_8h_html"><div class="ttname"><a href="../../df/d03/proc_8h.html">proc.h</a></div></div>
+<div class="ttc" id="astructtrapframe_html_abc7f81b0a6a91d13e9fefe171b0a7d12"><div class="ttname"><a href="../../df/d05/structtrapframe.html#abc7f81b0a6a91d13e9fefe171b0a7d12">trapframe::trapno</a></div><div class="ttdeci">uint trapno</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d39/x86_8h_source.html#l00170">x86.h:170</a></div></div>
+<div class="ttc" id="adefs_8h_html_aaf98ef7cdde3a0dfb2e49919de3298b1"><div class="ttname"><a href="../../d5/d64/defs_8h.html#aaf98ef7cdde3a0dfb2e49919de3298b1">exit</a></div><div class="ttdeci">void exit(void)</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/dda/proc_8c_source.html#l00232">proc.c:232</a></div></div>
+<div class="ttc" id="aconsole_8c_html_a95c0aca5d6d7487933984f08b189917a"><div class="ttname"><a href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a></div><div class="ttdeci">void panic(char *s)</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/d56/console_8c_source.html#l00107">console.c:107</a></div></div>
+<div class="ttc" id="atraps_8h_html_a85fc66e3edd4ed6a4db6e455feaba8ca"><div class="ttname"><a href="../../d5/d98/traps_8h.html#a85fc66e3edd4ed6a4db6e455feaba8ca">IRQ_TIMER</a></div><div class="ttdeci">#define IRQ_TIMER</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d98/traps_8h_source.html#l00032">traps.h:32</a></div></div>
+<div class="ttc" id="atrap_8c_html_a7fcd6915876e066781399d7b00f1b1f0"><div class="ttname"><a href="../../dc/d6f/trap_8c.html#a7fcd6915876e066781399d7b00f1b1f0">ticks</a></div><div class="ttdeci">uint ticks</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d6f/trap_8c_source.html#l00015">trap.c:15</a></div></div>
+<div class="ttc" id="adefs_8h_html_a709693afdb9b89d848e684e7acde1f8f"><div class="ttname"><a href="../../d5/d64/defs_8h.html#a709693afdb9b89d848e684e7acde1f8f">ideintr</a></div><div class="ttdeci">void ideintr(void)</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d2f/ide_8c_source.html#l00104">ide.c:104</a></div></div>
+<div class="ttc" id="adefs_8h_html"><div class="ttname"><a href="../../d5/d64/defs_8h.html">defs.h</a></div></div>
+<div class="ttc" id="ausertests_8c_html_aee754febd402311e2a552cb0d6ab6629"><div class="ttname"><a href="../../de/dc0/usertests_8c.html#aee754febd402311e2a552cb0d6ab6629">name</a></div><div class="ttdeci">char name[3]</div><div class="ttdef"><b>Definition:</b> <a href="../../de/dc0/usertests_8c_source.html#l00012">usertests.c:12</a></div></div>
+<div class="ttc" id="ax86_8h_html_a02554001f8514fdcdfb6b3a719797c6c"><div class="ttname"><a href="../../d5/d39/x86_8h.html#a02554001f8514fdcdfb6b3a719797c6c">rcr2</a></div><div class="ttdeci">static uint rcr2(void)</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d39/x86_8h_source.html#l00134">x86.h:134</a></div></div>
+<div class="ttc" id="adefs_8h_html_afe4ef8638f1ecb962a6e67fb086ee3b8"><div class="ttname"><a href="../../d5/d64/defs_8h.html#afe4ef8638f1ecb962a6e67fb086ee3b8">acquire</a></div><div class="ttdeci">void acquire(struct spinlock *)</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d2d/spinlock_8c_source.html#l00025">spinlock.c:25</a></div></div>
+<div class="ttc" id="astructgatedesc_html"><div class="ttname"><a href="../../d8/dd3/structgatedesc.html">gatedesc</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d2/df1/mmu_8h_source.html#l00148">mmu.h:148</a></div></div>
+<div class="ttc" id="astructspinlock_html"><div class="ttname"><a href="../../d1/d08/structspinlock.html">spinlock</a></div><div class="ttdef"><b>Definition:</b> <a href="../../df/d63/spinlock_8h_source.html#l00002">spinlock.h:2</a></div></div>
+<div class="ttc" id="astructproc_html_afb4f94a3f4df9a835dbb41b0c26660a4"><div class="ttname"><a href="../../de/d48/structproc.html#afb4f94a3f4df9a835dbb41b0c26660a4">proc::killed</a></div><div class="ttdeci">int killed</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d03/proc_8h_source.html#l00059">proc.h:59</a></div></div>
+<div class="ttc" id="ammu_8h_html_a23e7ddf0a414b66cf9badd182edf1eca"><div class="ttname"><a href="../../d2/df1/mmu_8h.html#a23e7ddf0a414b66cf9badd182edf1eca">SETGATE</a></div><div class="ttdeci">#define SETGATE(gate, istrap, sel, off, d)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/df1/mmu_8h_source.html#l00168">mmu.h:168</a></div></div>
+<div class="ttc" id="amemlayout_8h_html"><div class="ttname"><a href="../../d8/da9/memlayout_8h.html">memlayout.h</a></div></div>
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+다음에 의해 생성됨 :  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.17
+</small></address>
+</body>
+</html>

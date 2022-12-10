@@ -1,0 +1,1101 @@
+\hypertarget{sh_8c}{}\doxysection{sh.\+c 파일 참조}
+\label{sh_8c}\index{sh.c@{sh.c}}
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}user.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}fcntl.\+h\char`\"{}}\newline
+sh.\+c에 대한 include 의존 그래프
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=263pt]{d6/d07/sh_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{데이터 구조}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structcmd}{cmd}}
+\item 
+struct \mbox{\hyperlink{structexeccmd}{execcmd}}
+\item 
+struct \mbox{\hyperlink{structredircmd}{redircmd}}
+\item 
+struct \mbox{\hyperlink{structpipecmd}{pipecmd}}
+\item 
+struct \mbox{\hyperlink{structlistcmd}{listcmd}}
+\item 
+struct \mbox{\hyperlink{structbackcmd}{backcmd}}
+\end{DoxyCompactItemize}
+\doxysubsection*{매크로}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{sh_8c_a7d636ac897898fcd988797e4ada044b9}{E\+X\+EC}}~1
+\item 
+\#define \mbox{\hyperlink{sh_8c_ae1749b6682612a761fc83e79c38386b1}{R\+E\+D\+IR}}~2
+\item 
+\#define \mbox{\hyperlink{sh_8c_a67bc87cdcc5724cf8e8e4ae278d0133f}{P\+I\+PE}}~3
+\item 
+\#define \mbox{\hyperlink{sh_8c_aed0a8f83088c41d721066cd5b3b9a00c}{L\+I\+ST}}~4
+\item 
+\#define \mbox{\hyperlink{sh_8c_ab303ee384877c80cb8855bf0113faf88}{B\+A\+CK}}~5
+\item 
+\#define \mbox{\hyperlink{sh_8c_a41101847771d39a4f0a7f9395061c629}{M\+A\+X\+A\+R\+GS}}~10
+\end{DoxyCompactItemize}
+\doxysubsection*{함수}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{sh_8c_a7ae98824a008ffbc5506060227b6faa0}{fork1}} (void)
+\item 
+void \mbox{\hyperlink{sh_8c_ada38fdb2913f040f6eeb6189eeb42d32}{panic}} (char $\ast$)
+\item 
+struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$ \mbox{\hyperlink{sh_8c_ab08793db282d79295235e593dc4cac82}{parsecmd}} (char $\ast$)
+\item 
+void \mbox{\hyperlink{sh_8c_aedbeff6afe5d4e22330c7e6b5e6df893}{runcmd}} (struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$\mbox{\hyperlink{structcmd}{cmd}})
+\item 
+int \mbox{\hyperlink{sh_8c_a0ee5a9418fea2f92036f5367a4101fe8}{getcmd}} (char $\ast$\mbox{\hyperlink{structbuf}{buf}}, int nbuf)
+\item 
+int \mbox{\hyperlink{sh_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\item 
+struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$ \mbox{\hyperlink{sh_8c_a9fe29da0f831645fb645dca0df0fa6e0}{execcmd}} (void)
+\item 
+struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$ \mbox{\hyperlink{sh_8c_ad6b34af843c5bc556aac1ad33d1e4517}{redircmd}} (struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$subcmd, char $\ast$\mbox{\hyperlink{structfile}{file}}, char $\ast$efile, int mode, int fd)
+\item 
+struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$ \mbox{\hyperlink{sh_8c_ac84beaa7dea2b72c5b2115aee36e3f9d}{pipecmd}} (struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$left, struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$right)
+\item 
+struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$ \mbox{\hyperlink{sh_8c_a7baebb9c63e5150e27491823db9d1cdb}{listcmd}} (struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$left, struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$right)
+\item 
+struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$ \mbox{\hyperlink{sh_8c_a8f1212e0b392bac41dcc6ff160b5dcdb}{backcmd}} (struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$subcmd)
+\item 
+int \mbox{\hyperlink{sh_8c_aaf1dedac6db801eab8d23f2acb3b1272}{gettoken}} (char $\ast$$\ast$ps, char $\ast$es, char $\ast$$\ast$q, char $\ast$$\ast$eq)
+\item 
+int \mbox{\hyperlink{sh_8c_ae0a03d29adb5d9fa678bd53e749f1546}{peek}} (char $\ast$$\ast$ps, char $\ast$es, char $\ast$toks)
+\item 
+struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$ \mbox{\hyperlink{sh_8c_a4593dc7728db0ff4bb5fb29c31ab8cba}{parseline}} (char $\ast$$\ast$, char $\ast$)
+\item 
+struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$ \mbox{\hyperlink{sh_8c_a4789e9e629e810d291c1dd5ece4d3a71}{parsepipe}} (char $\ast$$\ast$, char $\ast$)
+\item 
+struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$ \mbox{\hyperlink{sh_8c_add82543cc6953d0173086d06bfcf76c7}{parseexec}} (char $\ast$$\ast$, char $\ast$)
+\item 
+struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$ \mbox{\hyperlink{sh_8c_a116fd6ef63a4f3a15340502d15ec1ce1}{nulterminate}} (struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$)
+\item 
+struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$ \mbox{\hyperlink{sh_8c_a1b8582f6a43b9f8874aae78e44a4a448}{parseredirs}} (struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$\mbox{\hyperlink{structcmd}{cmd}}, char $\ast$$\ast$ps, char $\ast$es)
+\item 
+struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$ \mbox{\hyperlink{sh_8c_a99d0a6cc8bd52b455b635ed26e4f149a}{parseblock}} (char $\ast$$\ast$ps, char $\ast$es)
+\end{DoxyCompactItemize}
+\doxysubsection*{변수}
+\begin{DoxyCompactItemize}
+\item 
+char \mbox{\hyperlink{sh_8c_ab8474337bbc7c7d316b75b5c00d79947}{whitespace}} \mbox{[}$\,$\mbox{]} = \char`\"{} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}v\char`\"{}
+\item 
+char \mbox{\hyperlink{sh_8c_ab385d981fc73a48a1b732173200f46e5}{symbols}} \mbox{[}$\,$\mbox{]} = \char`\"{}$<$$\vert$$>$\&;()\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{매크로 문서화}
+\mbox{\Hypertarget{sh_8c_ab303ee384877c80cb8855bf0113faf88}\label{sh_8c_ab303ee384877c80cb8855bf0113faf88}} 
+\index{sh.c@{sh.c}!BACK@{BACK}}
+\index{BACK@{BACK}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{BACK}{BACK}}
+{\footnotesize\ttfamily \#define B\+A\+CK~5}
+
+
+
+sh.\+c 파일의 12 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{sh_8c_a7d636ac897898fcd988797e4ada044b9}\label{sh_8c_a7d636ac897898fcd988797e4ada044b9}} 
+\index{sh.c@{sh.c}!EXEC@{EXEC}}
+\index{EXEC@{EXEC}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{EXEC}{EXEC}}
+{\footnotesize\ttfamily \#define E\+X\+EC~1}
+
+
+
+sh.\+c 파일의 8 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{sh_8c_aed0a8f83088c41d721066cd5b3b9a00c}\label{sh_8c_aed0a8f83088c41d721066cd5b3b9a00c}} 
+\index{sh.c@{sh.c}!LIST@{LIST}}
+\index{LIST@{LIST}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{LIST}{LIST}}
+{\footnotesize\ttfamily \#define L\+I\+ST~4}
+
+
+
+sh.\+c 파일의 11 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{sh_8c_a41101847771d39a4f0a7f9395061c629}\label{sh_8c_a41101847771d39a4f0a7f9395061c629}} 
+\index{sh.c@{sh.c}!MAXARGS@{MAXARGS}}
+\index{MAXARGS@{MAXARGS}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{MAXARGS}{MAXARGS}}
+{\footnotesize\ttfamily \#define M\+A\+X\+A\+R\+GS~10}
+
+
+
+sh.\+c 파일의 14 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{sh_8c_a67bc87cdcc5724cf8e8e4ae278d0133f}\label{sh_8c_a67bc87cdcc5724cf8e8e4ae278d0133f}} 
+\index{sh.c@{sh.c}!PIPE@{PIPE}}
+\index{PIPE@{PIPE}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{PIPE}{PIPE}}
+{\footnotesize\ttfamily \#define P\+I\+PE~3}
+
+
+
+sh.\+c 파일의 10 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{sh_8c_ae1749b6682612a761fc83e79c38386b1}\label{sh_8c_ae1749b6682612a761fc83e79c38386b1}} 
+\index{sh.c@{sh.c}!REDIR@{REDIR}}
+\index{REDIR@{REDIR}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{REDIR}{REDIR}}
+{\footnotesize\ttfamily \#define R\+E\+D\+IR~2}
+
+
+
+sh.\+c 파일의 9 번째 라인에서 정의되었습니다.
+
+
+
+\doxysubsection{함수 문서화}
+\mbox{\Hypertarget{sh_8c_a8f1212e0b392bac41dcc6ff160b5dcdb}\label{sh_8c_a8f1212e0b392bac41dcc6ff160b5dcdb}} 
+\index{sh.c@{sh.c}!backcmd@{backcmd}}
+\index{backcmd@{backcmd}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{backcmd()}{backcmd()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structcmd}{cmd}}$\ast$ \mbox{\hyperlink{structbackcmd}{backcmd}} (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$}]{subcmd }\end{DoxyParamCaption})}
+
+
+
+sh.\+c 파일의 249 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{250 \{}
+\DoxyCodeLine{251   \textcolor{keyword}{struct }\mbox{\hyperlink{structbackcmd}{backcmd}} *\mbox{\hyperlink{structbackcmd_a74a697014e2d3a17710e530fca0e8432}{cmd}};}
+\DoxyCodeLine{252 }
+\DoxyCodeLine{253   \mbox{\hyperlink{structcmd}{cmd}} = \mbox{\hyperlink{umalloc_8c_a94267ee40e0547410676894ab3f23c15}{malloc}}(\textcolor{keyword}{sizeof}(*\mbox{\hyperlink{structcmd}{cmd}}));}
+\DoxyCodeLine{254   \mbox{\hyperlink{defs_8h_a9d55c9f035076ed1a90b6452770d0b62}{memset}}(\mbox{\hyperlink{structcmd}{cmd}}, 0, \textcolor{keyword}{sizeof}(*\mbox{\hyperlink{structcmd}{cmd}}));}
+\DoxyCodeLine{255   \mbox{\hyperlink{structcmd}{cmd}}-\/>\mbox{\hyperlink{structcmd_a9b861866e1dec63e694247fb4d976423}{type}} = \mbox{\hyperlink{sh_8c_ab303ee384877c80cb8855bf0113faf88}{BACK}};}
+\DoxyCodeLine{256   \mbox{\hyperlink{structcmd}{cmd}}-\/>cmd = subcmd;}
+\DoxyCodeLine{257   \textcolor{keywordflow}{return} (\textcolor{keyword}{struct} \mbox{\hyperlink{structcmd}{cmd}}*)\mbox{\hyperlink{structbackcmd_a74a697014e2d3a17710e530fca0e8432}{cmd}};}
+\DoxyCodeLine{258 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_a8f1212e0b392bac41dcc6ff160b5dcdb_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_a8f1212e0b392bac41dcc6ff160b5dcdb_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{sh_8c_a9fe29da0f831645fb645dca0df0fa6e0}\label{sh_8c_a9fe29da0f831645fb645dca0df0fa6e0}} 
+\index{sh.c@{sh.c}!execcmd@{execcmd}}
+\index{execcmd@{execcmd}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{execcmd()}{execcmd()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structcmd}{cmd}}$\ast$ \mbox{\hyperlink{structexeccmd}{execcmd}} (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+sh.\+c 파일의 196 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{197 \{}
+\DoxyCodeLine{198   \textcolor{keyword}{struct }\mbox{\hyperlink{structexeccmd}{execcmd}} *\mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{200   \mbox{\hyperlink{structcmd}{cmd}} = \mbox{\hyperlink{umalloc_8c_a94267ee40e0547410676894ab3f23c15}{malloc}}(\textcolor{keyword}{sizeof}(*\mbox{\hyperlink{structcmd}{cmd}}));}
+\DoxyCodeLine{201   \mbox{\hyperlink{defs_8h_a9d55c9f035076ed1a90b6452770d0b62}{memset}}(\mbox{\hyperlink{structcmd}{cmd}}, 0, \textcolor{keyword}{sizeof}(*\mbox{\hyperlink{structcmd}{cmd}}));}
+\DoxyCodeLine{202   \mbox{\hyperlink{structcmd}{cmd}}-\/>\mbox{\hyperlink{structcmd_a9b861866e1dec63e694247fb4d976423}{type}} = \mbox{\hyperlink{sh_8c_a7d636ac897898fcd988797e4ada044b9}{EXEC}};}
+\DoxyCodeLine{203   \textcolor{keywordflow}{return} (\textcolor{keyword}{struct} \mbox{\hyperlink{structcmd}{cmd}}*)\mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{204 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_a9fe29da0f831645fb645dca0df0fa6e0_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_a9fe29da0f831645fb645dca0df0fa6e0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{sh_8c_a7ae98824a008ffbc5506060227b6faa0}\label{sh_8c_a7ae98824a008ffbc5506060227b6faa0}} 
+\index{sh.c@{sh.c}!fork1@{fork1}}
+\index{fork1@{fork1}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{fork1()}{fork1()}}
+{\footnotesize\ttfamily int fork1 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+sh.\+c 파일의 182 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{183 \{}
+\DoxyCodeLine{184   \textcolor{keywordtype}{int} pid;}
+\DoxyCodeLine{185 }
+\DoxyCodeLine{186   pid = \mbox{\hyperlink{defs_8h_acd2e1ded4bb6fce4500438bf928330f4}{fork}}();}
+\DoxyCodeLine{187   \textcolor{keywordflow}{if}(pid == -\/1)}
+\DoxyCodeLine{188     \mbox{\hyperlink{sh_8c_ada38fdb2913f040f6eeb6189eeb42d32}{panic}}(\textcolor{stringliteral}{"fork"});}
+\DoxyCodeLine{189   \textcolor{keywordflow}{return} pid;}
+\DoxyCodeLine{190 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_a7ae98824a008ffbc5506060227b6faa0_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{dd/da3/sh_8c_a7ae98824a008ffbc5506060227b6faa0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{sh_8c_a0ee5a9418fea2f92036f5367a4101fe8}\label{sh_8c_a0ee5a9418fea2f92036f5367a4101fe8}} 
+\index{sh.c@{sh.c}!getcmd@{getcmd}}
+\index{getcmd@{getcmd}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{getcmd()}{getcmd()}}
+{\footnotesize\ttfamily int getcmd (\begin{DoxyParamCaption}\item[{char $\ast$}]{buf,  }\item[{int}]{nbuf }\end{DoxyParamCaption})}
+
+
+
+sh.\+c 파일의 134 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{135 \{}
+\DoxyCodeLine{136   \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(2, \textcolor{stringliteral}{"\$ "});}
+\DoxyCodeLine{137   \mbox{\hyperlink{defs_8h_a9d55c9f035076ed1a90b6452770d0b62}{memset}}(\mbox{\hyperlink{structbuf}{buf}}, 0, nbuf);}
+\DoxyCodeLine{138   \mbox{\hyperlink{ulib_8c_a3702e71383a007c873d8e7b84dcbe62a}{gets}}(\mbox{\hyperlink{structbuf}{buf}}, nbuf);}
+\DoxyCodeLine{139   \textcolor{keywordflow}{if}(\mbox{\hyperlink{structbuf}{buf}}[0] == 0) \textcolor{comment}{// EOF}}
+\DoxyCodeLine{140     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{141   \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{142 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=300pt]{dd/da3/sh_8c_a0ee5a9418fea2f92036f5367a4101fe8_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=210pt]{dd/da3/sh_8c_a0ee5a9418fea2f92036f5367a4101fe8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{sh_8c_aaf1dedac6db801eab8d23f2acb3b1272}\label{sh_8c_aaf1dedac6db801eab8d23f2acb3b1272}} 
+\index{sh.c@{sh.c}!gettoken@{gettoken}}
+\index{gettoken@{gettoken}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{gettoken()}{gettoken()}}
+{\footnotesize\ttfamily int gettoken (\begin{DoxyParamCaption}\item[{char $\ast$$\ast$}]{ps,  }\item[{char $\ast$}]{es,  }\item[{char $\ast$$\ast$}]{q,  }\item[{char $\ast$$\ast$}]{eq }\end{DoxyParamCaption})}
+
+
+
+sh.\+c 파일의 266 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{267 \{}
+\DoxyCodeLine{268   \textcolor{keywordtype}{char} *s;}
+\DoxyCodeLine{269   \textcolor{keywordtype}{int} ret;}
+\DoxyCodeLine{270 }
+\DoxyCodeLine{271   s = *ps;}
+\DoxyCodeLine{272   \textcolor{keywordflow}{while}(s < es \&\& \mbox{\hyperlink{ulib_8c_aa409596a785c33c8fabee6d6464df3ff}{strchr}}(\mbox{\hyperlink{sh_8c_ab8474337bbc7c7d316b75b5c00d79947}{whitespace}}, *s))}
+\DoxyCodeLine{273     s++;}
+\DoxyCodeLine{274   \textcolor{keywordflow}{if}(q)}
+\DoxyCodeLine{275     *q = s;}
+\DoxyCodeLine{276   ret = *s;}
+\DoxyCodeLine{277   \textcolor{keywordflow}{switch}(*s)\{}
+\DoxyCodeLine{278   \textcolor{keywordflow}{case} 0:}
+\DoxyCodeLine{279     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{280   \textcolor{keywordflow}{case} \textcolor{charliteral}{'|'}:}
+\DoxyCodeLine{281   \textcolor{keywordflow}{case} \textcolor{charliteral}{'('}:}
+\DoxyCodeLine{282   \textcolor{keywordflow}{case} \textcolor{charliteral}{')'}:}
+\DoxyCodeLine{283   \textcolor{keywordflow}{case} \textcolor{charliteral}{';'}:}
+\DoxyCodeLine{284   \textcolor{keywordflow}{case} \textcolor{charliteral}{'\&'}:}
+\DoxyCodeLine{285   \textcolor{keywordflow}{case} \textcolor{charliteral}{'<'}:}
+\DoxyCodeLine{286     s++;}
+\DoxyCodeLine{287     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{288   \textcolor{keywordflow}{case} \textcolor{charliteral}{'>'}:}
+\DoxyCodeLine{289     s++;}
+\DoxyCodeLine{290     \textcolor{keywordflow}{if}(*s == \textcolor{charliteral}{'>'})\{}
+\DoxyCodeLine{291       ret = \textcolor{charliteral}{'+'};}
+\DoxyCodeLine{292       s++;}
+\DoxyCodeLine{293     \}}
+\DoxyCodeLine{294     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{295   \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{296     ret = \textcolor{charliteral}{'a'};}
+\DoxyCodeLine{297     \textcolor{keywordflow}{while}(s < es \&\& !\mbox{\hyperlink{ulib_8c_aa409596a785c33c8fabee6d6464df3ff}{strchr}}(\mbox{\hyperlink{sh_8c_ab8474337bbc7c7d316b75b5c00d79947}{whitespace}}, *s) \&\& !\mbox{\hyperlink{ulib_8c_aa409596a785c33c8fabee6d6464df3ff}{strchr}}(\mbox{\hyperlink{sh_8c_ab385d981fc73a48a1b732173200f46e5}{symbols}}, *s))}
+\DoxyCodeLine{298       s++;}
+\DoxyCodeLine{299     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{300   \}}
+\DoxyCodeLine{301   \textcolor{keywordflow}{if}(eq)}
+\DoxyCodeLine{302     *eq = s;}
+\DoxyCodeLine{303 }
+\DoxyCodeLine{304   \textcolor{keywordflow}{while}(s < es \&\& \mbox{\hyperlink{ulib_8c_aa409596a785c33c8fabee6d6464df3ff}{strchr}}(\mbox{\hyperlink{sh_8c_ab8474337bbc7c7d316b75b5c00d79947}{whitespace}}, *s))}
+\DoxyCodeLine{305     s++;}
+\DoxyCodeLine{306   *ps = s;}
+\DoxyCodeLine{307   \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{308 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=219pt]{dd/da3/sh_8c_aaf1dedac6db801eab8d23f2acb3b1272_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_aaf1dedac6db801eab8d23f2acb3b1272_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{sh_8c_a7baebb9c63e5150e27491823db9d1cdb}\label{sh_8c_a7baebb9c63e5150e27491823db9d1cdb}} 
+\index{sh.c@{sh.c}!listcmd@{listcmd}}
+\index{listcmd@{listcmd}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{listcmd()}{listcmd()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structcmd}{cmd}}$\ast$ \mbox{\hyperlink{structlistcmd}{listcmd}} (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$}]{left,  }\item[{struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$}]{right }\end{DoxyParamCaption})}
+
+
+
+sh.\+c 파일의 236 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{237 \{}
+\DoxyCodeLine{238   \textcolor{keyword}{struct }\mbox{\hyperlink{structlistcmd}{listcmd}} *\mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{239 }
+\DoxyCodeLine{240   \mbox{\hyperlink{structcmd}{cmd}} = \mbox{\hyperlink{umalloc_8c_a94267ee40e0547410676894ab3f23c15}{malloc}}(\textcolor{keyword}{sizeof}(*\mbox{\hyperlink{structcmd}{cmd}}));}
+\DoxyCodeLine{241   \mbox{\hyperlink{defs_8h_a9d55c9f035076ed1a90b6452770d0b62}{memset}}(\mbox{\hyperlink{structcmd}{cmd}}, 0, \textcolor{keyword}{sizeof}(*\mbox{\hyperlink{structcmd}{cmd}}));}
+\DoxyCodeLine{242   \mbox{\hyperlink{structcmd}{cmd}}-\/>\mbox{\hyperlink{structcmd_a9b861866e1dec63e694247fb4d976423}{type}} = \mbox{\hyperlink{sh_8c_aed0a8f83088c41d721066cd5b3b9a00c}{LIST}};}
+\DoxyCodeLine{243   \mbox{\hyperlink{structcmd}{cmd}}-\/>left = \mbox{\hyperlink{structlistcmd_a3058dfa06817a015f821d38f1e1edc3b}{left}};}
+\DoxyCodeLine{244   \mbox{\hyperlink{structcmd}{cmd}}-\/>right = \mbox{\hyperlink{structlistcmd_a063a3a59362ddfafb7c0e4c848d4e8c5}{right}};}
+\DoxyCodeLine{245   \textcolor{keywordflow}{return} (\textcolor{keyword}{struct} \mbox{\hyperlink{structcmd}{cmd}}*)\mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{246 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_a7baebb9c63e5150e27491823db9d1cdb_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_a7baebb9c63e5150e27491823db9d1cdb_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{sh_8c_a840291bc02cba5474a4cb46a9b9566fe}\label{sh_8c_a840291bc02cba5474a4cb46a9b9566fe}} 
+\index{sh.c@{sh.c}!main@{main}}
+\index{main@{main}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+sh.\+c 파일의 145 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{146 \{}
+\DoxyCodeLine{147   \textcolor{keyword}{static} \textcolor{keywordtype}{char} \mbox{\hyperlink{structbuf}{buf}}[100];}
+\DoxyCodeLine{148   \textcolor{keywordtype}{int} fd;}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{150   \textcolor{comment}{// Ensure that three file descriptors are open.}}
+\DoxyCodeLine{151   \textcolor{keywordflow}{while}((fd = \mbox{\hyperlink{user_8h_a2c4414339f388561554c2deab11a1a07}{open}}(\textcolor{stringliteral}{"console"}, \mbox{\hyperlink{fcntl_8h_abb0586253488ee61072b73557eeb873b}{O\_RDWR}})) >= 0)\{}
+\DoxyCodeLine{152     \textcolor{keywordflow}{if}(fd >= 3)\{}
+\DoxyCodeLine{153       \mbox{\hyperlink{user_8h_ae152484c890a24e4d9b4980e7b965be0}{close}}(fd);}
+\DoxyCodeLine{154       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{155     \}}
+\DoxyCodeLine{156   \}}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158   \textcolor{comment}{// Read and run input commands.}}
+\DoxyCodeLine{159   \textcolor{keywordflow}{while}(\mbox{\hyperlink{sh_8c_a0ee5a9418fea2f92036f5367a4101fe8}{getcmd}}(\mbox{\hyperlink{structbuf}{buf}}, \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structbuf}{buf}})) >= 0)\{}
+\DoxyCodeLine{160     \textcolor{keywordflow}{if}(\mbox{\hyperlink{structbuf}{buf}}[0] == \textcolor{charliteral}{'c'} \&\& \mbox{\hyperlink{structbuf}{buf}}[1] == \textcolor{charliteral}{'d'} \&\& \mbox{\hyperlink{structbuf}{buf}}[2] == \textcolor{charliteral}{' '})\{}
+\DoxyCodeLine{161       \textcolor{comment}{// Chdir must be called by the parent, not the child.}}
+\DoxyCodeLine{162       \mbox{\hyperlink{structbuf}{buf}}[\mbox{\hyperlink{defs_8h_a5e5172aa1be36b8210c6dfd86800b44c}{strlen}}(\mbox{\hyperlink{structbuf}{buf}})-\/1] = 0;  \textcolor{comment}{// chop \(\backslash\)n}}
+\DoxyCodeLine{163       \textcolor{keywordflow}{if}(\mbox{\hyperlink{user_8h_aebe305544f2eb0cf2c4a4f8b4c12bc0f}{chdir}}(\mbox{\hyperlink{structbuf}{buf}}+3) < 0)}
+\DoxyCodeLine{164         \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(2, \textcolor{stringliteral}{"cannot cd \%s\(\backslash\)n"}, \mbox{\hyperlink{structbuf}{buf}}+3);}
+\DoxyCodeLine{165       \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{166     \}}
+\DoxyCodeLine{167     \textcolor{keywordflow}{if}(\mbox{\hyperlink{sh_8c_a7ae98824a008ffbc5506060227b6faa0}{fork1}}() == 0)}
+\DoxyCodeLine{168       \mbox{\hyperlink{sh_8c_aedbeff6afe5d4e22330c7e6b5e6df893}{runcmd}}(\mbox{\hyperlink{sh_8c_ab08793db282d79295235e593dc4cac82}{parsecmd}}(\mbox{\hyperlink{structbuf}{buf}}));}
+\DoxyCodeLine{169     \mbox{\hyperlink{defs_8h_af6f31822f7e737b4e414bdac1ccb59a4}{wait}}();}
+\DoxyCodeLine{170   \}}
+\DoxyCodeLine{171   \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}();}
+\DoxyCodeLine{172 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_a840291bc02cba5474a4cb46a9b9566fe_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{sh_8c_a116fd6ef63a4f3a15340502d15ec1ce1}\label{sh_8c_a116fd6ef63a4f3a15340502d15ec1ce1}} 
+\index{sh.c@{sh.c}!nulterminate@{nulterminate}}
+\index{nulterminate@{nulterminate}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{nulterminate()}{nulterminate()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$ nulterminate (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$}]{cmd }\end{DoxyParamCaption})}
+
+
+
+sh.\+c 파일의 450 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{451 \{}
+\DoxyCodeLine{452   \textcolor{keywordtype}{int} i;}
+\DoxyCodeLine{453   \textcolor{keyword}{struct }\mbox{\hyperlink{structbackcmd}{backcmd}} *bcmd;}
+\DoxyCodeLine{454   \textcolor{keyword}{struct }\mbox{\hyperlink{structexeccmd}{execcmd}} *ecmd;}
+\DoxyCodeLine{455   \textcolor{keyword}{struct }\mbox{\hyperlink{structlistcmd}{listcmd}} *lcmd;}
+\DoxyCodeLine{456   \textcolor{keyword}{struct }\mbox{\hyperlink{structpipecmd}{pipecmd}} *pcmd;}
+\DoxyCodeLine{457   \textcolor{keyword}{struct }\mbox{\hyperlink{structredircmd}{redircmd}} *rcmd;}
+\DoxyCodeLine{458 }
+\DoxyCodeLine{459   \textcolor{keywordflow}{if}(\mbox{\hyperlink{structcmd}{cmd}} == 0)}
+\DoxyCodeLine{460     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{461 }
+\DoxyCodeLine{462   \textcolor{keywordflow}{switch}(\mbox{\hyperlink{structcmd}{cmd}}-\/>\mbox{\hyperlink{structcmd_a9b861866e1dec63e694247fb4d976423}{type}})\{}
+\DoxyCodeLine{463   \textcolor{keywordflow}{case} \mbox{\hyperlink{sh_8c_a7d636ac897898fcd988797e4ada044b9}{EXEC}}:}
+\DoxyCodeLine{464     ecmd = (\textcolor{keyword}{struct }\mbox{\hyperlink{structexeccmd}{execcmd}}*)\mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{465     \textcolor{keywordflow}{for}(i=0; ecmd-\/>\mbox{\hyperlink{structexeccmd_a00e53af4bc0e28bbd6842bdceaee1ea9}{argv}}[i]; i++)}
+\DoxyCodeLine{466       *ecmd-\/>\mbox{\hyperlink{structexeccmd_ab3444b3d0c478e5338f55b7dffe70521}{eargv}}[i] = 0;}
+\DoxyCodeLine{467     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{468 }
+\DoxyCodeLine{469   \textcolor{keywordflow}{case} \mbox{\hyperlink{sh_8c_ae1749b6682612a761fc83e79c38386b1}{REDIR}}:}
+\DoxyCodeLine{470     rcmd = (\textcolor{keyword}{struct} \mbox{\hyperlink{structredircmd}{redircmd}}*)\mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{471     \mbox{\hyperlink{sh_8c_a116fd6ef63a4f3a15340502d15ec1ce1}{nulterminate}}(rcmd-\/>\mbox{\hyperlink{structredircmd_ad0e2824b83cc8a1da99b2922025011dc}{cmd}});}
+\DoxyCodeLine{472     *rcmd-\/>\mbox{\hyperlink{structredircmd_a7bd00698c6fbc539415332f187d78317}{efile}} = 0;}
+\DoxyCodeLine{473     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{474 }
+\DoxyCodeLine{475   \textcolor{keywordflow}{case} \mbox{\hyperlink{sh_8c_a67bc87cdcc5724cf8e8e4ae278d0133f}{PIPE}}:}
+\DoxyCodeLine{476     pcmd = (\textcolor{keyword}{struct }\mbox{\hyperlink{structpipecmd}{pipecmd}}*)\mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{477     \mbox{\hyperlink{sh_8c_a116fd6ef63a4f3a15340502d15ec1ce1}{nulterminate}}(pcmd-\/>\mbox{\hyperlink{structpipecmd_a8922b7eac1f12f729cc7226b8b120f6f}{left}});}
+\DoxyCodeLine{478     \mbox{\hyperlink{sh_8c_a116fd6ef63a4f3a15340502d15ec1ce1}{nulterminate}}(pcmd-\/>\mbox{\hyperlink{structpipecmd_a882e2847aa340ae4e201d2e49921b47e}{right}});}
+\DoxyCodeLine{479     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{480 }
+\DoxyCodeLine{481   \textcolor{keywordflow}{case} \mbox{\hyperlink{sh_8c_aed0a8f83088c41d721066cd5b3b9a00c}{LIST}}:}
+\DoxyCodeLine{482     lcmd = (\textcolor{keyword}{struct }\mbox{\hyperlink{structlistcmd}{listcmd}}*)\mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{483     \mbox{\hyperlink{sh_8c_a116fd6ef63a4f3a15340502d15ec1ce1}{nulterminate}}(lcmd-\/>\mbox{\hyperlink{structlistcmd_a3058dfa06817a015f821d38f1e1edc3b}{left}});}
+\DoxyCodeLine{484     \mbox{\hyperlink{sh_8c_a116fd6ef63a4f3a15340502d15ec1ce1}{nulterminate}}(lcmd-\/>\mbox{\hyperlink{structlistcmd_a063a3a59362ddfafb7c0e4c848d4e8c5}{right}});}
+\DoxyCodeLine{485     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{486 }
+\DoxyCodeLine{487   \textcolor{keywordflow}{case} \mbox{\hyperlink{sh_8c_ab303ee384877c80cb8855bf0113faf88}{BACK}}:}
+\DoxyCodeLine{488     bcmd = (\textcolor{keyword}{struct }\mbox{\hyperlink{structbackcmd}{backcmd}}*)\mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{489     \mbox{\hyperlink{sh_8c_a116fd6ef63a4f3a15340502d15ec1ce1}{nulterminate}}(bcmd-\/>\mbox{\hyperlink{structbackcmd_a74a697014e2d3a17710e530fca0e8432}{cmd}});}
+\DoxyCodeLine{490     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{491   \}}
+\DoxyCodeLine{492   \textcolor{keywordflow}{return} \mbox{\hyperlink{structbackcmd_a74a697014e2d3a17710e530fca0e8432}{cmd}};}
+\DoxyCodeLine{493 \}}
+
+\end{DoxyCode}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=338pt]{dd/da3/sh_8c_a116fd6ef63a4f3a15340502d15ec1ce1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{sh_8c_ada38fdb2913f040f6eeb6189eeb42d32}\label{sh_8c_ada38fdb2913f040f6eeb6189eeb42d32}} 
+\index{sh.c@{sh.c}!panic@{panic}}
+\index{panic@{panic}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{panic()}{panic()}}
+{\footnotesize\ttfamily void panic (\begin{DoxyParamCaption}\item[{char $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+sh.\+c 파일의 175 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{176 \{}
+\DoxyCodeLine{177   \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(2, \textcolor{stringliteral}{"\%s\(\backslash\)n"}, s);}
+\DoxyCodeLine{178   \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}();}
+\DoxyCodeLine{179 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_ada38fdb2913f040f6eeb6189eeb42d32_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_ada38fdb2913f040f6eeb6189eeb42d32_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{sh_8c_a99d0a6cc8bd52b455b635ed26e4f149a}\label{sh_8c_a99d0a6cc8bd52b455b635ed26e4f149a}} 
+\index{sh.c@{sh.c}!parseblock@{parseblock}}
+\index{parseblock@{parseblock}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{parseblock()}{parseblock()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structcmd}{cmd}}$\ast$ parseblock (\begin{DoxyParamCaption}\item[{char $\ast$$\ast$}]{ps,  }\item[{char $\ast$}]{es }\end{DoxyParamCaption})}
+
+
+
+sh.\+c 파일의 400 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{401 \{}
+\DoxyCodeLine{402   \textcolor{keyword}{struct }\mbox{\hyperlink{structcmd}{cmd}} *\mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{403 }
+\DoxyCodeLine{404   \textcolor{keywordflow}{if}(!\mbox{\hyperlink{sh_8c_ae0a03d29adb5d9fa678bd53e749f1546}{peek}}(ps, es, \textcolor{stringliteral}{"("}))}
+\DoxyCodeLine{405     \mbox{\hyperlink{sh_8c_ada38fdb2913f040f6eeb6189eeb42d32}{panic}}(\textcolor{stringliteral}{"parseblock"});}
+\DoxyCodeLine{406   \mbox{\hyperlink{sh_8c_aaf1dedac6db801eab8d23f2acb3b1272}{gettoken}}(ps, es, 0, 0);}
+\DoxyCodeLine{407   \mbox{\hyperlink{structcmd}{cmd}} = \mbox{\hyperlink{sh_8c_a4593dc7728db0ff4bb5fb29c31ab8cba}{parseline}}(ps, es);}
+\DoxyCodeLine{408   \textcolor{keywordflow}{if}(!\mbox{\hyperlink{sh_8c_ae0a03d29adb5d9fa678bd53e749f1546}{peek}}(ps, es, \textcolor{stringliteral}{")"}))}
+\DoxyCodeLine{409     \mbox{\hyperlink{sh_8c_ada38fdb2913f040f6eeb6189eeb42d32}{panic}}(\textcolor{stringliteral}{"syntax -\/ missing )"});}
+\DoxyCodeLine{410   \mbox{\hyperlink{sh_8c_aaf1dedac6db801eab8d23f2acb3b1272}{gettoken}}(ps, es, 0, 0);}
+\DoxyCodeLine{411   \mbox{\hyperlink{structcmd}{cmd}} = \mbox{\hyperlink{sh_8c_a1b8582f6a43b9f8874aae78e44a4a448}{parseredirs}}(\mbox{\hyperlink{structcmd}{cmd}}, ps, es);}
+\DoxyCodeLine{412   \textcolor{keywordflow}{return} \mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{413 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_a99d0a6cc8bd52b455b635ed26e4f149a_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_a99d0a6cc8bd52b455b635ed26e4f149a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{sh_8c_ab08793db282d79295235e593dc4cac82}\label{sh_8c_ab08793db282d79295235e593dc4cac82}} 
+\index{sh.c@{sh.c}!parsecmd@{parsecmd}}
+\index{parsecmd@{parsecmd}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{parsecmd()}{parsecmd()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$ parsecmd (\begin{DoxyParamCaption}\item[{char $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+sh.\+c 파일의 328 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{329 \{}
+\DoxyCodeLine{330   \textcolor{keywordtype}{char} *es;}
+\DoxyCodeLine{331   \textcolor{keyword}{struct }\mbox{\hyperlink{structcmd}{cmd}} *\mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{332 }
+\DoxyCodeLine{333   es = s + \mbox{\hyperlink{defs_8h_a5e5172aa1be36b8210c6dfd86800b44c}{strlen}}(s);}
+\DoxyCodeLine{334   \mbox{\hyperlink{structcmd}{cmd}} = \mbox{\hyperlink{sh_8c_a4593dc7728db0ff4bb5fb29c31ab8cba}{parseline}}(\&s, es);}
+\DoxyCodeLine{335   \mbox{\hyperlink{sh_8c_ae0a03d29adb5d9fa678bd53e749f1546}{peek}}(\&s, es, \textcolor{stringliteral}{""});}
+\DoxyCodeLine{336   \textcolor{keywordflow}{if}(s != es)\{}
+\DoxyCodeLine{337     \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(2, \textcolor{stringliteral}{"leftovers: \%s\(\backslash\)n"}, s);}
+\DoxyCodeLine{338     \mbox{\hyperlink{sh_8c_ada38fdb2913f040f6eeb6189eeb42d32}{panic}}(\textcolor{stringliteral}{"syntax"});}
+\DoxyCodeLine{339   \}}
+\DoxyCodeLine{340   \mbox{\hyperlink{sh_8c_a116fd6ef63a4f3a15340502d15ec1ce1}{nulterminate}}(\mbox{\hyperlink{structcmd}{cmd}});}
+\DoxyCodeLine{341   \textcolor{keywordflow}{return} \mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{342 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_ab08793db282d79295235e593dc4cac82_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{dd/da3/sh_8c_ab08793db282d79295235e593dc4cac82_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{sh_8c_add82543cc6953d0173086d06bfcf76c7}\label{sh_8c_add82543cc6953d0173086d06bfcf76c7}} 
+\index{sh.c@{sh.c}!parseexec@{parseexec}}
+\index{parseexec@{parseexec}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{parseexec()}{parseexec()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$ parseexec (\begin{DoxyParamCaption}\item[{char $\ast$$\ast$}]{ps,  }\item[{char $\ast$}]{es }\end{DoxyParamCaption})}
+
+
+
+sh.\+c 파일의 416 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{417 \{}
+\DoxyCodeLine{418   \textcolor{keywordtype}{char} *q, *eq;}
+\DoxyCodeLine{419   \textcolor{keywordtype}{int} tok, argc;}
+\DoxyCodeLine{420   \textcolor{keyword}{struct }\mbox{\hyperlink{structexeccmd}{execcmd}} *\mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{421   \textcolor{keyword}{struct }\mbox{\hyperlink{structcmd}{cmd}} *ret;}
+\DoxyCodeLine{422 }
+\DoxyCodeLine{423   \textcolor{keywordflow}{if}(\mbox{\hyperlink{sh_8c_ae0a03d29adb5d9fa678bd53e749f1546}{peek}}(ps, es, \textcolor{stringliteral}{"("}))}
+\DoxyCodeLine{424     \textcolor{keywordflow}{return} \mbox{\hyperlink{sh_8c_a99d0a6cc8bd52b455b635ed26e4f149a}{parseblock}}(ps, es);}
+\DoxyCodeLine{425 }
+\DoxyCodeLine{426   ret = \mbox{\hyperlink{sh_8c_a9fe29da0f831645fb645dca0df0fa6e0}{execcmd}}();}
+\DoxyCodeLine{427   \mbox{\hyperlink{structcmd}{cmd}} = (\textcolor{keyword}{struct }\mbox{\hyperlink{structexeccmd}{execcmd}}*)ret;}
+\DoxyCodeLine{428 }
+\DoxyCodeLine{429   argc = 0;}
+\DoxyCodeLine{430   ret = \mbox{\hyperlink{sh_8c_a1b8582f6a43b9f8874aae78e44a4a448}{parseredirs}}(ret, ps, es);}
+\DoxyCodeLine{431   \textcolor{keywordflow}{while}(!\mbox{\hyperlink{sh_8c_ae0a03d29adb5d9fa678bd53e749f1546}{peek}}(ps, es, \textcolor{stringliteral}{"|)\&;"}))\{}
+\DoxyCodeLine{432     \textcolor{keywordflow}{if}((tok=\mbox{\hyperlink{sh_8c_aaf1dedac6db801eab8d23f2acb3b1272}{gettoken}}(ps, es, \&q, \&eq)) == 0)}
+\DoxyCodeLine{433       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{434     \textcolor{keywordflow}{if}(tok != \textcolor{charliteral}{'a'})}
+\DoxyCodeLine{435       \mbox{\hyperlink{sh_8c_ada38fdb2913f040f6eeb6189eeb42d32}{panic}}(\textcolor{stringliteral}{"syntax"});}
+\DoxyCodeLine{436     \mbox{\hyperlink{structcmd}{cmd}}-\/>argv[argc] = q;}
+\DoxyCodeLine{437     \mbox{\hyperlink{structcmd}{cmd}}-\/>eargv[argc] = eq;}
+\DoxyCodeLine{438     argc++;}
+\DoxyCodeLine{439     \textcolor{keywordflow}{if}(argc >= \mbox{\hyperlink{sh_8c_a41101847771d39a4f0a7f9395061c629}{MAXARGS}})}
+\DoxyCodeLine{440       \mbox{\hyperlink{sh_8c_ada38fdb2913f040f6eeb6189eeb42d32}{panic}}(\textcolor{stringliteral}{"too many args"});}
+\DoxyCodeLine{441     ret = \mbox{\hyperlink{sh_8c_a1b8582f6a43b9f8874aae78e44a4a448}{parseredirs}}(ret, ps, es);}
+\DoxyCodeLine{442   \}}
+\DoxyCodeLine{443   \mbox{\hyperlink{structcmd}{cmd}}-\/>argv[argc] = 0;}
+\DoxyCodeLine{444   \mbox{\hyperlink{structcmd}{cmd}}-\/>eargv[argc] = 0;}
+\DoxyCodeLine{445   \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{446 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_add82543cc6953d0173086d06bfcf76c7_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_add82543cc6953d0173086d06bfcf76c7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{sh_8c_a4593dc7728db0ff4bb5fb29c31ab8cba}\label{sh_8c_a4593dc7728db0ff4bb5fb29c31ab8cba}} 
+\index{sh.c@{sh.c}!parseline@{parseline}}
+\index{parseline@{parseline}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{parseline()}{parseline()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$ parseline (\begin{DoxyParamCaption}\item[{char $\ast$$\ast$}]{ps,  }\item[{char $\ast$}]{es }\end{DoxyParamCaption})}
+
+
+
+sh.\+c 파일의 345 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{346 \{}
+\DoxyCodeLine{347   \textcolor{keyword}{struct }\mbox{\hyperlink{structcmd}{cmd}} *\mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{348 }
+\DoxyCodeLine{349   \mbox{\hyperlink{structcmd}{cmd}} = \mbox{\hyperlink{sh_8c_a4789e9e629e810d291c1dd5ece4d3a71}{parsepipe}}(ps, es);}
+\DoxyCodeLine{350   \textcolor{keywordflow}{while}(\mbox{\hyperlink{sh_8c_ae0a03d29adb5d9fa678bd53e749f1546}{peek}}(ps, es, \textcolor{stringliteral}{"\&"}))\{}
+\DoxyCodeLine{351     \mbox{\hyperlink{sh_8c_aaf1dedac6db801eab8d23f2acb3b1272}{gettoken}}(ps, es, 0, 0);}
+\DoxyCodeLine{352     \mbox{\hyperlink{structcmd}{cmd}} = \mbox{\hyperlink{sh_8c_a8f1212e0b392bac41dcc6ff160b5dcdb}{backcmd}}(\mbox{\hyperlink{structcmd}{cmd}});}
+\DoxyCodeLine{353   \}}
+\DoxyCodeLine{354   \textcolor{keywordflow}{if}(\mbox{\hyperlink{sh_8c_ae0a03d29adb5d9fa678bd53e749f1546}{peek}}(ps, es, \textcolor{stringliteral}{";"}))\{}
+\DoxyCodeLine{355     \mbox{\hyperlink{sh_8c_aaf1dedac6db801eab8d23f2acb3b1272}{gettoken}}(ps, es, 0, 0);}
+\DoxyCodeLine{356     \mbox{\hyperlink{structcmd}{cmd}} = \mbox{\hyperlink{sh_8c_a7baebb9c63e5150e27491823db9d1cdb}{listcmd}}(\mbox{\hyperlink{structcmd}{cmd}}, \mbox{\hyperlink{sh_8c_a4593dc7728db0ff4bb5fb29c31ab8cba}{parseline}}(ps, es));}
+\DoxyCodeLine{357   \}}
+\DoxyCodeLine{358   \textcolor{keywordflow}{return} \mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{359 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_a4593dc7728db0ff4bb5fb29c31ab8cba_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_a4593dc7728db0ff4bb5fb29c31ab8cba_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{sh_8c_a4789e9e629e810d291c1dd5ece4d3a71}\label{sh_8c_a4789e9e629e810d291c1dd5ece4d3a71}} 
+\index{sh.c@{sh.c}!parsepipe@{parsepipe}}
+\index{parsepipe@{parsepipe}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{parsepipe()}{parsepipe()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$ parsepipe (\begin{DoxyParamCaption}\item[{char $\ast$$\ast$}]{ps,  }\item[{char $\ast$}]{es }\end{DoxyParamCaption})}
+
+
+
+sh.\+c 파일의 362 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{363 \{}
+\DoxyCodeLine{364   \textcolor{keyword}{struct }\mbox{\hyperlink{structcmd}{cmd}} *\mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{365 }
+\DoxyCodeLine{366   \mbox{\hyperlink{structcmd}{cmd}} = \mbox{\hyperlink{sh_8c_add82543cc6953d0173086d06bfcf76c7}{parseexec}}(ps, es);}
+\DoxyCodeLine{367   \textcolor{keywordflow}{if}(\mbox{\hyperlink{sh_8c_ae0a03d29adb5d9fa678bd53e749f1546}{peek}}(ps, es, \textcolor{stringliteral}{"|"}))\{}
+\DoxyCodeLine{368     \mbox{\hyperlink{sh_8c_aaf1dedac6db801eab8d23f2acb3b1272}{gettoken}}(ps, es, 0, 0);}
+\DoxyCodeLine{369     \mbox{\hyperlink{structcmd}{cmd}} = \mbox{\hyperlink{sh_8c_ac84beaa7dea2b72c5b2115aee36e3f9d}{pipecmd}}(\mbox{\hyperlink{structcmd}{cmd}}, \mbox{\hyperlink{sh_8c_a4789e9e629e810d291c1dd5ece4d3a71}{parsepipe}}(ps, es));}
+\DoxyCodeLine{370   \}}
+\DoxyCodeLine{371   \textcolor{keywordflow}{return} \mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{372 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_a4789e9e629e810d291c1dd5ece4d3a71_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_a4789e9e629e810d291c1dd5ece4d3a71_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{sh_8c_a1b8582f6a43b9f8874aae78e44a4a448}\label{sh_8c_a1b8582f6a43b9f8874aae78e44a4a448}} 
+\index{sh.c@{sh.c}!parseredirs@{parseredirs}}
+\index{parseredirs@{parseredirs}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{parseredirs()}{parseredirs()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structcmd}{cmd}}$\ast$ parseredirs (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$}]{cmd,  }\item[{char $\ast$$\ast$}]{ps,  }\item[{char $\ast$}]{es }\end{DoxyParamCaption})}
+
+
+
+sh.\+c 파일의 375 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{376 \{}
+\DoxyCodeLine{377   \textcolor{keywordtype}{int} tok;}
+\DoxyCodeLine{378   \textcolor{keywordtype}{char} *q, *eq;}
+\DoxyCodeLine{379 }
+\DoxyCodeLine{380   \textcolor{keywordflow}{while}(\mbox{\hyperlink{sh_8c_ae0a03d29adb5d9fa678bd53e749f1546}{peek}}(ps, es, \textcolor{stringliteral}{"<>"}))\{}
+\DoxyCodeLine{381     tok = \mbox{\hyperlink{sh_8c_aaf1dedac6db801eab8d23f2acb3b1272}{gettoken}}(ps, es, 0, 0);}
+\DoxyCodeLine{382     \textcolor{keywordflow}{if}(\mbox{\hyperlink{sh_8c_aaf1dedac6db801eab8d23f2acb3b1272}{gettoken}}(ps, es, \&q, \&eq) != \textcolor{charliteral}{'a'})}
+\DoxyCodeLine{383       \mbox{\hyperlink{sh_8c_ada38fdb2913f040f6eeb6189eeb42d32}{panic}}(\textcolor{stringliteral}{"missing file for redirection"});}
+\DoxyCodeLine{384     \textcolor{keywordflow}{switch}(tok)\{}
+\DoxyCodeLine{385     \textcolor{keywordflow}{case} \textcolor{charliteral}{'<'}:}
+\DoxyCodeLine{386       \mbox{\hyperlink{structcmd}{cmd}} = \mbox{\hyperlink{sh_8c_ad6b34af843c5bc556aac1ad33d1e4517}{redircmd}}(\mbox{\hyperlink{structcmd}{cmd}}, q, eq, \mbox{\hyperlink{fcntl_8h_a7a68c9ffaac7dbcd652225dd7c06a54b}{O\_RDONLY}}, 0);}
+\DoxyCodeLine{387       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{388     \textcolor{keywordflow}{case} \textcolor{charliteral}{'>'}:}
+\DoxyCodeLine{389       \mbox{\hyperlink{structcmd}{cmd}} = \mbox{\hyperlink{sh_8c_ad6b34af843c5bc556aac1ad33d1e4517}{redircmd}}(\mbox{\hyperlink{structcmd}{cmd}}, q, eq, \mbox{\hyperlink{fcntl_8h_a11b644a8526139c4cc1850dac1271ced}{O\_WRONLY}}|\mbox{\hyperlink{fcntl_8h_ab40a23079c3b9a7e25ffdc8108c7fb02}{O\_CREATE}}, 1);}
+\DoxyCodeLine{390       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{391     \textcolor{keywordflow}{case} \textcolor{charliteral}{'+'}:  \textcolor{comment}{// >>}}
+\DoxyCodeLine{392       \mbox{\hyperlink{structcmd}{cmd}} = \mbox{\hyperlink{sh_8c_ad6b34af843c5bc556aac1ad33d1e4517}{redircmd}}(\mbox{\hyperlink{structcmd}{cmd}}, q, eq, \mbox{\hyperlink{fcntl_8h_a11b644a8526139c4cc1850dac1271ced}{O\_WRONLY}}|\mbox{\hyperlink{fcntl_8h_ab40a23079c3b9a7e25ffdc8108c7fb02}{O\_CREATE}}, 1);}
+\DoxyCodeLine{393       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{394     \}}
+\DoxyCodeLine{395   \}}
+\DoxyCodeLine{396   \textcolor{keywordflow}{return} \mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{397 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_a1b8582f6a43b9f8874aae78e44a4a448_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_a1b8582f6a43b9f8874aae78e44a4a448_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{sh_8c_ae0a03d29adb5d9fa678bd53e749f1546}\label{sh_8c_ae0a03d29adb5d9fa678bd53e749f1546}} 
+\index{sh.c@{sh.c}!peek@{peek}}
+\index{peek@{peek}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{peek()}{peek()}}
+{\footnotesize\ttfamily int peek (\begin{DoxyParamCaption}\item[{char $\ast$$\ast$}]{ps,  }\item[{char $\ast$}]{es,  }\item[{char $\ast$}]{toks }\end{DoxyParamCaption})}
+
+
+
+sh.\+c 파일의 311 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{312 \{}
+\DoxyCodeLine{313   \textcolor{keywordtype}{char} *s;}
+\DoxyCodeLine{314 }
+\DoxyCodeLine{315   s = *ps;}
+\DoxyCodeLine{316   \textcolor{keywordflow}{while}(s < es \&\& \mbox{\hyperlink{ulib_8c_aa409596a785c33c8fabee6d6464df3ff}{strchr}}(\mbox{\hyperlink{sh_8c_ab8474337bbc7c7d316b75b5c00d79947}{whitespace}}, *s))}
+\DoxyCodeLine{317     s++;}
+\DoxyCodeLine{318   *ps = s;}
+\DoxyCodeLine{319   \textcolor{keywordflow}{return} *s \&\& \mbox{\hyperlink{ulib_8c_aa409596a785c33c8fabee6d6464df3ff}{strchr}}(toks, *s);}
+\DoxyCodeLine{320 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=201pt]{dd/da3/sh_8c_ae0a03d29adb5d9fa678bd53e749f1546_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_ae0a03d29adb5d9fa678bd53e749f1546_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{sh_8c_ac84beaa7dea2b72c5b2115aee36e3f9d}\label{sh_8c_ac84beaa7dea2b72c5b2115aee36e3f9d}} 
+\index{sh.c@{sh.c}!pipecmd@{pipecmd}}
+\index{pipecmd@{pipecmd}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{pipecmd()}{pipecmd()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structcmd}{cmd}}$\ast$ \mbox{\hyperlink{structpipecmd}{pipecmd}} (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$}]{left,  }\item[{struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$}]{right }\end{DoxyParamCaption})}
+
+
+
+sh.\+c 파일의 223 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{224 \{}
+\DoxyCodeLine{225   \textcolor{keyword}{struct }\mbox{\hyperlink{structpipecmd}{pipecmd}} *\mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{226 }
+\DoxyCodeLine{227   \mbox{\hyperlink{structcmd}{cmd}} = \mbox{\hyperlink{umalloc_8c_a94267ee40e0547410676894ab3f23c15}{malloc}}(\textcolor{keyword}{sizeof}(*\mbox{\hyperlink{structcmd}{cmd}}));}
+\DoxyCodeLine{228   \mbox{\hyperlink{defs_8h_a9d55c9f035076ed1a90b6452770d0b62}{memset}}(\mbox{\hyperlink{structcmd}{cmd}}, 0, \textcolor{keyword}{sizeof}(*\mbox{\hyperlink{structcmd}{cmd}}));}
+\DoxyCodeLine{229   \mbox{\hyperlink{structcmd}{cmd}}-\/>\mbox{\hyperlink{structcmd_a9b861866e1dec63e694247fb4d976423}{type}} = \mbox{\hyperlink{sh_8c_a67bc87cdcc5724cf8e8e4ae278d0133f}{PIPE}};}
+\DoxyCodeLine{230   \mbox{\hyperlink{structcmd}{cmd}}-\/>left = \mbox{\hyperlink{structpipecmd_a8922b7eac1f12f729cc7226b8b120f6f}{left}};}
+\DoxyCodeLine{231   \mbox{\hyperlink{structcmd}{cmd}}-\/>right = \mbox{\hyperlink{structpipecmd_a882e2847aa340ae4e201d2e49921b47e}{right}};}
+\DoxyCodeLine{232   \textcolor{keywordflow}{return} (\textcolor{keyword}{struct} \mbox{\hyperlink{structcmd}{cmd}}*)\mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{233 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_ac84beaa7dea2b72c5b2115aee36e3f9d_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_ac84beaa7dea2b72c5b2115aee36e3f9d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{sh_8c_ad6b34af843c5bc556aac1ad33d1e4517}\label{sh_8c_ad6b34af843c5bc556aac1ad33d1e4517}} 
+\index{sh.c@{sh.c}!redircmd@{redircmd}}
+\index{redircmd@{redircmd}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{redircmd()}{redircmd()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structcmd}{cmd}}$\ast$ \mbox{\hyperlink{structredircmd}{redircmd}} (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$}]{subcmd,  }\item[{char $\ast$}]{file,  }\item[{char $\ast$}]{efile,  }\item[{int}]{mode,  }\item[{int}]{fd }\end{DoxyParamCaption})}
+
+
+
+sh.\+c 파일의 207 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{208 \{}
+\DoxyCodeLine{209   \textcolor{keyword}{struct }\mbox{\hyperlink{structredircmd}{redircmd}} *\mbox{\hyperlink{structredircmd_ad0e2824b83cc8a1da99b2922025011dc}{cmd}};}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{211   \mbox{\hyperlink{structcmd}{cmd}} = \mbox{\hyperlink{umalloc_8c_a94267ee40e0547410676894ab3f23c15}{malloc}}(\textcolor{keyword}{sizeof}(*\mbox{\hyperlink{structcmd}{cmd}}));}
+\DoxyCodeLine{212   \mbox{\hyperlink{defs_8h_a9d55c9f035076ed1a90b6452770d0b62}{memset}}(\mbox{\hyperlink{structcmd}{cmd}}, 0, \textcolor{keyword}{sizeof}(*\mbox{\hyperlink{structcmd}{cmd}}));}
+\DoxyCodeLine{213   \mbox{\hyperlink{structcmd}{cmd}}-\/>\mbox{\hyperlink{structcmd_a9b861866e1dec63e694247fb4d976423}{type}} = \mbox{\hyperlink{sh_8c_ae1749b6682612a761fc83e79c38386b1}{REDIR}};}
+\DoxyCodeLine{214   \mbox{\hyperlink{structcmd}{cmd}}-\/>cmd = subcmd;}
+\DoxyCodeLine{215   \mbox{\hyperlink{structcmd}{cmd}}-\/>file = \mbox{\hyperlink{file_8c_a7cfa5243b3d349a415c7500c962fe9a5}{file}};}
+\DoxyCodeLine{216   \mbox{\hyperlink{structcmd}{cmd}}-\/>efile = \mbox{\hyperlink{structredircmd_a7bd00698c6fbc539415332f187d78317}{efile}};}
+\DoxyCodeLine{217   \mbox{\hyperlink{structcmd}{cmd}}-\/>mode = \mbox{\hyperlink{structredircmd_a36b522983b6a0c0efdaea471b08d120b}{mode}};}
+\DoxyCodeLine{218   \mbox{\hyperlink{structcmd}{cmd}}-\/>fd = \mbox{\hyperlink{structredircmd_a1d4b8ba36b5bb4e9e4af58a6d58934a1}{fd}};}
+\DoxyCodeLine{219   \textcolor{keywordflow}{return} (\textcolor{keyword}{struct} \mbox{\hyperlink{structcmd}{cmd}}*)\mbox{\hyperlink{structredircmd_ad0e2824b83cc8a1da99b2922025011dc}{cmd}};}
+\DoxyCodeLine{220 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_ad6b34af843c5bc556aac1ad33d1e4517_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_ad6b34af843c5bc556aac1ad33d1e4517_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{sh_8c_aedbeff6afe5d4e22330c7e6b5e6df893}\label{sh_8c_aedbeff6afe5d4e22330c7e6b5e6df893}} 
+\index{sh.c@{sh.c}!runcmd@{runcmd}}
+\index{runcmd@{runcmd}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{runcmd()}{runcmd()}}
+{\footnotesize\ttfamily void runcmd (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structcmd}{cmd}} $\ast$}]{cmd }\end{DoxyParamCaption})}
+
+
+
+sh.\+c 파일의 58 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{59 \{}
+\DoxyCodeLine{60   \textcolor{keywordtype}{int} p[2];}
+\DoxyCodeLine{61   \textcolor{keyword}{struct }\mbox{\hyperlink{structbackcmd}{backcmd}} *bcmd;}
+\DoxyCodeLine{62   \textcolor{keyword}{struct }\mbox{\hyperlink{structexeccmd}{execcmd}} *ecmd;}
+\DoxyCodeLine{63   \textcolor{keyword}{struct }\mbox{\hyperlink{structlistcmd}{listcmd}} *lcmd;}
+\DoxyCodeLine{64   \textcolor{keyword}{struct }\mbox{\hyperlink{structpipecmd}{pipecmd}} *pcmd;}
+\DoxyCodeLine{65   \textcolor{keyword}{struct }\mbox{\hyperlink{structredircmd}{redircmd}} *rcmd;}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67   \textcolor{keywordflow}{if}(\mbox{\hyperlink{structcmd}{cmd}} == 0)}
+\DoxyCodeLine{68     \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}();}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70   \textcolor{keywordflow}{switch}(\mbox{\hyperlink{structcmd}{cmd}}-\/>\mbox{\hyperlink{structcmd_a9b861866e1dec63e694247fb4d976423}{type}})\{}
+\DoxyCodeLine{71   \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{72     \mbox{\hyperlink{sh_8c_ada38fdb2913f040f6eeb6189eeb42d32}{panic}}(\textcolor{stringliteral}{"runcmd"});}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74   \textcolor{keywordflow}{case} \mbox{\hyperlink{sh_8c_a7d636ac897898fcd988797e4ada044b9}{EXEC}}:}
+\DoxyCodeLine{75     ecmd = (\textcolor{keyword}{struct }\mbox{\hyperlink{structexeccmd}{execcmd}}*)\mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{76     \textcolor{keywordflow}{if}(ecmd-\/>\mbox{\hyperlink{structexeccmd_a00e53af4bc0e28bbd6842bdceaee1ea9}{argv}}[0] == 0)}
+\DoxyCodeLine{77       \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}();}
+\DoxyCodeLine{78     \mbox{\hyperlink{defs_8h_aa7b4aae4a12acd187e23396214aeca47}{exec}}(ecmd-\/>\mbox{\hyperlink{structexeccmd_a00e53af4bc0e28bbd6842bdceaee1ea9}{argv}}[0], ecmd-\/>\mbox{\hyperlink{structexeccmd_a00e53af4bc0e28bbd6842bdceaee1ea9}{argv}});}
+\DoxyCodeLine{79     \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(2, \textcolor{stringliteral}{"exec \%s failed\(\backslash\)n"}, ecmd-\/>\mbox{\hyperlink{structexeccmd_a00e53af4bc0e28bbd6842bdceaee1ea9}{argv}}[0]);}
+\DoxyCodeLine{80     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82   \textcolor{keywordflow}{case} \mbox{\hyperlink{sh_8c_ae1749b6682612a761fc83e79c38386b1}{REDIR}}:}
+\DoxyCodeLine{83     rcmd = (\textcolor{keyword}{struct }\mbox{\hyperlink{structredircmd}{redircmd}}*)\mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{84     \mbox{\hyperlink{user_8h_ae152484c890a24e4d9b4980e7b965be0}{close}}(rcmd-\/>\mbox{\hyperlink{structredircmd_a1d4b8ba36b5bb4e9e4af58a6d58934a1}{fd}});}
+\DoxyCodeLine{85     \textcolor{keywordflow}{if}(\mbox{\hyperlink{user_8h_a2c4414339f388561554c2deab11a1a07}{open}}(rcmd-\/>\mbox{\hyperlink{structredircmd_adfbfcf9111724e5b453bab2ed3ee308f}{file}}, rcmd-\/>\mbox{\hyperlink{structredircmd_a36b522983b6a0c0efdaea471b08d120b}{mode}}) < 0)\{}
+\DoxyCodeLine{86       \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(2, \textcolor{stringliteral}{"open \%s failed\(\backslash\)n"}, rcmd-\/>\mbox{\hyperlink{structredircmd_adfbfcf9111724e5b453bab2ed3ee308f}{file}});}
+\DoxyCodeLine{87       \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}();}
+\DoxyCodeLine{88     \}}
+\DoxyCodeLine{89     \mbox{\hyperlink{sh_8c_aedbeff6afe5d4e22330c7e6b5e6df893}{runcmd}}(rcmd-\/>\mbox{\hyperlink{structredircmd_ad0e2824b83cc8a1da99b2922025011dc}{cmd}});}
+\DoxyCodeLine{90     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92   \textcolor{keywordflow}{case} \mbox{\hyperlink{sh_8c_aed0a8f83088c41d721066cd5b3b9a00c}{LIST}}:}
+\DoxyCodeLine{93     lcmd = (\textcolor{keyword}{struct }\mbox{\hyperlink{structlistcmd}{listcmd}}*)\mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{94     \textcolor{keywordflow}{if}(\mbox{\hyperlink{sh_8c_a7ae98824a008ffbc5506060227b6faa0}{fork1}}() == 0)}
+\DoxyCodeLine{95       \mbox{\hyperlink{sh_8c_aedbeff6afe5d4e22330c7e6b5e6df893}{runcmd}}(lcmd-\/>\mbox{\hyperlink{structlistcmd_a3058dfa06817a015f821d38f1e1edc3b}{left}});}
+\DoxyCodeLine{96     \mbox{\hyperlink{defs_8h_af6f31822f7e737b4e414bdac1ccb59a4}{wait}}();}
+\DoxyCodeLine{97     \mbox{\hyperlink{sh_8c_aedbeff6afe5d4e22330c7e6b5e6df893}{runcmd}}(lcmd-\/>\mbox{\hyperlink{structlistcmd_a063a3a59362ddfafb7c0e4c848d4e8c5}{right}});}
+\DoxyCodeLine{98     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100   \textcolor{keywordflow}{case} \mbox{\hyperlink{sh_8c_a67bc87cdcc5724cf8e8e4ae278d0133f}{PIPE}}:}
+\DoxyCodeLine{101     pcmd = (\textcolor{keyword}{struct }\mbox{\hyperlink{structpipecmd}{pipecmd}}*)\mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{102     \textcolor{keywordflow}{if}(\mbox{\hyperlink{user_8h_a3e511a43ff12776599312723e69df219}{pipe}}(p) < 0)}
+\DoxyCodeLine{103       \mbox{\hyperlink{sh_8c_ada38fdb2913f040f6eeb6189eeb42d32}{panic}}(\textcolor{stringliteral}{"pipe"});}
+\DoxyCodeLine{104     \textcolor{keywordflow}{if}(\mbox{\hyperlink{sh_8c_a7ae98824a008ffbc5506060227b6faa0}{fork1}}() == 0)\{}
+\DoxyCodeLine{105       \mbox{\hyperlink{user_8h_ae152484c890a24e4d9b4980e7b965be0}{close}}(1);}
+\DoxyCodeLine{106       \mbox{\hyperlink{user_8h_a530ea95b243a1bf148adaf399e2a6292}{dup}}(p[1]);}
+\DoxyCodeLine{107       \mbox{\hyperlink{user_8h_ae152484c890a24e4d9b4980e7b965be0}{close}}(p[0]);}
+\DoxyCodeLine{108       \mbox{\hyperlink{user_8h_ae152484c890a24e4d9b4980e7b965be0}{close}}(p[1]);}
+\DoxyCodeLine{109       \mbox{\hyperlink{sh_8c_aedbeff6afe5d4e22330c7e6b5e6df893}{runcmd}}(pcmd-\/>\mbox{\hyperlink{structpipecmd_a8922b7eac1f12f729cc7226b8b120f6f}{left}});}
+\DoxyCodeLine{110     \}}
+\DoxyCodeLine{111     \textcolor{keywordflow}{if}(\mbox{\hyperlink{sh_8c_a7ae98824a008ffbc5506060227b6faa0}{fork1}}() == 0)\{}
+\DoxyCodeLine{112       \mbox{\hyperlink{user_8h_ae152484c890a24e4d9b4980e7b965be0}{close}}(0);}
+\DoxyCodeLine{113       \mbox{\hyperlink{user_8h_a530ea95b243a1bf148adaf399e2a6292}{dup}}(p[0]);}
+\DoxyCodeLine{114       \mbox{\hyperlink{user_8h_ae152484c890a24e4d9b4980e7b965be0}{close}}(p[0]);}
+\DoxyCodeLine{115       \mbox{\hyperlink{user_8h_ae152484c890a24e4d9b4980e7b965be0}{close}}(p[1]);}
+\DoxyCodeLine{116       \mbox{\hyperlink{sh_8c_aedbeff6afe5d4e22330c7e6b5e6df893}{runcmd}}(pcmd-\/>\mbox{\hyperlink{structpipecmd_a882e2847aa340ae4e201d2e49921b47e}{right}});}
+\DoxyCodeLine{117     \}}
+\DoxyCodeLine{118     \mbox{\hyperlink{user_8h_ae152484c890a24e4d9b4980e7b965be0}{close}}(p[0]);}
+\DoxyCodeLine{119     \mbox{\hyperlink{user_8h_ae152484c890a24e4d9b4980e7b965be0}{close}}(p[1]);}
+\DoxyCodeLine{120     \mbox{\hyperlink{defs_8h_af6f31822f7e737b4e414bdac1ccb59a4}{wait}}();}
+\DoxyCodeLine{121     \mbox{\hyperlink{defs_8h_af6f31822f7e737b4e414bdac1ccb59a4}{wait}}();}
+\DoxyCodeLine{122     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124   \textcolor{keywordflow}{case} \mbox{\hyperlink{sh_8c_ab303ee384877c80cb8855bf0113faf88}{BACK}}:}
+\DoxyCodeLine{125     bcmd = (\textcolor{keyword}{struct }\mbox{\hyperlink{structbackcmd}{backcmd}}*)\mbox{\hyperlink{structcmd}{cmd}};}
+\DoxyCodeLine{126     \textcolor{keywordflow}{if}(\mbox{\hyperlink{sh_8c_a7ae98824a008ffbc5506060227b6faa0}{fork1}}() == 0)}
+\DoxyCodeLine{127       \mbox{\hyperlink{sh_8c_aedbeff6afe5d4e22330c7e6b5e6df893}{runcmd}}(bcmd-\/>\mbox{\hyperlink{structbackcmd_a74a697014e2d3a17710e530fca0e8432}{cmd}});}
+\DoxyCodeLine{128     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{129   \}}
+\DoxyCodeLine{130   \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}();}
+\DoxyCodeLine{131 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da3/sh_8c_aedbeff6afe5d4e22330c7e6b5e6df893_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=210pt]{dd/da3/sh_8c_aedbeff6afe5d4e22330c7e6b5e6df893_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{변수 문서화}
+\mbox{\Hypertarget{sh_8c_ab385d981fc73a48a1b732173200f46e5}\label{sh_8c_ab385d981fc73a48a1b732173200f46e5}} 
+\index{sh.c@{sh.c}!symbols@{symbols}}
+\index{symbols@{symbols}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{symbols}{symbols}}
+{\footnotesize\ttfamily char symbols\mbox{[}$\,$\mbox{]} = \char`\"{}$<$$\vert$$>$\&;()\char`\"{}}
+
+
+
+sh.\+c 파일의 263 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{sh_8c_ab8474337bbc7c7d316b75b5c00d79947}\label{sh_8c_ab8474337bbc7c7d316b75b5c00d79947}} 
+\index{sh.c@{sh.c}!whitespace@{whitespace}}
+\index{whitespace@{whitespace}!sh.c@{sh.c}}
+\doxysubsubsection{\texorpdfstring{whitespace}{whitespace}}
+{\footnotesize\ttfamily char whitespace\mbox{[}$\,$\mbox{]} = \char`\"{} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}v\char`\"{}}
+
+
+
+sh.\+c 파일의 262 번째 라인에서 정의되었습니다.
+

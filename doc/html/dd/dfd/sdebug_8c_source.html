@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: sdebug.c 소스 파일</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">My Project
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 다음에 의해 생성됨 :  Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'검색');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','검색');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">sdebug.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="../../dd/dfd/sdebug_8c.html">이 파일의 문서화 페이지로 가기</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d9/d49/types_8h.html">types.h</a>&quot;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d2/d1b/stat_8h.html">stat.h</a>&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d8/ddb/user_8h.html">user.h</a>&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="../../dd/dfd/sdebug_8c.html#a748e973809132905bcaac82634785970">    5</a></span>&#160;<span class="preprocessor">#define PNUM 5                  // fork 프로세스 개수</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="../../dd/dfd/sdebug_8c.html#a86afc3e9ef69ed4a661aeaed76012d2a">    6</a></span>&#160;<span class="preprocessor">#define PRINT_CYCLE 100000000   // 각 프로세스 정보 출력 주기(틱)</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="../../dd/dfd/sdebug_8c.html#a5e28adda83c3146c364a9d2b7ff3b372">    7</a></span>&#160;<span class="preprocessor">#define TOTAL_COUNTER 500000000 // 프로세스가 종료할 떄 카운터 값(틱)</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="../../dd/dfd/sdebug_8c.html#a25928a6c58bcdf10ca68b7936639c6a8">    9</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="../../dd/dfd/sdebug_8c.html#a25928a6c58bcdf10ca68b7936639c6a8">sdebug_func</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keywordtype">int</span> n, pid;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="../../d5/de1/forktest_8c.html#a249680925885256274fa9f02dd51cec4">printf</a>(1, <span class="stringliteral">&quot;start sdebug command\n&quot;</span>);</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordflow">for</span> (n = 0; n &lt; <a class="code" href="../../dd/dfd/sdebug_8c.html#a748e973809132905bcaac82634785970">PNUM</a>; n++)</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    {</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        pid = <a class="code" href="../../d5/d64/defs_8h.html#acd2e1ded4bb6fce4500438bf928330f4">fork</a>();</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordflow">if</span> (pid &lt; 0)</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        {</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        }</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keywordflow">if</span> (pid == 0)</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <span class="keywordtype">long</span> cnt = 1;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <span class="keywordtype">long</span> count = 0;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <span class="keywordtype">long</span> print_cnt = <a class="code" href="../../dd/dfd/sdebug_8c.html#a86afc3e9ef69ed4a661aeaed76012d2a">PRINT_CYCLE</a>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            <span class="keywordtype">int</span> get_weight = weightset(n + 1);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <span class="keywordtype">long</span> start = <a class="code" href="../../d8/ddb/user_8h.html#ab637d1dd2fecad1cb0c91a42597a8dbc">uptime</a>();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <span class="keywordflow">while</span> (count &lt;= <a class="code" href="../../dd/dfd/sdebug_8c.html#a5e28adda83c3146c364a9d2b7ff3b372">TOTAL_COUNTER</a>)</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                count++;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                print_cnt--;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                <span class="keywordflow">if</span> (print_cnt == 0)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                    <span class="keywordflow">if</span> (cnt)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                    {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                        <span class="keywordtype">long</span> <a class="code" href="../../d4/def/kalloc_8c.html#af4f810c521bcfd87215d3007005a8325">end</a> = <a class="code" href="../../d8/ddb/user_8h.html#ab637d1dd2fecad1cb0c91a42597a8dbc">uptime</a>();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                        <a class="code" href="../../d5/de1/forktest_8c.html#a249680925885256274fa9f02dd51cec4">printf</a>(1, <span class="stringliteral">&quot;PID: %d, WEIGHT: %d, &quot;</span>, <a class="code" href="../../d8/ddb/user_8h.html#a939cb25a305fe68aad9b365077f1a8c7">getpid</a>(), get_weight);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                        <a class="code" href="../../d5/de1/forktest_8c.html#a249680925885256274fa9f02dd51cec4">printf</a>(1, <span class="stringliteral">&quot;TIMES: %d ms\n&quot;</span>, (<a class="code" href="../../d4/def/kalloc_8c.html#af4f810c521bcfd87215d3007005a8325">end</a> - start) * 10);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                        cnt = 0;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                    }</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                    print_cnt = <a class="code" href="../../dd/dfd/sdebug_8c.html#a86afc3e9ef69ed4a661aeaed76012d2a">PRINT_CYCLE</a>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <a class="code" href="../../d5/de1/forktest_8c.html#a249680925885256274fa9f02dd51cec4">printf</a>(1, <span class="stringliteral">&quot;PID: %d terminated\n&quot;</span>, <a class="code" href="../../d8/ddb/user_8h.html#a939cb25a305fe68aad9b365077f1a8c7">getpid</a>());</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <a class="code" href="../../d5/d64/defs_8h.html#aaf98ef7cdde3a0dfb2e49919de3298b1">exit</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="comment">// for (cnt = 0; cnt &lt; TOTAL_COUNTER; cnt++)</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <span class="comment">// {</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <span class="comment">//     // tmp = uptime();</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="comment">//     // printf(1, &quot;\npid %d %d %d\n&quot;, getpid(), tmp, cnt);</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="comment">//     if (cnt == PRINT_CYCLE)</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="comment">//     {</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="comment">//         long end = uptime();</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="comment">//         printf(1, &quot;PID: %d, WEIGHT: %d, TIMES : %d ms\n&quot;, getpid(), get_weight, (end - start) * 10);</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="comment">//     }</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="comment">// }</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="comment">// if (cnt == TOTAL_COUNTER)</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="comment">// {</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="comment">//     printf(1, &quot;PID: %d terminated\n&quot;, getpid());</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <span class="comment">//     exit();</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <span class="comment">// }</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="../../dd/dfd/sdebug_8c.html#a748e973809132905bcaac82634785970">PNUM</a>; i++)</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    {</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">if</span> (pid != 0)</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <a class="code" href="../../d5/d64/defs_8h.html#af6f31822f7e737b4e414bdac1ccb59a4">wait</a>();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="../../d5/de1/forktest_8c.html#a249680925885256274fa9f02dd51cec4">printf</a>(1, <span class="stringliteral">&quot;end of sdebug command\n&quot;</span>);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="../../dd/dfd/sdebug_8c.html#a840291bc02cba5474a4cb46a9b9566fe">   75</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../dd/dfd/sdebug_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;{</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="comment">// sdebug_func();</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">int</span> i, cnt = 0;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">for</span> (i = 0; i != 3; i++)</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <a class="code" href="../../d5/d64/defs_8h.html#acd2e1ded4bb6fce4500438bf928330f4">fork</a>();</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        cnt++;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <a class="code" href="../../d5/de1/forktest_8c.html#a249680925885256274fa9f02dd51cec4">printf</a>(1, <span class="stringliteral">&quot;%d\n&quot;</span>, cnt);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <a class="code" href="../../d5/d64/defs_8h.html#aaf98ef7cdde3a0dfb2e49919de3298b1">exit</a>();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="asdebug_8c_html_a86afc3e9ef69ed4a661aeaed76012d2a"><div class="ttname"><a href="../../dd/dfd/sdebug_8c.html#a86afc3e9ef69ed4a661aeaed76012d2a">PRINT_CYCLE</a></div><div class="ttdeci">#define PRINT_CYCLE</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/dfd/sdebug_8c_source.html#l00006">sdebug.c:6</a></div></div>
+<div class="ttc" id="adefs_8h_html_acd2e1ded4bb6fce4500438bf928330f4"><div class="ttname"><a href="../../d5/d64/defs_8h.html#acd2e1ded4bb6fce4500438bf928330f4">fork</a></div><div class="ttdeci">int fork(void)</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/dda/proc_8c_source.html#l00184">proc.c:184</a></div></div>
+<div class="ttc" id="atypes_8h_html"><div class="ttname"><a href="../../d9/d49/types_8h.html">types.h</a></div></div>
+<div class="ttc" id="akalloc_8c_html_af4f810c521bcfd87215d3007005a8325"><div class="ttname"><a href="../../d4/def/kalloc_8c.html#af4f810c521bcfd87215d3007005a8325">end</a></div><div class="ttdeci">char end[]</div></div>
+<div class="ttc" id="auser_8h_html_a939cb25a305fe68aad9b365077f1a8c7"><div class="ttname"><a href="../../d8/ddb/user_8h.html#a939cb25a305fe68aad9b365077f1a8c7">getpid</a></div><div class="ttdeci">int getpid(void)</div></div>
+<div class="ttc" id="auser_8h_html_ab637d1dd2fecad1cb0c91a42597a8dbc"><div class="ttname"><a href="../../d8/ddb/user_8h.html#ab637d1dd2fecad1cb0c91a42597a8dbc">uptime</a></div><div class="ttdeci">int uptime(void)</div></div>
+<div class="ttc" id="asdebug_8c_html_a25928a6c58bcdf10ca68b7936639c6a8"><div class="ttname"><a href="../../dd/dfd/sdebug_8c.html#a25928a6c58bcdf10ca68b7936639c6a8">sdebug_func</a></div><div class="ttdeci">void sdebug_func(void)</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/dfd/sdebug_8c_source.html#l00009">sdebug.c:9</a></div></div>
+<div class="ttc" id="aforktest_8c_html_a249680925885256274fa9f02dd51cec4"><div class="ttname"><a href="../../d5/de1/forktest_8c.html#a249680925885256274fa9f02dd51cec4">printf</a></div><div class="ttdeci">void printf(int fd, const char *s,...)</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/de1/forktest_8c_source.html#l00011">forktest.c:11</a></div></div>
+<div class="ttc" id="adefs_8h_html_af6f31822f7e737b4e414bdac1ccb59a4"><div class="ttname"><a href="../../d5/d64/defs_8h.html#af6f31822f7e737b4e414bdac1ccb59a4">wait</a></div><div class="ttdeci">int wait(void)</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/dda/proc_8c_source.html#l00280">proc.c:280</a></div></div>
+<div class="ttc" id="asdebug_8c_html_a5e28adda83c3146c364a9d2b7ff3b372"><div class="ttname"><a href="../../dd/dfd/sdebug_8c.html#a5e28adda83c3146c364a9d2b7ff3b372">TOTAL_COUNTER</a></div><div class="ttdeci">#define TOTAL_COUNTER</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/dfd/sdebug_8c_source.html#l00007">sdebug.c:7</a></div></div>
+<div class="ttc" id="asdebug_8c_html_a748e973809132905bcaac82634785970"><div class="ttname"><a href="../../dd/dfd/sdebug_8c.html#a748e973809132905bcaac82634785970">PNUM</a></div><div class="ttdeci">#define PNUM</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/dfd/sdebug_8c_source.html#l00005">sdebug.c:5</a></div></div>
+<div class="ttc" id="astat_8h_html"><div class="ttname"><a href="../../d2/d1b/stat_8h.html">stat.h</a></div></div>
+<div class="ttc" id="asdebug_8c_html_a840291bc02cba5474a4cb46a9b9566fe"><div class="ttname"><a href="../../dd/dfd/sdebug_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main</a></div><div class="ttdeci">int main(void)</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/dfd/sdebug_8c_source.html#l00075">sdebug.c:75</a></div></div>
+<div class="ttc" id="adefs_8h_html_aaf98ef7cdde3a0dfb2e49919de3298b1"><div class="ttname"><a href="../../d5/d64/defs_8h.html#aaf98ef7cdde3a0dfb2e49919de3298b1">exit</a></div><div class="ttdeci">void exit(void)</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/dda/proc_8c_source.html#l00232">proc.c:232</a></div></div>
+<div class="ttc" id="auser_8h_html"><div class="ttname"><a href="../../d8/ddb/user_8h.html">user.h</a></div></div>
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+다음에 의해 생성됨 :  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.17
+</small></address>
+</body>
+</html>

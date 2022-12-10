@@ -1,0 +1,274 @@
+\hypertarget{kalloc_8c}{}\doxysection{kalloc.\+c 파일 참조}
+\label{kalloc_8c}\index{kalloc.c@{kalloc.c}}
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}defs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}param.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}memlayout.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mmu.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}spinlock.\+h\char`\"{}}\newline
+kalloc.\+c에 대한 include 의존 그래프
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{db/d16/kalloc_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{데이터 구조}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structrun}{run}}
+\end{DoxyCompactItemize}
+\doxysubsection*{함수}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{kalloc_8c_adeb1e621acdd949dffd5a054a43d1d89}{freerange}} (void $\ast$vstart, void $\ast$vend)
+\item 
+void \mbox{\hyperlink{kalloc_8c_a596c07f040e83fd8ea1857f36ffab4fb}{kinit1}} (void $\ast$vstart, void $\ast$vend)
+\item 
+void \mbox{\hyperlink{kalloc_8c_a8efe9094969255a41fbdaaee820bd478}{kinit2}} (void $\ast$vstart, void $\ast$vend)
+\item 
+void \mbox{\hyperlink{kalloc_8c_aced59ecf8411235f6dffc065236711a5}{kfree}} (char $\ast$v)
+\item 
+char $\ast$ \mbox{\hyperlink{kalloc_8c_a3af104ba40b66dcec8363ac5a70907ed}{kalloc}} (void)
+\end{DoxyCompactItemize}
+\doxysubsection*{변수}
+\begin{DoxyCompactItemize}
+\item 
+char \mbox{\hyperlink{kalloc_8c_af4f810c521bcfd87215d3007005a8325}{end}} \mbox{[}$\,$\mbox{]}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>struct \mbox{\hyperlink{structspinlock}{spinlock}} \mbox{\hyperlink{kalloc_8c_ab28e82cd5dda7d960095706a3ea20572}{lock}}\\
+\>int \mbox{\hyperlink{kalloc_8c_a37d4eb2590728645fea0e2da2b94e210}{use\_lock}}\\
+\>struct \mbox{\hyperlink{structrun}{run}} $\ast$ \mbox{\hyperlink{kalloc_8c_a25f1f0e27ad1cafebbde0b8b7455afb4}{freelist}}\\
+\} \mbox{\hyperlink{kalloc_8c_a1580ee3446c9d9d159d9b57ec68b66c5}{kmem}}\\
+
+\end{tabbing}\end{DoxyCompactItemize}
+
+
+\doxysubsection{함수 문서화}
+\mbox{\Hypertarget{kalloc_8c_adeb1e621acdd949dffd5a054a43d1d89}\label{kalloc_8c_adeb1e621acdd949dffd5a054a43d1d89}} 
+\index{kalloc.c@{kalloc.c}!freerange@{freerange}}
+\index{freerange@{freerange}!kalloc.c@{kalloc.c}}
+\doxysubsubsection{\texorpdfstring{freerange()}{freerange()}}
+{\footnotesize\ttfamily void freerange (\begin{DoxyParamCaption}\item[{void $\ast$}]{vstart,  }\item[{void $\ast$}]{vend }\end{DoxyParamCaption})}
+
+
+
+kalloc.\+c 파일의 47 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{48 \{}
+\DoxyCodeLine{49   \textcolor{keywordtype}{char} *p;}
+\DoxyCodeLine{50   p = (\textcolor{keywordtype}{char}*)\mbox{\hyperlink{mmu_8h_affa8cdfbd1c15dafc9f3af3a7b641f80}{PGROUNDUP}}((\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})vstart);}
+\DoxyCodeLine{51   \textcolor{keywordflow}{for}(; p + \mbox{\hyperlink{mmu_8h_a5f96cb6ae6670e023c407cc2f77e1704}{PGSIZE}} <= (\textcolor{keywordtype}{char}*)vend; p += \mbox{\hyperlink{mmu_8h_a5f96cb6ae6670e023c407cc2f77e1704}{PGSIZE}})}
+\DoxyCodeLine{52     \mbox{\hyperlink{kalloc_8c_aced59ecf8411235f6dffc065236711a5}{kfree}}(p);}
+\DoxyCodeLine{53 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d4/def/kalloc_8c_adeb1e621acdd949dffd5a054a43d1d89_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=224pt]{d4/def/kalloc_8c_adeb1e621acdd949dffd5a054a43d1d89_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{kalloc_8c_a3af104ba40b66dcec8363ac5a70907ed}\label{kalloc_8c_a3af104ba40b66dcec8363ac5a70907ed}} 
+\index{kalloc.c@{kalloc.c}!kalloc@{kalloc}}
+\index{kalloc@{kalloc}!kalloc.c@{kalloc.c}}
+\doxysubsubsection{\texorpdfstring{kalloc()}{kalloc()}}
+{\footnotesize\ttfamily char$\ast$ kalloc (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+kalloc.\+c 파일의 83 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{84 \{}
+\DoxyCodeLine{85   \textcolor{keyword}{struct }\mbox{\hyperlink{structrun}{run}} *\mbox{\hyperlink{console_8c_af10fa12dd785c91e29528fbdc50cf9af}{r}};}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87   \textcolor{keywordflow}{if}(\mbox{\hyperlink{kalloc_8c_a1580ee3446c9d9d159d9b57ec68b66c5}{kmem}}.use\_lock)}
+\DoxyCodeLine{88     \mbox{\hyperlink{defs_8h_afe4ef8638f1ecb962a6e67fb086ee3b8}{acquire}}(\&\mbox{\hyperlink{kalloc_8c_a1580ee3446c9d9d159d9b57ec68b66c5}{kmem}}.lock);}
+\DoxyCodeLine{89   \mbox{\hyperlink{console_8c_af10fa12dd785c91e29528fbdc50cf9af}{r}} = \mbox{\hyperlink{kalloc_8c_a1580ee3446c9d9d159d9b57ec68b66c5}{kmem}}.freelist;}
+\DoxyCodeLine{90   \textcolor{keywordflow}{if}(\mbox{\hyperlink{console_8c_af10fa12dd785c91e29528fbdc50cf9af}{r}})}
+\DoxyCodeLine{91     \mbox{\hyperlink{kalloc_8c_a1580ee3446c9d9d159d9b57ec68b66c5}{kmem}}.freelist = \mbox{\hyperlink{console_8c_af10fa12dd785c91e29528fbdc50cf9af}{r}}-\/>next;}
+\DoxyCodeLine{92   \textcolor{keywordflow}{if}(\mbox{\hyperlink{kalloc_8c_a1580ee3446c9d9d159d9b57ec68b66c5}{kmem}}.use\_lock)}
+\DoxyCodeLine{93     \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{kalloc_8c_a1580ee3446c9d9d159d9b57ec68b66c5}{kmem}}.lock);}
+\DoxyCodeLine{94   \textcolor{keywordflow}{return} (\textcolor{keywordtype}{char}*)\mbox{\hyperlink{console_8c_af10fa12dd785c91e29528fbdc50cf9af}{r}};}
+\DoxyCodeLine{95 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d4/def/kalloc_8c_a3af104ba40b66dcec8363ac5a70907ed_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d4/def/kalloc_8c_a3af104ba40b66dcec8363ac5a70907ed_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{kalloc_8c_aced59ecf8411235f6dffc065236711a5}\label{kalloc_8c_aced59ecf8411235f6dffc065236711a5}} 
+\index{kalloc.c@{kalloc.c}!kfree@{kfree}}
+\index{kfree@{kfree}!kalloc.c@{kalloc.c}}
+\doxysubsubsection{\texorpdfstring{kfree()}{kfree()}}
+{\footnotesize\ttfamily void kfree (\begin{DoxyParamCaption}\item[{char $\ast$}]{v }\end{DoxyParamCaption})}
+
+
+
+kalloc.\+c 파일의 60 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{61 \{}
+\DoxyCodeLine{62   \textcolor{keyword}{struct }\mbox{\hyperlink{structrun}{run}} *\mbox{\hyperlink{console_8c_af10fa12dd785c91e29528fbdc50cf9af}{r}};}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64   \textcolor{keywordflow}{if}((\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})v \% \mbox{\hyperlink{mmu_8h_a5f96cb6ae6670e023c407cc2f77e1704}{PGSIZE}} || v < \mbox{\hyperlink{kalloc_8c_af4f810c521bcfd87215d3007005a8325}{end}} || \mbox{\hyperlink{memlayout_8h_a5021188bc7da1304f27e913aee183407}{V2P}}(v) >= \mbox{\hyperlink{memlayout_8h_ad3c557a115f7d82d9ef849846779531c}{PHYSTOP}})}
+\DoxyCodeLine{65     \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"kfree"});}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67   \textcolor{comment}{// Fill with junk to catch dangling refs.}}
+\DoxyCodeLine{68   \mbox{\hyperlink{defs_8h_a9d55c9f035076ed1a90b6452770d0b62}{memset}}(v, 1, \mbox{\hyperlink{mmu_8h_a5f96cb6ae6670e023c407cc2f77e1704}{PGSIZE}});}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70   \textcolor{keywordflow}{if}(\mbox{\hyperlink{kalloc_8c_a1580ee3446c9d9d159d9b57ec68b66c5}{kmem}}.use\_lock)}
+\DoxyCodeLine{71     \mbox{\hyperlink{defs_8h_afe4ef8638f1ecb962a6e67fb086ee3b8}{acquire}}(\&\mbox{\hyperlink{kalloc_8c_a1580ee3446c9d9d159d9b57ec68b66c5}{kmem}}.lock);}
+\DoxyCodeLine{72   \mbox{\hyperlink{console_8c_af10fa12dd785c91e29528fbdc50cf9af}{r}} = (\textcolor{keyword}{struct }\mbox{\hyperlink{structrun}{run}}*)v;}
+\DoxyCodeLine{73   \mbox{\hyperlink{console_8c_af10fa12dd785c91e29528fbdc50cf9af}{r}}-\/>next = \mbox{\hyperlink{kalloc_8c_a1580ee3446c9d9d159d9b57ec68b66c5}{kmem}}.freelist;}
+\DoxyCodeLine{74   \mbox{\hyperlink{kalloc_8c_a1580ee3446c9d9d159d9b57ec68b66c5}{kmem}}.freelist = \mbox{\hyperlink{console_8c_af10fa12dd785c91e29528fbdc50cf9af}{r}};}
+\DoxyCodeLine{75   \textcolor{keywordflow}{if}(\mbox{\hyperlink{kalloc_8c_a1580ee3446c9d9d159d9b57ec68b66c5}{kmem}}.use\_lock)}
+\DoxyCodeLine{76     \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{kalloc_8c_a1580ee3446c9d9d159d9b57ec68b66c5}{kmem}}.lock);}
+\DoxyCodeLine{77 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d4/def/kalloc_8c_aced59ecf8411235f6dffc065236711a5_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d4/def/kalloc_8c_aced59ecf8411235f6dffc065236711a5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{kalloc_8c_a596c07f040e83fd8ea1857f36ffab4fb}\label{kalloc_8c_a596c07f040e83fd8ea1857f36ffab4fb}} 
+\index{kalloc.c@{kalloc.c}!kinit1@{kinit1}}
+\index{kinit1@{kinit1}!kalloc.c@{kalloc.c}}
+\doxysubsubsection{\texorpdfstring{kinit1()}{kinit1()}}
+{\footnotesize\ttfamily void kinit1 (\begin{DoxyParamCaption}\item[{void $\ast$}]{vstart,  }\item[{void $\ast$}]{vend }\end{DoxyParamCaption})}
+
+
+
+kalloc.\+c 파일의 32 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{33 \{}
+\DoxyCodeLine{34   \mbox{\hyperlink{defs_8h_ab56d728e6966819a0260c358d3ac3419}{initlock}}(\&\mbox{\hyperlink{kalloc_8c_a1580ee3446c9d9d159d9b57ec68b66c5}{kmem}}.lock, \textcolor{stringliteral}{"kmem"});}
+\DoxyCodeLine{35   \mbox{\hyperlink{kalloc_8c_a1580ee3446c9d9d159d9b57ec68b66c5}{kmem}}.use\_lock = 0;}
+\DoxyCodeLine{36   \mbox{\hyperlink{kalloc_8c_adeb1e621acdd949dffd5a054a43d1d89}{freerange}}(vstart, vend);}
+\DoxyCodeLine{37 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d4/def/kalloc_8c_a596c07f040e83fd8ea1857f36ffab4fb_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{kalloc_8c_a8efe9094969255a41fbdaaee820bd478}\label{kalloc_8c_a8efe9094969255a41fbdaaee820bd478}} 
+\index{kalloc.c@{kalloc.c}!kinit2@{kinit2}}
+\index{kinit2@{kinit2}!kalloc.c@{kalloc.c}}
+\doxysubsubsection{\texorpdfstring{kinit2()}{kinit2()}}
+{\footnotesize\ttfamily void kinit2 (\begin{DoxyParamCaption}\item[{void $\ast$}]{vstart,  }\item[{void $\ast$}]{vend }\end{DoxyParamCaption})}
+
+
+
+kalloc.\+c 파일의 40 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{41 \{}
+\DoxyCodeLine{42   \mbox{\hyperlink{kalloc_8c_adeb1e621acdd949dffd5a054a43d1d89}{freerange}}(vstart, vend);}
+\DoxyCodeLine{43   \mbox{\hyperlink{kalloc_8c_a1580ee3446c9d9d159d9b57ec68b66c5}{kmem}}.use\_lock = 1;}
+\DoxyCodeLine{44 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d4/def/kalloc_8c_a8efe9094969255a41fbdaaee820bd478_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{변수 문서화}
+\mbox{\Hypertarget{kalloc_8c_af4f810c521bcfd87215d3007005a8325}\label{kalloc_8c_af4f810c521bcfd87215d3007005a8325}} 
+\index{kalloc.c@{kalloc.c}!end@{end}}
+\index{end@{end}!kalloc.c@{kalloc.c}}
+\doxysubsubsection{\texorpdfstring{end}{end}}
+{\footnotesize\ttfamily char end\mbox{[}$\,$\mbox{]}}
+
+\mbox{\Hypertarget{kalloc_8c_a25f1f0e27ad1cafebbde0b8b7455afb4}\label{kalloc_8c_a25f1f0e27ad1cafebbde0b8b7455afb4}} 
+\index{kalloc.c@{kalloc.c}!freelist@{freelist}}
+\index{freelist@{freelist}!kalloc.c@{kalloc.c}}
+\doxysubsubsection{\texorpdfstring{freelist}{freelist}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structrun}{run}}$\ast$ freelist}
+
+
+
+kalloc.\+c 파일의 23 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{kalloc_8c_a1580ee3446c9d9d159d9b57ec68b66c5}\label{kalloc_8c_a1580ee3446c9d9d159d9b57ec68b66c5}} 
+\index{kalloc.c@{kalloc.c}!kmem@{kmem}}
+\index{kmem@{kmem}!kalloc.c@{kalloc.c}}
+\doxysubsubsection{\texorpdfstring{kmem}{kmem}}
+{\footnotesize\ttfamily struct \{ ... \}  kmem}
+
+\mbox{\Hypertarget{kalloc_8c_ab28e82cd5dda7d960095706a3ea20572}\label{kalloc_8c_ab28e82cd5dda7d960095706a3ea20572}} 
+\index{kalloc.c@{kalloc.c}!lock@{lock}}
+\index{lock@{lock}!kalloc.c@{kalloc.c}}
+\doxysubsubsection{\texorpdfstring{lock}{lock}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structspinlock}{spinlock}} lock}
+
+
+
+kalloc.\+c 파일의 21 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{kalloc_8c_a37d4eb2590728645fea0e2da2b94e210}\label{kalloc_8c_a37d4eb2590728645fea0e2da2b94e210}} 
+\index{kalloc.c@{kalloc.c}!use\_lock@{use\_lock}}
+\index{use\_lock@{use\_lock}!kalloc.c@{kalloc.c}}
+\doxysubsubsection{\texorpdfstring{use\_lock}{use\_lock}}
+{\footnotesize\ttfamily int use\+\_\+lock}
+
+
+
+kalloc.\+c 파일의 22 번째 라인에서 정의되었습니다.
+

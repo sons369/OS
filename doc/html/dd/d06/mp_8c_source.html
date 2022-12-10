@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: mp.c 소스 파일</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">My Project
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 다음에 의해 생성됨 :  Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'검색');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','검색');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">mp.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="../../dd/d06/mp_8c.html">이 파일의 문서화 페이지로 가기</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Multiprocessor support</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Search memory for MP description structures.</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// http://developer.intel.com/design/pentium/datashts/24201606.pdf</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d9/d49/types_8h.html">types.h</a>&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d5/d64/defs_8h.html">defs.h</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d5/d33/param_8h.html">param.h</a>&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d8/da9/memlayout_8h.html">memlayout.h</a>&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../dc/d0c/mp_8h.html">mp.h</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d5/d39/x86_8h.html">x86.h</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d2/df1/mmu_8h.html">mmu.h</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../df/d03/proc_8h.html">proc.h</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="../../df/d03/proc_8h.html#a6d2633e73724907b582dfe6938ed7bb9">   14</a></span>&#160;<span class="keyword">struct </span><a class="code" href="../../db/d62/structcpu.html">cpu</a> <a class="code" href="../../dd/d06/mp_8c.html#a6d2633e73724907b582dfe6938ed7bb9">cpus</a>[<a class="code" href="../../d5/d33/param_8h.html#a2c4561c4c17cde39101c4e7a40d4492a">NCPU</a>];</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="../../df/d03/proc_8h.html#a6201a0661c3d5b88df5f63529298eb48">   15</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../dd/d06/mp_8c.html#a6201a0661c3d5b88df5f63529298eb48">ncpu</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="../../dd/d06/mp_8c.html#a619ae379337e3cb2397ee0b6b4fd8d6b">   16</a></span>&#160;<a class="code" href="../../d9/d49/types_8h.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a> <a class="code" href="../../dd/d06/mp_8c.html#a619ae379337e3cb2397ee0b6b4fd8d6b">ioapicid</a>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">static</span> <a class="code" href="../../d9/d49/types_8h.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a></div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="../../dd/d06/mp_8c.html#a6ba3e7e061b98d697ee0814d64962b99">   19</a></span>&#160;<a class="code" href="../../dd/d06/mp_8c.html#a6ba3e7e061b98d697ee0814d64962b99">sum</a>(<a class="code" href="../../d9/d49/types_8h.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a> *addr, <span class="keywordtype">int</span> len)</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <span class="keywordtype">int</span> i, <a class="code" href="../../dd/d06/mp_8c.html#a6ba3e7e061b98d697ee0814d64962b99">sum</a>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <a class="code" href="../../dd/d06/mp_8c.html#a6ba3e7e061b98d697ee0814d64962b99">sum</a> = 0;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keywordflow">for</span>(i=0; i&lt;len; i++)</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="../../dd/d06/mp_8c.html#a6ba3e7e061b98d697ee0814d64962b99">sum</a> += addr[i];</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="../../dd/d06/mp_8c.html#a6ba3e7e061b98d697ee0814d64962b99">sum</a>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;}</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// Look for an MP structure in the len bytes at addr.</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">static</span> <span class="keyword">struct </span><a class="code" href="../../d8/d11/structmp.html">mp</a>*</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="../../dd/d06/mp_8c.html#ac738110b935fbf3556b6b1d0e81820dd">   31</a></span>&#160;<a class="code" href="../../dd/d06/mp_8c.html#ac738110b935fbf3556b6b1d0e81820dd">mpsearch1</a>(<a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> a, <span class="keywordtype">int</span> len)</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a> *<a class="code" href="../../d0/d56/console_8c.html#ab56fa7c992b725d84916b987c3d532ea">e</a>, *p, *addr;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  addr = <a class="code" href="../../d8/da9/memlayout_8h.html#aefd5e8b62c49bba2cf20309c7dd174e2">P2V</a>(a);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <a class="code" href="../../d0/d56/console_8c.html#ab56fa7c992b725d84916b987c3d532ea">e</a> = addr+len;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="keywordflow">for</span>(p = addr; p &lt; <a class="code" href="../../d0/d56/console_8c.html#ab56fa7c992b725d84916b987c3d532ea">e</a>; p += <span class="keyword">sizeof</span>(<span class="keyword">struct </span><a class="code" href="../../d8/d11/structmp.html">mp</a>))</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    if(<a class="code" href="../../d5/d64/defs_8h.html#acdb4d3f48d2fb0a834722b1107d2b284">memcmp</a>(p, &quot;_MP_&quot;, 4) == 0 &amp;&amp; <a class="code" href="../../dd/d06/mp_8c.html#a6ba3e7e061b98d697ee0814d64962b99">sum</a>(p, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> <a class="code" href="../../d8/d11/structmp.html">mp</a>)) == 0)</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;      <span class="keywordflow">return</span> (<span class="keyword">struct</span> <a class="code" href="../../d8/d11/structmp.html">mp</a>*)p;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">// Search for the MP Floating Pointer Structure, which according to the</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">// spec is in one of the following three locations:</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">// 1) in the first KB of the EBDA;</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">// 2) in the last KB of system base memory;</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">// 3) in the BIOS ROM between 0xE0000 and 0xFFFFF.</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">static</span> <span class="keyword">struct </span><a class="code" href="../../d8/d11/structmp.html">mp</a>*</div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="../../dd/d06/mp_8c.html#a12fc61f3ee74bea92d8e3afbb38f19c4">   49</a></span>&#160;<a class="code" href="../../dd/d06/mp_8c.html#a12fc61f3ee74bea92d8e3afbb38f19c4">mpsearch</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;{</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a> *bda;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> p;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d8/d11/structmp.html">mp</a> *<a class="code" href="../../d8/d11/structmp.html">mp</a>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  bda = (<a class="code" href="../../d9/d49/types_8h.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a> *) <a class="code" href="../../d8/da9/memlayout_8h.html#aefd5e8b62c49bba2cf20309c7dd174e2">P2V</a>(0x400);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keywordflow">if</span>((p = ((bda[0x0F]&lt;&lt;8)| bda[0x0E]) &lt;&lt; 4)){</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">if</span>((<a class="code" href="../../d8/d11/structmp.html">mp</a> = <a class="code" href="../../dd/d06/mp_8c.html#ac738110b935fbf3556b6b1d0e81820dd">mpsearch1</a>(p, 1024)))</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="../../d8/d11/structmp.html">mp</a>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    p = ((bda[0x14]&lt;&lt;8)|bda[0x13])*1024;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">if</span>((<a class="code" href="../../d8/d11/structmp.html">mp</a> = <a class="code" href="../../dd/d06/mp_8c.html#ac738110b935fbf3556b6b1d0e81820dd">mpsearch1</a>(p-1024, 1024)))</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="../../d8/d11/structmp.html">mp</a>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="../../dd/d06/mp_8c.html#ac738110b935fbf3556b6b1d0e81820dd">mpsearch1</a>(0xF0000, 0x10000);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">// Search for an MP configuration table.  For now,</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">// don&#39;t accept the default configurations (physaddr == 0).</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">// Check for correct signature, calculate the checksum and,</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">// if correct, check the version.</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">// To do: check extended table checksum.</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword">static</span> <span class="keyword">struct </span><a class="code" href="../../d8/d01/structmpconf.html">mpconf</a>*</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="../../dd/d06/mp_8c.html#afda992ed57ce99565c232878c4257875">   73</a></span>&#160;<a class="code" href="../../dd/d06/mp_8c.html#afda992ed57ce99565c232878c4257875">mpconfig</a>(<span class="keyword">struct</span> <a class="code" href="../../d8/d11/structmp.html">mp</a> **pmp)</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;{</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d8/d01/structmpconf.html">mpconf</a> *conf;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d8/d11/structmp.html">mp</a> *<a class="code" href="../../d8/d11/structmp.html">mp</a>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="keywordflow">if</span>((<a class="code" href="../../d8/d11/structmp.html">mp</a> = <a class="code" href="../../dd/d06/mp_8c.html#a12fc61f3ee74bea92d8e3afbb38f19c4">mpsearch</a>()) == 0 || <a class="code" href="../../d8/d11/structmp.html">mp</a>-&gt;<a class="code" href="../../d8/d11/structmp.html#a3333bff25a42470efb69b3b01f08d6ce">physaddr</a> == 0)</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  conf = (<span class="keyword">struct </span><a class="code" href="../../d8/d01/structmpconf.html">mpconf</a>*) <a class="code" href="../../d8/da9/memlayout_8h.html#aefd5e8b62c49bba2cf20309c7dd174e2">P2V</a>((<a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a>) <a class="code" href="../../d8/d11/structmp.html">mp</a>-&gt;<a class="code" href="../../d8/d11/structmp.html#a3333bff25a42470efb69b3b01f08d6ce">physaddr</a>);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="../../d5/d64/defs_8h.html#acdb4d3f48d2fb0a834722b1107d2b284">memcmp</a>(conf, <span class="stringliteral">&quot;PCMP&quot;</span>, 4) != 0)</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="keywordflow">if</span>(conf-&gt;<a class="code" href="../../d8/d01/structmpconf.html#ade1055584605c76f4e1134d6631e0afa">version</a> != 1 &amp;&amp; conf-&gt;<a class="code" href="../../d8/d01/structmpconf.html#ade1055584605c76f4e1134d6631e0afa">version</a> != 4)</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="../../dd/d06/mp_8c.html#a6ba3e7e061b98d697ee0814d64962b99">sum</a>((<a class="code" href="../../d9/d49/types_8h.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a>*)conf, conf-&gt;<a class="code" href="../../d8/d01/structmpconf.html#a6b7583180c78b6a2e490d6c72779d8dd">length</a>) != 0)</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  *pmp = <a class="code" href="../../d8/d11/structmp.html">mp</a>;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="keywordflow">return</span> conf;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;}</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="../../dd/d06/mp_8c.html#a2fd0b66a17c5347541448ef906b7b2a2">   92</a></span>&#160;<a class="code" href="../../dd/d06/mp_8c.html#a2fd0b66a17c5347541448ef906b7b2a2">mpinit</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;{</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a> *p, *<a class="code" href="../../d0/d56/console_8c.html#ab56fa7c992b725d84916b987c3d532ea">e</a>;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="keywordtype">int</span> <a class="code" href="../../d5/d64/defs_8h.html#a46b52bd30030451d1b65291b77ba05d5">ismp</a>;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d8/d11/structmp.html">mp</a> *<a class="code" href="../../d8/d11/structmp.html">mp</a>;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d8/d01/structmpconf.html">mpconf</a> *conf;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d4/d22/structmpproc.html">mpproc</a> *<a class="code" href="../../d3/dda/proc_8c.html#a5780b0050ca664736fd1cc9696624ce5">proc</a>;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d6/d9b/structmpioapic.html">mpioapic</a> *<a class="code" href="../../dd/d61/ioapic_8c.html#a61d7da24dba0ce35323deb8bb6cf6f91">ioapic</a>;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="keywordflow">if</span>((conf = <a class="code" href="../../dd/d06/mp_8c.html#afda992ed57ce99565c232878c4257875">mpconfig</a>(&amp;<a class="code" href="../../d8/d11/structmp.html">mp</a>)) == 0)</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <a class="code" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a>(<span class="stringliteral">&quot;Expect to run on an SMP&quot;</span>);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#a46b52bd30030451d1b65291b77ba05d5">ismp</a> = 1;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <a class="code" href="../../d5/d64/defs_8h.html#a4029f3e2439d5912f93543b8addd10ec">lapic</a> = (<a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a>*)conf-&gt;<a class="code" href="../../d8/d01/structmpconf.html#a087fac7e9dc4ca1fdfe142b3adf96c99">lapicaddr</a>;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <span class="keywordflow">for</span>(p=(<a class="code" href="../../d9/d49/types_8h.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a>*)(conf+1), <a class="code" href="../../d0/d56/console_8c.html#ab56fa7c992b725d84916b987c3d532ea">e</a>=(<a class="code" href="../../d9/d49/types_8h.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a>*)conf+conf-&gt;<a class="code" href="../../d8/d01/structmpconf.html#a6b7583180c78b6a2e490d6c72779d8dd">length</a>; p&lt;<a class="code" href="../../d0/d56/console_8c.html#ab56fa7c992b725d84916b987c3d532ea">e</a>; ){</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">switch</span>(*p){</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="../../dc/d0c/mp_8h.html#a0dd89a9c5a25d2d9f9a7fe57beb69597">MPPROC</a>:</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;      <a class="code" href="../../de/d48/structproc.html">proc</a> = (<span class="keyword">struct </span><a class="code" href="../../d4/d22/structmpproc.html">mpproc</a>*)p;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;      <span class="keywordflow">if</span>(<a class="code" href="../../dd/d06/mp_8c.html#a6201a0661c3d5b88df5f63529298eb48">ncpu</a> &lt; <a class="code" href="../../d5/d33/param_8h.html#a2c4561c4c17cde39101c4e7a40d4492a">NCPU</a>) {</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <a class="code" href="../../dd/d06/mp_8c.html#a6d2633e73724907b582dfe6938ed7bb9">cpus</a>[<a class="code" href="../../dd/d06/mp_8c.html#a6201a0661c3d5b88df5f63529298eb48">ncpu</a>].<a class="code" href="../../db/d62/structcpu.html#ad08a3478ec15fc8bec1d9b6b5a0431db">apicid</a> = <a class="code" href="../../de/d48/structproc.html">proc</a>-&gt;apicid;  <span class="comment">// apicid may differ from ncpu</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <a class="code" href="../../dd/d06/mp_8c.html#a6201a0661c3d5b88df5f63529298eb48">ncpu</a>++;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;      }</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;      p += <span class="keyword">sizeof</span>(<span class="keyword">struct </span><a class="code" href="../../d4/d22/structmpproc.html">mpproc</a>);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;      <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="../../dc/d0c/mp_8h.html#a6d6b1d8666df6dc57974e608dda01edc">MPIOAPIC</a>:</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;      <a class="code" href="../../d3/d9b/structioapic.html">ioapic</a> = (<span class="keyword">struct </span><a class="code" href="../../d6/d9b/structmpioapic.html">mpioapic</a>*)p;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;      <a class="code" href="../../dd/d06/mp_8c.html#a619ae379337e3cb2397ee0b6b4fd8d6b">ioapicid</a> = <a class="code" href="../../d3/d9b/structioapic.html">ioapic</a>-&gt;apicno;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;      p += <span class="keyword">sizeof</span>(<span class="keyword">struct </span><a class="code" href="../../d6/d9b/structmpioapic.html">mpioapic</a>);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;      <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="../../dc/d0c/mp_8h.html#a10d8190eb1ea465310862131da282a09">MPBUS</a>:</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="../../dc/d0c/mp_8h.html#a613c0cd2bca1e5a30eb1ffc7857d4d61">MPIOINTR</a>:</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="../../dc/d0c/mp_8h.html#a993af198877b836f019baaa9f12c7c30">MPLINTR</a>:</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;      p += 8;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;      <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;      <a class="code" href="../../d5/d64/defs_8h.html#a46b52bd30030451d1b65291b77ba05d5">ismp</a> = 0;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;      <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    }</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  }</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  <span class="keywordflow">if</span>(!<a class="code" href="../../d5/d64/defs_8h.html#a46b52bd30030451d1b65291b77ba05d5">ismp</a>)</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <a class="code" href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a>(<span class="stringliteral">&quot;Didn&#39;t find a suitable machine&quot;</span>);</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="../../d8/d11/structmp.html">mp</a>-&gt;<a class="code" href="../../d8/d11/structmp.html#ae2157bc407a7423c57bdb078b70cd6e5">imcrp</a>){</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="comment">// Bochs doesn&#39;t support IMCR, so this doesn&#39;t run on Bochs.</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="comment">// But it would on real hardware.</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <a class="code" href="../../d5/d39/x86_8h.html#ae83f752beecce9c8f6f8711ff936377f">outb</a>(0x22, 0x70);   <span class="comment">// Select IMCR</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <a class="code" href="../../d5/d39/x86_8h.html#ae83f752beecce9c8f6f8711ff936377f">outb</a>(0x23, <a class="code" href="../../d5/d39/x86_8h.html#a2866d9720d8f4b0e23530f79171dfba9">inb</a>(0x23) | 1);  <span class="comment">// Mask external interrupts.</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  }</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;}</div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="amp_8c_html_ac738110b935fbf3556b6b1d0e81820dd"><div class="ttname"><a href="../../dd/d06/mp_8c.html#ac738110b935fbf3556b6b1d0e81820dd">mpsearch1</a></div><div class="ttdeci">static struct mp * mpsearch1(uint a, int len)</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d06/mp_8c_source.html#l00031">mp.c:31</a></div></div>
+<div class="ttc" id="aconsole_8c_html_ab56fa7c992b725d84916b987c3d532ea"><div class="ttname"><a href="../../d0/d56/console_8c.html#ab56fa7c992b725d84916b987c3d532ea">e</a></div><div class="ttdeci">uint e</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/d56/console_8c_source.html#l00186">console.c:186</a></div></div>
+<div class="ttc" id="astructcpu_html_ad08a3478ec15fc8bec1d9b6b5a0431db"><div class="ttname"><a href="../../db/d62/structcpu.html#ad08a3478ec15fc8bec1d9b6b5a0431db">cpu::apicid</a></div><div class="ttdeci">uchar apicid</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d03/proc_8h_source.html#l00004">proc.h:4</a></div></div>
+<div class="ttc" id="amp_8h_html"><div class="ttname"><a href="../../dc/d0c/mp_8h.html">mp.h</a></div></div>
+<div class="ttc" id="aioapic_8c_html_a61d7da24dba0ce35323deb8bb6cf6f91"><div class="ttname"><a href="../../dd/d61/ioapic_8c.html#a61d7da24dba0ce35323deb8bb6cf6f91">ioapic</a></div><div class="ttdeci">volatile struct ioapic * ioapic</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d61/ioapic_8c_source.html#l00025">ioapic.c:25</a></div></div>
+<div class="ttc" id="amp_8c_html_a6201a0661c3d5b88df5f63529298eb48"><div class="ttname"><a href="../../dd/d06/mp_8c.html#a6201a0661c3d5b88df5f63529298eb48">ncpu</a></div><div class="ttdeci">int ncpu</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d06/mp_8c_source.html#l00015">mp.c:15</a></div></div>
+<div class="ttc" id="atypes_8h_html"><div class="ttname"><a href="../../d9/d49/types_8h.html">types.h</a></div></div>
+<div class="ttc" id="astructmpioapic_html"><div class="ttname"><a href="../../d6/d9b/structmpioapic.html">mpioapic</a></div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d0c/mp_8h_source.html#l00040">mp.h:40</a></div></div>
+<div class="ttc" id="adefs_8h_html_a46b52bd30030451d1b65291b77ba05d5"><div class="ttname"><a href="../../d5/d64/defs_8h.html#a46b52bd30030451d1b65291b77ba05d5">ismp</a></div><div class="ttdeci">int ismp</div></div>
+<div class="ttc" id="ammu_8h_html"><div class="ttname"><a href="../../d2/df1/mmu_8h.html">mmu.h</a></div></div>
+<div class="ttc" id="aproc_8c_html_a5780b0050ca664736fd1cc9696624ce5"><div class="ttname"><a href="../../d3/dda/proc_8c.html#a5780b0050ca664736fd1cc9696624ce5">proc</a></div><div class="ttdeci">struct proc proc[NPROC]</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/dda/proc_8c_source.html#l00013">proc.c:13</a></div></div>
+<div class="ttc" id="amp_8c_html_a6ba3e7e061b98d697ee0814d64962b99"><div class="ttname"><a href="../../dd/d06/mp_8c.html#a6ba3e7e061b98d697ee0814d64962b99">sum</a></div><div class="ttdeci">static uchar sum(uchar *addr, int len)</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d06/mp_8c_source.html#l00019">mp.c:19</a></div></div>
+<div class="ttc" id="amp_8h_html_a993af198877b836f019baaa9f12c7c30"><div class="ttname"><a href="../../dc/d0c/mp_8h.html#a993af198877b836f019baaa9f12c7c30">MPLINTR</a></div><div class="ttdeci">#define MPLINTR</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d0c/mp_8h_source.html#l00053">mp.h:53</a></div></div>
+<div class="ttc" id="amp_8c_html_a619ae379337e3cb2397ee0b6b4fd8d6b"><div class="ttname"><a href="../../dd/d06/mp_8c.html#a619ae379337e3cb2397ee0b6b4fd8d6b">ioapicid</a></div><div class="ttdeci">uchar ioapicid</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d06/mp_8c_source.html#l00016">mp.c:16</a></div></div>
+<div class="ttc" id="astructmp_html_ae2157bc407a7423c57bdb078b70cd6e5"><div class="ttname"><a href="../../d8/d11/structmp.html#ae2157bc407a7423c57bdb078b70cd6e5">mp::imcrp</a></div><div class="ttdeci">uchar imcrp</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d0c/mp_8h_source.html#l00010">mp.h:10</a></div></div>
+<div class="ttc" id="ax86_8h_html_a2866d9720d8f4b0e23530f79171dfba9"><div class="ttname"><a href="../../d5/d39/x86_8h.html#a2866d9720d8f4b0e23530f79171dfba9">inb</a></div><div class="ttdeci">static uchar inb(ushort port)</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d39/x86_8h_source.html#l00004">x86.h:4</a></div></div>
+<div class="ttc" id="astructmpconf_html_a6b7583180c78b6a2e490d6c72779d8dd"><div class="ttname"><a href="../../d8/d01/structmpconf.html#a6b7583180c78b6a2e490d6c72779d8dd">mpconf::length</a></div><div class="ttdeci">ushort length</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d0c/mp_8h_source.html#l00016">mp.h:16</a></div></div>
+<div class="ttc" id="astructmpconf_html_ade1055584605c76f4e1134d6631e0afa"><div class="ttname"><a href="../../d8/d01/structmpconf.html#ade1055584605c76f4e1134d6631e0afa">mpconf::version</a></div><div class="ttdeci">uchar version</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d0c/mp_8h_source.html#l00017">mp.h:17</a></div></div>
+<div class="ttc" id="astructmpconf_html_a087fac7e9dc4ca1fdfe142b3adf96c99"><div class="ttname"><a href="../../d8/d01/structmpconf.html#a087fac7e9dc4ca1fdfe142b3adf96c99">mpconf::lapicaddr</a></div><div class="ttdeci">uint * lapicaddr</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d0c/mp_8h_source.html#l00023">mp.h:23</a></div></div>
+<div class="ttc" id="atypes_8h_html_a91ad9478d81a7aaf2593e8d9c3d06a14"><div class="ttname"><a href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a></div><div class="ttdeci">unsigned int uint</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d49/types_8h_source.html#l00001">types.h:1</a></div></div>
+<div class="ttc" id="adefs_8h_html_a4029f3e2439d5912f93543b8addd10ec"><div class="ttname"><a href="../../d5/d64/defs_8h.html#a4029f3e2439d5912f93543b8addd10ec">lapic</a></div><div class="ttdeci">volatile uint * lapic</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/df6/lapic_8c_source.html#l00044">lapic.c:44</a></div></div>
+<div class="ttc" id="astructmp_html_a3333bff25a42470efb69b3b01f08d6ce"><div class="ttname"><a href="../../d8/d11/structmp.html#a3333bff25a42470efb69b3b01f08d6ce">mp::physaddr</a></div><div class="ttdeci">void * physaddr</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d0c/mp_8h_source.html#l00005">mp.h:5</a></div></div>
+<div class="ttc" id="amp_8c_html_a2fd0b66a17c5347541448ef906b7b2a2"><div class="ttname"><a href="../../dd/d06/mp_8c.html#a2fd0b66a17c5347541448ef906b7b2a2">mpinit</a></div><div class="ttdeci">void mpinit(void)</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d06/mp_8c_source.html#l00092">mp.c:92</a></div></div>
+<div class="ttc" id="aparam_8h_html"><div class="ttname"><a href="../../d5/d33/param_8h.html">param.h</a></div></div>
+<div class="ttc" id="adefs_8h_html_acdb4d3f48d2fb0a834722b1107d2b284"><div class="ttname"><a href="../../d5/d64/defs_8h.html#acdb4d3f48d2fb0a834722b1107d2b284">memcmp</a></div><div class="ttdeci">int memcmp(const void *, const void *, uint)</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/db0/string_8c_source.html#l00016">string.c:16</a></div></div>
+<div class="ttc" id="amp_8c_html_afda992ed57ce99565c232878c4257875"><div class="ttname"><a href="../../dd/d06/mp_8c.html#afda992ed57ce99565c232878c4257875">mpconfig</a></div><div class="ttdeci">static struct mpconf * mpconfig(struct mp **pmp)</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d06/mp_8c_source.html#l00073">mp.c:73</a></div></div>
+<div class="ttc" id="ax86_8h_html"><div class="ttname"><a href="../../d5/d39/x86_8h.html">x86.h</a></div></div>
+<div class="ttc" id="amp_8h_html_a0dd89a9c5a25d2d9f9a7fe57beb69597"><div class="ttname"><a href="../../dc/d0c/mp_8h.html#a0dd89a9c5a25d2d9f9a7fe57beb69597">MPPROC</a></div><div class="ttdeci">#define MPPROC</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d0c/mp_8h_source.html#l00049">mp.h:49</a></div></div>
+<div class="ttc" id="amemlayout_8h_html_aefd5e8b62c49bba2cf20309c7dd174e2"><div class="ttname"><a href="../../d8/da9/memlayout_8h.html#aefd5e8b62c49bba2cf20309c7dd174e2">P2V</a></div><div class="ttdeci">#define P2V(a)</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/da9/memlayout_8h_source.html#l00012">memlayout.h:12</a></div></div>
+<div class="ttc" id="astructmpconf_html"><div class="ttname"><a href="../../d8/d01/structmpconf.html">mpconf</a></div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d0c/mp_8h_source.html#l00014">mp.h:14</a></div></div>
+<div class="ttc" id="astructioapic_html"><div class="ttname"><a href="../../d3/d9b/structioapic.html">ioapic</a></div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d61/ioapic_8c_source.html#l00028">ioapic.c:28</a></div></div>
+<div class="ttc" id="aproc_8h_html"><div class="ttname"><a href="../../df/d03/proc_8h.html">proc.h</a></div></div>
+<div class="ttc" id="atypes_8h_html_a65f85814a8290f9797005d3b28e7e5fc"><div class="ttname"><a href="../../d9/d49/types_8h.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a></div><div class="ttdeci">unsigned char uchar</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d49/types_8h_source.html#l00003">types.h:3</a></div></div>
+<div class="ttc" id="aconsole_8c_html_a95c0aca5d6d7487933984f08b189917a"><div class="ttname"><a href="../../d0/d56/console_8c.html#a95c0aca5d6d7487933984f08b189917a">panic</a></div><div class="ttdeci">void panic(char *s)</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/d56/console_8c_source.html#l00107">console.c:107</a></div></div>
+<div class="ttc" id="astructmpproc_html"><div class="ttname"><a href="../../d4/d22/structmpproc.html">mpproc</a></div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d0c/mp_8h_source.html#l00029">mp.h:29</a></div></div>
+<div class="ttc" id="amp_8h_html_a613c0cd2bca1e5a30eb1ffc7857d4d61"><div class="ttname"><a href="../../dc/d0c/mp_8h.html#a613c0cd2bca1e5a30eb1ffc7857d4d61">MPIOINTR</a></div><div class="ttdeci">#define MPIOINTR</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d0c/mp_8h_source.html#l00052">mp.h:52</a></div></div>
+<div class="ttc" id="astructproc_html"><div class="ttname"><a href="../../de/d48/structproc.html">proc</a></div><div class="ttdef"><b>Definition:</b> <a href="../../df/d03/proc_8h_source.html#l00048">proc.h:48</a></div></div>
+<div class="ttc" id="ax86_8h_html_ae83f752beecce9c8f6f8711ff936377f"><div class="ttname"><a href="../../d5/d39/x86_8h.html#ae83f752beecce9c8f6f8711ff936377f">outb</a></div><div class="ttdeci">static void outb(ushort port, uchar data)</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d39/x86_8h_source.html#l00022">x86.h:22</a></div></div>
+<div class="ttc" id="amp_8c_html_a12fc61f3ee74bea92d8e3afbb38f19c4"><div class="ttname"><a href="../../dd/d06/mp_8c.html#a12fc61f3ee74bea92d8e3afbb38f19c4">mpsearch</a></div><div class="ttdeci">static struct mp * mpsearch(void)</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d06/mp_8c_source.html#l00049">mp.c:49</a></div></div>
+<div class="ttc" id="adefs_8h_html"><div class="ttname"><a href="../../d5/d64/defs_8h.html">defs.h</a></div></div>
+<div class="ttc" id="astructmp_html"><div class="ttname"><a href="../../d8/d11/structmp.html">mp</a></div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d0c/mp_8h_source.html#l00003">mp.h:3</a></div></div>
+<div class="ttc" id="amp_8h_html_a6d6b1d8666df6dc57974e608dda01edc"><div class="ttname"><a href="../../dc/d0c/mp_8h.html#a6d6b1d8666df6dc57974e608dda01edc">MPIOAPIC</a></div><div class="ttdeci">#define MPIOAPIC</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d0c/mp_8h_source.html#l00051">mp.h:51</a></div></div>
+<div class="ttc" id="astructcpu_html"><div class="ttname"><a href="../../db/d62/structcpu.html">cpu</a></div><div class="ttdef"><b>Definition:</b> <a href="../../df/d03/proc_8h_source.html#l00002">proc.h:2</a></div></div>
+<div class="ttc" id="amp_8c_html_a6d2633e73724907b582dfe6938ed7bb9"><div class="ttname"><a href="../../dd/d06/mp_8c.html#a6d2633e73724907b582dfe6938ed7bb9">cpus</a></div><div class="ttdeci">struct cpu cpus[NCPU]</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d06/mp_8c_source.html#l00014">mp.c:14</a></div></div>
+<div class="ttc" id="aparam_8h_html_a2c4561c4c17cde39101c4e7a40d4492a"><div class="ttname"><a href="../../d5/d33/param_8h.html#a2c4561c4c17cde39101c4e7a40d4492a">NCPU</a></div><div class="ttdeci">#define NCPU</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d33/param_8h_source.html#l00003">param.h:3</a></div></div>
+<div class="ttc" id="amp_8h_html_a10d8190eb1ea465310862131da282a09"><div class="ttname"><a href="../../dc/d0c/mp_8h.html#a10d8190eb1ea465310862131da282a09">MPBUS</a></div><div class="ttdeci">#define MPBUS</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d0c/mp_8h_source.html#l00050">mp.h:50</a></div></div>
+<div class="ttc" id="amemlayout_8h_html"><div class="ttname"><a href="../../d8/da9/memlayout_8h.html">memlayout.h</a></div></div>
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+다음에 의해 생성됨 :  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.17
+</small></address>
+</body>
+</html>

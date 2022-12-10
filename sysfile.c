@@ -471,3 +471,39 @@ int sys_pipe(void)
   fd[1] = fd1;
   return 0;
 }
+
+int sys_printinfo(void)
+{
+  struct file *f;
+  char *fname;
+  struct stat fs;
+
+  if (argfd(0, 0, &f) < 0 || argstr(1, &fname) < 0)
+    return -1;
+  if (filestat(f, &fs) != -1)
+  {
+    /*파일 정보를 fstat로 받아와서 출력해주기*/
+    cprintf("FILE NAME: %s\nINODE NUM: %d\n", fname, fs.ino);
+    if (fs.type == T_FILE)
+      cprintf("FILE TYPE: %s\n", "FILE");
+    else if (fs.type == T_CS)
+      cprintf("FILE TYPE: %s\n", "CS");
+    cprintf("FILE SIZE: %d Bytes\n", fs.size);
+    cprintf("DIRECT BLOCK INFO:\n");
+    if (fs.type == T_FILE)
+    {
+      for (int i = 0; i < 12 && fs.addr[i]; i++)
+      {
+        cprintf("[%d] %d\n", i, fs.addr[i]);
+      }
+    }
+    else if (fs.type == T_CS)
+    {
+      for (int i = 0; i < 12 && fs.cs[i].len; i++)
+      {
+        cprintf("[%d] %d (num: %d, length: %d)\n", i, fs.addr[i], fs.cs[i].addr, fs.cs[i].len);
+      }
+    }
+  }
+  return 0;
+}

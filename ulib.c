@@ -102,36 +102,36 @@ memmove(void *vdst, const void *vsrc, int n)
   return vdst;
 }
 
-void printinfo(int fd, char *fname)
-{
-  struct stat fs;
-  int tmp;
+// void printinfo(int fd, char *fname)
+// {
+//   struct stat fs;
+//   int tmp;
 
-  if ((tmp = fstat(fd, &fs)) != 0)
-  {
-    printf(2, "fstat error!\n");
-    exit();
-  }
-  /*파일 정보를 fstat로 받아와서 출력해주기*/
-  printf(1, "FILE NAME: %s\nINODE NUM: %d\n", fname, fs.ino);
-  if (fs.type == T_FILE)
-    printf(1, "FILE TYPE: %s\n", "FILE");
-  else if (fs.type == T_CS)
-    printf(1, "FILE TYPE: %s\n", "CS");
-  printf(1, "FILE SIZE: %d Bytes\n", fs.size);
-  printf(1, "DIRECT BLOCK INFO:\n");
-  if (fs.type == T_FILE)
-  {
-    for (int i = 0; i < 12 && fs.addr[i]; i++)
-    {
-      printf(1, "[%d] %d\n", i, fs.addr[i]);
-    }
-  }
-  else if (fs.type == T_CS)
-  {
-    for (int i = 0; i < 12 && fs.cs[i].len; i++)
-    {
-      printf(1, "[%d] %d (num: %d, length: %d)\n", i, fs.addr[i], fs.cs[i].addr, fs.cs[i].len);
-    }
-  }
-}
+//   if ((tmp = fstat(fd, &fs)) != 0)
+//   {
+//     printf(2, "fstat error!\n");
+//     exit();
+//   }
+//   /*파일 정보를 fstat로 받아와서 출력해주기*/
+//   printf(1, "FILE NAME: %s\nINODE NUM: %d\n", fname, fs.ino);
+//   if (fs.type == T_FILE)
+//     printf(1, "FILE TYPE: %s\n", "FILE");
+//   else if (fs.type == T_CS)
+//     printf(1, "FILE TYPE: %s\n", "CS");
+//   printf(1, "FILE SIZE: %d Bytes\n", fs.size);
+//   printf(1, "DIRECT BLOCK INFO:\n");
+//   if (fs.type == T_FILE)
+//   {
+//     for (int i = 0; i < 12 && fs.addr[i]; i++)
+//     {
+//       printf(1, "[%d] %d\n", i, fs.addr[i]);
+//     }
+//   }
+//   else if (fs.type == T_CS)
+//   {
+//     for (int i = 0; i < 12 && fs.cs[i].len; i++)
+//     {
+//       printf(1, "[%d] %d (num: %d, length: %d)\n", i, fs.addr[i], fs.cs[i].addr, fs.cs[i].len);
+//     }
+//   }
+// }
