@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: elf.h 소스 파일</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">My Project
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 다음에 의해 생성됨 :  Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'검색');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','검색');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">elf.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="../../d1/d9e/elf_8h.html">이 파일의 문서화 페이지로 가기</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Format of an ELF executable file</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="../../d1/d9e/elf_8h.html#abb1c2e5626667aacc7b3efd269a6c0eb">    3</a></span>&#160;<span class="preprocessor">#define ELF_MAGIC 0x464C457FU  // &quot;\x7FELF&quot; in little endian</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// File header</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="../../d7/da8/structelfhdr.html">    6</a></span>&#160;<span class="keyword">struct </span><a class="code" href="../../d7/da8/structelfhdr.html">elfhdr</a> {</div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="../../d7/da8/structelfhdr.html#a28ee8116d69b533277311c5f3773b6b2">    7</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../d7/da8/structelfhdr.html#a28ee8116d69b533277311c5f3773b6b2">magic</a>;  <span class="comment">// must equal ELF_MAGIC</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="../../d7/da8/structelfhdr.html#a22ec6f2383f0488ee18a18673398f201">    8</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a> <a class="code" href="../../d7/da8/structelfhdr.html#a22ec6f2383f0488ee18a18673398f201">elf</a>[12];</div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="../../d7/da8/structelfhdr.html#a2cd2eaf0c952e30f8196890787ef68fe">    9</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#ab95f123a6c9bcfee6a343170ef8c5f69">ushort</a> <a class="code" href="../../d7/da8/structelfhdr.html#a2cd2eaf0c952e30f8196890787ef68fe">type</a>;</div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="../../d7/da8/structelfhdr.html#a17113c58d39b044bb1ae78733a8c68fc">   10</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#ab95f123a6c9bcfee6a343170ef8c5f69">ushort</a> <a class="code" href="../../d7/da8/structelfhdr.html#a17113c58d39b044bb1ae78733a8c68fc">machine</a>;</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="../../d7/da8/structelfhdr.html#abb1c8274f47cfdbbcefe44af2d5c723d">   11</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../d7/da8/structelfhdr.html#abb1c8274f47cfdbbcefe44af2d5c723d">version</a>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="../../d7/da8/structelfhdr.html#ad40755e1b2c6efc3ec0ad95889f743a5">   12</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../d7/da8/structelfhdr.html#ad40755e1b2c6efc3ec0ad95889f743a5">entry</a>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="../../d7/da8/structelfhdr.html#a1d463f67fcf951c06cfaa37850004c51">   13</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../d7/da8/structelfhdr.html#a1d463f67fcf951c06cfaa37850004c51">phoff</a>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="../../d7/da8/structelfhdr.html#a465ccdf83d0e26d129d723a493a6e764">   14</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../d7/da8/structelfhdr.html#a465ccdf83d0e26d129d723a493a6e764">shoff</a>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="../../d7/da8/structelfhdr.html#a2f1e0957c83938630ef0ed074830df03">   15</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../d7/da8/structelfhdr.html#a2f1e0957c83938630ef0ed074830df03">flags</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="../../d7/da8/structelfhdr.html#aeffe5743cc720e5795af5d17b6fd6928">   16</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#ab95f123a6c9bcfee6a343170ef8c5f69">ushort</a> <a class="code" href="../../d7/da8/structelfhdr.html#aeffe5743cc720e5795af5d17b6fd6928">ehsize</a>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="../../d7/da8/structelfhdr.html#ac636a4a9c4c61933c6044275ed687bc9">   17</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#ab95f123a6c9bcfee6a343170ef8c5f69">ushort</a> <a class="code" href="../../d7/da8/structelfhdr.html#ac636a4a9c4c61933c6044275ed687bc9">phentsize</a>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="../../d7/da8/structelfhdr.html#a3eff58d58a3ee83aa53d7ffdebdb6b5b">   18</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#ab95f123a6c9bcfee6a343170ef8c5f69">ushort</a> <a class="code" href="../../d7/da8/structelfhdr.html#a3eff58d58a3ee83aa53d7ffdebdb6b5b">phnum</a>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="../../d7/da8/structelfhdr.html#aeedc5375e3f67e8dda6351e0e80b8e02">   19</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#ab95f123a6c9bcfee6a343170ef8c5f69">ushort</a> <a class="code" href="../../d7/da8/structelfhdr.html#aeedc5375e3f67e8dda6351e0e80b8e02">shentsize</a>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="../../d7/da8/structelfhdr.html#aebf9526933b9f0502bdbafacce3734c1">   20</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#ab95f123a6c9bcfee6a343170ef8c5f69">ushort</a> <a class="code" href="../../d7/da8/structelfhdr.html#aebf9526933b9f0502bdbafacce3734c1">shnum</a>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="../../d7/da8/structelfhdr.html#a84f3d7712c99bfea3f4be42728dc0a0e">   21</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#ab95f123a6c9bcfee6a343170ef8c5f69">ushort</a> <a class="code" href="../../d7/da8/structelfhdr.html#a84f3d7712c99bfea3f4be42728dc0a0e">shstrndx</a>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;};</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">// Program section header</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="../../de/d4f/structproghdr.html">   25</a></span>&#160;<span class="keyword">struct </span><a class="code" href="../../de/d4f/structproghdr.html">proghdr</a> {</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="../../de/d4f/structproghdr.html#a42ea22dcdaa75a9cbdf7cd366b85e9ea">   26</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../de/d4f/structproghdr.html#a42ea22dcdaa75a9cbdf7cd366b85e9ea">type</a>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="../../de/d4f/structproghdr.html#a979532386fd448596cc5046339a2cd2d">   27</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../de/d4f/structproghdr.html#a979532386fd448596cc5046339a2cd2d">off</a>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="../../de/d4f/structproghdr.html#a6fa1051e19935bbedc5eaf086f5330b4">   28</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../de/d4f/structproghdr.html#a6fa1051e19935bbedc5eaf086f5330b4">vaddr</a>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="../../de/d4f/structproghdr.html#af65905aa5c4ccb33aac7dad5783e14d9">   29</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../de/d4f/structproghdr.html#af65905aa5c4ccb33aac7dad5783e14d9">paddr</a>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="../../de/d4f/structproghdr.html#a95dee0f1864ec1602f1ff6998ac00df0">   30</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../de/d4f/structproghdr.html#a95dee0f1864ec1602f1ff6998ac00df0">filesz</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="../../de/d4f/structproghdr.html#a9f703ade191af1054b3de797d8167d89">   31</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../de/d4f/structproghdr.html#a9f703ade191af1054b3de797d8167d89">memsz</a>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="../../de/d4f/structproghdr.html#ab3ad45ccf4b38dec384206ecbd099076">   32</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../de/d4f/structproghdr.html#ab3ad45ccf4b38dec384206ecbd099076">flags</a>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="../../de/d4f/structproghdr.html#a9a7d455ad6830cd1a37aa324911880ec">   33</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../de/d4f/structproghdr.html#a9a7d455ad6830cd1a37aa324911880ec">align</a>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;};</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">// Values for Proghdr type</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="../../d1/d9e/elf_8h.html#a6a45c035b7a2930e62ac97a6bd8121e9">   37</a></span>&#160;<span class="preprocessor">#define ELF_PROG_LOAD           1</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">// Flag bits for Proghdr flags</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="../../d1/d9e/elf_8h.html#ac9608330ae745d90d7b59374fe827538">   40</a></span>&#160;<span class="preprocessor">#define ELF_PROG_FLAG_EXEC      1</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="../../d1/d9e/elf_8h.html#a18b2debb63e51b9f66a702e3625a8622">   41</a></span>&#160;<span class="preprocessor">#define ELF_PROG_FLAG_WRITE     2</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="../../d1/d9e/elf_8h.html#a63df5e8bbab03913953e0042936f32c6">   42</a></span>&#160;<span class="preprocessor">#define ELF_PROG_FLAG_READ      4</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="astructelfhdr_html_a465ccdf83d0e26d129d723a493a6e764"><div class="ttname"><a href="../../d7/da8/structelfhdr.html#a465ccdf83d0e26d129d723a493a6e764">elfhdr::shoff</a></div><div class="ttdeci">uint shoff</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00014">elf.h:14</a></div></div>
+<div class="ttc" id="astructelfhdr_html_a2cd2eaf0c952e30f8196890787ef68fe"><div class="ttname"><a href="../../d7/da8/structelfhdr.html#a2cd2eaf0c952e30f8196890787ef68fe">elfhdr::type</a></div><div class="ttdeci">ushort type</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00009">elf.h:9</a></div></div>
+<div class="ttc" id="astructproghdr_html"><div class="ttname"><a href="../../de/d4f/structproghdr.html">proghdr</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00025">elf.h:25</a></div></div>
+<div class="ttc" id="astructelfhdr_html_a3eff58d58a3ee83aa53d7ffdebdb6b5b"><div class="ttname"><a href="../../d7/da8/structelfhdr.html#a3eff58d58a3ee83aa53d7ffdebdb6b5b">elfhdr::phnum</a></div><div class="ttdeci">ushort phnum</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00018">elf.h:18</a></div></div>
+<div class="ttc" id="astructproghdr_html_a9a7d455ad6830cd1a37aa324911880ec"><div class="ttname"><a href="../../de/d4f/structproghdr.html#a9a7d455ad6830cd1a37aa324911880ec">proghdr::align</a></div><div class="ttdeci">uint align</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00033">elf.h:33</a></div></div>
+<div class="ttc" id="astructelfhdr_html"><div class="ttname"><a href="../../d7/da8/structelfhdr.html">elfhdr</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00006">elf.h:6</a></div></div>
+<div class="ttc" id="astructelfhdr_html_a2f1e0957c83938630ef0ed074830df03"><div class="ttname"><a href="../../d7/da8/structelfhdr.html#a2f1e0957c83938630ef0ed074830df03">elfhdr::flags</a></div><div class="ttdeci">uint flags</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00015">elf.h:15</a></div></div>
+<div class="ttc" id="astructproghdr_html_af65905aa5c4ccb33aac7dad5783e14d9"><div class="ttname"><a href="../../de/d4f/structproghdr.html#af65905aa5c4ccb33aac7dad5783e14d9">proghdr::paddr</a></div><div class="ttdeci">uint paddr</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00029">elf.h:29</a></div></div>
+<div class="ttc" id="astructproghdr_html_ab3ad45ccf4b38dec384206ecbd099076"><div class="ttname"><a href="../../de/d4f/structproghdr.html#ab3ad45ccf4b38dec384206ecbd099076">proghdr::flags</a></div><div class="ttdeci">uint flags</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00032">elf.h:32</a></div></div>
+<div class="ttc" id="astructelfhdr_html_aebf9526933b9f0502bdbafacce3734c1"><div class="ttname"><a href="../../d7/da8/structelfhdr.html#aebf9526933b9f0502bdbafacce3734c1">elfhdr::shnum</a></div><div class="ttdeci">ushort shnum</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00020">elf.h:20</a></div></div>
+<div class="ttc" id="astructelfhdr_html_aeffe5743cc720e5795af5d17b6fd6928"><div class="ttname"><a href="../../d7/da8/structelfhdr.html#aeffe5743cc720e5795af5d17b6fd6928">elfhdr::ehsize</a></div><div class="ttdeci">ushort ehsize</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00016">elf.h:16</a></div></div>
+<div class="ttc" id="atypes_8h_html_a91ad9478d81a7aaf2593e8d9c3d06a14"><div class="ttname"><a href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a></div><div class="ttdeci">unsigned int uint</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d49/types_8h_source.html#l00001">types.h:1</a></div></div>
+<div class="ttc" id="astructelfhdr_html_abb1c8274f47cfdbbcefe44af2d5c723d"><div class="ttname"><a href="../../d7/da8/structelfhdr.html#abb1c8274f47cfdbbcefe44af2d5c723d">elfhdr::version</a></div><div class="ttdeci">uint version</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00011">elf.h:11</a></div></div>
+<div class="ttc" id="atypes_8h_html_ab95f123a6c9bcfee6a343170ef8c5f69"><div class="ttname"><a href="../../d9/d49/types_8h.html#ab95f123a6c9bcfee6a343170ef8c5f69">ushort</a></div><div class="ttdeci">unsigned short ushort</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d49/types_8h_source.html#l00002">types.h:2</a></div></div>
+<div class="ttc" id="astructproghdr_html_a95dee0f1864ec1602f1ff6998ac00df0"><div class="ttname"><a href="../../de/d4f/structproghdr.html#a95dee0f1864ec1602f1ff6998ac00df0">proghdr::filesz</a></div><div class="ttdeci">uint filesz</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00030">elf.h:30</a></div></div>
+<div class="ttc" id="astructelfhdr_html_ad40755e1b2c6efc3ec0ad95889f743a5"><div class="ttname"><a href="../../d7/da8/structelfhdr.html#ad40755e1b2c6efc3ec0ad95889f743a5">elfhdr::entry</a></div><div class="ttdeci">uint entry</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00012">elf.h:12</a></div></div>
+<div class="ttc" id="astructelfhdr_html_aeedc5375e3f67e8dda6351e0e80b8e02"><div class="ttname"><a href="../../d7/da8/structelfhdr.html#aeedc5375e3f67e8dda6351e0e80b8e02">elfhdr::shentsize</a></div><div class="ttdeci">ushort shentsize</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00019">elf.h:19</a></div></div>
+<div class="ttc" id="astructproghdr_html_a42ea22dcdaa75a9cbdf7cd366b85e9ea"><div class="ttname"><a href="../../de/d4f/structproghdr.html#a42ea22dcdaa75a9cbdf7cd366b85e9ea">proghdr::type</a></div><div class="ttdeci">uint type</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00026">elf.h:26</a></div></div>
+<div class="ttc" id="astructproghdr_html_a6fa1051e19935bbedc5eaf086f5330b4"><div class="ttname"><a href="../../de/d4f/structproghdr.html#a6fa1051e19935bbedc5eaf086f5330b4">proghdr::vaddr</a></div><div class="ttdeci">uint vaddr</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00028">elf.h:28</a></div></div>
+<div class="ttc" id="astructelfhdr_html_a28ee8116d69b533277311c5f3773b6b2"><div class="ttname"><a href="../../d7/da8/structelfhdr.html#a28ee8116d69b533277311c5f3773b6b2">elfhdr::magic</a></div><div class="ttdeci">uint magic</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00007">elf.h:7</a></div></div>
+<div class="ttc" id="astructelfhdr_html_a17113c58d39b044bb1ae78733a8c68fc"><div class="ttname"><a href="../../d7/da8/structelfhdr.html#a17113c58d39b044bb1ae78733a8c68fc">elfhdr::machine</a></div><div class="ttdeci">ushort machine</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00010">elf.h:10</a></div></div>
+<div class="ttc" id="astructelfhdr_html_a22ec6f2383f0488ee18a18673398f201"><div class="ttname"><a href="../../d7/da8/structelfhdr.html#a22ec6f2383f0488ee18a18673398f201">elfhdr::elf</a></div><div class="ttdeci">uchar elf[12]</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00008">elf.h:8</a></div></div>
+<div class="ttc" id="atypes_8h_html_a65f85814a8290f9797005d3b28e7e5fc"><div class="ttname"><a href="../../d9/d49/types_8h.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a></div><div class="ttdeci">unsigned char uchar</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d49/types_8h_source.html#l00003">types.h:3</a></div></div>
+<div class="ttc" id="astructproghdr_html_a9f703ade191af1054b3de797d8167d89"><div class="ttname"><a href="../../de/d4f/structproghdr.html#a9f703ade191af1054b3de797d8167d89">proghdr::memsz</a></div><div class="ttdeci">uint memsz</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00031">elf.h:31</a></div></div>
+<div class="ttc" id="astructelfhdr_html_ac636a4a9c4c61933c6044275ed687bc9"><div class="ttname"><a href="../../d7/da8/structelfhdr.html#ac636a4a9c4c61933c6044275ed687bc9">elfhdr::phentsize</a></div><div class="ttdeci">ushort phentsize</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00017">elf.h:17</a></div></div>
+<div class="ttc" id="astructelfhdr_html_a1d463f67fcf951c06cfaa37850004c51"><div class="ttname"><a href="../../d7/da8/structelfhdr.html#a1d463f67fcf951c06cfaa37850004c51">elfhdr::phoff</a></div><div class="ttdeci">uint phoff</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00013">elf.h:13</a></div></div>
+<div class="ttc" id="astructelfhdr_html_a84f3d7712c99bfea3f4be42728dc0a0e"><div class="ttname"><a href="../../d7/da8/structelfhdr.html#a84f3d7712c99bfea3f4be42728dc0a0e">elfhdr::shstrndx</a></div><div class="ttdeci">ushort shstrndx</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00021">elf.h:21</a></div></div>
+<div class="ttc" id="astructproghdr_html_a979532386fd448596cc5046339a2cd2d"><div class="ttname"><a href="../../de/d4f/structproghdr.html#a979532386fd448596cc5046339a2cd2d">proghdr::off</a></div><div class="ttdeci">uint off</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9e/elf_8h_source.html#l00027">elf.h:27</a></div></div>
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+다음에 의해 생성됨 :  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.17
+</small></address>
+</body>
+</html>

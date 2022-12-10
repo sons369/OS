@@ -1,0 +1,154 @@
+\hypertarget{test_8c}{}\doxysection{test.\+c 파일 참조}
+\label{test_8c}\index{test.c@{test.c}}
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}param.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stat.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mmu.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}proc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}fs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}spinlock.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sleeplock.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}file.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}fcntl.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}user.\+h\char`\"{}}\newline
+test.\+c에 대한 include 의존 그래프
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d9/d68/test_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{매크로}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{test_8c_aa893c2c75e0d3d0258e09fbd136ffaed}{B\+U\+F\+M\+AX}}~1024
+\end{DoxyCompactItemize}
+\doxysubsection*{함수}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{test_8c_a80eb535a122a6829927cd6ada7c77e7c}{write\+\_\+to\+\_\+norm}} (char $\ast$fname)
+\item 
+int \mbox{\hyperlink{test_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{매크로 문서화}
+\mbox{\Hypertarget{test_8c_aa893c2c75e0d3d0258e09fbd136ffaed}\label{test_8c_aa893c2c75e0d3d0258e09fbd136ffaed}} 
+\index{test.c@{test.c}!BUFMAX@{BUFMAX}}
+\index{BUFMAX@{BUFMAX}!test.c@{test.c}}
+\doxysubsubsection{\texorpdfstring{BUFMAX}{BUFMAX}}
+{\footnotesize\ttfamily \#define B\+U\+F\+M\+AX~1024}
+
+
+
+test.\+c 파일의 13 번째 라인에서 정의되었습니다.
+
+
+
+\doxysubsection{함수 문서화}
+\mbox{\Hypertarget{test_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{test_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{test.c@{test.c}!main@{main}}
+\index{main@{main}!test.c@{test.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+test.\+c 파일의 17 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{18 \{}
+\DoxyCodeLine{19     \textcolor{keywordtype}{int} fd;}
+\DoxyCodeLine{20     \textcolor{keywordtype}{int} i, size;}
+\DoxyCodeLine{21     \textcolor{keywordtype}{char} \mbox{\hyperlink{structbuf}{buf}}[\mbox{\hyperlink{test_8c_aa893c2c75e0d3d0258e09fbd136ffaed}{BUFMAX}}];}
+\DoxyCodeLine{22     \textcolor{keywordtype}{char} *fname = \textcolor{stringliteral}{"test\_cs"};}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24     \textcolor{keywordflow}{if} ((fd = \mbox{\hyperlink{user_8h_a2c4414339f388561554c2deab11a1a07}{open}}(fname, \mbox{\hyperlink{fcntl_8h_ab40a23079c3b9a7e25ffdc8108c7fb02}{O\_CREATE}} | \mbox{\hyperlink{init_8c_a0b5760fd15733f37bb3556a465eab276}{O\_CS}} | \mbox{\hyperlink{fcntl_8h_abb0586253488ee61072b73557eeb873b}{O\_RDWR}})) <= 0)}
+\DoxyCodeLine{25     \{}
+\DoxyCodeLine{26         \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(2, \textcolor{stringliteral}{"ERROR: open failed in cs file\(\backslash\)n"});}
+\DoxyCodeLine{27         \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}();}
+\DoxyCodeLine{28     \}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30     \textcolor{keywordflow}{for} (i = 0; i < \mbox{\hyperlink{test_8c_aa893c2c75e0d3d0258e09fbd136ffaed}{BUFMAX}}; i++)}
+\DoxyCodeLine{31         \mbox{\hyperlink{structbuf}{buf}}[i] = \textcolor{charliteral}{'a'};}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     \textcolor{keywordflow}{for} (i = 0; i < 130; i++)}
+\DoxyCodeLine{34     \{}
+\DoxyCodeLine{35         \textcolor{keywordflow}{if} ((size = \mbox{\hyperlink{user_8h_ae57e95d717eb7386cd8b935a0c136abe}{write}}(fd, \mbox{\hyperlink{structbuf}{buf}}, \mbox{\hyperlink{test_8c_aa893c2c75e0d3d0258e09fbd136ffaed}{BUFMAX}})) != \mbox{\hyperlink{test_8c_aa893c2c75e0d3d0258e09fbd136ffaed}{BUFMAX}})}
+\DoxyCodeLine{36         \{}
+\DoxyCodeLine{37             \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(2, \textcolor{stringliteral}{"ERROR: write failed in cs file\(\backslash\)n"});}
+\DoxyCodeLine{38             \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}();}
+\DoxyCodeLine{39         \}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41         \textcolor{comment}{/*}}
+\DoxyCodeLine{42 \textcolor{comment}{        if (i == 50)}}
+\DoxyCodeLine{43 \textcolor{comment}{            write\_to\_norm("test\_norm");}}
+\DoxyCodeLine{44 \textcolor{comment}{        */}}
+\DoxyCodeLine{45     \}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47     \mbox{\hyperlink{ulib_8c_a9ae5b5340f55f2c8b33263f105a931a1}{printinfo}}(fd, fname);}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     \mbox{\hyperlink{user_8h_ae152484c890a24e4d9b4980e7b965be0}{close}}(fd);}
+\DoxyCodeLine{50     \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}();}
+\DoxyCodeLine{51 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=294pt]{d8/db9/test_8c_ae66f6b31b5ad750f1fe042a706a4e3d4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{test_8c_a80eb535a122a6829927cd6ada7c77e7c}\label{test_8c_a80eb535a122a6829927cd6ada7c77e7c}} 
+\index{test.c@{test.c}!write\_to\_norm@{write\_to\_norm}}
+\index{write\_to\_norm@{write\_to\_norm}!test.c@{test.c}}
+\doxysubsubsection{\texorpdfstring{write\_to\_norm()}{write\_to\_norm()}}
+{\footnotesize\ttfamily void write\+\_\+to\+\_\+norm (\begin{DoxyParamCaption}\item[{char $\ast$}]{fname }\end{DoxyParamCaption})}
+
+
+
+test.\+c 파일의 53 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{54 \{}
+\DoxyCodeLine{55     \textcolor{keywordtype}{int} fd;}
+\DoxyCodeLine{56     \textcolor{keywordtype}{int} i, size;}
+\DoxyCodeLine{57     \textcolor{keywordtype}{char} \mbox{\hyperlink{structbuf}{buf}}[\mbox{\hyperlink{test_8c_aa893c2c75e0d3d0258e09fbd136ffaed}{BUFMAX}}];}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59     \textcolor{keywordflow}{if} ((fd = \mbox{\hyperlink{user_8h_a2c4414339f388561554c2deab11a1a07}{open}}(fname, \mbox{\hyperlink{fcntl_8h_ab40a23079c3b9a7e25ffdc8108c7fb02}{O\_CREATE}} | \mbox{\hyperlink{fcntl_8h_abb0586253488ee61072b73557eeb873b}{O\_RDWR}})) <= 0)}
+\DoxyCodeLine{60     \{}
+\DoxyCodeLine{61         \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(2, \textcolor{stringliteral}{"ERROR: open failed in normal file\(\backslash\)n"});}
+\DoxyCodeLine{62         \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}();}
+\DoxyCodeLine{63     \}}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65     \textcolor{keywordflow}{for} (i = 0; i < \mbox{\hyperlink{test_8c_aa893c2c75e0d3d0258e09fbd136ffaed}{BUFMAX}}; i++)}
+\DoxyCodeLine{66         \mbox{\hyperlink{structbuf}{buf}}[i] = \textcolor{charliteral}{'b'};}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68     \textcolor{keywordflow}{for} (i = 0; i < 2; i++)}
+\DoxyCodeLine{69     \{}
+\DoxyCodeLine{70         \textcolor{keywordflow}{if} ((size = \mbox{\hyperlink{user_8h_ae57e95d717eb7386cd8b935a0c136abe}{write}}(fd, \mbox{\hyperlink{structbuf}{buf}}, \mbox{\hyperlink{test_8c_aa893c2c75e0d3d0258e09fbd136ffaed}{BUFMAX}})) != \mbox{\hyperlink{test_8c_aa893c2c75e0d3d0258e09fbd136ffaed}{BUFMAX}})}
+\DoxyCodeLine{71         \{}
+\DoxyCodeLine{72             \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(2, \textcolor{stringliteral}{"ERROR: write failed in normal file\(\backslash\)n"});}
+\DoxyCodeLine{73             \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}();}
+\DoxyCodeLine{74         \}}
+\DoxyCodeLine{75     \}}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77     \mbox{\hyperlink{ulib_8c_a9ae5b5340f55f2c8b33263f105a931a1}{printinfo}}(fd, fname);}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79     \mbox{\hyperlink{user_8h_ae152484c890a24e4d9b4980e7b965be0}{close}}(fd);}
+\DoxyCodeLine{80 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{d8/db9/test_8c_a80eb535a122a6829927cd6ada7c77e7c_cgraph}
+\end{center}
+\end{figure}

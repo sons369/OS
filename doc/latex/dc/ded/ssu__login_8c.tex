@@ -1,0 +1,215 @@
+\hypertarget{ssu__login_8c}{}\doxysection{ssu\+\_\+login.\+c 파일 참조}
+\label{ssu__login_8c}\index{ssu\_login.c@{ssu\_login.c}}
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stat.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}user.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}fcntl.\+h\char`\"{}}\newline
+ssu\+\_\+login.\+c에 대한 include 의존 그래프
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=325pt]{db/da0/ssu__login_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{함수}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{ssu__login_8c_aee6613d3b5d371f2db0bf93154c3d138}{get\+\_\+user\+\_\+list}} ()
+\item 
+int \mbox{\hyperlink{ssu__login_8c_aa928468107ea02f650eb121a110c76ff}{check\+\_\+idpw}} (const char $\ast$user\+\_\+id, const char $\ast$user\+\_\+pw)
+\item 
+int \mbox{\hyperlink{ssu__login_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$\mbox{\hyperlink{init_8c_abd1a2cf54950f450187ef24c1cdcac0c}{argv}}\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\doxysubsection*{변수}
+\begin{DoxyCompactItemize}
+\item 
+char \mbox{\hyperlink{ssu__login_8c_ae62fa000e048e5a160f4d3c894d183b3}{user\+ID}} \mbox{[}16\mbox{]}\mbox{[}32\mbox{]}
+\item 
+char \mbox{\hyperlink{ssu__login_8c_a7204bc86d43f71c8c3bdfcf588fa013e}{pwd\+ID}} \mbox{[}16\mbox{]}\mbox{[}32\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{함수 문서화}
+\mbox{\Hypertarget{ssu__login_8c_aa928468107ea02f650eb121a110c76ff}\label{ssu__login_8c_aa928468107ea02f650eb121a110c76ff}} 
+\index{ssu\_login.c@{ssu\_login.c}!check\_idpw@{check\_idpw}}
+\index{check\_idpw@{check\_idpw}!ssu\_login.c@{ssu\_login.c}}
+\doxysubsubsection{\texorpdfstring{check\_idpw()}{check\_idpw()}}
+{\footnotesize\ttfamily int check\+\_\+idpw (\begin{DoxyParamCaption}\item[{const char $\ast$}]{user\+\_\+id,  }\item[{const char $\ast$}]{user\+\_\+pw }\end{DoxyParamCaption})}
+
+
+
+ssu\+\_\+login.\+c 파일의 42 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{43 \{}
+\DoxyCodeLine{44     \textcolor{keywordflow}{if} (\mbox{\hyperlink{defs_8h_a5e5172aa1be36b8210c6dfd86800b44c}{strlen}}(user\_id) == 0 || \mbox{\hyperlink{defs_8h_a5e5172aa1be36b8210c6dfd86800b44c}{strlen}}(user\_pw) == 0)}
+\DoxyCodeLine{45         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{46     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 10; i++)}
+\DoxyCodeLine{47     \{}
+\DoxyCodeLine{48         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{ulib_8c_a20f61ccd139bc66f11fc83ff9d66d4cf}{strcmp}}(user\_id, \mbox{\hyperlink{ssu__login_8c_ae62fa000e048e5a160f4d3c894d183b3}{userID}}[i]))}
+\DoxyCodeLine{49             \textcolor{keywordflow}{if} (!\mbox{\hyperlink{ulib_8c_a20f61ccd139bc66f11fc83ff9d66d4cf}{strcmp}}(user\_pw, \mbox{\hyperlink{ssu__login_8c_a7204bc86d43f71c8c3bdfcf588fa013e}{pwdID}}[i]))}
+\DoxyCodeLine{50                 \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{51     \}}
+\DoxyCodeLine{52     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{53 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{dc/ded/ssu__login_8c_aa928468107ea02f650eb121a110c76ff_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=231pt]{dc/ded/ssu__login_8c_aa928468107ea02f650eb121a110c76ff_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{ssu__login_8c_aee6613d3b5d371f2db0bf93154c3d138}\label{ssu__login_8c_aee6613d3b5d371f2db0bf93154c3d138}} 
+\index{ssu\_login.c@{ssu\_login.c}!get\_user\_list@{get\_user\_list}}
+\index{get\_user\_list@{get\_user\_list}!ssu\_login.c@{ssu\_login.c}}
+\doxysubsubsection{\texorpdfstring{get\_user\_list()}{get\_user\_list()}}
+{\footnotesize\ttfamily void get\+\_\+user\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+ssu\+\_\+login.\+c 파일의 9 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{10 \{}
+\DoxyCodeLine{11     \textcolor{keywordtype}{int} fd;}
+\DoxyCodeLine{12     \textcolor{keywordtype}{int} n;}
+\DoxyCodeLine{13     \textcolor{keywordtype}{int} flag = 0;}
+\DoxyCodeLine{14     \textcolor{keywordtype}{char} \mbox{\hyperlink{structbuf}{buf}}[512];}
+\DoxyCodeLine{15     \textcolor{keywordtype}{int} idx = 0;}
+\DoxyCodeLine{16     \textcolor{keywordtype}{int} q\_idx = 0;}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18     fd = \mbox{\hyperlink{user_8h_a2c4414339f388561554c2deab11a1a07}{open}}(\textcolor{stringliteral}{"list.txt"}, \mbox{\hyperlink{fcntl_8h_a7a68c9ffaac7dbcd652225dd7c06a54b}{O\_RDONLY}});}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 16; i++)}
+\DoxyCodeLine{21     \{}
+\DoxyCodeLine{22         \textcolor{keywordflow}{while} ((n = \mbox{\hyperlink{user_8h_a2d73522d6354b8a141ecfaa9585a0c77}{read}}(fd, \mbox{\hyperlink{structbuf}{buf}}, 1)) > 0)}
+\DoxyCodeLine{23         \{}
+\DoxyCodeLine{24             \textcolor{keywordflow}{if} (\mbox{\hyperlink{structbuf}{buf}}[0] == \textcolor{charliteral}{'\(\backslash\)n'})}
+\DoxyCodeLine{25                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{26             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\mbox{\hyperlink{structbuf}{buf}}[0] == \textcolor{charliteral}{' '})}
+\DoxyCodeLine{27                 flag = 1;}
+\DoxyCodeLine{28             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (flag == 0)}
+\DoxyCodeLine{29                 \mbox{\hyperlink{ssu__login_8c_ae62fa000e048e5a160f4d3c894d183b3}{userID}}[i][idx++] = \mbox{\hyperlink{structbuf}{buf}}[0];}
+\DoxyCodeLine{30             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{31             \{}
+\DoxyCodeLine{32                 \mbox{\hyperlink{ssu__login_8c_a7204bc86d43f71c8c3bdfcf588fa013e}{pwdID}}[i][q\_idx++] = \mbox{\hyperlink{structbuf}{buf}}[0];}
+\DoxyCodeLine{33             \}}
+\DoxyCodeLine{34         \}}
+\DoxyCodeLine{35         idx = 0;}
+\DoxyCodeLine{36         q\_idx = 0;}
+\DoxyCodeLine{37         flag = 0;}
+\DoxyCodeLine{38     \}}
+\DoxyCodeLine{39     \mbox{\hyperlink{user_8h_ae152484c890a24e4d9b4980e7b965be0}{close}}(fd);}
+\DoxyCodeLine{40 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{dc/ded/ssu__login_8c_aee6613d3b5d371f2db0bf93154c3d138_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=236pt]{dc/ded/ssu__login_8c_aee6613d3b5d371f2db0bf93154c3d138_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{ssu__login_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{ssu__login_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{ssu\_login.c@{ssu\_login.c}!main@{main}}
+\index{main@{main}!ssu\_login.c@{ssu\_login.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+ssu\+\_\+login.\+c 파일의 55 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{56 \{}
+\DoxyCodeLine{57     \textcolor{keywordtype}{int} pid, wpid;}
+\DoxyCodeLine{58     \textcolor{keywordtype}{char} \textcolor{keywordtype}{id}[32];}
+\DoxyCodeLine{59     \textcolor{keywordtype}{char} pw[32];}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61     \mbox{\hyperlink{ssu__login_8c_aee6613d3b5d371f2db0bf93154c3d138}{get\_user\_list}}();}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63     \textcolor{keywordflow}{while} (1)}
+\DoxyCodeLine{64     \{}
+\DoxyCodeLine{65         \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(1, \textcolor{stringliteral}{"Username: "});}
+\DoxyCodeLine{66         \mbox{\hyperlink{ulib_8c_a3702e71383a007c873d8e7b84dcbe62a}{gets}}(\textcolor{keywordtype}{id}, 32);}
+\DoxyCodeLine{67         \textcolor{keywordtype}{id}[\mbox{\hyperlink{defs_8h_a5e5172aa1be36b8210c6dfd86800b44c}{strlen}}(\textcolor{keywordtype}{id}) -\/ 1] = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{68         \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(1, \textcolor{stringliteral}{"Password: "});}
+\DoxyCodeLine{69         \mbox{\hyperlink{ulib_8c_a3702e71383a007c873d8e7b84dcbe62a}{gets}}(pw, 32);}
+\DoxyCodeLine{70         pw[\mbox{\hyperlink{defs_8h_a5e5172aa1be36b8210c6dfd86800b44c}{strlen}}(pw) -\/ 1] = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{71         \textcolor{keywordflow}{if} (\mbox{\hyperlink{ssu__login_8c_aa928468107ea02f650eb121a110c76ff}{check\_idpw}}(\textcolor{keywordtype}{id}, pw))}
+\DoxyCodeLine{72             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{73     \}}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75     pid = \mbox{\hyperlink{defs_8h_acd2e1ded4bb6fce4500438bf928330f4}{fork}}();}
+\DoxyCodeLine{76     \textcolor{keywordflow}{if} (pid < 0)}
+\DoxyCodeLine{77     \{}
+\DoxyCodeLine{78         \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(1, \textcolor{stringliteral}{"init: fork failed\(\backslash\)n"});}
+\DoxyCodeLine{79         \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}();}
+\DoxyCodeLine{80     \}}
+\DoxyCodeLine{81     \textcolor{keywordflow}{if} (pid == 0)}
+\DoxyCodeLine{82     \{}
+\DoxyCodeLine{83         \mbox{\hyperlink{defs_8h_aa7b4aae4a12acd187e23396214aeca47}{exec}}(\textcolor{stringliteral}{"sh"}, \mbox{\hyperlink{init_8c_abd1a2cf54950f450187ef24c1cdcac0c}{argv}});}
+\DoxyCodeLine{84         \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(1, \textcolor{stringliteral}{"init: exec sh failed\(\backslash\)n"});}
+\DoxyCodeLine{85         \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}();}
+\DoxyCodeLine{86     \}}
+\DoxyCodeLine{87     \textcolor{keywordflow}{while} ((wpid = \mbox{\hyperlink{defs_8h_af6f31822f7e737b4e414bdac1ccb59a4}{wait}}()) >= 0 \&\& wpid != pid)}
+\DoxyCodeLine{88         \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(1, \textcolor{stringliteral}{"zombie!\(\backslash\)n"});}
+\DoxyCodeLine{89     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{90 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{dc/ded/ssu__login_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{변수 문서화}
+\mbox{\Hypertarget{ssu__login_8c_a7204bc86d43f71c8c3bdfcf588fa013e}\label{ssu__login_8c_a7204bc86d43f71c8c3bdfcf588fa013e}} 
+\index{ssu\_login.c@{ssu\_login.c}!pwdID@{pwdID}}
+\index{pwdID@{pwdID}!ssu\_login.c@{ssu\_login.c}}
+\doxysubsubsection{\texorpdfstring{pwdID}{pwdID}}
+{\footnotesize\ttfamily char pwd\+ID\mbox{[}16\mbox{]}\mbox{[}32\mbox{]}}
+
+
+
+ssu\+\_\+login.\+c 파일의 7 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{ssu__login_8c_ae62fa000e048e5a160f4d3c894d183b3}\label{ssu__login_8c_ae62fa000e048e5a160f4d3c894d183b3}} 
+\index{ssu\_login.c@{ssu\_login.c}!userID@{userID}}
+\index{userID@{userID}!ssu\_login.c@{ssu\_login.c}}
+\doxysubsubsection{\texorpdfstring{userID}{userID}}
+{\footnotesize\ttfamily char user\+ID\mbox{[}16\mbox{]}\mbox{[}32\mbox{]}}
+
+
+
+ssu\+\_\+login.\+c 파일의 6 번째 라인에서 정의되었습니다.
+

@@ -1,0 +1,124 @@
+\hypertarget{memlayout_8h}{}\doxysection{memlayout.\+h 파일 참조}
+\label{memlayout_8h}\index{memlayout.h@{memlayout.h}}
+이 그래프는 이 파일을 직/간접적으로 include 하는 파일들을 보여줍니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{db/d84/memlayout_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{매크로}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{memlayout_8h_afa15977c771e531ebd3f3a5c2563ce16}{E\+X\+T\+M\+EM}}~0x100000
+\item 
+\#define \mbox{\hyperlink{memlayout_8h_ad3c557a115f7d82d9ef849846779531c}{P\+H\+Y\+S\+T\+OP}}~0x\+E000000
+\item 
+\#define \mbox{\hyperlink{memlayout_8h_a643ab4c8a98a6f7bfde12c8f52f6aafa}{D\+E\+V\+S\+P\+A\+CE}}~0x\+F\+E000000
+\item 
+\#define \mbox{\hyperlink{memlayout_8h_a20cbfc19992a40ab9ccf4aa8ab8283d0}{K\+E\+R\+N\+B\+A\+SE}}~0x80000000
+\item 
+\#define \mbox{\hyperlink{memlayout_8h_aca91837d3500b42e38e6427ca4db4946}{K\+E\+R\+N\+L\+I\+NK}}~(\mbox{\hyperlink{memlayout_8h_a20cbfc19992a40ab9ccf4aa8ab8283d0}{K\+E\+R\+N\+B\+A\+SE}}+\mbox{\hyperlink{memlayout_8h_afa15977c771e531ebd3f3a5c2563ce16}{E\+X\+T\+M\+EM}})
+\item 
+\#define \mbox{\hyperlink{memlayout_8h_a5021188bc7da1304f27e913aee183407}{V2P}}(a)~(((\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}) (a)) -\/ \mbox{\hyperlink{memlayout_8h_a20cbfc19992a40ab9ccf4aa8ab8283d0}{K\+E\+R\+N\+B\+A\+SE}})
+\item 
+\#define \mbox{\hyperlink{memlayout_8h_aefd5e8b62c49bba2cf20309c7dd174e2}{P2V}}(a)~((void $\ast$)(((char $\ast$) (a)) + \mbox{\hyperlink{memlayout_8h_a20cbfc19992a40ab9ccf4aa8ab8283d0}{K\+E\+R\+N\+B\+A\+SE}}))
+\item 
+\#define \mbox{\hyperlink{memlayout_8h_a07c445cd5425fc1d69188d1e6d511e4b}{V2\+P\+\_\+\+WO}}(x)~((x) -\/ \mbox{\hyperlink{memlayout_8h_a20cbfc19992a40ab9ccf4aa8ab8283d0}{K\+E\+R\+N\+B\+A\+SE}})
+\item 
+\#define \mbox{\hyperlink{memlayout_8h_a6835c6206bedd9fccc1a29205c233309}{P2\+V\+\_\+\+WO}}(x)~((x) + \mbox{\hyperlink{memlayout_8h_a20cbfc19992a40ab9ccf4aa8ab8283d0}{K\+E\+R\+N\+B\+A\+SE}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{매크로 문서화}
+\mbox{\Hypertarget{memlayout_8h_a643ab4c8a98a6f7bfde12c8f52f6aafa}\label{memlayout_8h_a643ab4c8a98a6f7bfde12c8f52f6aafa}} 
+\index{memlayout.h@{memlayout.h}!DEVSPACE@{DEVSPACE}}
+\index{DEVSPACE@{DEVSPACE}!memlayout.h@{memlayout.h}}
+\doxysubsubsection{\texorpdfstring{DEVSPACE}{DEVSPACE}}
+{\footnotesize\ttfamily \#define D\+E\+V\+S\+P\+A\+CE~0x\+F\+E000000}
+
+
+
+memlayout.\+h 파일의 5 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{memlayout_8h_afa15977c771e531ebd3f3a5c2563ce16}\label{memlayout_8h_afa15977c771e531ebd3f3a5c2563ce16}} 
+\index{memlayout.h@{memlayout.h}!EXTMEM@{EXTMEM}}
+\index{EXTMEM@{EXTMEM}!memlayout.h@{memlayout.h}}
+\doxysubsubsection{\texorpdfstring{EXTMEM}{EXTMEM}}
+{\footnotesize\ttfamily \#define E\+X\+T\+M\+EM~0x100000}
+
+
+
+memlayout.\+h 파일의 3 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{memlayout_8h_a20cbfc19992a40ab9ccf4aa8ab8283d0}\label{memlayout_8h_a20cbfc19992a40ab9ccf4aa8ab8283d0}} 
+\index{memlayout.h@{memlayout.h}!KERNBASE@{KERNBASE}}
+\index{KERNBASE@{KERNBASE}!memlayout.h@{memlayout.h}}
+\doxysubsubsection{\texorpdfstring{KERNBASE}{KERNBASE}}
+{\footnotesize\ttfamily \#define K\+E\+R\+N\+B\+A\+SE~0x80000000}
+
+
+
+memlayout.\+h 파일의 8 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{memlayout_8h_aca91837d3500b42e38e6427ca4db4946}\label{memlayout_8h_aca91837d3500b42e38e6427ca4db4946}} 
+\index{memlayout.h@{memlayout.h}!KERNLINK@{KERNLINK}}
+\index{KERNLINK@{KERNLINK}!memlayout.h@{memlayout.h}}
+\doxysubsubsection{\texorpdfstring{KERNLINK}{KERNLINK}}
+{\footnotesize\ttfamily \#define K\+E\+R\+N\+L\+I\+NK~(\mbox{\hyperlink{memlayout_8h_a20cbfc19992a40ab9ccf4aa8ab8283d0}{K\+E\+R\+N\+B\+A\+SE}}+\mbox{\hyperlink{memlayout_8h_afa15977c771e531ebd3f3a5c2563ce16}{E\+X\+T\+M\+EM}})}
+
+
+
+memlayout.\+h 파일의 9 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{memlayout_8h_aefd5e8b62c49bba2cf20309c7dd174e2}\label{memlayout_8h_aefd5e8b62c49bba2cf20309c7dd174e2}} 
+\index{memlayout.h@{memlayout.h}!P2V@{P2V}}
+\index{P2V@{P2V}!memlayout.h@{memlayout.h}}
+\doxysubsubsection{\texorpdfstring{P2V}{P2V}}
+{\footnotesize\ttfamily \#define P2V(\begin{DoxyParamCaption}\item[{}]{a }\end{DoxyParamCaption})~((void $\ast$)(((char $\ast$) (a)) + \mbox{\hyperlink{memlayout_8h_a20cbfc19992a40ab9ccf4aa8ab8283d0}{K\+E\+R\+N\+B\+A\+SE}}))}
+
+
+
+memlayout.\+h 파일의 12 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{memlayout_8h_a6835c6206bedd9fccc1a29205c233309}\label{memlayout_8h_a6835c6206bedd9fccc1a29205c233309}} 
+\index{memlayout.h@{memlayout.h}!P2V\_WO@{P2V\_WO}}
+\index{P2V\_WO@{P2V\_WO}!memlayout.h@{memlayout.h}}
+\doxysubsubsection{\texorpdfstring{P2V\_WO}{P2V\_WO}}
+{\footnotesize\ttfamily \#define P2\+V\+\_\+\+WO(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~((x) + \mbox{\hyperlink{memlayout_8h_a20cbfc19992a40ab9ccf4aa8ab8283d0}{K\+E\+R\+N\+B\+A\+SE}})}
+
+
+
+memlayout.\+h 파일의 15 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{memlayout_8h_ad3c557a115f7d82d9ef849846779531c}\label{memlayout_8h_ad3c557a115f7d82d9ef849846779531c}} 
+\index{memlayout.h@{memlayout.h}!PHYSTOP@{PHYSTOP}}
+\index{PHYSTOP@{PHYSTOP}!memlayout.h@{memlayout.h}}
+\doxysubsubsection{\texorpdfstring{PHYSTOP}{PHYSTOP}}
+{\footnotesize\ttfamily \#define P\+H\+Y\+S\+T\+OP~0x\+E000000}
+
+
+
+memlayout.\+h 파일의 4 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{memlayout_8h_a5021188bc7da1304f27e913aee183407}\label{memlayout_8h_a5021188bc7da1304f27e913aee183407}} 
+\index{memlayout.h@{memlayout.h}!V2P@{V2P}}
+\index{V2P@{V2P}!memlayout.h@{memlayout.h}}
+\doxysubsubsection{\texorpdfstring{V2P}{V2P}}
+{\footnotesize\ttfamily \#define V2P(\begin{DoxyParamCaption}\item[{}]{a }\end{DoxyParamCaption})~(((\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}) (a)) -\/ \mbox{\hyperlink{memlayout_8h_a20cbfc19992a40ab9ccf4aa8ab8283d0}{K\+E\+R\+N\+B\+A\+SE}})}
+
+
+
+memlayout.\+h 파일의 11 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{memlayout_8h_a07c445cd5425fc1d69188d1e6d511e4b}\label{memlayout_8h_a07c445cd5425fc1d69188d1e6d511e4b}} 
+\index{memlayout.h@{memlayout.h}!V2P\_WO@{V2P\_WO}}
+\index{V2P\_WO@{V2P\_WO}!memlayout.h@{memlayout.h}}
+\doxysubsubsection{\texorpdfstring{V2P\_WO}{V2P\_WO}}
+{\footnotesize\ttfamily \#define V2\+P\+\_\+\+WO(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~((x) -\/ \mbox{\hyperlink{memlayout_8h_a20cbfc19992a40ab9ccf4aa8ab8283d0}{K\+E\+R\+N\+B\+A\+SE}})}
+
+
+
+memlayout.\+h 파일의 14 번째 라인에서 정의되었습니다.
+

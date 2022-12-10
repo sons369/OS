@@ -1,0 +1,431 @@
+\hypertarget{ide_8c}{}\doxysection{ide.\+c 파일 참조}
+\label{ide_8c}\index{ide.c@{ide.c}}
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}defs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}param.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}memlayout.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mmu.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}proc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}x86.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}traps.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}spinlock.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sleeplock.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}fs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}buf.\+h\char`\"{}}\newline
+ide.\+c에 대한 include 의존 그래프
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{de/d54/ide_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{매크로}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ide_8c_aa35bad1e92008da628f27b2f6bb270aa}{S\+E\+C\+T\+O\+R\+\_\+\+S\+I\+ZE}}~512
+\item 
+\#define \mbox{\hyperlink{ide_8c_aebe5f7f39eb6d658f4a430936dc1dfc2}{I\+D\+E\+\_\+\+B\+SY}}~0x80
+\item 
+\#define \mbox{\hyperlink{ide_8c_a46b51ed8423e20960b46bd4451aad66b}{I\+D\+E\+\_\+\+D\+R\+DY}}~0x40
+\item 
+\#define \mbox{\hyperlink{ide_8c_a8856c5f8e07087f4cc462dc093539f75}{I\+D\+E\+\_\+\+DF}}~0x20
+\item 
+\#define \mbox{\hyperlink{ide_8c_ae27406a5efbf146eebd69751e36b1d14}{I\+D\+E\+\_\+\+E\+RR}}~0x01
+\item 
+\#define \mbox{\hyperlink{ide_8c_ae117ee5b71546241f52d9088c0fffadc}{I\+D\+E\+\_\+\+C\+M\+D\+\_\+\+R\+E\+AD}}~0x20
+\item 
+\#define \mbox{\hyperlink{ide_8c_ae7cbfd899670e7987022c3bb639e568d}{I\+D\+E\+\_\+\+C\+M\+D\+\_\+\+W\+R\+I\+TE}}~0x30
+\item 
+\#define \mbox{\hyperlink{ide_8c_a93b80911b1cd461ad95283151dfc90ee}{I\+D\+E\+\_\+\+C\+M\+D\+\_\+\+R\+D\+M\+UL}}~0xc4
+\item 
+\#define \mbox{\hyperlink{ide_8c_a4afad2a87c6ecab61eefe7804384defc}{I\+D\+E\+\_\+\+C\+M\+D\+\_\+\+W\+R\+M\+UL}}~0xc5
+\end{DoxyCompactItemize}
+\doxysubsection*{함수}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{ide_8c_a8dd5da18ae27fdeef2e7f854b855700e}{idestart}} (struct \mbox{\hyperlink{structbuf}{buf}} $\ast$)
+\item 
+static int \mbox{\hyperlink{ide_8c_a20e7bdb8447d25c59f86be50a373963c}{idewait}} (int checkerr)
+\item 
+void \mbox{\hyperlink{ide_8c_aefb190a6104cb58c0bc1f8fec88d1307}{ideinit}} (void)
+\item 
+void \mbox{\hyperlink{ide_8c_a709693afdb9b89d848e684e7acde1f8f}{ideintr}} (void)
+\item 
+void \mbox{\hyperlink{ide_8c_a7f36b008f02088c86f76e98e05b55af5}{iderw}} (struct \mbox{\hyperlink{structbuf}{buf}} $\ast$b)
+\end{DoxyCompactItemize}
+\doxysubsection*{변수}
+\begin{DoxyCompactItemize}
+\item 
+static struct \mbox{\hyperlink{structspinlock}{spinlock}} \mbox{\hyperlink{ide_8c_a61ffb3980938c8620af8a902efe915d8}{idelock}}
+\item 
+static struct \mbox{\hyperlink{structbuf}{buf}} $\ast$ \mbox{\hyperlink{ide_8c_a536acd566db32c3d789cf25931c825df}{idequeue}}
+\item 
+static int \mbox{\hyperlink{ide_8c_afca23fe19435d7c19810acf8fb21bf33}{havedisk1}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{매크로 문서화}
+\mbox{\Hypertarget{ide_8c_aebe5f7f39eb6d658f4a430936dc1dfc2}\label{ide_8c_aebe5f7f39eb6d658f4a430936dc1dfc2}} 
+\index{ide.c@{ide.c}!IDE\_BSY@{IDE\_BSY}}
+\index{IDE\_BSY@{IDE\_BSY}!ide.c@{ide.c}}
+\doxysubsubsection{\texorpdfstring{IDE\_BSY}{IDE\_BSY}}
+{\footnotesize\ttfamily \#define I\+D\+E\+\_\+\+B\+SY~0x80}
+
+
+
+ide.\+c 파일의 17 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{ide_8c_a93b80911b1cd461ad95283151dfc90ee}\label{ide_8c_a93b80911b1cd461ad95283151dfc90ee}} 
+\index{ide.c@{ide.c}!IDE\_CMD\_RDMUL@{IDE\_CMD\_RDMUL}}
+\index{IDE\_CMD\_RDMUL@{IDE\_CMD\_RDMUL}!ide.c@{ide.c}}
+\doxysubsubsection{\texorpdfstring{IDE\_CMD\_RDMUL}{IDE\_CMD\_RDMUL}}
+{\footnotesize\ttfamily \#define I\+D\+E\+\_\+\+C\+M\+D\+\_\+\+R\+D\+M\+UL~0xc4}
+
+
+
+ide.\+c 파일의 24 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{ide_8c_ae117ee5b71546241f52d9088c0fffadc}\label{ide_8c_ae117ee5b71546241f52d9088c0fffadc}} 
+\index{ide.c@{ide.c}!IDE\_CMD\_READ@{IDE\_CMD\_READ}}
+\index{IDE\_CMD\_READ@{IDE\_CMD\_READ}!ide.c@{ide.c}}
+\doxysubsubsection{\texorpdfstring{IDE\_CMD\_READ}{IDE\_CMD\_READ}}
+{\footnotesize\ttfamily \#define I\+D\+E\+\_\+\+C\+M\+D\+\_\+\+R\+E\+AD~0x20}
+
+
+
+ide.\+c 파일의 22 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{ide_8c_ae7cbfd899670e7987022c3bb639e568d}\label{ide_8c_ae7cbfd899670e7987022c3bb639e568d}} 
+\index{ide.c@{ide.c}!IDE\_CMD\_WRITE@{IDE\_CMD\_WRITE}}
+\index{IDE\_CMD\_WRITE@{IDE\_CMD\_WRITE}!ide.c@{ide.c}}
+\doxysubsubsection{\texorpdfstring{IDE\_CMD\_WRITE}{IDE\_CMD\_WRITE}}
+{\footnotesize\ttfamily \#define I\+D\+E\+\_\+\+C\+M\+D\+\_\+\+W\+R\+I\+TE~0x30}
+
+
+
+ide.\+c 파일의 23 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{ide_8c_a4afad2a87c6ecab61eefe7804384defc}\label{ide_8c_a4afad2a87c6ecab61eefe7804384defc}} 
+\index{ide.c@{ide.c}!IDE\_CMD\_WRMUL@{IDE\_CMD\_WRMUL}}
+\index{IDE\_CMD\_WRMUL@{IDE\_CMD\_WRMUL}!ide.c@{ide.c}}
+\doxysubsubsection{\texorpdfstring{IDE\_CMD\_WRMUL}{IDE\_CMD\_WRMUL}}
+{\footnotesize\ttfamily \#define I\+D\+E\+\_\+\+C\+M\+D\+\_\+\+W\+R\+M\+UL~0xc5}
+
+
+
+ide.\+c 파일의 25 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{ide_8c_a8856c5f8e07087f4cc462dc093539f75}\label{ide_8c_a8856c5f8e07087f4cc462dc093539f75}} 
+\index{ide.c@{ide.c}!IDE\_DF@{IDE\_DF}}
+\index{IDE\_DF@{IDE\_DF}!ide.c@{ide.c}}
+\doxysubsubsection{\texorpdfstring{IDE\_DF}{IDE\_DF}}
+{\footnotesize\ttfamily \#define I\+D\+E\+\_\+\+DF~0x20}
+
+
+
+ide.\+c 파일의 19 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{ide_8c_a46b51ed8423e20960b46bd4451aad66b}\label{ide_8c_a46b51ed8423e20960b46bd4451aad66b}} 
+\index{ide.c@{ide.c}!IDE\_DRDY@{IDE\_DRDY}}
+\index{IDE\_DRDY@{IDE\_DRDY}!ide.c@{ide.c}}
+\doxysubsubsection{\texorpdfstring{IDE\_DRDY}{IDE\_DRDY}}
+{\footnotesize\ttfamily \#define I\+D\+E\+\_\+\+D\+R\+DY~0x40}
+
+
+
+ide.\+c 파일의 18 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{ide_8c_ae27406a5efbf146eebd69751e36b1d14}\label{ide_8c_ae27406a5efbf146eebd69751e36b1d14}} 
+\index{ide.c@{ide.c}!IDE\_ERR@{IDE\_ERR}}
+\index{IDE\_ERR@{IDE\_ERR}!ide.c@{ide.c}}
+\doxysubsubsection{\texorpdfstring{IDE\_ERR}{IDE\_ERR}}
+{\footnotesize\ttfamily \#define I\+D\+E\+\_\+\+E\+RR~0x01}
+
+
+
+ide.\+c 파일의 20 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{ide_8c_aa35bad1e92008da628f27b2f6bb270aa}\label{ide_8c_aa35bad1e92008da628f27b2f6bb270aa}} 
+\index{ide.c@{ide.c}!SECTOR\_SIZE@{SECTOR\_SIZE}}
+\index{SECTOR\_SIZE@{SECTOR\_SIZE}!ide.c@{ide.c}}
+\doxysubsubsection{\texorpdfstring{SECTOR\_SIZE}{SECTOR\_SIZE}}
+{\footnotesize\ttfamily \#define S\+E\+C\+T\+O\+R\+\_\+\+S\+I\+ZE~512}
+
+
+
+ide.\+c 파일의 16 번째 라인에서 정의되었습니다.
+
+
+
+\doxysubsection{함수 문서화}
+\mbox{\Hypertarget{ide_8c_aefb190a6104cb58c0bc1f8fec88d1307}\label{ide_8c_aefb190a6104cb58c0bc1f8fec88d1307}} 
+\index{ide.c@{ide.c}!ideinit@{ideinit}}
+\index{ideinit@{ideinit}!ide.c@{ide.c}}
+\doxysubsubsection{\texorpdfstring{ideinit()}{ideinit()}}
+{\footnotesize\ttfamily void ideinit (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+ide.\+c 파일의 51 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{52 \{}
+\DoxyCodeLine{53   \textcolor{keywordtype}{int} i;}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55   \mbox{\hyperlink{defs_8h_ab56d728e6966819a0260c358d3ac3419}{initlock}}(\&\mbox{\hyperlink{ide_8c_a61ffb3980938c8620af8a902efe915d8}{idelock}}, \textcolor{stringliteral}{"ide"});}
+\DoxyCodeLine{56   \mbox{\hyperlink{defs_8h_a63da75c0c2f0b051f2c790aea2116b63}{ioapicenable}}(\mbox{\hyperlink{traps_8h_ae17548e9192fbdecfb02247721aaf2df}{IRQ\_IDE}}, \mbox{\hyperlink{mp_8c_a6201a0661c3d5b88df5f63529298eb48}{ncpu}} -\/ 1);}
+\DoxyCodeLine{57   \mbox{\hyperlink{ide_8c_a20e7bdb8447d25c59f86be50a373963c}{idewait}}(0);}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59   \textcolor{comment}{// Check if disk 1 is present}}
+\DoxyCodeLine{60   \mbox{\hyperlink{x86_8h_ae83f752beecce9c8f6f8711ff936377f}{outb}}(0x1f6, 0xe0 | (1<<4));}
+\DoxyCodeLine{61   \textcolor{keywordflow}{for}(i=0; i<1000; i++)\{}
+\DoxyCodeLine{62     \textcolor{keywordflow}{if}(\mbox{\hyperlink{x86_8h_a2866d9720d8f4b0e23530f79171dfba9}{inb}}(0x1f7) != 0)\{}
+\DoxyCodeLine{63       \mbox{\hyperlink{ide_8c_afca23fe19435d7c19810acf8fb21bf33}{havedisk1}} = 1;}
+\DoxyCodeLine{64       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{65     \}}
+\DoxyCodeLine{66   \}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68   \textcolor{comment}{// Switch back to disk 0.}}
+\DoxyCodeLine{69   \mbox{\hyperlink{x86_8h_ae83f752beecce9c8f6f8711ff936377f}{outb}}(0x1f6, 0xe0 | (0<<4));}
+\DoxyCodeLine{70 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=349pt]{d9/d2f/ide_8c_aefb190a6104cb58c0bc1f8fec88d1307_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{ide_8c_a709693afdb9b89d848e684e7acde1f8f}\label{ide_8c_a709693afdb9b89d848e684e7acde1f8f}} 
+\index{ide.c@{ide.c}!ideintr@{ideintr}}
+\index{ideintr@{ideintr}!ide.c@{ide.c}}
+\doxysubsubsection{\texorpdfstring{ideintr()}{ideintr()}}
+{\footnotesize\ttfamily void ideintr (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+ide.\+c 파일의 104 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{105 \{}
+\DoxyCodeLine{106   \textcolor{keyword}{struct }\mbox{\hyperlink{structbuf}{buf}} *b;}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108   \textcolor{comment}{// First queued buffer is the active request.}}
+\DoxyCodeLine{109   \mbox{\hyperlink{defs_8h_afe4ef8638f1ecb962a6e67fb086ee3b8}{acquire}}(\&\mbox{\hyperlink{ide_8c_a61ffb3980938c8620af8a902efe915d8}{idelock}});}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111   \textcolor{keywordflow}{if}((b = \mbox{\hyperlink{ide_8c_a536acd566db32c3d789cf25931c825df}{idequeue}}) == 0)\{}
+\DoxyCodeLine{112     \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{ide_8c_a61ffb3980938c8620af8a902efe915d8}{idelock}});}
+\DoxyCodeLine{113     \textcolor{keywordflow}{return};}
+\DoxyCodeLine{114   \}}
+\DoxyCodeLine{115   \mbox{\hyperlink{ide_8c_a536acd566db32c3d789cf25931c825df}{idequeue}} = b-\/>\mbox{\hyperlink{structbuf_aba5c088c4da07a5ec88edfacdae9b85a}{qnext}};}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117   \textcolor{comment}{// Read data if needed.}}
+\DoxyCodeLine{118   \textcolor{keywordflow}{if}(!(b-\/>\mbox{\hyperlink{structbuf_ae7d6b6c34fdeadb38970efd0554aa1a9}{flags}} \& \mbox{\hyperlink{buf_8h_adc32011df267adb9740bcd0abf0f0663}{B\_DIRTY}}) \&\& \mbox{\hyperlink{ide_8c_a20e7bdb8447d25c59f86be50a373963c}{idewait}}(1) >= 0)}
+\DoxyCodeLine{119     \mbox{\hyperlink{x86_8h_afa75519f8fc7778abeebd0b9bdc82569}{insl}}(0x1f0, b-\/>\mbox{\hyperlink{structbuf_ab0ec38784ab94ed35e575cf6d33912d2}{data}}, \mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}}/4);}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121   \textcolor{comment}{// Wake process waiting for this buf.}}
+\DoxyCodeLine{122   b-\/>\mbox{\hyperlink{structbuf_ae7d6b6c34fdeadb38970efd0554aa1a9}{flags}} |= \mbox{\hyperlink{buf_8h_afab4199c0d27da71061f1c0cd5b51520}{B\_VALID}};}
+\DoxyCodeLine{123   b-\/>\mbox{\hyperlink{structbuf_ae7d6b6c34fdeadb38970efd0554aa1a9}{flags}} \&= \string~\mbox{\hyperlink{buf_8h_adc32011df267adb9740bcd0abf0f0663}{B\_DIRTY}};}
+\DoxyCodeLine{124   \mbox{\hyperlink{defs_8h_a245b56417239f499389b2e806bd99254}{wakeup}}(b);}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126   \textcolor{comment}{// Start disk on next buf in queue.}}
+\DoxyCodeLine{127   \textcolor{keywordflow}{if}(\mbox{\hyperlink{ide_8c_a536acd566db32c3d789cf25931c825df}{idequeue}} != 0)}
+\DoxyCodeLine{128     \mbox{\hyperlink{ide_8c_a8dd5da18ae27fdeef2e7f854b855700e}{idestart}}(\mbox{\hyperlink{ide_8c_a536acd566db32c3d789cf25931c825df}{idequeue}});}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130   \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{ide_8c_a61ffb3980938c8620af8a902efe915d8}{idelock}});}
+\DoxyCodeLine{131 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d9/d2f/ide_8c_a709693afdb9b89d848e684e7acde1f8f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{ide_8c_a7f36b008f02088c86f76e98e05b55af5}\label{ide_8c_a7f36b008f02088c86f76e98e05b55af5}} 
+\index{ide.c@{ide.c}!iderw@{iderw}}
+\index{iderw@{iderw}!ide.c@{ide.c}}
+\doxysubsubsection{\texorpdfstring{iderw()}{iderw()}}
+{\footnotesize\ttfamily void iderw (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structbuf}{buf}} $\ast$}]{b }\end{DoxyParamCaption})}
+
+
+
+ide.\+c 파일의 138 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{139 \{}
+\DoxyCodeLine{140   \textcolor{keyword}{struct }\mbox{\hyperlink{structbuf}{buf}} **pp;}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142   \textcolor{keywordflow}{if}(!\mbox{\hyperlink{defs_8h_afa76133bc67c6026376d630da9b53b68}{holdingsleep}}(\&b-\/>\mbox{\hyperlink{structbuf_a626ad748d91d4bd7f4e65b74c73f2644}{lock}}))}
+\DoxyCodeLine{143     \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"iderw: buf not locked"});}
+\DoxyCodeLine{144   \textcolor{keywordflow}{if}((b-\/>\mbox{\hyperlink{structbuf_ae7d6b6c34fdeadb38970efd0554aa1a9}{flags}} \& (\mbox{\hyperlink{buf_8h_afab4199c0d27da71061f1c0cd5b51520}{B\_VALID}}|\mbox{\hyperlink{buf_8h_adc32011df267adb9740bcd0abf0f0663}{B\_DIRTY}})) == \mbox{\hyperlink{buf_8h_afab4199c0d27da71061f1c0cd5b51520}{B\_VALID}})}
+\DoxyCodeLine{145     \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"iderw: nothing to do"});}
+\DoxyCodeLine{146   \textcolor{keywordflow}{if}(b-\/>\mbox{\hyperlink{structbuf_ac96082c2b5f22133ac7092ef81487227}{dev}} != 0 \&\& !\mbox{\hyperlink{ide_8c_afca23fe19435d7c19810acf8fb21bf33}{havedisk1}})}
+\DoxyCodeLine{147     \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"iderw: ide disk 1 not present"});}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149   \mbox{\hyperlink{defs_8h_afe4ef8638f1ecb962a6e67fb086ee3b8}{acquire}}(\&\mbox{\hyperlink{ide_8c_a61ffb3980938c8620af8a902efe915d8}{idelock}});  \textcolor{comment}{//DOC:acquire-\/lock}}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151   \textcolor{comment}{// Append b to idequeue.}}
+\DoxyCodeLine{152   b-\/>\mbox{\hyperlink{structbuf_aba5c088c4da07a5ec88edfacdae9b85a}{qnext}} = 0;}
+\DoxyCodeLine{153   \textcolor{keywordflow}{for}(pp=\&\mbox{\hyperlink{ide_8c_a536acd566db32c3d789cf25931c825df}{idequeue}}; *pp; pp=\&(*pp)-\/>\mbox{\hyperlink{structbuf_aba5c088c4da07a5ec88edfacdae9b85a}{qnext}})  \textcolor{comment}{//DOC:insert-\/queue}}
+\DoxyCodeLine{154     ;}
+\DoxyCodeLine{155   *pp = b;}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157   \textcolor{comment}{// Start disk if necessary.}}
+\DoxyCodeLine{158   \textcolor{keywordflow}{if}(\mbox{\hyperlink{ide_8c_a536acd566db32c3d789cf25931c825df}{idequeue}} == b)}
+\DoxyCodeLine{159     \mbox{\hyperlink{ide_8c_a8dd5da18ae27fdeef2e7f854b855700e}{idestart}}(b);}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161   \textcolor{comment}{// Wait for request to finish.}}
+\DoxyCodeLine{162   \textcolor{keywordflow}{while}((b-\/>\mbox{\hyperlink{structbuf_ae7d6b6c34fdeadb38970efd0554aa1a9}{flags}} \& (\mbox{\hyperlink{buf_8h_afab4199c0d27da71061f1c0cd5b51520}{B\_VALID}}|\mbox{\hyperlink{buf_8h_adc32011df267adb9740bcd0abf0f0663}{B\_DIRTY}})) != \mbox{\hyperlink{buf_8h_afab4199c0d27da71061f1c0cd5b51520}{B\_VALID}})\{}
+\DoxyCodeLine{163     \mbox{\hyperlink{defs_8h_aca4a88f06b3ebbcc04330f7ae06c8507}{sleep}}(b, \&\mbox{\hyperlink{ide_8c_a61ffb3980938c8620af8a902efe915d8}{idelock}});}
+\DoxyCodeLine{164   \}}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167   \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{ide_8c_a61ffb3980938c8620af8a902efe915d8}{idelock}});}
+\DoxyCodeLine{168 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d9/d2f/ide_8c_a7f36b008f02088c86f76e98e05b55af5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{ide_8c_a8dd5da18ae27fdeef2e7f854b855700e}\label{ide_8c_a8dd5da18ae27fdeef2e7f854b855700e}} 
+\index{ide.c@{ide.c}!idestart@{idestart}}
+\index{idestart@{idestart}!ide.c@{ide.c}}
+\doxysubsubsection{\texorpdfstring{idestart()}{idestart()}}
+{\footnotesize\ttfamily static void idestart (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structbuf}{buf}} $\ast$}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+ide.\+c 파일의 74 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{75 \{}
+\DoxyCodeLine{76   \textcolor{keywordflow}{if}(b == 0)}
+\DoxyCodeLine{77     \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"idestart"});}
+\DoxyCodeLine{78   \textcolor{keywordflow}{if}(b-\/>\mbox{\hyperlink{structbuf_a756b2bcc88008bef7f21d688aa4a7a48}{blockno}} >= \mbox{\hyperlink{param_8h_a486f47992f736854db2444b01afd9991}{FSSIZE}})}
+\DoxyCodeLine{79     \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"incorrect blockno"});}
+\DoxyCodeLine{80   \textcolor{keywordtype}{int} sector\_per\_block =  \mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}}/\mbox{\hyperlink{ide_8c_aa35bad1e92008da628f27b2f6bb270aa}{SECTOR\_SIZE}};}
+\DoxyCodeLine{81   \textcolor{keywordtype}{int} sector = b-\/>\mbox{\hyperlink{structbuf_a756b2bcc88008bef7f21d688aa4a7a48}{blockno}} * sector\_per\_block;}
+\DoxyCodeLine{82   \textcolor{keywordtype}{int} read\_cmd = (sector\_per\_block == 1) ? \mbox{\hyperlink{ide_8c_ae117ee5b71546241f52d9088c0fffadc}{IDE\_CMD\_READ}} :  \mbox{\hyperlink{ide_8c_a93b80911b1cd461ad95283151dfc90ee}{IDE\_CMD\_RDMUL}};}
+\DoxyCodeLine{83   \textcolor{keywordtype}{int} write\_cmd = (sector\_per\_block == 1) ? \mbox{\hyperlink{ide_8c_ae7cbfd899670e7987022c3bb639e568d}{IDE\_CMD\_WRITE}} : \mbox{\hyperlink{ide_8c_a4afad2a87c6ecab61eefe7804384defc}{IDE\_CMD\_WRMUL}};}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85   \textcolor{keywordflow}{if} (sector\_per\_block > 7) \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"idestart"});}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87   \mbox{\hyperlink{ide_8c_a20e7bdb8447d25c59f86be50a373963c}{idewait}}(0);}
+\DoxyCodeLine{88   \mbox{\hyperlink{x86_8h_ae83f752beecce9c8f6f8711ff936377f}{outb}}(0x3f6, 0);  \textcolor{comment}{// generate interrupt}}
+\DoxyCodeLine{89   \mbox{\hyperlink{x86_8h_ae83f752beecce9c8f6f8711ff936377f}{outb}}(0x1f2, sector\_per\_block);  \textcolor{comment}{// number of sectors}}
+\DoxyCodeLine{90   \mbox{\hyperlink{x86_8h_ae83f752beecce9c8f6f8711ff936377f}{outb}}(0x1f3, sector \& 0xff);}
+\DoxyCodeLine{91   \mbox{\hyperlink{x86_8h_ae83f752beecce9c8f6f8711ff936377f}{outb}}(0x1f4, (sector >> 8) \& 0xff);}
+\DoxyCodeLine{92   \mbox{\hyperlink{x86_8h_ae83f752beecce9c8f6f8711ff936377f}{outb}}(0x1f5, (sector >> 16) \& 0xff);}
+\DoxyCodeLine{93   \mbox{\hyperlink{x86_8h_ae83f752beecce9c8f6f8711ff936377f}{outb}}(0x1f6, 0xe0 | ((b-\/>\mbox{\hyperlink{structbuf_ac96082c2b5f22133ac7092ef81487227}{dev}}\&1)<<4) | ((sector>>24)\&0x0f));}
+\DoxyCodeLine{94   \textcolor{keywordflow}{if}(b-\/>\mbox{\hyperlink{structbuf_ae7d6b6c34fdeadb38970efd0554aa1a9}{flags}} \& \mbox{\hyperlink{buf_8h_adc32011df267adb9740bcd0abf0f0663}{B\_DIRTY}})\{}
+\DoxyCodeLine{95     \mbox{\hyperlink{x86_8h_ae83f752beecce9c8f6f8711ff936377f}{outb}}(0x1f7, write\_cmd);}
+\DoxyCodeLine{96     \mbox{\hyperlink{x86_8h_af20064a96968f84c40bd6c633bc844f4}{outsl}}(0x1f0, b-\/>\mbox{\hyperlink{structbuf_ab0ec38784ab94ed35e575cf6d33912d2}{data}}, \mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}}/4);}
+\DoxyCodeLine{97   \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{98     \mbox{\hyperlink{x86_8h_ae83f752beecce9c8f6f8711ff936377f}{outb}}(0x1f7, read\_cmd);}
+\DoxyCodeLine{99   \}}
+\DoxyCodeLine{100 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{d9/d2f/ide_8c_a8dd5da18ae27fdeef2e7f854b855700e_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=218pt]{d9/d2f/ide_8c_a8dd5da18ae27fdeef2e7f854b855700e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{ide_8c_a20e7bdb8447d25c59f86be50a373963c}\label{ide_8c_a20e7bdb8447d25c59f86be50a373963c}} 
+\index{ide.c@{ide.c}!idewait@{idewait}}
+\index{idewait@{idewait}!ide.c@{ide.c}}
+\doxysubsubsection{\texorpdfstring{idewait()}{idewait()}}
+{\footnotesize\ttfamily static int idewait (\begin{DoxyParamCaption}\item[{int}]{checkerr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+ide.\+c 파일의 39 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{40 \{}
+\DoxyCodeLine{41   \textcolor{keywordtype}{int} \mbox{\hyperlink{console_8c_af10fa12dd785c91e29528fbdc50cf9af}{r}};}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43   \textcolor{keywordflow}{while}(((\mbox{\hyperlink{console_8c_af10fa12dd785c91e29528fbdc50cf9af}{r}} = \mbox{\hyperlink{x86_8h_a2866d9720d8f4b0e23530f79171dfba9}{inb}}(0x1f7)) \& (\mbox{\hyperlink{ide_8c_aebe5f7f39eb6d658f4a430936dc1dfc2}{IDE\_BSY}}|\mbox{\hyperlink{ide_8c_a46b51ed8423e20960b46bd4451aad66b}{IDE\_DRDY}})) != \mbox{\hyperlink{ide_8c_a46b51ed8423e20960b46bd4451aad66b}{IDE\_DRDY}})}
+\DoxyCodeLine{44     ;}
+\DoxyCodeLine{45   \textcolor{keywordflow}{if}(checkerr \&\& (\mbox{\hyperlink{console_8c_af10fa12dd785c91e29528fbdc50cf9af}{r}} \& (\mbox{\hyperlink{ide_8c_a8856c5f8e07087f4cc462dc093539f75}{IDE\_DF}}|\mbox{\hyperlink{ide_8c_ae27406a5efbf146eebd69751e36b1d14}{IDE\_ERR}})) != 0)}
+\DoxyCodeLine{46     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{47   \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{48 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=201pt]{d9/d2f/ide_8c_a20e7bdb8447d25c59f86be50a373963c_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=307pt]{d9/d2f/ide_8c_a20e7bdb8447d25c59f86be50a373963c_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{변수 문서화}
+\mbox{\Hypertarget{ide_8c_afca23fe19435d7c19810acf8fb21bf33}\label{ide_8c_afca23fe19435d7c19810acf8fb21bf33}} 
+\index{ide.c@{ide.c}!havedisk1@{havedisk1}}
+\index{havedisk1@{havedisk1}!ide.c@{ide.c}}
+\doxysubsubsection{\texorpdfstring{havedisk1}{havedisk1}}
+{\footnotesize\ttfamily int havedisk1\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+ide.\+c 파일의 34 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{ide_8c_a61ffb3980938c8620af8a902efe915d8}\label{ide_8c_a61ffb3980938c8620af8a902efe915d8}} 
+\index{ide.c@{ide.c}!idelock@{idelock}}
+\index{idelock@{idelock}!ide.c@{ide.c}}
+\doxysubsubsection{\texorpdfstring{idelock}{idelock}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structspinlock}{spinlock}} idelock\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+ide.\+c 파일의 31 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{ide_8c_a536acd566db32c3d789cf25931c825df}\label{ide_8c_a536acd566db32c3d789cf25931c825df}} 
+\index{ide.c@{ide.c}!idequeue@{idequeue}}
+\index{idequeue@{idequeue}!ide.c@{ide.c}}
+\doxysubsubsection{\texorpdfstring{idequeue}{idequeue}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structbuf}{buf}}$\ast$ idequeue\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+ide.\+c 파일의 32 번째 라인에서 정의되었습니다.
+

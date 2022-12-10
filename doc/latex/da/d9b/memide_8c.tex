@@ -1,0 +1,177 @@
+\hypertarget{memide_8c}{}\doxysection{memide.\+c 파일 참조}
+\label{memide_8c}\index{memide.c@{memide.c}}
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}defs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}param.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mmu.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}proc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}x86.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}traps.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}spinlock.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sleeplock.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}fs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}buf.\+h\char`\"{}}\newline
+memide.\+c에 대한 include 의존 그래프
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/d13/memide_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{함수}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{memide_8c_aefb190a6104cb58c0bc1f8fec88d1307}{ideinit}} (void)
+\item 
+void \mbox{\hyperlink{memide_8c_a709693afdb9b89d848e684e7acde1f8f}{ideintr}} (void)
+\item 
+void \mbox{\hyperlink{memide_8c_a7f36b008f02088c86f76e98e05b55af5}{iderw}} (struct \mbox{\hyperlink{structbuf}{buf}} $\ast$b)
+\end{DoxyCompactItemize}
+\doxysubsection*{변수}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{types_8h_a65f85814a8290f9797005d3b28e7e5fc}{uchar}} \mbox{\hyperlink{memide_8c_af73b74f3a51ba441c3b68b1cf3e276c3}{\+\_\+binary\+\_\+fs\+\_\+img\+\_\+start}} \mbox{[}$\,$\mbox{]}
+\item 
+\mbox{\hyperlink{types_8h_a65f85814a8290f9797005d3b28e7e5fc}{uchar}} \mbox{\hyperlink{memide_8c_a10b9652e23b65245bbc2126350c915d3}{\+\_\+binary\+\_\+fs\+\_\+img\+\_\+size}} \mbox{[}$\,$\mbox{]}
+\item 
+static int \mbox{\hyperlink{memide_8c_a6c6c74725f99265c4ff7e7e4d3a94a8b}{disksize}}
+\item 
+static \mbox{\hyperlink{types_8h_a65f85814a8290f9797005d3b28e7e5fc}{uchar}} $\ast$ \mbox{\hyperlink{memide_8c_ac6cbbc8255be1fb722d083bbfa53111b}{memdisk}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{함수 문서화}
+\mbox{\Hypertarget{memide_8c_aefb190a6104cb58c0bc1f8fec88d1307}\label{memide_8c_aefb190a6104cb58c0bc1f8fec88d1307}} 
+\index{memide.c@{memide.c}!ideinit@{ideinit}}
+\index{ideinit@{ideinit}!memide.c@{memide.c}}
+\doxysubsubsection{\texorpdfstring{ideinit()}{ideinit()}}
+{\footnotesize\ttfamily void ideinit (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+memide.\+c 파일의 22 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{23 \{}
+\DoxyCodeLine{24   \mbox{\hyperlink{memide_8c_ac6cbbc8255be1fb722d083bbfa53111b}{memdisk}} = \mbox{\hyperlink{memide_8c_af73b74f3a51ba441c3b68b1cf3e276c3}{\_binary\_fs\_img\_start}};}
+\DoxyCodeLine{25   \mbox{\hyperlink{memide_8c_a6c6c74725f99265c4ff7e7e4d3a94a8b}{disksize}} = (\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})\mbox{\hyperlink{memide_8c_a10b9652e23b65245bbc2126350c915d3}{\_binary\_fs\_img\_size}}/\mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}};}
+\DoxyCodeLine{26 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{memide_8c_a709693afdb9b89d848e684e7acde1f8f}\label{memide_8c_a709693afdb9b89d848e684e7acde1f8f}} 
+\index{memide.c@{memide.c}!ideintr@{ideintr}}
+\index{ideintr@{ideintr}!memide.c@{memide.c}}
+\doxysubsubsection{\texorpdfstring{ideintr()}{ideintr()}}
+{\footnotesize\ttfamily void ideintr (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+memide.\+c 파일의 30 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{31 \{}
+\DoxyCodeLine{32   \textcolor{comment}{// no-\/op}}
+\DoxyCodeLine{33 \}}
+
+\end{DoxyCode}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{da/d9b/memide_8c_a709693afdb9b89d848e684e7acde1f8f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{memide_8c_a7f36b008f02088c86f76e98e05b55af5}\label{memide_8c_a7f36b008f02088c86f76e98e05b55af5}} 
+\index{memide.c@{memide.c}!iderw@{iderw}}
+\index{iderw@{iderw}!memide.c@{memide.c}}
+\doxysubsubsection{\texorpdfstring{iderw()}{iderw()}}
+{\footnotesize\ttfamily void iderw (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structbuf}{buf}} $\ast$}]{b }\end{DoxyParamCaption})}
+
+
+
+memide.\+c 파일의 39 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{40 \{}
+\DoxyCodeLine{41   \mbox{\hyperlink{types_8h_a65f85814a8290f9797005d3b28e7e5fc}{uchar}} *p;}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43   \textcolor{keywordflow}{if}(!\mbox{\hyperlink{defs_8h_afa76133bc67c6026376d630da9b53b68}{holdingsleep}}(\&b-\/>\mbox{\hyperlink{structbuf_a626ad748d91d4bd7f4e65b74c73f2644}{lock}}))}
+\DoxyCodeLine{44     \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"iderw: buf not locked"});}
+\DoxyCodeLine{45   \textcolor{keywordflow}{if}((b-\/>\mbox{\hyperlink{structbuf_ae7d6b6c34fdeadb38970efd0554aa1a9}{flags}} \& (\mbox{\hyperlink{buf_8h_afab4199c0d27da71061f1c0cd5b51520}{B\_VALID}}|\mbox{\hyperlink{buf_8h_adc32011df267adb9740bcd0abf0f0663}{B\_DIRTY}})) == \mbox{\hyperlink{buf_8h_afab4199c0d27da71061f1c0cd5b51520}{B\_VALID}})}
+\DoxyCodeLine{46     \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"iderw: nothing to do"});}
+\DoxyCodeLine{47   \textcolor{keywordflow}{if}(b-\/>\mbox{\hyperlink{structbuf_ac96082c2b5f22133ac7092ef81487227}{dev}} != 1)}
+\DoxyCodeLine{48     \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"iderw: request not for disk 1"});}
+\DoxyCodeLine{49   \textcolor{keywordflow}{if}(b-\/>\mbox{\hyperlink{structbuf_a756b2bcc88008bef7f21d688aa4a7a48}{blockno}} >= \mbox{\hyperlink{memide_8c_a6c6c74725f99265c4ff7e7e4d3a94a8b}{disksize}})}
+\DoxyCodeLine{50     \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"iderw: block out of range"});}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52   p = \mbox{\hyperlink{memide_8c_ac6cbbc8255be1fb722d083bbfa53111b}{memdisk}} + b-\/>\mbox{\hyperlink{structbuf_a756b2bcc88008bef7f21d688aa4a7a48}{blockno}}*\mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}};}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54   \textcolor{keywordflow}{if}(b-\/>\mbox{\hyperlink{structbuf_ae7d6b6c34fdeadb38970efd0554aa1a9}{flags}} \& \mbox{\hyperlink{buf_8h_adc32011df267adb9740bcd0abf0f0663}{B\_DIRTY}})\{}
+\DoxyCodeLine{55     b-\/>\mbox{\hyperlink{structbuf_ae7d6b6c34fdeadb38970efd0554aa1a9}{flags}} \&= \string~\mbox{\hyperlink{buf_8h_adc32011df267adb9740bcd0abf0f0663}{B\_DIRTY}};}
+\DoxyCodeLine{56     \mbox{\hyperlink{defs_8h_aa9c8577c0e9d233f85892ec2d9bfe212}{memmove}}(p, b-\/>\mbox{\hyperlink{structbuf_ab0ec38784ab94ed35e575cf6d33912d2}{data}}, \mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}});}
+\DoxyCodeLine{57   \} \textcolor{keywordflow}{else}}
+\DoxyCodeLine{58     \mbox{\hyperlink{defs_8h_aa9c8577c0e9d233f85892ec2d9bfe212}{memmove}}(b-\/>\mbox{\hyperlink{structbuf_ab0ec38784ab94ed35e575cf6d33912d2}{data}}, p, \mbox{\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{BSIZE}});}
+\DoxyCodeLine{59   b-\/>\mbox{\hyperlink{structbuf_ae7d6b6c34fdeadb38970efd0554aa1a9}{flags}} |= \mbox{\hyperlink{buf_8h_afab4199c0d27da71061f1c0cd5b51520}{B\_VALID}};}
+\DoxyCodeLine{60 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{da/d9b/memide_8c_a7f36b008f02088c86f76e98e05b55af5_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{da/d9b/memide_8c_a7f36b008f02088c86f76e98e05b55af5_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{변수 문서화}
+\mbox{\Hypertarget{memide_8c_a10b9652e23b65245bbc2126350c915d3}\label{memide_8c_a10b9652e23b65245bbc2126350c915d3}} 
+\index{memide.c@{memide.c}!\_binary\_fs\_img\_size@{\_binary\_fs\_img\_size}}
+\index{\_binary\_fs\_img\_size@{\_binary\_fs\_img\_size}!memide.c@{memide.c}}
+\doxysubsubsection{\texorpdfstring{\_binary\_fs\_img\_size}{\_binary\_fs\_img\_size}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a65f85814a8290f9797005d3b28e7e5fc}{uchar}} \+\_\+binary\+\_\+fs\+\_\+img\+\_\+size\mbox{[}$\,$\mbox{]}}
+
+
+
+memide.\+c 파일의 16 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{memide_8c_af73b74f3a51ba441c3b68b1cf3e276c3}\label{memide_8c_af73b74f3a51ba441c3b68b1cf3e276c3}} 
+\index{memide.c@{memide.c}!\_binary\_fs\_img\_start@{\_binary\_fs\_img\_start}}
+\index{\_binary\_fs\_img\_start@{\_binary\_fs\_img\_start}!memide.c@{memide.c}}
+\doxysubsubsection{\texorpdfstring{\_binary\_fs\_img\_start}{\_binary\_fs\_img\_start}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a65f85814a8290f9797005d3b28e7e5fc}{uchar}} \+\_\+binary\+\_\+fs\+\_\+img\+\_\+start\mbox{[}$\,$\mbox{]}}
+
+\mbox{\Hypertarget{memide_8c_a6c6c74725f99265c4ff7e7e4d3a94a8b}\label{memide_8c_a6c6c74725f99265c4ff7e7e4d3a94a8b}} 
+\index{memide.c@{memide.c}!disksize@{disksize}}
+\index{disksize@{disksize}!memide.c@{memide.c}}
+\doxysubsubsection{\texorpdfstring{disksize}{disksize}}
+{\footnotesize\ttfamily int disksize\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+memide.\+c 파일의 18 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{memide_8c_ac6cbbc8255be1fb722d083bbfa53111b}\label{memide_8c_ac6cbbc8255be1fb722d083bbfa53111b}} 
+\index{memide.c@{memide.c}!memdisk@{memdisk}}
+\index{memdisk@{memdisk}!memide.c@{memide.c}}
+\doxysubsubsection{\texorpdfstring{memdisk}{memdisk}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a65f85814a8290f9797005d3b28e7e5fc}{uchar}}$\ast$ memdisk\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+memide.\+c 파일의 19 번째 라인에서 정의되었습니다.
+

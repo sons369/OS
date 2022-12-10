@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: file.h 소스 파일</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">My Project
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 다음에 의해 생성됨 :  Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'검색');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','검색');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">file.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="../../d2/d4d/file_8h.html">이 파일의 문서화 페이지로 가기</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno"><a class="line" href="../../d7/d3a/structfile.html">    1</a></span>&#160;<span class="keyword">struct </span><a class="code" href="../../d7/d3a/structfile.html">file</a> {</div>
+<div class="line"><a name="l00002"></a><span class="lineno"><a class="line" href="../../d7/d3a/structfile.html#a4aeeba6a286e58966d853aa1f510d3d5a59fcf59caf6e70c3cc3cc48291b89752">    2</a></span>&#160;  <span class="keyword">enum</span> { <a class="code" href="../../d7/d3a/structfile.html#a4aeeba6a286e58966d853aa1f510d3d5a224e095442d50a6bd1058fd742fb68c7">FD_NONE</a>, <a class="code" href="../../d7/d3a/structfile.html#a4aeeba6a286e58966d853aa1f510d3d5a59fcf59caf6e70c3cc3cc48291b89752">FD_PIPE</a>, <a class="code" href="../../d7/d3a/structfile.html#a4aeeba6a286e58966d853aa1f510d3d5aa5d8c5e0d95ed88367e96ecebfdf326d">FD_INODE</a> } <a class="code" href="../../d7/d3a/structfile.html#a3a28c808a8dcd4acf45087ac30c075e7">type</a>;</div>
+<div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="../../d7/d3a/structfile.html#a41c818f828adea488058bca63e4df23f">    3</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="../../d7/d3a/structfile.html#a41c818f828adea488058bca63e4df23f">ref</a>; <span class="comment">// reference count</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno"><a class="line" href="../../d7/d3a/structfile.html#a0c5c8eced8bc562dbbecc8d450a6b646">    4</a></span>&#160;  <span class="keywordtype">char</span> <a class="code" href="../../d7/d3a/structfile.html#a0c5c8eced8bc562dbbecc8d450a6b646">readable</a>;</div>
+<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="../../d7/d3a/structfile.html#a6e1b641ea1551ac4316a0c11a683df45">    5</a></span>&#160;  <span class="keywordtype">char</span> <a class="code" href="../../d7/d3a/structfile.html#a6e1b641ea1551ac4316a0c11a683df45">writable</a>;</div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="../../d7/d3a/structfile.html#a19d83a8d6cb47902fe8c762d2798c198">    6</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d8/d53/structpipe.html">pipe</a> *<a class="code" href="../../d7/d3a/structfile.html#a19d83a8d6cb47902fe8c762d2798c198">pipe</a>;</div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="../../d7/d3a/structfile.html#a4fd095f927715574dc2a4f243690e508">    7</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d0/df8/structinode.html">inode</a> *<a class="code" href="../../d7/d3a/structfile.html#a4fd095f927715574dc2a4f243690e508">ip</a>;</div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="../../d7/d3a/structfile.html#a94a911be6cc1b1326728392d8b40150d">    8</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../d7/d3a/structfile.html#a94a911be6cc1b1326728392d8b40150d">off</a>;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;};</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// in-memory copy of an inode</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="../../d0/df8/structinode.html">   13</a></span>&#160;<span class="keyword">struct </span><a class="code" href="../../d0/df8/structinode.html">inode</a> {</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">   14</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">dev</a>;           <span class="comment">// Device number</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="../../d0/df8/structinode.html#a8acc2b9df0bfc6856da62925763db7fe">   15</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../d0/df8/structinode.html#a8acc2b9df0bfc6856da62925763db7fe">inum</a>;          <span class="comment">// Inode number</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="../../d0/df8/structinode.html#a6a519028ee67f805482b3e1725bf09c5">   16</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="../../d0/df8/structinode.html#a6a519028ee67f805482b3e1725bf09c5">ref</a>;            <span class="comment">// Reference count</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="../../d0/df8/structinode.html#a46bad0e938fbd348ac02bdef0c8d6215">   17</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="../../d9/dd0/structsleeplock.html">sleeplock</a> <a class="code" href="../../d0/df8/structinode.html#a46bad0e938fbd348ac02bdef0c8d6215">lock</a>; <span class="comment">// protects everything below here</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="../../d0/df8/structinode.html#aad324382ba30eb83daa5304fce7dca08">   18</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="../../d0/df8/structinode.html#aad324382ba30eb83daa5304fce7dca08">valid</a>;          <span class="comment">// inode has been read from disk?</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="../../d0/df8/structinode.html#a8d74bec2898785c057111c328d23fda2">   20</a></span>&#160;  <span class="keywordtype">short</span> <a class="code" href="../../d0/df8/structinode.html#a8d74bec2898785c057111c328d23fda2">type</a>;         <span class="comment">// copy of disk inode</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="../../d0/df8/structinode.html#a34af7242018a977dace5730683850875">   21</a></span>&#160;  <span class="keywordtype">short</span> <a class="code" href="../../d0/df8/structinode.html#a34af7242018a977dace5730683850875">major</a>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="../../d0/df8/structinode.html#a37878866e7905b666db2aa33076076a2">   22</a></span>&#160;  <span class="keywordtype">short</span> <a class="code" href="../../d0/df8/structinode.html#a37878866e7905b666db2aa33076076a2">minor</a>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="../../d0/df8/structinode.html#af8b88b409bea7ef99c49a55f387538b2">   23</a></span>&#160;  <span class="keywordtype">short</span> <a class="code" href="../../d0/df8/structinode.html#af8b88b409bea7ef99c49a55f387538b2">nlink</a>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="../../d0/df8/structinode.html#a918af769c48a8ca8afac057bf83d12de">   24</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../d0/df8/structinode.html#a918af769c48a8ca8afac057bf83d12de">size</a>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">   25</a></span>&#160;  <a class="code" href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="code" href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">addrs</a>[<a class="code" href="../../df/d26/fs_8h.html#acd38e9532d4b3623f844b93c012a8e06">NDIRECT</a>+1];</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;};</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">// table mapping major device number to</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// device functions</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="../../de/d6a/structdevsw.html">   30</a></span>&#160;<span class="keyword">struct </span><a class="code" href="../../de/d6a/structdevsw.html">devsw</a> {</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="../../de/d6a/structdevsw.html#a4efbe00d0031a1c9005ef2186947ea37">   31</a></span>&#160;  int (*<a class="code" href="../../de/d6a/structdevsw.html#a4efbe00d0031a1c9005ef2186947ea37">read</a>)(<span class="keyword">struct </span><a class="code" href="../../d0/df8/structinode.html">inode</a>*, <span class="keywordtype">char</span>*, int);</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="../../de/d6a/structdevsw.html#a87fd7af6c9a6fb8663fc206be7a233d4">   32</a></span>&#160;  int (*<a class="code" href="../../de/d6a/structdevsw.html#a87fd7af6c9a6fb8663fc206be7a233d4">write</a>)(<span class="keyword">struct </span><a class="code" href="../../d0/df8/structinode.html">inode</a>*, <span class="keywordtype">char</span>*, int);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;};</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">extern</span> <span class="keyword">struct </span><a class="code" href="../../de/d6a/structdevsw.html">devsw</a> <a class="code" href="../../de/d6a/structdevsw.html">devsw</a>[];</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="../../d2/d4d/file_8h.html#a6c17169f464fb1a2995dbe06faa47a5f">   37</a></span>&#160;<span class="preprocessor">#define CONSOLE 1</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="astructinode_html_a7ba4ab7e52404b80d6d854678715ae30"><div class="ttname"><a href="../../d0/df8/structinode.html#a7ba4ab7e52404b80d6d854678715ae30">inode::addrs</a></div><div class="ttdeci">uint addrs[NDIRECT+1]</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00025">file.h:25</a></div></div>
+<div class="ttc" id="astructfile_html_a6e1b641ea1551ac4316a0c11a683df45"><div class="ttname"><a href="../../d7/d3a/structfile.html#a6e1b641ea1551ac4316a0c11a683df45">file::writable</a></div><div class="ttdeci">char writable</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00005">file.h:5</a></div></div>
+<div class="ttc" id="astructfile_html_a4fd095f927715574dc2a4f243690e508"><div class="ttname"><a href="../../d7/d3a/structfile.html#a4fd095f927715574dc2a4f243690e508">file::ip</a></div><div class="ttdeci">struct inode * ip</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00007">file.h:7</a></div></div>
+<div class="ttc" id="astructinode_html_a46bad0e938fbd348ac02bdef0c8d6215"><div class="ttname"><a href="../../d0/df8/structinode.html#a46bad0e938fbd348ac02bdef0c8d6215">inode::lock</a></div><div class="ttdeci">struct sleeplock lock</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00017">file.h:17</a></div></div>
+<div class="ttc" id="astructinode_html_a34af7242018a977dace5730683850875"><div class="ttname"><a href="../../d0/df8/structinode.html#a34af7242018a977dace5730683850875">inode::major</a></div><div class="ttdeci">short major</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00021">file.h:21</a></div></div>
+<div class="ttc" id="astructfile_html"><div class="ttname"><a href="../../d7/d3a/structfile.html">file</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00001">file.h:1</a></div></div>
+<div class="ttc" id="astructdevsw_html_a4efbe00d0031a1c9005ef2186947ea37"><div class="ttname"><a href="../../de/d6a/structdevsw.html#a4efbe00d0031a1c9005ef2186947ea37">devsw::read</a></div><div class="ttdeci">int(* read)(struct inode *, char *, int)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00031">file.h:31</a></div></div>
+<div class="ttc" id="astructfile_html_a4aeeba6a286e58966d853aa1f510d3d5a224e095442d50a6bd1058fd742fb68c7"><div class="ttname"><a href="../../d7/d3a/structfile.html#a4aeeba6a286e58966d853aa1f510d3d5a224e095442d50a6bd1058fd742fb68c7">file::FD_NONE</a></div><div class="ttdeci">@ FD_NONE</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00002">file.h:2</a></div></div>
+<div class="ttc" id="astructfile_html_a94a911be6cc1b1326728392d8b40150d"><div class="ttname"><a href="../../d7/d3a/structfile.html#a94a911be6cc1b1326728392d8b40150d">file::off</a></div><div class="ttdeci">uint off</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00008">file.h:8</a></div></div>
+<div class="ttc" id="atypes_8h_html_a91ad9478d81a7aaf2593e8d9c3d06a14"><div class="ttname"><a href="../../d9/d49/types_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a></div><div class="ttdeci">unsigned int uint</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d49/types_8h_source.html#l00001">types.h:1</a></div></div>
+<div class="ttc" id="astructinode_html"><div class="ttname"><a href="../../d0/df8/structinode.html">inode</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00013">file.h:13</a></div></div>
+<div class="ttc" id="astructinode_html_a6a519028ee67f805482b3e1725bf09c5"><div class="ttname"><a href="../../d0/df8/structinode.html#a6a519028ee67f805482b3e1725bf09c5">inode::ref</a></div><div class="ttdeci">int ref</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00016">file.h:16</a></div></div>
+<div class="ttc" id="astructinode_html_af8b88b409bea7ef99c49a55f387538b2"><div class="ttname"><a href="../../d0/df8/structinode.html#af8b88b409bea7ef99c49a55f387538b2">inode::nlink</a></div><div class="ttdeci">short nlink</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00023">file.h:23</a></div></div>
+<div class="ttc" id="astructfile_html_a4aeeba6a286e58966d853aa1f510d3d5a59fcf59caf6e70c3cc3cc48291b89752"><div class="ttname"><a href="../../d7/d3a/structfile.html#a4aeeba6a286e58966d853aa1f510d3d5a59fcf59caf6e70c3cc3cc48291b89752">file::FD_PIPE</a></div><div class="ttdeci">@ FD_PIPE</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00002">file.h:2</a></div></div>
+<div class="ttc" id="astructinode_html_a121742a89c4531f03a7de1613d5be605"><div class="ttname"><a href="../../d0/df8/structinode.html#a121742a89c4531f03a7de1613d5be605">inode::dev</a></div><div class="ttdeci">uint dev</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00014">file.h:14</a></div></div>
+<div class="ttc" id="astructfile_html_a3a28c808a8dcd4acf45087ac30c075e7"><div class="ttname"><a href="../../d7/d3a/structfile.html#a3a28c808a8dcd4acf45087ac30c075e7">file::type</a></div><div class="ttdeci">enum file::@4 type</div></div>
+<div class="ttc" id="astructinode_html_a8d74bec2898785c057111c328d23fda2"><div class="ttname"><a href="../../d0/df8/structinode.html#a8d74bec2898785c057111c328d23fda2">inode::type</a></div><div class="ttdeci">short type</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00020">file.h:20</a></div></div>
+<div class="ttc" id="astructdevsw_html"><div class="ttname"><a href="../../de/d6a/structdevsw.html">devsw</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00030">file.h:30</a></div></div>
+<div class="ttc" id="afs_8h_html_acd38e9532d4b3623f844b93c012a8e06"><div class="ttname"><a href="../../df/d26/fs_8h.html#acd38e9532d4b3623f844b93c012a8e06">NDIRECT</a></div><div class="ttdeci">#define NDIRECT</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d26/fs_8h_source.html#l00024">fs.h:24</a></div></div>
+<div class="ttc" id="astructfile_html_a41c818f828adea488058bca63e4df23f"><div class="ttname"><a href="../../d7/d3a/structfile.html#a41c818f828adea488058bca63e4df23f">file::ref</a></div><div class="ttdeci">int ref</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00003">file.h:3</a></div></div>
+<div class="ttc" id="astructinode_html_aad324382ba30eb83daa5304fce7dca08"><div class="ttname"><a href="../../d0/df8/structinode.html#aad324382ba30eb83daa5304fce7dca08">inode::valid</a></div><div class="ttdeci">int valid</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00018">file.h:18</a></div></div>
+<div class="ttc" id="astructfile_html_a4aeeba6a286e58966d853aa1f510d3d5aa5d8c5e0d95ed88367e96ecebfdf326d"><div class="ttname"><a href="../../d7/d3a/structfile.html#a4aeeba6a286e58966d853aa1f510d3d5aa5d8c5e0d95ed88367e96ecebfdf326d">file::FD_INODE</a></div><div class="ttdeci">@ FD_INODE</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00002">file.h:2</a></div></div>
+<div class="ttc" id="astructfile_html_a0c5c8eced8bc562dbbecc8d450a6b646"><div class="ttname"><a href="../../d7/d3a/structfile.html#a0c5c8eced8bc562dbbecc8d450a6b646">file::readable</a></div><div class="ttdeci">char readable</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00004">file.h:4</a></div></div>
+<div class="ttc" id="astructinode_html_a37878866e7905b666db2aa33076076a2"><div class="ttname"><a href="../../d0/df8/structinode.html#a37878866e7905b666db2aa33076076a2">inode::minor</a></div><div class="ttdeci">short minor</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00022">file.h:22</a></div></div>
+<div class="ttc" id="astructdevsw_html_a87fd7af6c9a6fb8663fc206be7a233d4"><div class="ttname"><a href="../../de/d6a/structdevsw.html#a87fd7af6c9a6fb8663fc206be7a233d4">devsw::write</a></div><div class="ttdeci">int(* write)(struct inode *, char *, int)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00032">file.h:32</a></div></div>
+<div class="ttc" id="astructpipe_html"><div class="ttname"><a href="../../d8/d53/structpipe.html">pipe</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d47/pipe_8c_source.html#l00013">pipe.c:13</a></div></div>
+<div class="ttc" id="astructsleeplock_html"><div class="ttname"><a href="../../d9/dd0/structsleeplock.html">sleeplock</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d0/d74/sleeplock_8h_source.html#l00002">sleeplock.h:2</a></div></div>
+<div class="ttc" id="astructinode_html_a918af769c48a8ca8afac057bf83d12de"><div class="ttname"><a href="../../d0/df8/structinode.html#a918af769c48a8ca8afac057bf83d12de">inode::size</a></div><div class="ttdeci">uint size</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00024">file.h:24</a></div></div>
+<div class="ttc" id="astructfile_html_a19d83a8d6cb47902fe8c762d2798c198"><div class="ttname"><a href="../../d7/d3a/structfile.html#a19d83a8d6cb47902fe8c762d2798c198">file::pipe</a></div><div class="ttdeci">struct pipe * pipe</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00006">file.h:6</a></div></div>
+<div class="ttc" id="astructinode_html_a8acc2b9df0bfc6856da62925763db7fe"><div class="ttname"><a href="../../d0/df8/structinode.html#a8acc2b9df0bfc6856da62925763db7fe">inode::inum</a></div><div class="ttdeci">uint inum</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d4d/file_8h_source.html#l00015">file.h:15</a></div></div>
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+다음에 의해 생성됨 :  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.17
+</small></address>
+</body>
+</html>

@@ -1,0 +1,1115 @@
+\hypertarget{proc_8c}{}\doxysection{proc.\+c 파일 참조}
+\label{proc_8c}\index{proc.c@{proc.c}}
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}defs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}param.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}memlayout.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mmu.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}x86.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}proc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}spinlock.\+h\char`\"{}}\newline
+proc.\+c에 대한 include 의존 그래프
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d6/d6a/proc_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{함수}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{proc_8c_a11c5d62d28e8121e75235d361158156e}{forkret}} (void)
+\item 
+void \mbox{\hyperlink{proc_8c_a6c085102b25a17b9a1a78db5a8be16f9}{trapret}} (void)
+\item 
+static void \mbox{\hyperlink{proc_8c_ab5b9e3505045fa920a190e14e0ab2717}{wakeup1}} (void $\ast$chan)
+\item 
+void \mbox{\hyperlink{proc_8c_a9d293f913985937ee7a266fe5ddbfc77}{pinit}} (void)
+\item 
+int \mbox{\hyperlink{proc_8c_a414dda255ed3c1e43e7922d10f9d2c6d}{cpuid}} ()
+\item 
+struct \mbox{\hyperlink{structcpu}{cpu}} $\ast$ \mbox{\hyperlink{proc_8c_a6ab45dc363c8d9b7beb14c25be49c6d7}{mycpu}} (void)
+\item 
+struct \mbox{\hyperlink{structproc}{proc}} $\ast$ \mbox{\hyperlink{proc_8c_aac2d0e6895b990d37e7c675637e9e40f}{myproc}} (void)
+\item 
+static struct \mbox{\hyperlink{structproc}{proc}} $\ast$ \mbox{\hyperlink{proc_8c_ab2adf77e35eddf8a6a5371372caddedc}{allocproc}} (void)
+\item 
+void \mbox{\hyperlink{proc_8c_a81c8a6a0cae413bc81aa223f7f7b7205}{userinit}} (void)
+\item 
+int \mbox{\hyperlink{proc_8c_a9c16214741f4fcd088e5eea468709328}{growproc}} (int n)
+\item 
+int \mbox{\hyperlink{proc_8c_acd2e1ded4bb6fce4500438bf928330f4}{fork}} (void)
+\item 
+void \mbox{\hyperlink{proc_8c_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}} (void)
+\item 
+int \mbox{\hyperlink{proc_8c_af6f31822f7e737b4e414bdac1ccb59a4}{wait}} (void)
+\item 
+void \mbox{\hyperlink{proc_8c_a9fa00b0be5d3c4781048861e2506eb63}{scheduler}} (void)
+\item 
+void \mbox{\hyperlink{proc_8c_ad788da91743c333b5bed7c4a0dd12365}{sched}} (void)
+\item 
+void \mbox{\hyperlink{proc_8c_a7cb51f5c2b5cad3766f19eb69c92793b}{yield}} (void)
+\item 
+void \mbox{\hyperlink{proc_8c_ae70cc0370342e46f6db3bec367232457}{sleep}} (void $\ast$chan, struct \mbox{\hyperlink{structspinlock}{spinlock}} $\ast$lk)
+\item 
+void \mbox{\hyperlink{proc_8c_a4a34d9f03e436cfa09b88f735f6ee952}{wakeup}} (void $\ast$chan)
+\item 
+int \mbox{\hyperlink{proc_8c_a650cf0caaaa8b75f653c1c92818d03a4}{kill}} (int pid)
+\item 
+void \mbox{\hyperlink{proc_8c_a7f185044294ebb57521c73f723990164}{procdump}} (void)
+\end{DoxyCompactItemize}
+\doxysubsection*{변수}
+\begin{DoxyCompactItemize}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>struct \mbox{\hyperlink{structspinlock}{spinlock}} \mbox{\hyperlink{proc_8c_ab28e82cd5dda7d960095706a3ea20572}{lock}}\\
+\>struct \mbox{\hyperlink{structproc}{proc}} \mbox{\hyperlink{proc_8c_a5780b0050ca664736fd1cc9696624ce5}{proc}} \mbox{[}\mbox{\hyperlink{param_8h_a810c5b751df5bb30588613ed91095129}{NPROC}}\mbox{]}\\
+\} \mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}\\
+
+\end{tabbing}\item 
+static struct \mbox{\hyperlink{structproc}{proc}} $\ast$ \mbox{\hyperlink{proc_8c_aefa2374374b48494732e6494ccca9b89}{initproc}}
+\item 
+int \mbox{\hyperlink{proc_8c_aec016216766697de7529c7b9cb5beda9}{nextpid}} = 1
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{함수 문서화}
+\mbox{\Hypertarget{proc_8c_ab2adf77e35eddf8a6a5371372caddedc}\label{proc_8c_ab2adf77e35eddf8a6a5371372caddedc}} 
+\index{proc.c@{proc.c}!allocproc@{allocproc}}
+\index{allocproc@{allocproc}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{allocproc()}{allocproc()}}
+{\footnotesize\ttfamily static struct \mbox{\hyperlink{structproc}{proc}}$\ast$ allocproc (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+proc.\+c 파일의 76 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{77 \{}
+\DoxyCodeLine{78   \textcolor{keyword}{struct }\mbox{\hyperlink{structproc}{proc}} *p;}
+\DoxyCodeLine{79   \textcolor{keywordtype}{char} *sp;}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81   \mbox{\hyperlink{defs_8h_afe4ef8638f1ecb962a6e67fb086ee3b8}{acquire}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock);}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83   \textcolor{keywordflow}{for} (p = \mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.proc; p < \&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.proc[\mbox{\hyperlink{param_8h_a810c5b751df5bb30588613ed91095129}{NPROC}}]; p++)}
+\DoxyCodeLine{84     \textcolor{keywordflow}{if} (p-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} == \mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7aa09b651ef326a9d8efcee5cc5b720ab4}{UNUSED}})}
+\DoxyCodeLine{85       \textcolor{keywordflow}{goto} found;}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87   \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock);}
+\DoxyCodeLine{88   \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90 found:}
+\DoxyCodeLine{91   p-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} = \mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7aaed0f3d976d25b54cb7c895ce591febb}{EMBRYO}};}
+\DoxyCodeLine{92   p-\/>\mbox{\hyperlink{structproc_acf2bdf54d1f957ccbcdc987007029944}{pid}} = \mbox{\hyperlink{proc_8c_aec016216766697de7529c7b9cb5beda9}{nextpid}}++;}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94   \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock);}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96   \textcolor{comment}{// Allocate kernel stack.}}
+\DoxyCodeLine{97   \textcolor{keywordflow}{if} ((p-\/>\mbox{\hyperlink{structproc_a9f556df98482bff6c9216013d7581ae4}{kstack}} = \mbox{\hyperlink{defs_8h_a3af104ba40b66dcec8363ac5a70907ed}{kalloc}}()) == 0)}
+\DoxyCodeLine{98   \{}
+\DoxyCodeLine{99     p-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} = \mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7aa09b651ef326a9d8efcee5cc5b720ab4}{UNUSED}};}
+\DoxyCodeLine{100     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{101   \}}
+\DoxyCodeLine{102   sp = p-\/>\mbox{\hyperlink{structproc_a9f556df98482bff6c9216013d7581ae4}{kstack}} + \mbox{\hyperlink{param_8h_a7735dc19a8cdc3fcafd4241184be4b41}{KSTACKSIZE}};}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104   \textcolor{comment}{// Leave room for trap frame.}}
+\DoxyCodeLine{105   sp -\/= \textcolor{keyword}{sizeof} *p-\/>\mbox{\hyperlink{structproc_a56ec07ac1e10ce42adfc8dd2a366071f}{tf}};}
+\DoxyCodeLine{106   p-\/>\mbox{\hyperlink{structproc_a56ec07ac1e10ce42adfc8dd2a366071f}{tf}} = (\textcolor{keyword}{struct }\mbox{\hyperlink{structtrapframe}{trapframe}} *)sp;}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108   \textcolor{comment}{// Set up new context to start executing at forkret,}}
+\DoxyCodeLine{109   \textcolor{comment}{// which returns to trapret.}}
+\DoxyCodeLine{110   sp -\/= 4;}
+\DoxyCodeLine{111   *(\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} *)sp = (\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})\mbox{\hyperlink{proc_8c_a6c085102b25a17b9a1a78db5a8be16f9}{trapret}};}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113   sp -\/= \textcolor{keyword}{sizeof} *p-\/>\mbox{\hyperlink{structproc_ae0d9bffe1ad1c7d60dd2733be0a2333c}{context}};}
+\DoxyCodeLine{114   p-\/>\mbox{\hyperlink{structproc_ae0d9bffe1ad1c7d60dd2733be0a2333c}{context}} = (\textcolor{keyword}{struct }\mbox{\hyperlink{structcontext}{context}} *)sp;}
+\DoxyCodeLine{115   \mbox{\hyperlink{defs_8h_a9d55c9f035076ed1a90b6452770d0b62}{memset}}(p-\/>\mbox{\hyperlink{structproc_ae0d9bffe1ad1c7d60dd2733be0a2333c}{context}}, 0, \textcolor{keyword}{sizeof} *p-\/>\mbox{\hyperlink{structproc_ae0d9bffe1ad1c7d60dd2733be0a2333c}{context}});}
+\DoxyCodeLine{116   p-\/>\mbox{\hyperlink{structproc_ae0d9bffe1ad1c7d60dd2733be0a2333c}{context}}-\/>\mbox{\hyperlink{structcontext_a0cfb49e5b03fd7bf12fa79d1a42be935}{eip}} = (\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}})\mbox{\hyperlink{proc_8c_a11c5d62d28e8121e75235d361158156e}{forkret}};}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118   \textcolor{keywordflow}{return} p;}
+\DoxyCodeLine{119 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dda/proc_8c_ab2adf77e35eddf8a6a5371372caddedc_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{d3/dda/proc_8c_ab2adf77e35eddf8a6a5371372caddedc_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{proc_8c_a414dda255ed3c1e43e7922d10f9d2c6d}\label{proc_8c_a414dda255ed3c1e43e7922d10f9d2c6d}} 
+\index{proc.c@{proc.c}!cpuid@{cpuid}}
+\index{cpuid@{cpuid}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{cpuid()}{cpuid()}}
+{\footnotesize\ttfamily int cpuid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+proc.\+c 파일의 30 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{31 \{}
+\DoxyCodeLine{32   \textcolor{keywordflow}{return} \mbox{\hyperlink{proc_8c_a6ab45dc363c8d9b7beb14c25be49c6d7}{mycpu}}() -\/ \mbox{\hyperlink{mp_8c_a6d2633e73724907b582dfe6938ed7bb9}{cpus}};}
+\DoxyCodeLine{33 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=313pt]{d3/dda/proc_8c_a414dda255ed3c1e43e7922d10f9d2c6d_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dda/proc_8c_a414dda255ed3c1e43e7922d10f9d2c6d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{proc_8c_aaf98ef7cdde3a0dfb2e49919de3298b1}\label{proc_8c_aaf98ef7cdde3a0dfb2e49919de3298b1}} 
+\index{proc.c@{proc.c}!exit@{exit}}
+\index{exit@{exit}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{exit()}{exit()}}
+{\footnotesize\ttfamily void exit (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+proc.\+c 파일의 232 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{233 \{}
+\DoxyCodeLine{234   \textcolor{keyword}{struct }\mbox{\hyperlink{structproc}{proc}} *curproc = \mbox{\hyperlink{proc_8c_aac2d0e6895b990d37e7c675637e9e40f}{myproc}}();}
+\DoxyCodeLine{235   \textcolor{keyword}{struct }\mbox{\hyperlink{structproc}{proc}} *p;}
+\DoxyCodeLine{236   \textcolor{keywordtype}{int} fd;}
+\DoxyCodeLine{237 }
+\DoxyCodeLine{238   \textcolor{keywordflow}{if} (curproc == \mbox{\hyperlink{proc_8c_aefa2374374b48494732e6494ccca9b89}{initproc}})}
+\DoxyCodeLine{239     \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"init exiting"});}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{241   \textcolor{comment}{// Close all open files.}}
+\DoxyCodeLine{242   \textcolor{keywordflow}{for} (fd = 0; fd < \mbox{\hyperlink{param_8h_a80bacbaea8dd6aecf216d85d981bcb21}{NOFILE}}; fd++)}
+\DoxyCodeLine{243   \{}
+\DoxyCodeLine{244     \textcolor{keywordflow}{if} (curproc-\/>\mbox{\hyperlink{structproc_a4a9eb0352efe3fc097c91fccfaac50bd}{ofile}}[fd])}
+\DoxyCodeLine{245     \{}
+\DoxyCodeLine{246       \mbox{\hyperlink{defs_8h_ac865ee0b2d70f753d61d1fefef9de0f6}{fileclose}}(curproc-\/>\mbox{\hyperlink{structproc_a4a9eb0352efe3fc097c91fccfaac50bd}{ofile}}[fd]);}
+\DoxyCodeLine{247       curproc-\/>\mbox{\hyperlink{structproc_a4a9eb0352efe3fc097c91fccfaac50bd}{ofile}}[fd] = 0;}
+\DoxyCodeLine{248     \}}
+\DoxyCodeLine{249   \}}
+\DoxyCodeLine{250 }
+\DoxyCodeLine{251   \mbox{\hyperlink{defs_8h_a603ca98212e00d2ffdba7827ef0f1003}{begin\_op}}();}
+\DoxyCodeLine{252   \mbox{\hyperlink{defs_8h_a29530a0afdfe924818d8c70b6724528d}{iput}}(curproc-\/>\mbox{\hyperlink{structproc_a493bc338ce008a838eef521972a35257}{cwd}});}
+\DoxyCodeLine{253   \mbox{\hyperlink{defs_8h_a2504e37a109f9bae5ca11fe89e4e8fa1}{end\_op}}();}
+\DoxyCodeLine{254   curproc-\/>\mbox{\hyperlink{structproc_a493bc338ce008a838eef521972a35257}{cwd}} = 0;}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{256   \mbox{\hyperlink{defs_8h_afe4ef8638f1ecb962a6e67fb086ee3b8}{acquire}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock);}
+\DoxyCodeLine{257 }
+\DoxyCodeLine{258   \textcolor{comment}{// Parent might be sleeping in wait().}}
+\DoxyCodeLine{259   \mbox{\hyperlink{proc_8c_ab5b9e3505045fa920a190e14e0ab2717}{wakeup1}}(curproc-\/>\mbox{\hyperlink{structproc_a14ea8849701ffafba4d142725de154d4}{parent}});}
+\DoxyCodeLine{260 }
+\DoxyCodeLine{261   \textcolor{comment}{// Pass abandoned children to init.}}
+\DoxyCodeLine{262   \textcolor{keywordflow}{for} (p = \mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.proc; p < \&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.proc[\mbox{\hyperlink{param_8h_a810c5b751df5bb30588613ed91095129}{NPROC}}]; p++)}
+\DoxyCodeLine{263   \{}
+\DoxyCodeLine{264     \textcolor{keywordflow}{if} (p-\/>\mbox{\hyperlink{structproc_a14ea8849701ffafba4d142725de154d4}{parent}} == curproc)}
+\DoxyCodeLine{265     \{}
+\DoxyCodeLine{266       p-\/>\mbox{\hyperlink{structproc_a14ea8849701ffafba4d142725de154d4}{parent}} = \mbox{\hyperlink{proc_8c_aefa2374374b48494732e6494ccca9b89}{initproc}};}
+\DoxyCodeLine{267       \textcolor{keywordflow}{if} (p-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} == \mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7a5dfb36109b24f39d54d5c3f48f53def8}{ZOMBIE}})}
+\DoxyCodeLine{268         \mbox{\hyperlink{proc_8c_ab5b9e3505045fa920a190e14e0ab2717}{wakeup1}}(\mbox{\hyperlink{proc_8c_aefa2374374b48494732e6494ccca9b89}{initproc}});}
+\DoxyCodeLine{269     \}}
+\DoxyCodeLine{270   \}}
+\DoxyCodeLine{271 }
+\DoxyCodeLine{272   \textcolor{comment}{// Jump into the scheduler, never to return.}}
+\DoxyCodeLine{273   curproc-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} = \mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7a5dfb36109b24f39d54d5c3f48f53def8}{ZOMBIE}};}
+\DoxyCodeLine{274   \mbox{\hyperlink{proc_8c_ad788da91743c333b5bed7c4a0dd12365}{sched}}();}
+\DoxyCodeLine{275   \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"zombie exit"});}
+\DoxyCodeLine{276 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dda/proc_8c_aaf98ef7cdde3a0dfb2e49919de3298b1_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{d3/dda/proc_8c_aaf98ef7cdde3a0dfb2e49919de3298b1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{proc_8c_acd2e1ded4bb6fce4500438bf928330f4}\label{proc_8c_acd2e1ded4bb6fce4500438bf928330f4}} 
+\index{proc.c@{proc.c}!fork@{fork}}
+\index{fork@{fork}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{fork()}{fork()}}
+{\footnotesize\ttfamily int fork (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+proc.\+c 파일의 184 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{185 \{}
+\DoxyCodeLine{186   \textcolor{keywordtype}{int} i, \mbox{\hyperlink{structproc_acf2bdf54d1f957ccbcdc987007029944}{pid}};}
+\DoxyCodeLine{187   \textcolor{keyword}{struct }\mbox{\hyperlink{structproc}{proc}} *np;}
+\DoxyCodeLine{188   \textcolor{keyword}{struct }\mbox{\hyperlink{structproc}{proc}} *curproc = \mbox{\hyperlink{proc_8c_aac2d0e6895b990d37e7c675637e9e40f}{myproc}}();}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{190   \textcolor{comment}{// Allocate process.}}
+\DoxyCodeLine{191   \textcolor{keywordflow}{if} ((np = \mbox{\hyperlink{proc_8c_ab2adf77e35eddf8a6a5371372caddedc}{allocproc}}()) == 0)}
+\DoxyCodeLine{192   \{}
+\DoxyCodeLine{193     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{194   \}}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{196   \textcolor{comment}{// Copy process state from proc.}}
+\DoxyCodeLine{197   \textcolor{keywordflow}{if} ((np-\/>\mbox{\hyperlink{structproc_ad430afc653e9eb6cee33954d5545b79d}{pgdir}} = \mbox{\hyperlink{defs_8h_aaa9d4abe019ce435b9a3296be3a2e214}{copyuvm}}(curproc-\/>\mbox{\hyperlink{structproc_ad430afc653e9eb6cee33954d5545b79d}{pgdir}}, curproc-\/>\mbox{\hyperlink{structproc_a6e67042bb361124ff287af88efc33e00}{sz}})) == 0)}
+\DoxyCodeLine{198   \{}
+\DoxyCodeLine{199     \mbox{\hyperlink{defs_8h_ae79d6a7d0901b7c081cfded3f916d5bd}{kfree}}(np-\/>\mbox{\hyperlink{structproc_a9f556df98482bff6c9216013d7581ae4}{kstack}});}
+\DoxyCodeLine{200     np-\/>\mbox{\hyperlink{structproc_a9f556df98482bff6c9216013d7581ae4}{kstack}} = 0;}
+\DoxyCodeLine{201     np-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} = \mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7aa09b651ef326a9d8efcee5cc5b720ab4}{UNUSED}};}
+\DoxyCodeLine{202     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{203   \}}
+\DoxyCodeLine{204   np-\/>\mbox{\hyperlink{structproc_a6e67042bb361124ff287af88efc33e00}{sz}} = curproc-\/>\mbox{\hyperlink{structproc_a6e67042bb361124ff287af88efc33e00}{sz}};}
+\DoxyCodeLine{205   np-\/>\mbox{\hyperlink{structproc_a14ea8849701ffafba4d142725de154d4}{parent}} = curproc;}
+\DoxyCodeLine{206   *np-\/>\mbox{\hyperlink{structproc_a56ec07ac1e10ce42adfc8dd2a366071f}{tf}} = *curproc-\/>\mbox{\hyperlink{structproc_a56ec07ac1e10ce42adfc8dd2a366071f}{tf}};}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{208   \textcolor{comment}{// Clear \%eax so that fork returns 0 in the child.}}
+\DoxyCodeLine{209   np-\/>\mbox{\hyperlink{structproc_a56ec07ac1e10ce42adfc8dd2a366071f}{tf}}-\/>\mbox{\hyperlink{structtrapframe_ab1dd3a10936b61129d7395c3a21bc2fe}{eax}} = 0;}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{211   \textcolor{keywordflow}{for} (i = 0; i < \mbox{\hyperlink{param_8h_a80bacbaea8dd6aecf216d85d981bcb21}{NOFILE}}; i++)}
+\DoxyCodeLine{212     \textcolor{keywordflow}{if} (curproc-\/>\mbox{\hyperlink{structproc_a4a9eb0352efe3fc097c91fccfaac50bd}{ofile}}[i])}
+\DoxyCodeLine{213       np-\/>\mbox{\hyperlink{structproc_a4a9eb0352efe3fc097c91fccfaac50bd}{ofile}}[i] = \mbox{\hyperlink{defs_8h_a1063546fe0d5f45fe1a38a9b4f6b5783}{filedup}}(curproc-\/>\mbox{\hyperlink{structproc_a4a9eb0352efe3fc097c91fccfaac50bd}{ofile}}[i]);}
+\DoxyCodeLine{214   np-\/>\mbox{\hyperlink{structproc_a493bc338ce008a838eef521972a35257}{cwd}} = \mbox{\hyperlink{defs_8h_acdd1de79a331b8922c483434d257731d}{idup}}(curproc-\/>\mbox{\hyperlink{structproc_a493bc338ce008a838eef521972a35257}{cwd}});}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216   \mbox{\hyperlink{defs_8h_a3e26eb6d2dbf34cf09486f4c0295ae3f}{safestrcpy}}(np-\/>\mbox{\hyperlink{structproc_ac04af53e17d24b90c3cbfab56d658d62}{name}}, curproc-\/>\mbox{\hyperlink{structproc_ac04af53e17d24b90c3cbfab56d658d62}{name}}, \textcolor{keyword}{sizeof}(curproc-\/>\mbox{\hyperlink{structproc_ac04af53e17d24b90c3cbfab56d658d62}{name}}));}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{218   \mbox{\hyperlink{structproc_acf2bdf54d1f957ccbcdc987007029944}{pid}} = np-\/>\mbox{\hyperlink{structproc_acf2bdf54d1f957ccbcdc987007029944}{pid}};}
+\DoxyCodeLine{219 }
+\DoxyCodeLine{220   \mbox{\hyperlink{defs_8h_afe4ef8638f1ecb962a6e67fb086ee3b8}{acquire}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock);}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{222   np-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} = \mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7a269b90433e40460a2c0044a0b3e15694}{RUNNABLE}};}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{224   \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock);}
+\DoxyCodeLine{225 }
+\DoxyCodeLine{226   \textcolor{keywordflow}{return} \mbox{\hyperlink{structproc_acf2bdf54d1f957ccbcdc987007029944}{pid}};}
+\DoxyCodeLine{227 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dda/proc_8c_acd2e1ded4bb6fce4500438bf928330f4_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{d3/dda/proc_8c_acd2e1ded4bb6fce4500438bf928330f4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{proc_8c_a11c5d62d28e8121e75235d361158156e}\label{proc_8c_a11c5d62d28e8121e75235d361158156e}} 
+\index{proc.c@{proc.c}!forkret@{forkret}}
+\index{forkret@{forkret}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{forkret()}{forkret()}}
+{\footnotesize\ttfamily void forkret (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+proc.\+c 파일의 405 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{406 \{}
+\DoxyCodeLine{407   \textcolor{keyword}{static} \textcolor{keywordtype}{int} first = 1;}
+\DoxyCodeLine{408   \textcolor{comment}{// Still holding ptable.lock from scheduler.}}
+\DoxyCodeLine{409   \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock);}
+\DoxyCodeLine{410 }
+\DoxyCodeLine{411   \textcolor{keywordflow}{if} (first)}
+\DoxyCodeLine{412   \{}
+\DoxyCodeLine{413     \textcolor{comment}{// Some initialization functions must be run in the context}}
+\DoxyCodeLine{414     \textcolor{comment}{// of a regular process (e.g., they call sleep), and thus cannot}}
+\DoxyCodeLine{415     \textcolor{comment}{// be run from main().}}
+\DoxyCodeLine{416     first = 0;}
+\DoxyCodeLine{417     \mbox{\hyperlink{defs_8h_a301761a27cf266e0bad483272fb31a3c}{iinit}}(\mbox{\hyperlink{param_8h_ae9ce6b24fe2aae59ff60b469c35febbc}{ROOTDEV}});}
+\DoxyCodeLine{418     \mbox{\hyperlink{defs_8h_ad5e79aaefb91f41b9ef6aeae7ecf4708}{initlog}}(\mbox{\hyperlink{param_8h_ae9ce6b24fe2aae59ff60b469c35febbc}{ROOTDEV}});}
+\DoxyCodeLine{419   \}}
+\DoxyCodeLine{420 }
+\DoxyCodeLine{421   \textcolor{comment}{// Return to "caller", actually trapret (see allocproc).}}
+\DoxyCodeLine{422 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dda/proc_8c_a11c5d62d28e8121e75235d361158156e_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=316pt]{d3/dda/proc_8c_a11c5d62d28e8121e75235d361158156e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{proc_8c_a9c16214741f4fcd088e5eea468709328}\label{proc_8c_a9c16214741f4fcd088e5eea468709328}} 
+\index{proc.c@{proc.c}!growproc@{growproc}}
+\index{growproc@{growproc}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{growproc()}{growproc()}}
+{\footnotesize\ttfamily int growproc (\begin{DoxyParamCaption}\item[{int}]{n }\end{DoxyParamCaption})}
+
+
+
+proc.\+c 파일의 160 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{161 \{}
+\DoxyCodeLine{162   \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} \mbox{\hyperlink{structproc_a6e67042bb361124ff287af88efc33e00}{sz}};}
+\DoxyCodeLine{163   \textcolor{keyword}{struct }\mbox{\hyperlink{structproc}{proc}} *curproc = \mbox{\hyperlink{proc_8c_aac2d0e6895b990d37e7c675637e9e40f}{myproc}}();}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{165   \mbox{\hyperlink{structproc_a6e67042bb361124ff287af88efc33e00}{sz}} = curproc-\/>\mbox{\hyperlink{structproc_a6e67042bb361124ff287af88efc33e00}{sz}};}
+\DoxyCodeLine{166   \textcolor{keywordflow}{if} (n > 0)}
+\DoxyCodeLine{167   \{}
+\DoxyCodeLine{168     \textcolor{keywordflow}{if} ((\mbox{\hyperlink{structproc_a6e67042bb361124ff287af88efc33e00}{sz}} = \mbox{\hyperlink{defs_8h_a67f50b6f85756f02b5acdcb084d51b9f}{allocuvm}}(curproc-\/>\mbox{\hyperlink{structproc_ad430afc653e9eb6cee33954d5545b79d}{pgdir}}, \mbox{\hyperlink{structproc_a6e67042bb361124ff287af88efc33e00}{sz}}, \mbox{\hyperlink{structproc_a6e67042bb361124ff287af88efc33e00}{sz}} + n)) == 0)}
+\DoxyCodeLine{169       \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{170   \}}
+\DoxyCodeLine{171   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (n < 0)}
+\DoxyCodeLine{172   \{}
+\DoxyCodeLine{173     \textcolor{keywordflow}{if} ((\mbox{\hyperlink{structproc_a6e67042bb361124ff287af88efc33e00}{sz}} = \mbox{\hyperlink{defs_8h_ac45969a8875b6dc87245e0a642aa2d8d}{deallocuvm}}(curproc-\/>\mbox{\hyperlink{structproc_ad430afc653e9eb6cee33954d5545b79d}{pgdir}}, \mbox{\hyperlink{structproc_a6e67042bb361124ff287af88efc33e00}{sz}}, \mbox{\hyperlink{structproc_a6e67042bb361124ff287af88efc33e00}{sz}} + n)) == 0)}
+\DoxyCodeLine{174       \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{175   \}}
+\DoxyCodeLine{176   curproc-\/>\mbox{\hyperlink{structproc_a6e67042bb361124ff287af88efc33e00}{sz}} = \mbox{\hyperlink{structproc_a6e67042bb361124ff287af88efc33e00}{sz}};}
+\DoxyCodeLine{177   \mbox{\hyperlink{defs_8h_ad43d81fa3edec39a200abd0853bc84b1}{switchuvm}}(curproc);}
+\DoxyCodeLine{178   \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{179 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dda/proc_8c_a9c16214741f4fcd088e5eea468709328_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{d3/dda/proc_8c_a9c16214741f4fcd088e5eea468709328_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{proc_8c_a650cf0caaaa8b75f653c1c92818d03a4}\label{proc_8c_a650cf0caaaa8b75f653c1c92818d03a4}} 
+\index{proc.c@{proc.c}!kill@{kill}}
+\index{kill@{kill}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{kill()}{kill()}}
+{\footnotesize\ttfamily int kill (\begin{DoxyParamCaption}\item[{int}]{pid }\end{DoxyParamCaption})}
+
+
+
+proc.\+c 파일의 488 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{489 \{}
+\DoxyCodeLine{490   \textcolor{keyword}{struct }\mbox{\hyperlink{structproc}{proc}} *p;}
+\DoxyCodeLine{491 }
+\DoxyCodeLine{492   \mbox{\hyperlink{defs_8h_afe4ef8638f1ecb962a6e67fb086ee3b8}{acquire}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock);}
+\DoxyCodeLine{493   \textcolor{keywordflow}{for} (p = \mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.proc; p < \&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.proc[\mbox{\hyperlink{param_8h_a810c5b751df5bb30588613ed91095129}{NPROC}}]; p++)}
+\DoxyCodeLine{494   \{}
+\DoxyCodeLine{495     \textcolor{keywordflow}{if} (p-\/>\mbox{\hyperlink{structproc_acf2bdf54d1f957ccbcdc987007029944}{pid}} == \mbox{\hyperlink{structproc_acf2bdf54d1f957ccbcdc987007029944}{pid}})}
+\DoxyCodeLine{496     \{}
+\DoxyCodeLine{497       p-\/>\mbox{\hyperlink{structproc_afb4f94a3f4df9a835dbb41b0c26660a4}{killed}} = 1;}
+\DoxyCodeLine{498       \textcolor{comment}{// Wake process from sleep if necessary.}}
+\DoxyCodeLine{499       \textcolor{keywordflow}{if} (p-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} == \mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7a488282601451a751e0f0e770b15d4235}{SLEEPING}})}
+\DoxyCodeLine{500         p-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} = \mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7a269b90433e40460a2c0044a0b3e15694}{RUNNABLE}};}
+\DoxyCodeLine{501       \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock);}
+\DoxyCodeLine{502       \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{503     \}}
+\DoxyCodeLine{504   \}}
+\DoxyCodeLine{505   \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock);}
+\DoxyCodeLine{506   \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{507 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dda/proc_8c_a650cf0caaaa8b75f653c1c92818d03a4_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dda/proc_8c_a650cf0caaaa8b75f653c1c92818d03a4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{proc_8c_a6ab45dc363c8d9b7beb14c25be49c6d7}\label{proc_8c_a6ab45dc363c8d9b7beb14c25be49c6d7}} 
+\index{proc.c@{proc.c}!mycpu@{mycpu}}
+\index{mycpu@{mycpu}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{mycpu()}{mycpu()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structcpu}{cpu}}$\ast$ mycpu (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+proc.\+c 파일의 38 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{39 \{}
+\DoxyCodeLine{40   \textcolor{keywordtype}{int} apicid, i;}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42   \textcolor{keywordflow}{if} (\mbox{\hyperlink{x86_8h_a216ef768ced2935b4fd2a7de7d65de5b}{readeflags}}() \& \mbox{\hyperlink{mmu_8h_ab481068357bb42797aafe91864a2d085}{FL\_IF}})}
+\DoxyCodeLine{43     \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"mycpu called with interrupts enabled\(\backslash\)n"});}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45   apicid = \mbox{\hyperlink{defs_8h_a627f7996b64f99d885244a5102c85164}{lapicid}}();}
+\DoxyCodeLine{46   \textcolor{comment}{// APIC IDs are not guaranteed to be contiguous. Maybe we should have}}
+\DoxyCodeLine{47   \textcolor{comment}{// a reverse map, or reserve a register to store \&cpus[i].}}
+\DoxyCodeLine{48   \textcolor{keywordflow}{for} (i = 0; i < \mbox{\hyperlink{mp_8c_a6201a0661c3d5b88df5f63529298eb48}{ncpu}}; ++i)}
+\DoxyCodeLine{49   \{}
+\DoxyCodeLine{50     \textcolor{keywordflow}{if} (\mbox{\hyperlink{mp_8c_a6d2633e73724907b582dfe6938ed7bb9}{cpus}}[i].apicid == apicid)}
+\DoxyCodeLine{51       \textcolor{keywordflow}{return} \&\mbox{\hyperlink{mp_8c_a6d2633e73724907b582dfe6938ed7bb9}{cpus}}[i];}
+\DoxyCodeLine{52   \}}
+\DoxyCodeLine{53   \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"unknown apicid\(\backslash\)n"});}
+\DoxyCodeLine{54 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{d3/dda/proc_8c_a6ab45dc363c8d9b7beb14c25be49c6d7_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{d3/dda/proc_8c_a6ab45dc363c8d9b7beb14c25be49c6d7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{proc_8c_aac2d0e6895b990d37e7c675637e9e40f}\label{proc_8c_aac2d0e6895b990d37e7c675637e9e40f}} 
+\index{proc.c@{proc.c}!myproc@{myproc}}
+\index{myproc@{myproc}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{myproc()}{myproc()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structproc}{proc}}$\ast$ myproc (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+proc.\+c 파일의 59 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{60 \{}
+\DoxyCodeLine{61   \textcolor{keyword}{struct }\mbox{\hyperlink{structcpu}{cpu}} *c;}
+\DoxyCodeLine{62   \textcolor{keyword}{struct }\mbox{\hyperlink{structproc}{proc}} *p;}
+\DoxyCodeLine{63   \mbox{\hyperlink{defs_8h_a206b749d1b7768dadce61cbcde7e0f1c}{pushcli}}();}
+\DoxyCodeLine{64   c = \mbox{\hyperlink{proc_8c_a6ab45dc363c8d9b7beb14c25be49c6d7}{mycpu}}();}
+\DoxyCodeLine{65   p = c-\/>\mbox{\hyperlink{structcpu_a9e71a6265904fd644875a9ea5a413c89}{proc}};}
+\DoxyCodeLine{66   \mbox{\hyperlink{defs_8h_ae3424f669269fef400ce29c3aeb43fdb}{popcli}}();}
+\DoxyCodeLine{67   \textcolor{keywordflow}{return} p;}
+\DoxyCodeLine{68 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dda/proc_8c_aac2d0e6895b990d37e7c675637e9e40f_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dda/proc_8c_aac2d0e6895b990d37e7c675637e9e40f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{proc_8c_a9d293f913985937ee7a266fe5ddbfc77}\label{proc_8c_a9d293f913985937ee7a266fe5ddbfc77}} 
+\index{proc.c@{proc.c}!pinit@{pinit}}
+\index{pinit@{pinit}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{pinit()}{pinit()}}
+{\footnotesize\ttfamily void pinit (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+proc.\+c 파일의 24 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{25 \{}
+\DoxyCodeLine{26   \mbox{\hyperlink{defs_8h_ab56d728e6966819a0260c358d3ac3419}{initlock}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock, \textcolor{stringliteral}{"ptable"});}
+\DoxyCodeLine{27 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=207pt]{d3/dda/proc_8c_a9d293f913985937ee7a266fe5ddbfc77_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{proc_8c_a7f185044294ebb57521c73f723990164}\label{proc_8c_a7f185044294ebb57521c73f723990164}} 
+\index{proc.c@{proc.c}!procdump@{procdump}}
+\index{procdump@{procdump}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{procdump()}{procdump()}}
+{\footnotesize\ttfamily void procdump (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+proc.\+c 파일의 513 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{514 \{}
+\DoxyCodeLine{515   \textcolor{keyword}{static} \textcolor{keywordtype}{char} *states[] = \{}
+\DoxyCodeLine{516       [\mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7aa09b651ef326a9d8efcee5cc5b720ab4}{UNUSED}}] \textcolor{stringliteral}{"unused"},}
+\DoxyCodeLine{517       [\mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7aaed0f3d976d25b54cb7c895ce591febb}{EMBRYO}}] \textcolor{stringliteral}{"embryo"},}
+\DoxyCodeLine{518       [\mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7a488282601451a751e0f0e770b15d4235}{SLEEPING}}] \textcolor{stringliteral}{"sleep "},}
+\DoxyCodeLine{519       [\mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7a269b90433e40460a2c0044a0b3e15694}{RUNNABLE}}] \textcolor{stringliteral}{"runble"},}
+\DoxyCodeLine{520       [\mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7a1061be6c3fb88d32829cba6f6b2be304}{RUNNING}}] \textcolor{stringliteral}{"run   "},}
+\DoxyCodeLine{521       [\mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7a5dfb36109b24f39d54d5c3f48f53def8}{ZOMBIE}}] \textcolor{stringliteral}{"zombie"}\};}
+\DoxyCodeLine{522   \textcolor{keywordtype}{int} i;}
+\DoxyCodeLine{523   \textcolor{keyword}{struct }\mbox{\hyperlink{structproc}{proc}} *p;}
+\DoxyCodeLine{524   \textcolor{keywordtype}{char} *\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}};}
+\DoxyCodeLine{525   \mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} pc[10];}
+\DoxyCodeLine{526 }
+\DoxyCodeLine{527   \textcolor{keywordflow}{for} (p = \mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.proc; p < \&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.proc[\mbox{\hyperlink{param_8h_a810c5b751df5bb30588613ed91095129}{NPROC}}]; p++)}
+\DoxyCodeLine{528   \{}
+\DoxyCodeLine{529     \textcolor{keywordflow}{if} (p-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} == \mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7aa09b651ef326a9d8efcee5cc5b720ab4}{UNUSED}})}
+\DoxyCodeLine{530       \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{531     \textcolor{keywordflow}{if} (p-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} >= 0 \&\& p-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} < \mbox{\hyperlink{defs_8h_afacd331296c10f360da7640e0d68429f}{NELEM}}(states) \&\& states[p-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}}])}
+\DoxyCodeLine{532       \mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} = states[p-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}}];}
+\DoxyCodeLine{533     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{534       \mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} = \textcolor{stringliteral}{"???"};}
+\DoxyCodeLine{535     \mbox{\hyperlink{console_8c_a90f0742d846503e4ed1804f1df421ec6}{cprintf}}(\textcolor{stringliteral}{"\%d \%s \%s"}, p-\/>\mbox{\hyperlink{structproc_acf2bdf54d1f957ccbcdc987007029944}{pid}}, \mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}}, p-\/>\mbox{\hyperlink{structproc_ac04af53e17d24b90c3cbfab56d658d62}{name}});}
+\DoxyCodeLine{536     \textcolor{keywordflow}{if} (p-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} == \mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7a488282601451a751e0f0e770b15d4235}{SLEEPING}})}
+\DoxyCodeLine{537     \{}
+\DoxyCodeLine{538       \mbox{\hyperlink{defs_8h_a4105de9e2969515d6c6c795c4386f69f}{getcallerpcs}}((\mbox{\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}} *)p-\/>\mbox{\hyperlink{structproc_ae0d9bffe1ad1c7d60dd2733be0a2333c}{context}}-\/>\mbox{\hyperlink{structcontext_ac9640ddc2e90e4213ba9847bbe1b0e57}{ebp}} + 2, pc);}
+\DoxyCodeLine{539       \textcolor{keywordflow}{for} (i = 0; i < 10 \&\& pc[i] != 0; i++)}
+\DoxyCodeLine{540         \mbox{\hyperlink{console_8c_a90f0742d846503e4ed1804f1df421ec6}{cprintf}}(\textcolor{stringliteral}{" \%p"}, pc[i]);}
+\DoxyCodeLine{541     \}}
+\DoxyCodeLine{542     \mbox{\hyperlink{console_8c_a90f0742d846503e4ed1804f1df421ec6}{cprintf}}(\textcolor{stringliteral}{"\(\backslash\)n"});}
+\DoxyCodeLine{543   \}}
+\DoxyCodeLine{544 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dda/proc_8c_a7f185044294ebb57521c73f723990164_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dda/proc_8c_a7f185044294ebb57521c73f723990164_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{proc_8c_ad788da91743c333b5bed7c4a0dd12365}\label{proc_8c_ad788da91743c333b5bed7c4a0dd12365}} 
+\index{proc.c@{proc.c}!sched@{sched}}
+\index{sched@{sched}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{sched()}{sched()}}
+{\footnotesize\ttfamily void sched (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+proc.\+c 파일의 376 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{377 \{}
+\DoxyCodeLine{378   \textcolor{keywordtype}{int} intena;}
+\DoxyCodeLine{379   \textcolor{keyword}{struct }\mbox{\hyperlink{structproc}{proc}} *p = \mbox{\hyperlink{proc_8c_aac2d0e6895b990d37e7c675637e9e40f}{myproc}}();}
+\DoxyCodeLine{380 }
+\DoxyCodeLine{381   \textcolor{keywordflow}{if} (!\mbox{\hyperlink{defs_8h_ac44b13cc76bf4040e3baf34df75ff230}{holding}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock))}
+\DoxyCodeLine{382     \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"sched ptable.lock"});}
+\DoxyCodeLine{383   \textcolor{keywordflow}{if} (\mbox{\hyperlink{proc_8c_a6ab45dc363c8d9b7beb14c25be49c6d7}{mycpu}}()-\/>ncli != 1)}
+\DoxyCodeLine{384     \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"sched locks"});}
+\DoxyCodeLine{385   \textcolor{keywordflow}{if} (p-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} == \mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7a1061be6c3fb88d32829cba6f6b2be304}{RUNNING}})}
+\DoxyCodeLine{386     \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"sched running"});}
+\DoxyCodeLine{387   \textcolor{keywordflow}{if} (\mbox{\hyperlink{x86_8h_a216ef768ced2935b4fd2a7de7d65de5b}{readeflags}}() \& \mbox{\hyperlink{mmu_8h_ab481068357bb42797aafe91864a2d085}{FL\_IF}})}
+\DoxyCodeLine{388     \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"sched interruptible"});}
+\DoxyCodeLine{389   intena = \mbox{\hyperlink{proc_8c_a6ab45dc363c8d9b7beb14c25be49c6d7}{mycpu}}()-\/>\mbox{\hyperlink{structcpu_a26fc271fea8af30d67fc2ae22ef0a82f}{intena}};}
+\DoxyCodeLine{390   \mbox{\hyperlink{defs_8h_a1d9e7047d3dfb57809a2541d8387705e}{swtch}}(\&p-\/>\mbox{\hyperlink{structproc_ae0d9bffe1ad1c7d60dd2733be0a2333c}{context}}, \mbox{\hyperlink{proc_8c_a6ab45dc363c8d9b7beb14c25be49c6d7}{mycpu}}()-\/>\mbox{\hyperlink{proc_8c_a9fa00b0be5d3c4781048861e2506eb63}{scheduler}});}
+\DoxyCodeLine{391   \mbox{\hyperlink{proc_8c_a6ab45dc363c8d9b7beb14c25be49c6d7}{mycpu}}()-\/>\mbox{\hyperlink{structcpu_a26fc271fea8af30d67fc2ae22ef0a82f}{intena}} = intena;}
+\DoxyCodeLine{392 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dda/proc_8c_ad788da91743c333b5bed7c4a0dd12365_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dda/proc_8c_ad788da91743c333b5bed7c4a0dd12365_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{proc_8c_a9fa00b0be5d3c4781048861e2506eb63}\label{proc_8c_a9fa00b0be5d3c4781048861e2506eb63}} 
+\index{proc.c@{proc.c}!scheduler@{scheduler}}
+\index{scheduler@{scheduler}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{scheduler()}{scheduler()}}
+{\footnotesize\ttfamily void scheduler (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+proc.\+c 파일의 333 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{334 \{}
+\DoxyCodeLine{335   \textcolor{keyword}{struct }\mbox{\hyperlink{structproc}{proc}} *p;}
+\DoxyCodeLine{336   \textcolor{keyword}{struct }\mbox{\hyperlink{structcpu}{cpu}} *c = \mbox{\hyperlink{proc_8c_a6ab45dc363c8d9b7beb14c25be49c6d7}{mycpu}}();}
+\DoxyCodeLine{337   c-\/>\mbox{\hyperlink{structcpu_a9e71a6265904fd644875a9ea5a413c89}{proc}} = 0;}
+\DoxyCodeLine{338 }
+\DoxyCodeLine{339   \textcolor{keywordflow}{for} (;;)}
+\DoxyCodeLine{340   \{}
+\DoxyCodeLine{341     \textcolor{comment}{// Enable interrupts on this processor.}}
+\DoxyCodeLine{342     \mbox{\hyperlink{x86_8h_af87d69b8449fc86a02b250af121cd29d}{sti}}();}
+\DoxyCodeLine{343 }
+\DoxyCodeLine{344     \textcolor{comment}{// Loop over process table looking for process to run.}}
+\DoxyCodeLine{345     \mbox{\hyperlink{defs_8h_afe4ef8638f1ecb962a6e67fb086ee3b8}{acquire}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock);}
+\DoxyCodeLine{346     \textcolor{keywordflow}{for} (p = \mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.proc; p < \&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.proc[\mbox{\hyperlink{param_8h_a810c5b751df5bb30588613ed91095129}{NPROC}}]; p++)}
+\DoxyCodeLine{347     \{}
+\DoxyCodeLine{348       \textcolor{keywordflow}{if} (p-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} != \mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7a269b90433e40460a2c0044a0b3e15694}{RUNNABLE}})}
+\DoxyCodeLine{349         \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{350 }
+\DoxyCodeLine{351       \textcolor{comment}{// Switch to chosen process.  It is the process's job}}
+\DoxyCodeLine{352       \textcolor{comment}{// to release ptable.lock and then reacquire it}}
+\DoxyCodeLine{353       \textcolor{comment}{// before jumping back to us.}}
+\DoxyCodeLine{354       c-\/>\mbox{\hyperlink{structcpu_a9e71a6265904fd644875a9ea5a413c89}{proc}} = p;}
+\DoxyCodeLine{355       \mbox{\hyperlink{defs_8h_ad43d81fa3edec39a200abd0853bc84b1}{switchuvm}}(p);}
+\DoxyCodeLine{356       p-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} = \mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7a1061be6c3fb88d32829cba6f6b2be304}{RUNNING}};}
+\DoxyCodeLine{357 }
+\DoxyCodeLine{358       \mbox{\hyperlink{defs_8h_a1d9e7047d3dfb57809a2541d8387705e}{swtch}}(\&(c-\/>\mbox{\hyperlink{structcpu_aaa1510fdf8a2230c033d04e13e4fdd9e}{scheduler}}), p-\/>\mbox{\hyperlink{structproc_ae0d9bffe1ad1c7d60dd2733be0a2333c}{context}});}
+\DoxyCodeLine{359       \mbox{\hyperlink{defs_8h_a02ca0670bc1fe12e38453082631ff360}{switchkvm}}();}
+\DoxyCodeLine{360 }
+\DoxyCodeLine{361       \textcolor{comment}{// Process is done running for now.}}
+\DoxyCodeLine{362       \textcolor{comment}{// It should have changed its p-\/>state before coming back.}}
+\DoxyCodeLine{363       c-\/>\mbox{\hyperlink{structcpu_a9e71a6265904fd644875a9ea5a413c89}{proc}} = 0;}
+\DoxyCodeLine{364     \}}
+\DoxyCodeLine{365     \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock);}
+\DoxyCodeLine{366   \}}
+\DoxyCodeLine{367 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dda/proc_8c_a9fa00b0be5d3c4781048861e2506eb63_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dda/proc_8c_a9fa00b0be5d3c4781048861e2506eb63_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{proc_8c_ae70cc0370342e46f6db3bec367232457}\label{proc_8c_ae70cc0370342e46f6db3bec367232457}} 
+\index{proc.c@{proc.c}!sleep@{sleep}}
+\index{sleep@{sleep}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{sleep()}{sleep()}}
+{\footnotesize\ttfamily void sleep (\begin{DoxyParamCaption}\item[{void $\ast$}]{chan,  }\item[{struct \mbox{\hyperlink{structspinlock}{spinlock}} $\ast$}]{lk }\end{DoxyParamCaption})}
+
+
+
+proc.\+c 파일의 426 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{427 \{}
+\DoxyCodeLine{428   \textcolor{keyword}{struct }\mbox{\hyperlink{structproc}{proc}} *p = \mbox{\hyperlink{proc_8c_aac2d0e6895b990d37e7c675637e9e40f}{myproc}}();}
+\DoxyCodeLine{429 }
+\DoxyCodeLine{430   \textcolor{keywordflow}{if} (p == 0)}
+\DoxyCodeLine{431     \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"sleep"});}
+\DoxyCodeLine{432 }
+\DoxyCodeLine{433   \textcolor{keywordflow}{if} (lk == 0)}
+\DoxyCodeLine{434     \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"sleep without lk"});}
+\DoxyCodeLine{435 }
+\DoxyCodeLine{436   \textcolor{comment}{// Must acquire ptable.lock in order to}}
+\DoxyCodeLine{437   \textcolor{comment}{// change p-\/>state and then call sched.}}
+\DoxyCodeLine{438   \textcolor{comment}{// Once we hold ptable.lock, we can be}}
+\DoxyCodeLine{439   \textcolor{comment}{// guaranteed that we won't miss any wakeup}}
+\DoxyCodeLine{440   \textcolor{comment}{// (wakeup runs with ptable.lock locked),}}
+\DoxyCodeLine{441   \textcolor{comment}{// so it's okay to release lk.}}
+\DoxyCodeLine{442   \textcolor{keywordflow}{if} (lk != \&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock)}
+\DoxyCodeLine{443   \{                        \textcolor{comment}{// DOC: sleeplock0}}
+\DoxyCodeLine{444     \mbox{\hyperlink{defs_8h_afe4ef8638f1ecb962a6e67fb086ee3b8}{acquire}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock); \textcolor{comment}{// DOC: sleeplock1}}
+\DoxyCodeLine{445     \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(lk);}
+\DoxyCodeLine{446   \}}
+\DoxyCodeLine{447   \textcolor{comment}{// Go to sleep.}}
+\DoxyCodeLine{448   p-\/>\mbox{\hyperlink{structproc_a03048a49756c2243576208ba4ec5fbd4}{chan}} = \mbox{\hyperlink{structproc_a03048a49756c2243576208ba4ec5fbd4}{chan}};}
+\DoxyCodeLine{449   p-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} = \mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7a488282601451a751e0f0e770b15d4235}{SLEEPING}};}
+\DoxyCodeLine{450 }
+\DoxyCodeLine{451   \mbox{\hyperlink{proc_8c_ad788da91743c333b5bed7c4a0dd12365}{sched}}();}
+\DoxyCodeLine{452 }
+\DoxyCodeLine{453   \textcolor{comment}{// Tidy up.}}
+\DoxyCodeLine{454   p-\/>\mbox{\hyperlink{structproc_a03048a49756c2243576208ba4ec5fbd4}{chan}} = 0;}
+\DoxyCodeLine{455 }
+\DoxyCodeLine{456   \textcolor{comment}{// Reacquire original lock.}}
+\DoxyCodeLine{457   \textcolor{keywordflow}{if} (lk != \&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock)}
+\DoxyCodeLine{458   \{ \textcolor{comment}{// DOC: sleeplock2}}
+\DoxyCodeLine{459     \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock);}
+\DoxyCodeLine{460     \mbox{\hyperlink{defs_8h_afe4ef8638f1ecb962a6e67fb086ee3b8}{acquire}}(lk);}
+\DoxyCodeLine{461   \}}
+\DoxyCodeLine{462 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dda/proc_8c_ae70cc0370342e46f6db3bec367232457_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dda/proc_8c_ae70cc0370342e46f6db3bec367232457_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{proc_8c_a6c085102b25a17b9a1a78db5a8be16f9}\label{proc_8c_a6c085102b25a17b9a1a78db5a8be16f9}} 
+\index{proc.c@{proc.c}!trapret@{trapret}}
+\index{trapret@{trapret}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{trapret()}{trapret()}}
+{\footnotesize\ttfamily void trapret (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=316pt]{d3/dda/proc_8c_a6c085102b25a17b9a1a78db5a8be16f9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{proc_8c_a81c8a6a0cae413bc81aa223f7f7b7205}\label{proc_8c_a81c8a6a0cae413bc81aa223f7f7b7205}} 
+\index{proc.c@{proc.c}!userinit@{userinit}}
+\index{userinit@{userinit}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{userinit()}{userinit()}}
+{\footnotesize\ttfamily void userinit (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+proc.\+c 파일의 123 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{124 \{}
+\DoxyCodeLine{125   \textcolor{keyword}{struct }\mbox{\hyperlink{structproc}{proc}} *p;}
+\DoxyCodeLine{126   \textcolor{keyword}{extern} \textcolor{keywordtype}{char} \_binary\_initcode\_start[], \_binary\_initcode\_size[];}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128   p = \mbox{\hyperlink{proc_8c_ab2adf77e35eddf8a6a5371372caddedc}{allocproc}}();}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130   \mbox{\hyperlink{proc_8c_aefa2374374b48494732e6494ccca9b89}{initproc}} = p;}
+\DoxyCodeLine{131   \textcolor{keywordflow}{if} ((p-\/>\mbox{\hyperlink{structproc_ad430afc653e9eb6cee33954d5545b79d}{pgdir}} = \mbox{\hyperlink{defs_8h_aa7dbd3b5c70eb93e0e7fb8331202821d}{setupkvm}}()) == 0)}
+\DoxyCodeLine{132     \mbox{\hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic}}(\textcolor{stringliteral}{"userinit: out of memory?"});}
+\DoxyCodeLine{133   \mbox{\hyperlink{defs_8h_a7b3410bde4005e848e1748f2b0f0a084}{inituvm}}(p-\/>\mbox{\hyperlink{structproc_ad430afc653e9eb6cee33954d5545b79d}{pgdir}}, \_binary\_initcode\_start, (\textcolor{keywordtype}{int})\_binary\_initcode\_size);}
+\DoxyCodeLine{134   p-\/>\mbox{\hyperlink{structproc_a6e67042bb361124ff287af88efc33e00}{sz}} = \mbox{\hyperlink{mmu_8h_a5f96cb6ae6670e023c407cc2f77e1704}{PGSIZE}};}
+\DoxyCodeLine{135   \mbox{\hyperlink{defs_8h_a9d55c9f035076ed1a90b6452770d0b62}{memset}}(p-\/>\mbox{\hyperlink{structproc_a56ec07ac1e10ce42adfc8dd2a366071f}{tf}}, 0, \textcolor{keyword}{sizeof}(*p-\/>\mbox{\hyperlink{structproc_a56ec07ac1e10ce42adfc8dd2a366071f}{tf}}));}
+\DoxyCodeLine{136   p-\/>\mbox{\hyperlink{structproc_a56ec07ac1e10ce42adfc8dd2a366071f}{tf}}-\/>\mbox{\hyperlink{structtrapframe_a61261f63223a73e25be79fcc8c625265}{cs}} = (\mbox{\hyperlink{mmu_8h_a85b694d969eb01e547197c21db219f4b}{SEG\_UCODE}} << 3) | \mbox{\hyperlink{mmu_8h_a060d4d4e32af81cab881fe77e58d7b78}{DPL\_USER}};}
+\DoxyCodeLine{137   p-\/>\mbox{\hyperlink{structproc_a56ec07ac1e10ce42adfc8dd2a366071f}{tf}}-\/>\mbox{\hyperlink{structtrapframe_a421be1ec9ad2a55f1d1adeac9b0b89c3}{ds}} = (\mbox{\hyperlink{mmu_8h_aba0495696b4c656fda31704782648461}{SEG\_UDATA}} << 3) | \mbox{\hyperlink{mmu_8h_a060d4d4e32af81cab881fe77e58d7b78}{DPL\_USER}};}
+\DoxyCodeLine{138   p-\/>\mbox{\hyperlink{structproc_a56ec07ac1e10ce42adfc8dd2a366071f}{tf}}-\/>\mbox{\hyperlink{structtrapframe_ab974b358098da0aaa5897c32827a038d}{es}} = p-\/>\mbox{\hyperlink{structproc_a56ec07ac1e10ce42adfc8dd2a366071f}{tf}}-\/>\mbox{\hyperlink{structtrapframe_a421be1ec9ad2a55f1d1adeac9b0b89c3}{ds}};}
+\DoxyCodeLine{139   p-\/>\mbox{\hyperlink{structproc_a56ec07ac1e10ce42adfc8dd2a366071f}{tf}}-\/>\mbox{\hyperlink{structtrapframe_aa9c9b52b242d4f42fe4252e26b655bf6}{ss}} = p-\/>\mbox{\hyperlink{structproc_a56ec07ac1e10ce42adfc8dd2a366071f}{tf}}-\/>\mbox{\hyperlink{structtrapframe_a421be1ec9ad2a55f1d1adeac9b0b89c3}{ds}};}
+\DoxyCodeLine{140   p-\/>\mbox{\hyperlink{structproc_a56ec07ac1e10ce42adfc8dd2a366071f}{tf}}-\/>\mbox{\hyperlink{structtrapframe_ae6b3005ad34416546603ab18dbb4a644}{eflags}} = \mbox{\hyperlink{mmu_8h_ab481068357bb42797aafe91864a2d085}{FL\_IF}};}
+\DoxyCodeLine{141   p-\/>\mbox{\hyperlink{structproc_a56ec07ac1e10ce42adfc8dd2a366071f}{tf}}-\/>\mbox{\hyperlink{structtrapframe_acd319e2dbd720d217c10f8fb620d73e2}{esp}} = \mbox{\hyperlink{mmu_8h_a5f96cb6ae6670e023c407cc2f77e1704}{PGSIZE}};}
+\DoxyCodeLine{142   p-\/>\mbox{\hyperlink{structproc_a56ec07ac1e10ce42adfc8dd2a366071f}{tf}}-\/>\mbox{\hyperlink{structtrapframe_a886a5973a537894e3a95435f38767d5c}{eip}} = 0; \textcolor{comment}{// beginning of initcode.S}}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144   \mbox{\hyperlink{defs_8h_a3e26eb6d2dbf34cf09486f4c0295ae3f}{safestrcpy}}(p-\/>\mbox{\hyperlink{structproc_ac04af53e17d24b90c3cbfab56d658d62}{name}}, \textcolor{stringliteral}{"initcode"}, \textcolor{keyword}{sizeof}(p-\/>\mbox{\hyperlink{structproc_ac04af53e17d24b90c3cbfab56d658d62}{name}}));}
+\DoxyCodeLine{145   p-\/>\mbox{\hyperlink{structproc_a493bc338ce008a838eef521972a35257}{cwd}} = \mbox{\hyperlink{defs_8h_a29aa723e0b59f069c9eba588fdeb7e5a}{namei}}(\textcolor{stringliteral}{"/"});}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147   \textcolor{comment}{// this assignment to p-\/>state lets other cores}}
+\DoxyCodeLine{148   \textcolor{comment}{// run this process. the acquire forces the above}}
+\DoxyCodeLine{149   \textcolor{comment}{// writes to be visible, and the lock is also needed}}
+\DoxyCodeLine{150   \textcolor{comment}{// because the assignment might not be atomic.}}
+\DoxyCodeLine{151   \mbox{\hyperlink{defs_8h_afe4ef8638f1ecb962a6e67fb086ee3b8}{acquire}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock);}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153   p-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} = \mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7a269b90433e40460a2c0044a0b3e15694}{RUNNABLE}};}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155   \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock);}
+\DoxyCodeLine{156 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dda/proc_8c_a81c8a6a0cae413bc81aa223f7f7b7205_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{proc_8c_af6f31822f7e737b4e414bdac1ccb59a4}\label{proc_8c_af6f31822f7e737b4e414bdac1ccb59a4}} 
+\index{proc.c@{proc.c}!wait@{wait}}
+\index{wait@{wait}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{wait()}{wait()}}
+{\footnotesize\ttfamily int wait (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+proc.\+c 파일의 280 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{281 \{}
+\DoxyCodeLine{282   \textcolor{keyword}{struct }\mbox{\hyperlink{structproc}{proc}} *p;}
+\DoxyCodeLine{283   \textcolor{keywordtype}{int} havekids, \mbox{\hyperlink{structproc_acf2bdf54d1f957ccbcdc987007029944}{pid}};}
+\DoxyCodeLine{284   \textcolor{keyword}{struct }\mbox{\hyperlink{structproc}{proc}} *curproc = \mbox{\hyperlink{proc_8c_aac2d0e6895b990d37e7c675637e9e40f}{myproc}}();}
+\DoxyCodeLine{285 }
+\DoxyCodeLine{286   \mbox{\hyperlink{defs_8h_afe4ef8638f1ecb962a6e67fb086ee3b8}{acquire}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock);}
+\DoxyCodeLine{287   \textcolor{keywordflow}{for} (;;)}
+\DoxyCodeLine{288   \{}
+\DoxyCodeLine{289     \textcolor{comment}{// Scan through table looking for exited children.}}
+\DoxyCodeLine{290     havekids = 0;}
+\DoxyCodeLine{291     \textcolor{keywordflow}{for} (p = \mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.proc; p < \&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.proc[\mbox{\hyperlink{param_8h_a810c5b751df5bb30588613ed91095129}{NPROC}}]; p++)}
+\DoxyCodeLine{292     \{}
+\DoxyCodeLine{293       \textcolor{keywordflow}{if} (p-\/>\mbox{\hyperlink{structproc_a14ea8849701ffafba4d142725de154d4}{parent}} != curproc)}
+\DoxyCodeLine{294         \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{295       havekids = 1;}
+\DoxyCodeLine{296       \textcolor{keywordflow}{if} (p-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} == \mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7a5dfb36109b24f39d54d5c3f48f53def8}{ZOMBIE}})}
+\DoxyCodeLine{297       \{}
+\DoxyCodeLine{298         \textcolor{comment}{// Found one.}}
+\DoxyCodeLine{299         \mbox{\hyperlink{structproc_acf2bdf54d1f957ccbcdc987007029944}{pid}} = p-\/>\mbox{\hyperlink{structproc_acf2bdf54d1f957ccbcdc987007029944}{pid}};}
+\DoxyCodeLine{300         \mbox{\hyperlink{defs_8h_ae79d6a7d0901b7c081cfded3f916d5bd}{kfree}}(p-\/>\mbox{\hyperlink{structproc_a9f556df98482bff6c9216013d7581ae4}{kstack}});}
+\DoxyCodeLine{301         p-\/>\mbox{\hyperlink{structproc_a9f556df98482bff6c9216013d7581ae4}{kstack}} = 0;}
+\DoxyCodeLine{302         \mbox{\hyperlink{defs_8h_af24cf1756e19afd8be8c95d02262cf3a}{freevm}}(p-\/>\mbox{\hyperlink{structproc_ad430afc653e9eb6cee33954d5545b79d}{pgdir}});}
+\DoxyCodeLine{303         p-\/>\mbox{\hyperlink{structproc_acf2bdf54d1f957ccbcdc987007029944}{pid}} = 0;}
+\DoxyCodeLine{304         p-\/>\mbox{\hyperlink{structproc_a14ea8849701ffafba4d142725de154d4}{parent}} = 0;}
+\DoxyCodeLine{305         p-\/>\mbox{\hyperlink{structproc_ac04af53e17d24b90c3cbfab56d658d62}{name}}[0] = 0;}
+\DoxyCodeLine{306         p-\/>\mbox{\hyperlink{structproc_afb4f94a3f4df9a835dbb41b0c26660a4}{killed}} = 0;}
+\DoxyCodeLine{307         p-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} = \mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7aa09b651ef326a9d8efcee5cc5b720ab4}{UNUSED}};}
+\DoxyCodeLine{308         \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock);}
+\DoxyCodeLine{309         \textcolor{keywordflow}{return} \mbox{\hyperlink{structproc_acf2bdf54d1f957ccbcdc987007029944}{pid}};}
+\DoxyCodeLine{310       \}}
+\DoxyCodeLine{311     \}}
+\DoxyCodeLine{312 }
+\DoxyCodeLine{313     \textcolor{comment}{// No point waiting if we don't have any children.}}
+\DoxyCodeLine{314     \textcolor{keywordflow}{if} (!havekids || curproc-\/>\mbox{\hyperlink{structproc_afb4f94a3f4df9a835dbb41b0c26660a4}{killed}})}
+\DoxyCodeLine{315     \{}
+\DoxyCodeLine{316       \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock);}
+\DoxyCodeLine{317       \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{318     \}}
+\DoxyCodeLine{319 }
+\DoxyCodeLine{320     \textcolor{comment}{// Wait for children to exit.  (See wakeup1 call in proc\_exit.)}}
+\DoxyCodeLine{321     \mbox{\hyperlink{proc_8c_ae70cc0370342e46f6db3bec367232457}{sleep}}(curproc, \&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock); \textcolor{comment}{// DOC: wait-\/sleep}}
+\DoxyCodeLine{322   \}}
+\DoxyCodeLine{323 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dda/proc_8c_af6f31822f7e737b4e414bdac1ccb59a4_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{d3/dda/proc_8c_af6f31822f7e737b4e414bdac1ccb59a4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{proc_8c_a4a34d9f03e436cfa09b88f735f6ee952}\label{proc_8c_a4a34d9f03e436cfa09b88f735f6ee952}} 
+\index{proc.c@{proc.c}!wakeup@{wakeup}}
+\index{wakeup@{wakeup}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{wakeup()}{wakeup()}}
+{\footnotesize\ttfamily void wakeup (\begin{DoxyParamCaption}\item[{void $\ast$}]{chan }\end{DoxyParamCaption})}
+
+
+
+proc.\+c 파일의 478 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{479 \{}
+\DoxyCodeLine{480   \mbox{\hyperlink{defs_8h_afe4ef8638f1ecb962a6e67fb086ee3b8}{acquire}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock);}
+\DoxyCodeLine{481   \mbox{\hyperlink{proc_8c_ab5b9e3505045fa920a190e14e0ab2717}{wakeup1}}(\mbox{\hyperlink{structproc_a03048a49756c2243576208ba4ec5fbd4}{chan}});}
+\DoxyCodeLine{482   \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock);}
+\DoxyCodeLine{483 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dda/proc_8c_a4a34d9f03e436cfa09b88f735f6ee952_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dda/proc_8c_a4a34d9f03e436cfa09b88f735f6ee952_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{proc_8c_ab5b9e3505045fa920a190e14e0ab2717}\label{proc_8c_ab5b9e3505045fa920a190e14e0ab2717}} 
+\index{proc.c@{proc.c}!wakeup1@{wakeup1}}
+\index{wakeup1@{wakeup1}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{wakeup1()}{wakeup1()}}
+{\footnotesize\ttfamily static void wakeup1 (\begin{DoxyParamCaption}\item[{void $\ast$}]{chan }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+proc.\+c 파일의 468 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{469 \{}
+\DoxyCodeLine{470   \textcolor{keyword}{struct }\mbox{\hyperlink{structproc}{proc}} *p;}
+\DoxyCodeLine{471 }
+\DoxyCodeLine{472   \textcolor{keywordflow}{for} (p = \mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.proc; p < \&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.proc[\mbox{\hyperlink{param_8h_a810c5b751df5bb30588613ed91095129}{NPROC}}]; p++)}
+\DoxyCodeLine{473     \textcolor{keywordflow}{if} (p-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} == \mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7a488282601451a751e0f0e770b15d4235}{SLEEPING}} \&\& p-\/>\mbox{\hyperlink{structproc_a03048a49756c2243576208ba4ec5fbd4}{chan}} == \mbox{\hyperlink{structproc_a03048a49756c2243576208ba4ec5fbd4}{chan}})}
+\DoxyCodeLine{474       p-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} = \mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7a269b90433e40460a2c0044a0b3e15694}{RUNNABLE}};}
+\DoxyCodeLine{475 \}}
+
+\end{DoxyCode}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dda/proc_8c_ab5b9e3505045fa920a190e14e0ab2717_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{proc_8c_a7cb51f5c2b5cad3766f19eb69c92793b}\label{proc_8c_a7cb51f5c2b5cad3766f19eb69c92793b}} 
+\index{proc.c@{proc.c}!yield@{yield}}
+\index{yield@{yield}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{yield()}{yield()}}
+{\footnotesize\ttfamily void yield (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+proc.\+c 파일의 395 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{396 \{}
+\DoxyCodeLine{397   \mbox{\hyperlink{defs_8h_afe4ef8638f1ecb962a6e67fb086ee3b8}{acquire}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock); \textcolor{comment}{// DOC: yieldlock}}
+\DoxyCodeLine{398   \mbox{\hyperlink{proc_8c_aac2d0e6895b990d37e7c675637e9e40f}{myproc}}()-\/>\mbox{\hyperlink{structproc_a0f2fe91548a1382672ae26e29ca9e736}{state}} = \mbox{\hyperlink{proc_8h_aa1ced7d2b60040fded3fa873d0c03ba7a269b90433e40460a2c0044a0b3e15694}{RUNNABLE}};}
+\DoxyCodeLine{399   \mbox{\hyperlink{proc_8c_ad788da91743c333b5bed7c4a0dd12365}{sched}}();}
+\DoxyCodeLine{400   \mbox{\hyperlink{defs_8h_a4f8616948f3dbce65671f666eed1d669}{release}}(\&\mbox{\hyperlink{proc_8c_addf39d613ca9a58e7e6080a2e454421a}{ptable}}.lock);}
+\DoxyCodeLine{401 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dda/proc_8c_a7cb51f5c2b5cad3766f19eb69c92793b_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=193pt]{d3/dda/proc_8c_a7cb51f5c2b5cad3766f19eb69c92793b_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{변수 문서화}
+\mbox{\Hypertarget{proc_8c_aefa2374374b48494732e6494ccca9b89}\label{proc_8c_aefa2374374b48494732e6494ccca9b89}} 
+\index{proc.c@{proc.c}!initproc@{initproc}}
+\index{initproc@{initproc}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{initproc}{initproc}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structproc}{proc}}$\ast$ initproc\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+proc.\+c 파일의 16 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{proc_8c_ab28e82cd5dda7d960095706a3ea20572}\label{proc_8c_ab28e82cd5dda7d960095706a3ea20572}} 
+\index{proc.c@{proc.c}!lock@{lock}}
+\index{lock@{lock}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{lock}{lock}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structspinlock}{spinlock}} lock}
+
+
+
+proc.\+c 파일의 12 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{proc_8c_aec016216766697de7529c7b9cb5beda9}\label{proc_8c_aec016216766697de7529c7b9cb5beda9}} 
+\index{proc.c@{proc.c}!nextpid@{nextpid}}
+\index{nextpid@{nextpid}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{nextpid}{nextpid}}
+{\footnotesize\ttfamily int nextpid = 1}
+
+
+
+proc.\+c 파일의 18 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{proc_8c_a5780b0050ca664736fd1cc9696624ce5}\label{proc_8c_a5780b0050ca664736fd1cc9696624ce5}} 
+\index{proc.c@{proc.c}!proc@{proc}}
+\index{proc@{proc}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{proc}{proc}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structproc}{proc}} \mbox{\hyperlink{structproc}{proc}}\mbox{[}\mbox{\hyperlink{param_8h_a810c5b751df5bb30588613ed91095129}{N\+P\+R\+OC}}\mbox{]}}
+
+
+
+proc.\+c 파일의 13 번째 라인에서 정의되었습니다.
+
+\mbox{\Hypertarget{proc_8c_addf39d613ca9a58e7e6080a2e454421a}\label{proc_8c_addf39d613ca9a58e7e6080a2e454421a}} 
+\index{proc.c@{proc.c}!ptable@{ptable}}
+\index{ptable@{ptable}!proc.c@{proc.c}}
+\doxysubsubsection{\texorpdfstring{ptable}{ptable}}
+{\footnotesize\ttfamily struct \{ ... \}  ptable}
+

@@ -1,0 +1,50 @@
+\hypertarget{echo_8c}{}\doxysection{echo.\+c 파일 참조}
+\label{echo_8c}\index{echo.c@{echo.c}}
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stat.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}user.\+h\char`\"{}}\newline
+echo.\+c에 대한 include 의존 그래프
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=260pt]{d4/dc8/echo_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{함수}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{echo_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$\mbox{\hyperlink{init_8c_abd1a2cf54950f450187ef24c1cdcac0c}{argv}}\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{함수 문서화}
+\mbox{\Hypertarget{echo_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{echo_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{echo.c@{echo.c}!main@{main}}
+\index{main@{main}!echo.c@{echo.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+echo.\+c 파일의 6 번째 라인에서 정의되었습니다.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{7 \{}
+\DoxyCodeLine{8   \textcolor{keywordtype}{int} i;}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10   \textcolor{keywordflow}{for}(i = 1; i < argc; i++)}
+\DoxyCodeLine{11     \mbox{\hyperlink{forktest_8c_a249680925885256274fa9f02dd51cec4}{printf}}(1, \textcolor{stringliteral}{"\%s\%s"}, \mbox{\hyperlink{init_8c_abd1a2cf54950f450187ef24c1cdcac0c}{argv}}[i], i+1 < argc ? \textcolor{stringliteral}{" "} : \textcolor{stringliteral}{"\(\backslash\)n"});}
+\DoxyCodeLine{12   \mbox{\hyperlink{defs_8h_aaf98ef7cdde3a0dfb2e49919de3298b1}{exit}}();}
+\DoxyCodeLine{13 \}}
+
+\end{DoxyCode}
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{da/daf/echo_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph}
+\end{center}
+\end{figure}
